@@ -1,0 +1,12 @@
+.git
+.venv
+**/__pycache__
+neurosim-data
+results
+dist
+build
+docs/validation
+**/node_modules
+**/.next
+**/test-results
+**/playwright-report

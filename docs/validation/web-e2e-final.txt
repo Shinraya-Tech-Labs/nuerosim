@@ -1,0 +1,15 @@
+> neurosim-web@0.2.0-dev.0 test:e2e
+> playwright test
+
+Running 3 tests using 1 worker
+  ok 1 tests/e2e/connectivity.spec.ts › real saved topology renders, filters, and reloads (30.9s)
+  ok 2 tests/e2e/connectivity.spec.ts › configuration submits a real job and reports validation failures (4.3s)
+  ok 3 tests/e2e/performance.spec.ts › profile the 512-neuron network at balanced and full edge density (49.1s)
+
+3 passed (1.7m)
+
+Environment: isolated FastAPI API on 127.0.0.1:8011 with a separate SQLite store,
+Next.js development server on 127.0.0.1:3011, headless Chromium 156.0.8078.4.
+The test also exercises the WebGL initialization failure and 2D fallback path.
+The emitted WebGL error in that case is expected from the deliberately disabled
+WebGL test context; the fallback test passed.

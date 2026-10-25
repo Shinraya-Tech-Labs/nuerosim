@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-19T18:31:52.243Z",
+  "browser": "156.0.8078.4",
+  "mode": "headless Chromium, Next development server, 1440x1000, five 1-second samples with orbit input; no universal performance claim",
+  "measurements": [
+    {
+      "n": 32,
+      "edges": 73,
+      "experiment": "8068285c-6505-4049-9ef1-5773b04a1bc9",
+      "config_sha256": "2dd8e926645eb05aadb4d60402dffaa803f815f8cd3bc54154960dbd7ca21689",
+      "samples": [
+        "60.0 FPS · p95 17.8 ms · 2 draw calls · JS heap 22 MiB",
+        "60.0 FPS · p95 18.1 ms · 2 draw calls · JS heap 22 MiB",
+        "60.1 FPS · p95 21.7 ms · 2 draw calls · JS heap 22 MiB",
+        "59.4 FPS · p95 18.1 ms · 2 draw calls · JS heap 22 MiB",
+        "60.7 FPS · p95 17.8 ms · 2 draw calls · JS heap 22 MiB"
+      ],
+      "renderer": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+        "dpr": 1
+      }
+    },
+    {
+      "n": 128,
+      "edges": 1276,
+      "experiment": "f247c87d-93b2-4aad-a49e-e9d157c2864a",
+      "config_sha256": "db007f586583253fc7a3462c46354c2e996dfcc0f5784be811206c5ab397de6a",
+      "samples": [
+        "49.1 FPS · p95 21.6 ms · 2 draw calls · JS heap 22 MiB",
+        "55.3 FPS · p95 21.8 ms · 2 draw calls · JS heap 22 MiB",
+        "49.0 FPS · p95 26.4 ms · 2 draw calls · JS heap 22 MiB",
+        "55.1 FPS · p95 18.8 ms · 2 draw calls · JS heap 22 MiB",
+        "52.4 FPS · p95 20.3 ms · 2 draw calls · JS heap 22 MiB"
+      ],
+      "renderer": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+        "dpr": 1
+      }
+    },
+    {
+      "n": 512,
+      "edges": 20786,
+      "experiment": "b5f9c070-946a-4193-acca-8d6789f55443",
+      "config_sha256": "77311a826f99310340d7fea0102fd6751cc618a9b3d783f58f86320d96fa437d",
+      "samples": [
+        "5.8 FPS · p95 220.2 ms · 2 draw calls · JS heap 22 MiB",
+        "6.7 FPS · p95 206.5 ms · 2 draw calls · JS heap 22 MiB",
+        "4.8 FPS · p95 256.8 ms · 2 draw calls · JS heap 22 MiB",
+        "7.3 FPS · p95 201.1 ms · 2 draw calls · JS heap 22 MiB",
+        "6.0 FPS · p95 215.0 ms · 2 draw calls · JS heap 22 MiB"
+      ],
+      "renderer": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+        "dpr": 1
+      }
+    }
+  ]
+}

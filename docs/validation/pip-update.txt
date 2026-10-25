@@ -1,0 +1,10 @@
+Requirement already satisfied: pip in d:\p r o j e c t s\github pushed\neurosim\.venv\lib\site-packages (25.3)
+Collecting pip
+  Using cached pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+Using cached pip-26.2.1-py3-none-any.whl (1.8 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 25.3
+    Uninstalling pip-25.3:
+      Successfully uninstalled pip-25.3
+Successfully installed pip-26.2.1

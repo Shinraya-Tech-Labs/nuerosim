@@ -276,7 +276,7 @@ class MultiCompartmentNeuron:
                 j  = comp_map[comp.parent_id]
                 cp = self.compartments[j]
                 r  = 0.5 * (comp.r_axial + cp.r_axial)  # Ω
-                I  = (self.V[j] - self.V[i]) / r * 1e-3  # μA (V→mV, Ω→mS)
+                I  = (self.V[j] - self.V[i]) / r * 1e3  # mV / ohm -> microamp
                 I_ax[i] += I
                 I_ax[j] -= I
         return I_ax
