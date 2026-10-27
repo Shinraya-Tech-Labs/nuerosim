@@ -186,3 +186,42 @@ test("configuration submits a real job and reports validation failures", async (
     page.getByRole("heading", { name: "LIF NETWORK" }),
   ).toBeVisible();
 });
+
+test("guided demonstrations execute real seeded experiments and compare recorded traces", async ({
+  page,
+}) => {
+  test.setTimeout(180000);
+  await page.goto("/");
+  await page.getByRole("button", { name: /HH single-neuron firing/ }).click();
+  await expect(page.getByRole("heading", { name: "HH NETWORK" })).toBeVisible();
+  await page.getByText("CONFIGURED CURRENT INPUT").click();
+  await expect(
+    page.getByText(/Neuron 0: 10 µA\/cm² · \[10, 40\) ms/),
+  ).toBeVisible();
+
+  await page.getByRole("button", { name: /Seeded LIF network/ }).click();
+  await expect(
+    page.getByRole("heading", { name: "LIF NETWORK" }),
+  ).toBeVisible();
+  await expect(page.getByTestId("counts")).toContainText("128 / 128 neurons");
+  await expect(page.getByTestId("event-count")).not.toHaveText("0 SPIKES");
+  const networkId = await page.evaluate(() =>
+    new URLSearchParams(location.search).get("experiment")!,
+  );
+
+  await page.getByRole("button", { name: /Compare 8 vs 12/ }).click();
+  await expect(page.getByTestId("comparison-path")).toBeVisible({
+    timeout: 90000,
+  });
+  await expect(page.getByLabel("Comparison experiment")).not.toHaveValue("");
+  await page.getByLabel("Saved experiment").selectOption(networkId);
+  await expect(page.getByTestId("counts")).toContainText("128 / 128 neurons");
+  await page.setViewportSize({ width: 1366, height: 768 });
+  await page.getByRole("button", { name: "Enter presentation mode" }).click();
+  await expect(
+    page.getByRole("button", { name: "Exit presentation mode" }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await page.screenshot({
+    path: "../docs/validation/exhibition-workspace.png",
+  });
+});

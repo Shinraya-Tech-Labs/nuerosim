@@ -320,6 +320,50 @@ summary:focus-visible,
 .full-width {
   width: 100%;
 }
+.guided-demos {
+  display: grid;
+  gap: 7px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.guided-demos .eyebrow {
+  margin-bottom: 3px;
+}
+.job-inputs {
+  margin: 12px 0;
+  color: #adb6b3;
+  font-size: 10px;
+}
+.job-inputs summary {
+  cursor: pointer;
+  color: #d2a274;
+  font: 9px var(--mono);
+  letter-spacing: 0.08em;
+}
+.job-inputs p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+.job-inputs small {
+  color: var(--muted);
+  line-height: 1.5;
+}
+.empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.presentation-toggle {
+  padding: 7px 10px;
+}
+.science-guide {
+  margin-top: 4px;
+}
+.science-guide .helper {
+  margin-bottom: 0;
+}
 .download-link {
   color: #d8a171;
   font: 10px var(--mono);

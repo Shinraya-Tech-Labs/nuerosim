@@ -22,6 +22,41 @@ const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
   loading: () => <p>Loading 3D renderer…</p>,
 });
+const HH_DEMO = {
+  name: "Exhibition · HH current clamp",
+  model: "hh",
+  duration: 50,
+  dt: 0.025,
+  record_every: 4,
+  n: 1,
+  seed: 42,
+  pulses: [{ target: 0, start: 10, stop: 40, amplitude: 10 }],
+};
+const NETWORK_DEMO = {
+  name: "Exhibition · seeded LIF network",
+  model: "lif",
+  duration: 30,
+  n: 128,
+  seed: 42,
+  probability: 0.08,
+  pulses: Array.from({ length: 16 }, (_, target) => ({
+    target,
+    start: 0,
+    stop: 30,
+    amplitude: 20,
+  })),
+};
+const pairedLifDemo = (amplitude: number, label: string) => ({
+  name: `Exhibition · LIF pulse ${label} µA/cm²`,
+  model: "lif",
+  duration: 50,
+  dt: 0.025,
+  record_every: 4,
+  n: 1,
+  seed: 42,
+  probability: 0,
+  pulses: [{ target: 0, start: 10, stop: 40, amplitude }],
+});
 export default function Workspace() {
   const [jobs, setJobs] = useState<Job[]>([]),
     [id, setId] = useState(""),
@@ -35,6 +70,11 @@ export default function Workspace() {
     [focusToken, setFocusToken] = useState(0),
     [adaptive, setAdaptive] = useState(false),
     [busy, setBusy] = useState(false);
+  const [presentationMode, setPresentationMode] = useState(false),
+    [comparisonPair, setComparisonPair] = useState<{
+      referenceId: string;
+      changedId: string;
+    } | null>(null);
   const [layout, setLayout] = useState<Layout>("columns"),
     [selected, setSelected] = useState(0),
     [hover, setHover] = useState<number | null>(null),
@@ -189,6 +229,30 @@ export default function Workspace() {
     return () => controller.abort();
   }, [compare, selected]);
   useEffect(() => {
+    if (!comparisonPair) return;
+    const pair = [comparisonPair.referenceId, comparisonPair.changedId].map(
+      (runId) => jobs.find((item) => item.id === runId),
+    );
+    if (
+      pair.some(
+        (item) => item?.status === "failed" || item?.status === "cancelled",
+      )
+    ) {
+      setError(
+        "A paired comparison run failed or was cancelled. Inspect both jobs in experiment history.",
+      );
+      setComparisonPair(null);
+    } else if (
+      pair.every((item) => item?.status === "completed") &&
+      (id !== comparisonPair.changedId ||
+        data?.config_sha256 === pair[1]?.manifest.config_sha256)
+    ) {
+      if (id === comparisonPair.changedId)
+        setCompare(comparisonPair.referenceId);
+      setComparisonPair(null);
+    }
+  }, [jobs, comparisonPair, id, data]);
+  useEffect(() => {
     if (!playing || !data) return;
     let previous = performance.now();
     const timer = setInterval(() => {
@@ -236,6 +300,27 @@ export default function Workspace() {
       const result = await api<Job>(path, { method: "POST", body });
       setJobs(await api<Job[]>("/experiments?limit=500"));
       choose(result.id);
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function runComparisonDemo() {
+    setBusy(true);
+    setError("");
+    try {
+      const reference = await api<Job>("/experiments", {
+        method: "POST",
+        body: JSON.stringify(pairedLifDemo(8, "8")),
+      });
+      const changed = await api<Job>("/experiments", {
+        method: "POST",
+        body: JSON.stringify(pairedLifDemo(12, "12")),
+      });
+      setComparisonPair({ referenceId: reference.id, changedId: changed.id });
+      choose(changed.id);
+      setJobs(await api<Job[]>("/experiments?limit=500"));
     } catch (e) {
       setError(String(e));
     } finally {
@@ -300,6 +385,22 @@ export default function Workspace() {
           <small>{job?.id.slice(0, 8) || "LOCAL CPU WORKSPACE"}</small>
         </div>
         <div className="topbar-right">
+          <button
+            className="subtle-button presentation-toggle"
+            aria-label={
+              presentationMode
+                ? "Exit presentation mode"
+                : "Enter presentation mode"
+            }
+            aria-pressed={presentationMode}
+            onClick={() => {
+              const enabled = !presentationMode;
+              setPresentationMode(enabled);
+              setSidebarOpen(!enabled);
+            }}
+          >
+            {presentationMode ? "Exit presentation" : "Presentation"}
+          </button>
           <span className="renderer-badge">
             <i />
             {fallback ? "2D canvas" : rendererLabel}
@@ -309,7 +410,7 @@ export default function Workspace() {
         </div>
       </header>
       <div
-        className={`workbench ${sidebarOpen ? "with-sidebar" : "sidebar-collapsed"}`}
+        className={`workbench ${sidebarOpen ? "with-sidebar" : "sidebar-collapsed"} ${presentationMode ? "presentation" : ""}`}
       >
         {sidebarOpen && (
           <aside className="experiment-rail">
@@ -343,6 +444,22 @@ export default function Workspace() {
                 </div>
                 <progress value={job.progress} max={1} />
                 {job.error && <p className="job-error">{job.error}</p>}
+                <details className="job-inputs">
+                  <summary>CONFIGURED CURRENT INPUT</summary>
+                  {job.manifest.config.pulses?.length ? (
+                    job.manifest.config.pulses.map((pulse, index) => (
+                      <p key={`${pulse.target}-${index}`}>
+                        Neuron {pulse.target}: {pulse.amplitude} µA/cm² · [
+                        {pulse.start}, {pulse.stop}) ms
+                      </p>
+                    ))
+                  ) : (
+                    <p>No external current pulses configured.</p>
+                  )}
+                  <small>
+                    Configured current density, not a recorded current trace.
+                  </small>
+                </details>
                 <div className="job-actions">
                   {["queued", "running", "cancelling"].includes(job.status) ? (
                     <button
@@ -373,6 +490,41 @@ export default function Workspace() {
                 </div>
               </div>
             )}
+            <section
+              className="guided-demos"
+              aria-label="Guided demonstrations"
+            >
+              <span className="eyebrow">GUIDED DEMONSTRATIONS</span>
+              <button
+                className="subtle-button full-width"
+                disabled={busy || comparisonPair !== null}
+                onClick={() => run("/experiments", JSON.stringify(HH_DEMO))}
+              >
+                01 · HH single-neuron firing
+              </button>
+              <button
+                className="subtle-button full-width"
+                disabled={busy || comparisonPair !== null}
+                onClick={() =>
+                  run("/experiments", JSON.stringify(NETWORK_DEMO))
+                }
+              >
+                02 · Seeded LIF network
+              </button>
+              <button
+                className="subtle-button full-width"
+                disabled={busy || comparisonPair !== null}
+                onClick={runComparisonDemo}
+              >
+                03 · Compare 8 vs 12 µA/cm²
+              </button>
+              {comparisonPair && (
+                <p className="helper" role="status">
+                  Waiting for both recorded LIF runs. Their voltage traces will
+                  be compared when complete.
+                </p>
+              )}
+            </section>
             <details className="rail-section">
               <summary>New simulation</summary>
               <p className="helper">
@@ -515,6 +667,16 @@ export default function Workspace() {
               <summary>SWC morphology</summary>
               <Morphology fallback={fallback} />
             </details>
+            <details className="rail-section science-guide">
+              <summary>How to read the signals</summary>
+              <p className="helper">
+                Membrane voltage is recorded in mV. A raster marks recorded
+                spike times by neuron; population rate is normalized in Hz.
+                Excitatory and inhibitory colors label saved synapse classes.
+                The 3D positions are illustrative, not anatomy. The manifest
+                records the seed and configuration for reruns.
+              </p>
+            </details>
             <div className="rail-foot">
               <span className="live-dot" />
               Computations remain on this machine
@@ -558,12 +720,23 @@ export default function Workspace() {
                     explore its recorded topology and activity.
                   </p>
                   {!job && (
-                    <button
-                      className="primary-button"
-                      onClick={() => setSidebarOpen(true)}
-                    >
-                      Open experiment library
-                    </button>
+                    <div className="empty-actions">
+                      <button
+                        className="primary-button"
+                        disabled={busy}
+                        onClick={() =>
+                          run("/experiments", JSON.stringify(HH_DEMO))
+                        }
+                      >
+                        {busy ? "Submitting…" : "Run HH current-clamp demo"}
+                      </button>
+                      <button
+                        className="subtle-button"
+                        onClick={() => setSidebarOpen(true)}
+                      >
+                        Open experiment library
+                      </button>
+                    </div>
                   )}
                 </div>
               )}

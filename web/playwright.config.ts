@@ -13,7 +13,7 @@ export default defineConfig({
       url: "http://127.0.0.1:8011/health",
       env: {
         PYTHONPATH: "../python",
-        NEUROSIM_DB: "../neurosim-data/web-e2e-redesign.db",
+        NEUROSIM_DB: `../neurosim-data/web-e2e-${Date.now()}.db`,
       },
       reuseExistingServer: false,
       timeout: 30000,

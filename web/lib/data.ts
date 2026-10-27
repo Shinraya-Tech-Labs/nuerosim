@@ -77,7 +77,16 @@ export type Job = {
   status: string;
   progress: number;
   error: string | null;
-  manifest: { config: Record<string, unknown>; config_sha256: string };
+  manifest: {
+    config: Record<string, unknown> & { pulses?: Pulse[] };
+    config_sha256: string;
+  };
+};
+export type Pulse = {
+  target: number;
+  start: number;
+  stop: number;
+  amplitude: number;
 };
 export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`/api${path}`, {

@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-21T09:43:44.464Z",
+  "date": "2026-10-27T14:01:28.457Z",
   "browser": "156.0.8078.4",
   "environment": "Headless Chromium, local Next development server, 1440×1000. Renderer is read from Three.js's initialized backend; JS heap and frame metrics are reported when the browser exposes them. No physical GPU result is implied.",
   "measurements": [
@@ -12,9 +12,9 @@
       "requestedRenderer": "auto",
       "activeRenderer": "WebGL2 · WebGPU unavailable",
       "samples": [
-        "16.7 FPS · p95 72.6 ms · 2 draw calls · JS heap 33 MiB",
-        "15.3 FPS · p95 171.9 ms · 2 draw calls · JS heap 33 MiB",
-        "14.0 FPS · p95 166.0 ms · 2 draw calls · JS heap 33 MiB"
+        "11.3 FPS · p95 319.5 ms · 2 draw calls · JS heap 38 MiB",
+        "12.3 FPS · p95 231.9 ms · 2 draw calls · JS heap 38 MiB",
+        "12.6 FPS · p95 83.0 ms · 2 draw calls · JS heap 38 MiB"
       ]
     },
     {
@@ -26,9 +26,9 @@
       "requestedRenderer": "auto",
       "activeRenderer": "WebGL2 · WebGPU unavailable",
       "samples": [
-        "2.6 FPS · p95 500.4 ms · 2 draw calls · JS heap 33 MiB",
-        "2.8 FPS · p95 374.6 ms · 2 draw calls · JS heap 33 MiB",
-        "2.6 FPS · p95 450.8 ms · 2 draw calls · JS heap 33 MiB"
+        "1.9 FPS · p95 587.4 ms · 2 draw calls · JS heap 38 MiB",
+        "2.4 FPS · p95 440.9 ms · 2 draw calls · JS heap 38 MiB",
+        "2.0 FPS · p95 571.8 ms · 2 draw calls · JS heap 38 MiB"
       ]
     },
     {
@@ -40,9 +40,9 @@
       "requestedRenderer": "webgl2",
       "activeRenderer": "WebGL2",
       "samples": [
-        "13.6 FPS · p95 174.8 ms · 2 draw calls · JS heap 33 MiB",
-        "15.2 FPS · p95 83.0 ms · 2 draw calls · JS heap 33 MiB",
-        "14.8 FPS · p95 159.9 ms · 2 draw calls · JS heap 33 MiB"
+        "12.0 FPS · p95 201.7 ms · 2 draw calls · JS heap 38 MiB",
+        "12.4 FPS · p95 188.4 ms · 2 draw calls · JS heap 38 MiB",
+        "11.8 FPS · p95 199.9 ms · 2 draw calls · JS heap 38 MiB"
       ]
     },
     {
@@ -54,20 +54,20 @@
       "requestedRenderer": "webgl2",
       "activeRenderer": "WebGL2",
       "samples": [
-        "2.5 FPS · p95 501.0 ms · 2 draw calls · JS heap 33 MiB",
-        "2.8 FPS · p95 366.6 ms · 2 draw calls · JS heap 33 MiB",
-        "2.5 FPS · p95 491.9 ms · 2 draw calls · JS heap 33 MiB"
+        "2.1 FPS · p95 559.5 ms · 2 draw calls · JS heap 38 MiB",
+        "2.2 FPS · p95 501.8 ms · 2 draw calls · JS heap 38 MiB",
+        "1.9 FPS · p95 596.6 ms · 2 draw calls · JS heap 38 MiB"
       ]
     },
     {
       "neurons": 512,
       "savedEdges": 20786,
-      "visibleEdges": 5632,
+      "visibleEdges": 7680,
       "edgeBudget": "adaptive",
       "requestedRenderer": "webgl2",
       "activeRenderer": "WebGL2",
       "samples": [
-        "4.8 FPS · p95 265.5 ms · 2 draw calls · JS heap 33 MiB"
+        "2.5 FPS · p95 442.7 ms · 2 draw calls · JS heap 38 MiB"
       ]
     }
   ]
