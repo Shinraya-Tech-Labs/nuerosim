@@ -21,6 +21,11 @@ voltage traces, raster and population-rate views.
 
 ![NeuroSim 3D connectivity workbench showing a saved 512-neuron network](docs/validation/web-network-512-auto.png)
 
+The guided exhibition flow runs real HH and seeded LIF jobs, supports a paired
+input comparison, and remains usable in presentation mode at laptop resolution.
+
+![NeuroSim 128-neuron guided network at 1366 by 768 in presentation mode](docs/validation/exhibition-workspace.png)
+
 The frontend reports the renderer actually initialized. Auto mode uses
 WebGPU when a usable adapter is available, otherwise it uses WebGL2. If WebGL2
 cannot initialize, the workbench has a batched 2D fallback. These paths are
@@ -143,15 +148,16 @@ where recorded compartment voltage is present.
 ## Validation status
 
 The latest documented local run passed **22 Python tests**, **6 frontend unit
-tests**, a strict Next.js production build, and **3 Playwright end-to-end tests**
+tests**, a strict Next.js production build, and **4 Playwright end-to-end tests**
 that execute real simulations through the API. Test coverage and raw outputs are
 listed in [`docs/VALIDATION.md`](docs/VALIDATION.md) and the
 [web validation report](docs/WEB_VALIDATION_REPORT.md).
 
-Headless Chromium measured WebGL2 at a median 14.8 FPS for 2,048 visible edges
-and 2.5 FPS for all 20,786 edges in this 512-neuron graph. This used software
-rendering, not the host's physical GPU. Adaptive display density reduced the
-edge count but did not reach the 24 FPS target in the observed sample. WebGPU
+Headless Chromium measured WebGL2 at a median 12.0 FPS for 2,048 visible edges
+and 2.1 FPS for all 20,786 edges in this 512-neuron graph in the latest run.
+This headless result does not establish performance on a physical GPU. Adaptive
+display density reduced the edge count but did not reach the 24 FPS target in
+the observed sample. WebGPU
 had no usable adapter in this environment, so WebGPU and consumer-GPU performance
 remain unverified. See the [raw renderer benchmark](docs/validation/web-render-benchmark-redesign.json)
 and measured limitations in the [validation report](docs/WEB_VALIDATION_REPORT.md).
