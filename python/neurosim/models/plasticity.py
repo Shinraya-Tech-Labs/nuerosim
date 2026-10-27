@@ -243,35 +243,41 @@ class NeurotransmitterDiffusion:
     D:        float = 0.4      # μm²/ms  (glutamate in aqueous: ~0.3-0.76)
     k_clear:  float = 0.5      # 1/ms
     cleft_w:  float = 20e-3    # μm  synaptic cleft width
-    dt:       float = 0.025    # ms  time step
+    dt:       float = 0.001    # ms; stable for the default 2-D grid
 
     # Grid for diffusion (N x N spatial points)
     N:        int   = 10
     dx:       float = 0.05     # μm  spatial resolution
 
     def __post_init__(self):
+        if not all(np.isfinite(v) for v in (self.D, self.dt, self.dx, self.k_clear)) or self.D < 0 or self.k_clear < 0 or self.dt <= 0 or self.dx <= 0 or self.N < 2:
+            raise ValueError("invalid diffusion parameters")
         self.C     = np.zeros((self.N, self.N))   # concentration grid (mM)
         self.alpha = self.D * self.dt / self.dx**2
 
-        if self.alpha > 0.5:
+        if 4*self.alpha + self.k_clear*self.dt > 1:
             raise ValueError(
-                f"Diffusion stability condition violated: α={self.alpha:.3f} > 0.5. "
+                f"Diffusion positivity condition violated: 4*alpha+k_clear*dt > 1 (alpha={self.alpha:.3f}). "
                 "Reduce dt or increase dx.")
 
     def release(self, amount: float, cx: int = None, cy: int = None) -> None:
         """Release neurotransmitter at cleft center."""
-        cx = cx or self.N // 2
-        cy = cy or self.N // 2
+        if not np.isfinite(amount) or amount < 0:
+            raise ValueError("release must be finite and nonnegative")
+        cx = self.N // 2 if cx is None else cx
+        cy = self.N // 2 if cy is None else cy
+        if not 0 <= cx < self.N or not 0 <= cy < self.N:
+            raise ValueError("release index outside grid")
         self.C[cx, cy] += amount
 
     def step(self) -> np.ndarray:
         """Advance diffusion by one time step (finite difference)."""
         C = self.C
         # 2D discrete Laplacian with zero-flux boundary
-        lap = (np.roll(C,  1, 0) + np.roll(C, -1, 0) +
-               np.roll(C,  1, 1) + np.roll(C, -1, 1) - 4 * C)
+        padded = np.pad(C, 1, mode="edge")
+        lap = (padded[2:,1:-1] + padded[:-2,1:-1] +
+               padded[1:-1,2:] + padded[1:-1,:-2] - 4*C)
         self.C = C + self.alpha * lap - self.k_clear * C * self.dt
-        self.C = np.maximum(self.C, 0.0)
         return self.C
 
     def peak_concentration(self) -> float:

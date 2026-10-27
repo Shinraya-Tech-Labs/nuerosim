@@ -1,0 +1,353 @@
+.................F.F.......FF...F.FFFF                                   [100%]
+================================== FAILURES ===================================
+_____________ TestNeuronModels.test_neuron_step_does_not_explode ______________
+
+self = <test_neuron_models.TestNeuronModels object at 0x000001577F6BD0F0>
+
+    def test_neuron_step_does_not_explode(self):
+        """Integration step should not produce NaN or extreme values."""
+        neuron = build_l5_pyramidal_cell()
+        for _ in range(100):
+            neuron.step(dt=0.025)
+>       assert not np.any(np.isnan(neuron.V))
+E       AssertionError: assert not np.True_
+E        +  where np.True_ = <function any at 0x000001577E68C9B0>(array([ True,  True,  True,  True,  True]))
+E        +    where <function any at 0x000001577E68C9B0> = np.any
+E        +    and   array([ True,  True,  True,  True,  True]) = <ufunc 'isnan'>(array([nan, nan, nan, nan, nan]))
+E        +      where <ufunc 'isnan'> = np.isnan
+E        +      and   array([nan, nan, nan, nan, nan]) = <neurosim.models.neuron.MultiCompartmentNeuron object at 0x000001577F6BD940>.V
+
+test_neuron_models.py:179: AssertionError
+_____________ TestNeuronModels.test_no_spontaneous_spikes_at_rest _____________
+
+self = <test_neuron_models.TestNeuronModels object at 0x000001577F5E9AE0>
+
+    def test_no_spontaneous_spikes_at_rest(self):
+        """Without input, neuron should not fire spontaneously."""
+        neuron = build_l5_pyramidal_cell()
+        for _ in range(8000):   # 200 ms
+            neuron.step(dt=0.025)
+        n_spikes = len(neuron.spike_detector.times)
+>       assert n_spikes == 0, f"Unexpected {n_spikes} spontaneous spikes"
+E       AssertionError: Unexpected 1 spontaneous spikes
+E       assert 1 == 0
+
+test_neuron_models.py:203: AssertionError
+___________________ TestPlasticity.test_diffusion_stability ___________________
+
+self = <test_neuron_models.TestPlasticity object at 0x000001577F6516D0>
+
+    def test_diffusion_stability(self):
+        """Diffusion model should not become unstable."""
+>       diff = NeurotransmitterDiffusion(D=0.4, dt=0.025, dx=0.05)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_neuron_models.py:273:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+<string>:9: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = NeurotransmitterDiffusion(D=0.4, k_clear=0.5, cleft_w=0.02, dt=0.025, N=10, dx=0.05)
+
+    def __post_init__(self):
+        self.C     = np.zeros((self.N, self.N))   # concentration grid (mM)
+        self.alpha = self.D * self.dt / self.dx**2
+
+        if self.alpha > 0.5:
+>           raise ValueError(
+                f"Diffusion stability condition violated: \u03b1={self.alpha:.3f} > 0.5. "
+                "Reduce dt or increase dx.")
+E           ValueError: Diffusion stability condition violated: \u03b1=4.000 > 0.5. Reduce dt or increase dx.
+
+python\neurosim\models\plasticity.py:257: ValueError
+_________________ TestPlasticity.test_diffusion_conservation __________________
+
+self = <test_neuron_models.TestPlasticity object at 0x000001577F5E9F20>
+
+    def test_diffusion_conservation(self):
+        """Total transmitter should decrease (cleared) after release."""
+>       diff = NeurotransmitterDiffusion(D=0.4, k_clear=0.1, dt=0.025, dx=0.05)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_neuron_models.py:282:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+<string>:9: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = NeurotransmitterDiffusion(D=0.4, k_clear=0.1, cleft_w=0.02, dt=0.025, N=10, dx=0.05)
+
+    def __post_init__(self):
+        self.C     = np.zeros((self.N, self.N))   # concentration grid (mM)
+        self.alpha = self.D * self.dt / self.dx**2
+
+        if self.alpha > 0.5:
+>           raise ValueError(
+                f"Diffusion stability condition violated: \u03b1={self.alpha:.3f} > 0.5. "
+                "Reduce dt or increase dx.")
+E           ValueError: Diffusion stability condition violated: \u03b1=4.000 > 0.5. Reduce dt or increase dx.
+
+python\neurosim\models\plasticity.py:257: ValueError
+____________ TestSimulationEngine.test_single_neuron_current_clamp ____________
+
+self = <test_neuron_models.TestSimulationEngine object at 0x000001577F6BD5B0>
+
+    def test_single_neuron_current_clamp(self):
+        """Current clamp experiment should produce spikes and voltage trace."""
+        neuron  = build_l5_pyramidal_cell(neuron_id=0)
+        results = run_current_clamp(
+            neuron, I_amp=3.0,
+            t_start_inj=50.0, t_stop_inj=300.0,
+            t_stop_sim=350.0, dt=0.025
+        )
+        assert "V" in results
+        assert "spikes" in results
+>       assert results["total_spikes"] >= 1, "Should produce at least 1 spike"
+E       AssertionError: Should produce at least 1 spike
+E       assert 0 >= 1
+
+test_neuron_models.py:328: AssertionError
+________________ TestSimulationEngine.test_network_simulation _________________
+
+self = <test_neuron_models.TestSimulationEngine object at 0x000001577F651910>
+
+    def test_network_simulation(self):
+        """Small E-I network should run without errors."""
+>       from neurosim.reconstruction.ingestion import ReconstructionPipeline
+E       ModuleNotFoundError: No module named 'neurosim.reconstruction.ingestion'
+
+test_neuron_models.py:343: ModuleNotFoundError
+___________________ TestAPWaveform.test_ap_peak_above_zero ____________________
+
+self = <test_neuron_models.TestAPWaveform object at 0x000001577F6E11D0>
+ap_results = {'V': array([[[-64.99942 , -64.99885 , -64.998276, ...,        nan,
+                nan,        nan],
+        [-65.122...eckpoint_interval': 100.0, 'dt': 0.025, 'integrator': 'rk4', ...}, 'mean_firing_rate_hz': 0.0, 'n_connections': 0, ...}
+
+    def test_ap_peak_above_zero(self, ap_results):
+        """AP should overshoot 0 mV."""
+        V_soma = ap_results["V"][0, 0, :]
+>       assert V_soma.max() > 0.0, f"AP peak = {V_soma.max():.2f} mV"
+E       AssertionError: AP peak = nan mV
+E       assert np.float32(nan) > 0.0
+E        +  where np.float32(nan) = <built-in method max of numpy.ndarray object at 0x000001577F7C0510>()
+E        +    where <built-in method max of numpy.ndarray object at 0x000001577F7C0510> = array([-64.99942 , -64.99885 , -64.998276, ...,        nan,        nan,\n              nan], shape=(2401,), dtype=float32).max
+
+test_neuron_models.py:378: AssertionError
+___________________ TestAPWaveform.test_ap_peak_below_70mv ____________________
+
+self = <test_neuron_models.TestAPWaveform object at 0x000001577F6E1310>
+ap_results = {'V': array([[[-64.99942 , -64.99885 , -64.998276, ...,        nan,
+                nan,        nan],
+        [-65.122...eckpoint_interval': 100.0, 'dt': 0.025, 'integrator': 'rk4', ...}, 'mean_firing_rate_hz': 0.0, 'n_connections': 0, ...}
+
+    def test_ap_peak_below_70mv(self, ap_results):
+        """AP should not exceed +70 mV (unrealistic overshoot)."""
+        V_soma = ap_results["V"][0, 0, :]
+>       assert V_soma.max() < 70.0
+E       assert np.float32(nan) < 70.0
+E        +  where np.float32(nan) = <built-in method max of numpy.ndarray object at 0x000001577F7C2010>()
+E        +    where <built-in method max of numpy.ndarray object at 0x000001577F7C2010> = array([-64.99942 , -64.99885 , -64.998276, ...,        nan,        nan,\n              nan], shape=(2401,), dtype=float32).max
+
+test_neuron_models.py:383: AssertionError
+_____________________ TestAPWaveform.test_ahp_below_rest ______________________
+
+self = <test_neuron_models.TestAPWaveform object at 0x000001577F6BD810>
+ap_results = {'V': array([[[-64.99942 , -64.99885 , -64.998276, ...,        nan,
+                nan,        nan],
+        [-65.122...eckpoint_interval': 100.0, 'dt': 0.025, 'integrator': 'rk4', ...}, 'mean_firing_rate_hz': 0.0, 'n_connections': 0, ...}
+
+    def test_ahp_below_rest(self, ap_results):
+        """After-hyperpolarization should go below resting potential."""
+        V_soma = ap_results["V"][0, 0, :]
+        # Take last 20% of trace (after stimulation)
+        late_V = V_soma[int(len(V_soma) * 0.8):]
+>       assert late_V.min() < -65.0, "Expected AHP below resting potential"
+E       AssertionError: Expected AHP below resting potential
+E       assert np.float32(nan) < -65.0
+E        +  where np.float32(nan) = <built-in method min of numpy.ndarray object at 0x000001577F7C2490>()
+E        +    where <built-in method min of numpy.ndarray object at 0x000001577F7C2490> = array([nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan,\n       nan, nan, nan, nan, nan, nan, nan, nan,... nan, nan, nan, nan, nan,\n       nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan],\n      dtype=float32).min
+
+test_neuron_models.py:390: AssertionError
+============================== warnings summary ===============================
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:97: RuntimeWarning: overflow encountered in exp
+    return q10_scale(0.1 * dV / (1.0 - np.exp(-dV / 10.0)), self.T)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:100: RuntimeWarning: overflow encountered in exp
+    return q10_scale(4.0 * np.exp(-(V + 65.0) / 18.0), self.T)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:103: RuntimeWarning: overflow encountered in exp
+    return q10_scale(0.07 * np.exp(-(V + 65.0) / 20.0), self.T)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:106: RuntimeWarning: overflow encountered in exp
+    return q10_scale(1.0 / (1.0 + np.exp(-(V + 35.0) / 10.0)), self.T)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:112: RuntimeWarning: invalid value encountered in scalar divide
+    h_inf = ah / (ah + bh)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:147: RuntimeWarning: overflow encountered in exp
+    return q10_scale(0.01 * dV / (1.0 - np.exp(-dV / 10.0)), self.T)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:150: RuntimeWarning: overflow encountered in exp
+    return q10_scale(0.125 * np.exp(-(V + 65.0) / 80.0), self.T)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:117: RuntimeWarning: invalid value encountered in scalar multiply
+    dm = self._alpha_m(V) * (1 - m) - self._beta_m(V) * m
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:118: RuntimeWarning: invalid value encountered in scalar multiply
+    dh = self._alpha_h(V) * (1 - h) - self._beta_h(V) * h
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:158: RuntimeWarning: invalid value encountered in scalar multiply
+    dn = self._alpha_n(V) * (1 - n) - self._beta_n(V) * n
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:210: RuntimeWarning: overflow encountered in exp
+    return 1.0 / (1.0 + np.exp(-(V + 37.0) / 7.0))
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:111: RuntimeWarning: invalid value encountered in scalar divide
+    m_inf = am / (am + bm)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:154: RuntimeWarning: invalid value encountered in scalar divide
+    return np.array([an / (an + bn)])
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:123: RuntimeWarning: overflow encountered in scalar multiply
+    return m ** 3 * h
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:253: RuntimeWarning: invalid value encountered in scalar divide
+    return (0.0761 * np.exp((V + 94.22) / 31.84) /
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:344: RuntimeWarning: divide by zero encountered in scalar divide
+    dq = (self._q_inf(V) - q) / self._tau_q(V)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:216: RuntimeWarning: overflow encountered in exp
+    return 1.0 / (1.0 + np.exp((V + 41.0) / 0.5))
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:253: RuntimeWarning: overflow encountered in exp
+    return (0.0761 * np.exp((V + 94.22) / 31.84) /
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:254: RuntimeWarning: overflow encountered in exp
+    (1.0 + np.exp((V + 1.17) / 28.93))) ** (1/3)
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:260: RuntimeWarning: overflow encountered in exp
+    return (1.0 / (1.0 + np.exp((V + 53.3) / 14.54))) ** 4
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:257: RuntimeWarning: overflow encountered in exp
+    return 0.3632 + 1.158 / (1.0 + np.exp((V + 55.96) / 20.12))
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:263: RuntimeWarning: overflow encountered in exp
+    return 1.24 + 2.678 / (1.0 + np.exp((V + 50.0) / 16.027))
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:123: RuntimeWarning: overflow encountered in scalar power
+    return m ** 3 * h
+
+test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\neuron.py:86: RuntimeWarning: invalid value encountered in scalar add
+    I_total += ch.current(V, state)
+
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\ion_channels.py:336: RuntimeWarning: overflow encountered in exp
+    return 1.0 / (np.exp(-0.086 * V - 14.6) +
+
+test_neuron_models.py::TestNeuronModels::test_current_injection_produces_spikes
+  D:\P R O J E C T S\github pushed\neurosim\python\neurosim\models\neuron.py:320: RuntimeWarning: invalid value encountered in add
+    self.gates[i][name] += deriv * dt
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED test_neuron_models.py::TestNeuronModels::test_neuron_step_does_not_explode
+FAILED test_neuron_models.py::TestNeuronModels::test_no_spontaneous_spikes_at_rest
+FAILED test_neuron_models.py::TestPlasticity::test_diffusion_stability - Valu...
+FAILED test_neuron_models.py::TestPlasticity::test_diffusion_conservation - V...
+FAILED test_neuron_models.py::TestSimulationEngine::test_single_neuron_current_clamp
+FAILED test_neuron_models.py::TestSimulationEngine::test_network_simulation
+FAILED test_neuron_models.py::TestAPWaveform::test_ap_peak_above_zero - Asser...
+FAILED test_neuron_models.py::TestAPWaveform::test_ap_peak_below_70mv - asser...
+FAILED test_neuron_models.py::TestAPWaveform::test_ahp_below_rest - Assertion...
+9 failed, 29 passed, 90 warnings in 29.62s

@@ -1,0 +1,22 @@
+
+> neurosim-web@0.2.0-dev.0 format
+> prettier --write app components lib tests *.ts *.json
+
+app/layout.tsx 68ms (unchanged)
+app/page.tsx 4ms (unchanged)
+app/style.css 79ms (unchanged)
+components/Fallback.tsx 38ms (unchanged)
+components/Morphology.tsx 59ms (unchanged)
+components/Plots.tsx 36ms
+components/Scene.tsx 47ms (unchanged)
+components/Workspace.tsx 138ms
+lib/data.ts 38ms (unchanged)
+tests/data.test.ts 14ms (unchanged)
+tests/e2e/connectivity.spec.ts 27ms
+tests/e2e/performance.spec.ts 19ms (unchanged)
+next-env.d.ts 8ms (unchanged)
+playwright.config.ts 5ms (unchanged)
+vitest.config.ts 2ms (unchanged)
+package-lock.json 69ms (unchanged)
+package.json 1ms (unchanged)
+tsconfig.json 2ms (unchanged)

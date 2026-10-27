@@ -1,0 +1,43 @@
+{
+  "name": "Current clamp",
+  "model": "hh",
+  "solver": "rk4",
+  "duration": 50.0,
+  "dt": 0.025,
+  "record_every": 4,
+  "n": 1,
+  "seed": 42,
+  "probability": 0.0,
+  "inhibitory_fraction": 0.2,
+  "weight": 0.05,
+  "delay": 1.0,
+  "tau_syn": 5.0,
+  "initial_voltage": -65.0,
+  "pulses": [
+    {
+      "target": 0,
+      "start": 10.0,
+      "stop": 40.0,
+      "amplitude": 10.0
+    }
+  ],
+  "parameters": {
+    "cm": 1.0,
+    "g_na": 120.0,
+    "g_k": 36.0,
+    "g_leak": 0.3,
+    "e_na": 50.0,
+    "e_k": -77.0,
+    "e_leak": -54.387,
+    "tau_m": 20.0,
+    "rest": -65.0,
+    "reset": -65.0,
+    "threshold": -50.0,
+    "refractory": 2.0,
+    "delta_t": 2.0,
+    "tau_w": 100.0,
+    "a": 0.02,
+    "b": 0.1,
+    "axial": 0.1
+  }
+}

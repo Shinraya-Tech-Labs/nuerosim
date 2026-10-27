@@ -1,0 +1,7 @@
+Processing .\dist\neurosim-0.2.0.dev0-py3-none-any.whl
+Installing collected packages: neurosim
+  Attempting uninstall: neurosim
+    Found existing installation: neurosim 0.2.0.dev0
+    Uninstalling neurosim-0.2.0.dev0:
+      Successfully uninstalled neurosim-0.2.0.dev0
+Successfully installed neurosim-0.2.0.dev0

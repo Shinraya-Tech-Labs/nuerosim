@@ -1,0 +1,97 @@
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=68
+  - wheel
+* Getting build dependencies for wheel...
+running egg_info
+writing python\neurosim.egg-info\PKG-INFO
+writing dependency_links to python\neurosim.egg-info\dependency_links.txt
+writing entry points to python\neurosim.egg-info\entry_points.txt
+writing requirements to python\neurosim.egg-info\requires.txt
+writing top-level names to python\neurosim.egg-info\top_level.txt
+reading manifest file 'python\neurosim.egg-info\SOURCES.txt'
+writing manifest file 'python\neurosim.egg-info\SOURCES.txt'
+* Building wheel...
+running bdist_wheel
+running build
+running build_py
+copying python\neurosim\workbench\api.py -> build\lib\neurosim\workbench
+copying python\neurosim\workbench\cli.py -> build\lib\neurosim\workbench
+copying python\neurosim\workbench\config.py -> build\lib\neurosim\workbench
+copying python\neurosim\workbench\engine.py -> build\lib\neurosim\workbench
+copying python\neurosim\workbench\morphology.py -> build\lib\neurosim\workbench
+copying python\neurosim\workbench\store.py -> build\lib\neurosim\workbench
+running egg_info
+writing python\neurosim.egg-info\PKG-INFO
+writing dependency_links to python\neurosim.egg-info\dependency_links.txt
+writing entry points to python\neurosim.egg-info\entry_points.txt
+writing requirements to python\neurosim.egg-info\requires.txt
+writing top-level names to python\neurosim.egg-info\top_level.txt
+reading manifest file 'python\neurosim.egg-info\SOURCES.txt'
+writing manifest file 'python\neurosim.egg-info\SOURCES.txt'
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\neurosim
+creating build\bdist.win-amd64\wheel\neurosim\analysis
+copying build\lib\neurosim\analysis\spike_analysis.py -> build\bdist.win-amd64\wheel\.\neurosim\analysis
+copying build\lib\neurosim\analysis\__init__.py -> build\bdist.win-amd64\wheel\.\neurosim\analysis
+copying build\lib\neurosim\cli.py -> build\bdist.win-amd64\wheel\.\neurosim
+copying build\lib\neurosim\legacy_cli.py -> build\bdist.win-amd64\wheel\.\neurosim
+creating build\bdist.win-amd64\wheel\neurosim\models
+copying build\lib\neurosim\models\ion_channels.py -> build\bdist.win-amd64\wheel\.\neurosim\models
+copying build\lib\neurosim\models\neuron.py -> build\bdist.win-amd64\wheel\.\neurosim\models
+copying build\lib\neurosim\models\plasticity.py -> build\bdist.win-amd64\wheel\.\neurosim\models
+copying build\lib\neurosim\models\__init__.py -> build\bdist.win-amd64\wheel\.\neurosim\models
+creating build\bdist.win-amd64\wheel\neurosim\reconstruction
+copying build\lib\neurosim\reconstruction\__init__.py -> build\bdist.win-amd64\wheel\.\neurosim\reconstruction
+creating build\bdist.win-amd64\wheel\neurosim\simulation
+copying build\lib\neurosim\simulation\distributed.py -> build\bdist.win-amd64\wheel\.\neurosim\simulation
+copying build\lib\neurosim\simulation\engine.py -> build\bdist.win-amd64\wheel\.\neurosim\simulation
+copying build\lib\neurosim\simulation\optimization.py -> build\bdist.win-amd64\wheel\.\neurosim\simulation
+copying build\lib\neurosim\simulation\__init__.py -> build\bdist.win-amd64\wheel\.\neurosim\simulation
+creating build\bdist.win-amd64\wheel\neurosim\workbench
+copying build\lib\neurosim\workbench\api.py -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\workbench\cli.py -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\workbench\config.py -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\workbench\engine.py -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\workbench\index.html -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\workbench\morphology.py -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\workbench\store.py -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\workbench\__init__.py -> build\bdist.win-amd64\wheel\.\neurosim\workbench
+copying build\lib\neurosim\__init__.py -> build\bdist.win-amd64\wheel\.\neurosim
+running install_egg_info
+Copying python\neurosim.egg-info to build\bdist.win-amd64\wheel\.\neurosim-0.2.0.dev0-py3.14.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\neurosim-0.2.0.dev0.dist-info\WHEEL
+creating 'D:\\P R O J E C T S\\github pushed\\neurosim\\dist\\.tmp-b4bxhx90\\neurosim-0.2.0.dev0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'neurosim/__init__.py'
+adding 'neurosim/cli.py'
+adding 'neurosim/legacy_cli.py'
+adding 'neurosim/analysis/__init__.py'
+adding 'neurosim/analysis/spike_analysis.py'
+adding 'neurosim/models/__init__.py'
+adding 'neurosim/models/ion_channels.py'
+adding 'neurosim/models/neuron.py'
+adding 'neurosim/models/plasticity.py'
+adding 'neurosim/reconstruction/__init__.py'
+adding 'neurosim/simulation/__init__.py'
+adding 'neurosim/simulation/distributed.py'
+adding 'neurosim/simulation/engine.py'
+adding 'neurosim/simulation/optimization.py'
+adding 'neurosim/workbench/__init__.py'
+adding 'neurosim/workbench/api.py'
+adding 'neurosim/workbench/cli.py'
+adding 'neurosim/workbench/config.py'
+adding 'neurosim/workbench/engine.py'
+adding 'neurosim/workbench/index.html'
+adding 'neurosim/workbench/morphology.py'
+adding 'neurosim/workbench/store.py'
+adding 'neurosim-0.2.0.dev0.dist-info/METADATA'
+adding 'neurosim-0.2.0.dev0.dist-info/WHEEL'
+adding 'neurosim-0.2.0.dev0.dist-info/entry_points.txt'
+adding 'neurosim-0.2.0.dev0.dist-info/top_level.txt'
+adding 'neurosim-0.2.0.dev0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+Successfully built neurosim-0.2.0.dev0-py3-none-any.whl

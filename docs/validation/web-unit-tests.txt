@@ -1,0 +1,12 @@
+
+> neurosim-web@0.2.0-dev.0 test
+> vitest run
+
+
+ RUN  v5.0.5 D:/P R O J E C T S/github pushed/neurosim/web
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  00:08:45
+   Duration  241ms (tests 37%, import 35%, transform 16%, worker 12%, environment 1%)

@@ -1,0 +1,234 @@
+{
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+  "python": "3.14.2",
+  "benchmarks": [
+    {
+      "model": "hh",
+      "n": 1,
+      "duration_ms": 50,
+      "dt_ms": 0.025,
+      "wall_seconds": [
+        1.5258309999999256,
+        1.487360200000012,
+        1.3961351000000377
+      ],
+      "median_seconds": 1.487360200000012,
+      "spikes": 4,
+      "edges": 0,
+      "manifest": {
+        "schema_version": 1,
+        "config": {
+          "name": "Current clamp",
+          "model": "hh",
+          "solver": "rk4",
+          "duration": 50.0,
+          "dt": 0.025,
+          "record_every": 10,
+          "n": 1,
+          "seed": 42,
+          "probability": 0.0,
+          "inhibitory_fraction": 0.2,
+          "weight": 0.05,
+          "delay": 1.0,
+          "tau_syn": 5.0,
+          "initial_voltage": -65.0,
+          "pulses": [
+            {
+              "target": 0,
+              "start": 0.0,
+              "stop": 50.0,
+              "amplitude": 10.0
+            }
+          ],
+          "parameters": {
+            "cm": 1.0,
+            "g_na": 120.0,
+            "g_k": 36.0,
+            "g_leak": 0.3,
+            "e_na": 50.0,
+            "e_k": -77.0,
+            "e_leak": -54.387,
+            "tau_m": 20.0,
+            "rest": -65.0,
+            "reset": -65.0,
+            "threshold": -50.0,
+            "refractory": 2.0,
+            "delta_t": 2.0,
+            "tau_w": 100.0,
+            "a": 0.02,
+            "b": 0.1,
+            "axial": 0.1
+          }
+        },
+        "config_sha256": "4e112ab4f596cad1aae53c4592193d31ff3ec72810d2907f295d026593032fc3",
+        "engine_sha256": "0e95813e76c329a8b76143b785b09b88821b3f99558a31eae4b0596d7b9929c7",
+        "software_version": "0.2.0.dev0",
+        "python": "3.14.2",
+        "numpy": "2.5.4",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "backend": "cpu-float64",
+        "units": {
+          "time": "ms",
+          "voltage": "mV",
+          "current": "uA/cm^2",
+          "conductance": "mS/cm^2",
+          "capacitance": "uF/cm^2"
+        }
+      },
+      "repeats_identical": true
+    },
+    {
+      "model": "lif",
+      "n": 128,
+      "duration_ms": 100,
+      "dt_ms": 0.025,
+      "wall_seconds": [
+        0.916366299999936,
+        1.1284445000001142,
+        1.2864532000000963
+      ],
+      "median_seconds": 1.1284445000001142,
+      "spikes": 359,
+      "edges": 313,
+      "manifest": {
+        "schema_version": 1,
+        "config": {
+          "name": "Current clamp",
+          "model": "lif",
+          "solver": "rk4",
+          "duration": 100.0,
+          "dt": 0.025,
+          "record_every": 10,
+          "n": 128,
+          "seed": 42,
+          "probability": 0.02,
+          "inhibitory_fraction": 0.2,
+          "weight": 0.05,
+          "delay": 1.0,
+          "tau_syn": 5.0,
+          "initial_voltage": -65.0,
+          "pulses": [
+            {
+              "target": 0,
+              "start": 0.0,
+              "stop": 100.0,
+              "amplitude": 10.0
+            }
+          ],
+          "parameters": {
+            "cm": 1.0,
+            "g_na": 120.0,
+            "g_k": 36.0,
+            "g_leak": 0.3,
+            "e_na": 50.0,
+            "e_k": -77.0,
+            "e_leak": -54.387,
+            "tau_m": 20.0,
+            "rest": -65.0,
+            "reset": -65.0,
+            "threshold": -50.0,
+            "refractory": 2.0,
+            "delta_t": 2.0,
+            "tau_w": 100.0,
+            "a": 0.02,
+            "b": 0.1,
+            "axial": 0.1
+          }
+        },
+        "config_sha256": "dba9b666a621a11c19500ca77cdc50c5e251016cc89092b3a810f42b60f13e2f",
+        "engine_sha256": "0e95813e76c329a8b76143b785b09b88821b3f99558a31eae4b0596d7b9929c7",
+        "software_version": "0.2.0.dev0",
+        "python": "3.14.2",
+        "numpy": "2.5.4",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "backend": "cpu-float64",
+        "units": {
+          "time": "ms",
+          "voltage": "mV",
+          "current": "uA/cm^2",
+          "conductance": "mS/cm^2",
+          "capacitance": "uF/cm^2"
+        }
+      },
+      "repeats_identical": true
+    },
+    {
+      "model": "lif",
+      "n": 512,
+      "duration_ms": 100,
+      "dt_ms": 0.025,
+      "wall_seconds": [
+        1.8071022000001449,
+        2.103879700000107,
+        1.7867750999998862
+      ],
+      "median_seconds": 1.8071022000001449,
+      "spikes": 14371,
+      "edges": 5182,
+      "manifest": {
+        "schema_version": 1,
+        "config": {
+          "name": "Current clamp",
+          "model": "lif",
+          "solver": "rk4",
+          "duration": 100.0,
+          "dt": 0.025,
+          "record_every": 10,
+          "n": 512,
+          "seed": 42,
+          "probability": 0.02,
+          "inhibitory_fraction": 0.2,
+          "weight": 0.05,
+          "delay": 1.0,
+          "tau_syn": 5.0,
+          "initial_voltage": -65.0,
+          "pulses": [
+            {
+              "target": 0,
+              "start": 0.0,
+              "stop": 100.0,
+              "amplitude": 10.0
+            }
+          ],
+          "parameters": {
+            "cm": 1.0,
+            "g_na": 120.0,
+            "g_k": 36.0,
+            "g_leak": 0.3,
+            "e_na": 50.0,
+            "e_k": -77.0,
+            "e_leak": -54.387,
+            "tau_m": 20.0,
+            "rest": -65.0,
+            "reset": -65.0,
+            "threshold": -50.0,
+            "refractory": 2.0,
+            "delta_t": 2.0,
+            "tau_w": 100.0,
+            "a": 0.02,
+            "b": 0.1,
+            "axial": 0.1
+          }
+        },
+        "config_sha256": "d69d479c27a59a5c16b8f294a7173a5f11af1ad6f7a0c173d778f1d2ddc992cf",
+        "engine_sha256": "0e95813e76c329a8b76143b785b09b88821b3f99558a31eae4b0596d7b9929c7",
+        "software_version": "0.2.0.dev0",
+        "python": "3.14.2",
+        "numpy": "2.5.4",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "backend": "cpu-float64",
+        "units": {
+          "time": "ms",
+          "voltage": "mV",
+          "current": "uA/cm^2",
+          "conductance": "mS/cm^2",
+          "capacitance": "uF/cm^2"
+        }
+      },
+      "repeats_identical": true
+    }
+  ],
+  "cuda": "blocked: nvcc and NVIDIA runtime not found",
+  "mpi": "blocked: MPI executable not found"
+}

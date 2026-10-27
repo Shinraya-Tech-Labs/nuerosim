@@ -1,0 +1,17 @@
+Collecting bandit
+  Downloading bandit-1.9.4-py3-none-any.whl.metadata (7.1 kB)
+Collecting PyYAML>=5.3.1 (from bandit)
+  Using cached pyyaml-6.0.3-cp314-cp314-win_amd64.whl.metadata (2.4 kB)
+Collecting stevedore>=1.20.0 (from bandit)
+  Using cached stevedore-5.9.1-py3-none-any.whl.metadata (2.3 kB)
+Requirement already satisfied: rich in .\.venv\Lib\site-packages (from bandit) (15.0.0)
+Requirement already satisfied: colorama>=0.3.9 in .\.venv\Lib\site-packages (from bandit) (0.4.6)
+Requirement already satisfied: markdown-it-py>=2.2.0 in .\.venv\Lib\site-packages (from rich->bandit) (4.2.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in .\.venv\Lib\site-packages (from rich->bandit) (2.21.0)
+Requirement already satisfied: mdurl~=0.1 in .\.venv\Lib\site-packages (from markdown-it-py>=2.2.0->rich->bandit) (0.1.2)
+Downloading bandit-1.9.4-py3-none-any.whl (134 kB)
+Using cached pyyaml-6.0.3-cp314-cp314-win_amd64.whl (156 kB)
+Using cached stevedore-5.9.1-py3-none-any.whl (54 kB)
+Installing collected packages: stevedore, PyYAML, bandit
+
+Successfully installed PyYAML-6.0.3 bandit-1.9.4 stevedore-5.9.1

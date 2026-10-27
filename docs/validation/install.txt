@@ -1,0 +1,98 @@
+WARNING: Ignoring invalid distribution ~gentwatch-ai (C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages)
+Obtaining file:///D:/P%20R%20O%20J%20E%20C%20T%20S/github%20pushed/neurosim
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+  WARNING: Ignoring invalid distribution ~gentwatch-ai (C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages)
+Requirement already satisfied: numpy<3,>=1.26 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (2.4.2)
+Requirement already satisfied: scipy<2,>=1.11 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (1.17.1)
+Requirement already satisfied: pydantic<3,>=2.10 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (2.12.5)
+Requirement already satisfied: fastapi<1,>=0.115 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (0.129.0)
+Requirement already satisfied: uvicorn<1,>=0.30 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (0.40.0)
+Requirement already satisfied: pytest<10,>=8 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (9.0.3)
+Requirement already satisfied: httpx<1,>=0.27 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (0.28.1)
+Requirement already satisfied: build<2,>=1 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from neurosim==0.2.0.dev0) (1.5.0)
+Collecting pip-audit<3,>=2 (from neurosim==0.2.0.dev0)
+  Downloading pip_audit-2.10.1-py3-none-any.whl.metadata (28 kB)
+Requirement already satisfied: packaging>=24.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from build<2,>=1->neurosim==0.2.0.dev0) (26.0)
+Requirement already satisfied: pyproject_hooks in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from build<2,>=1->neurosim==0.2.0.dev0) (1.2.0)
+Requirement already satisfied: colorama in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from build<2,>=1->neurosim==0.2.0.dev0) (0.4.6)
+Requirement already satisfied: starlette<1.0.0,>=0.40.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from fastapi<1,>=0.115->neurosim==0.2.0.dev0) (0.52.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from fastapi<1,>=0.115->neurosim==0.2.0.dev0) (4.15.0)
+Requirement already satisfied: typing-inspection>=0.4.2 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from fastapi<1,>=0.115->neurosim==0.2.0.dev0) (0.4.2)
+Requirement already satisfied: annotated-doc>=0.0.2 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from fastapi<1,>=0.115->neurosim==0.2.0.dev0) (0.0.4)
+Requirement already satisfied: anyio in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from httpx<1,>=0.27->neurosim==0.2.0.dev0) (4.12.1)
+Requirement already satisfied: certifi in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from httpx<1,>=0.27->neurosim==0.2.0.dev0) (2026.1.4)
+Requirement already satisfied: httpcore==1.* in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from httpx<1,>=0.27->neurosim==0.2.0.dev0) (1.0.9)
+Requirement already satisfied: idna in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from httpx<1,>=0.27->neurosim==0.2.0.dev0) (3.11)
+Requirement already satisfied: h11>=0.16 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from httpcore==1.*->httpx<1,>=0.27->neurosim==0.2.0.dev0) (0.16.0)
+Collecting CacheControl>=0.13.0 (from CacheControl[filecache]>=0.13.0->pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading cachecontrol-0.14.4-py3-none-any.whl.metadata (3.1 kB)
+Collecting cyclonedx-python-lib<12,>=5 (from pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading cyclonedx_python_lib-11.12.0-py3-none-any.whl.metadata (6.9 kB)
+Collecting pip-api>=0.0.28 (from pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading pip_api-0.0.35-py3-none-any.whl.metadata (17 kB)
+Collecting pip-requirements-parser>=32.0.0 (from pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading pip_requirements_parser-32.0.1-py3-none-any.whl.metadata (9.3 kB)
+Requirement already satisfied: requests>=2.31.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pip-audit<3,>=2->neurosim==0.2.0.dev0) (2.34.2)
+Requirement already satisfied: rich>=12.4 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pip-audit<3,>=2->neurosim==0.2.0.dev0) (14.3.3)
+Requirement already satisfied: tomli>=2.2.1 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pip-audit<3,>=2->neurosim==0.2.0.dev0) (2.4.1)
+Requirement already satisfied: tomli-w>=1.2.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pip-audit<3,>=2->neurosim==0.2.0.dev0) (1.2.0)
+Requirement already satisfied: platformdirs>=4.2.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pip-audit<3,>=2->neurosim==0.2.0.dev0) (4.9.4)
+Collecting license-expression<31,>=30 (from cyclonedx-python-lib<12,>=5->pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading license_expression-30.4.4-py3-none-any.whl.metadata (11 kB)
+Collecting packageurl-python<2,>=0.11 (from cyclonedx-python-lib<12,>=5->pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading packageurl_python-0.17.6-py3-none-any.whl.metadata (5.1 kB)
+Collecting py-serializable<3.0.0,>=2.1.0 (from cyclonedx-python-lib<12,>=5->pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading py_serializable-2.1.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting sortedcontainers<3.0.0,>=2.4.0 (from cyclonedx-python-lib<12,>=5->pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+Collecting boolean.py>=4.0 (from license-expression<31,>=30->cyclonedx-python-lib<12,>=5->pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading boolean_py-5.0-py3-none-any.whl.metadata (2.3 kB)
+Collecting defusedxml<0.8.0,>=0.7.1 (from py-serializable<3.0.0,>=2.1.0->cyclonedx-python-lib<12,>=5->pip-audit<3,>=2->neurosim==0.2.0.dev0)
+  Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+Requirement already satisfied: annotated-types>=0.6.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pydantic<3,>=2.10->neurosim==0.2.0.dev0) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pydantic<3,>=2.10->neurosim==0.2.0.dev0) (2.41.5)
+Requirement already satisfied: iniconfig>=1.0.1 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pytest<10,>=8->neurosim==0.2.0.dev0) (2.3.0)
+Requirement already satisfied: pluggy<2,>=1.5 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pytest<10,>=8->neurosim==0.2.0.dev0) (1.6.0)
+Requirement already satisfied: pygments>=2.7.2 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pytest<10,>=8->neurosim==0.2.0.dev0) (2.19.2)
+Requirement already satisfied: click>=7.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from uvicorn<1,>=0.30->neurosim==0.2.0.dev0) (8.1.8)
+Requirement already satisfied: msgpack<2.0.0,>=0.5.2 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from CacheControl>=0.13.0->CacheControl[filecache]>=0.13.0->pip-audit<3,>=2->neurosim==0.2.0.dev0) (1.1.2)
+Requirement already satisfied: filelock>=3.8.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from CacheControl[filecache]>=0.13.0->pip-audit<3,>=2->neurosim==0.2.0.dev0) (3.25.0)
+Requirement already satisfied: pip in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pip-api>=0.0.28->pip-audit<3,>=2->neurosim==0.2.0.dev0) (26.0.1)
+Requirement already satisfied: pyparsing in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from pip-requirements-parser>=32.0.0->pip-audit<3,>=2->neurosim==0.2.0.dev0) (3.3.2)
+Requirement already satisfied: charset_normalizer<4,>=2 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from requests>=2.31.0->pip-audit<3,>=2->neurosim==0.2.0.dev0) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.26 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from requests>=2.31.0->pip-audit<3,>=2->neurosim==0.2.0.dev0) (2.6.3)
+Requirement already satisfied: markdown-it-py>=2.2.0 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from rich>=12.4->pip-audit<3,>=2->neurosim==0.2.0.dev0) (4.0.0)
+Requirement already satisfied: mdurl~=0.1 in C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages (from markdown-it-py>=2.2.0->rich>=12.4->pip-audit<3,>=2->neurosim==0.2.0.dev0) (0.1.2)
+Downloading pip_audit-2.10.1-py3-none-any.whl (62 kB)
+Downloading cyclonedx_python_lib-11.12.0-py3-none-any.whl (529 kB)
+   ---------------------------------------- 529.5/529.5 kB 11.7 MB/s  0:00:00
+Downloading license_expression-30.4.4-py3-none-any.whl (120 kB)
+Downloading packageurl_python-0.17.6-py3-none-any.whl (36 kB)
+Downloading py_serializable-2.1.0-py3-none-any.whl (23 kB)
+Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+Downloading boolean_py-5.0-py3-none-any.whl (26 kB)
+Downloading cachecontrol-0.14.4-py3-none-any.whl (22 kB)
+Downloading pip_api-0.0.35-py3-none-any.whl (123 kB)
+Downloading pip_requirements_parser-32.0.1-py3-none-any.whl (35 kB)
+Building wheels for collected packages: neurosim
+  Building editable for neurosim (pyproject.toml): started
+  Building editable for neurosim (pyproject.toml): finished with status 'done'
+  Created wheel for neurosim: filename=neurosim-0.2.0.dev0-0.editable-py3-none-any.whl size=3515 sha256=298827f840ed96f0e36e4fd3f301a7c70179c31623b38cce5d71cee8f785c524
+  Stored in directory: C:\Users\sreer_mg\AppData\Local\Temp\pip-ephem-wheel-cache-o5q1tj71\wheels\2d\74\2a\5452c32f9b3c089faf4a793e19f9e33a5a57fd2600a5eb219c
+Successfully built neurosim
+WARNING: Ignoring invalid distribution ~gentwatch-ai (C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages)
+Installing collected packages: sortedcontainers, boolean.py, pip-requirements-parser, pip-api, packageurl-python, license-expression, defusedxml, py-serializable, CacheControl, cyclonedx-python-lib, pip-audit, neurosim
+
+WARNING: Ignoring invalid distribution ~gentwatch-ai (C:\Users\sreer_mg\AppData\Local\Programs\Python\Python314\Lib\site-packages)
+Successfully installed CacheControl-0.14.4 boolean.py-5.0 cyclonedx-python-lib-11.12.0 defusedxml-0.7.1 license-expression-30.4.4 neurosim-0.2.0.dev0 packageurl-python-0.17.6 pip-api-0.0.35 pip-audit-2.10.1 pip-requirements-parser-32.0.1 py-serializable-2.1.0 sortedcontainers-2.4.0
+
+[notice] A new release of pip is available: 26.0.1 -> 26.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip

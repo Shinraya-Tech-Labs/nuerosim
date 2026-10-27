@@ -1,0 +1,23 @@
+
+> neurosim-web@0.2.0-dev.0 test:e2e
+> playwright test tests/e2e/connectivity.spec.ts
+
+[WebServer] INFO:     Started server process [21108]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+[WebServer] (node:17464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:5808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] [browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[WebServer] [browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+  ok 1 tests\e2e\connectivity.spec.ts:2:1 › real saved topology renders, filters, and reloads (5.7s)
+  ok 2 tests\e2e\connectivity.spec.ts:109:1 › configuration submits a real job and reports validation failures (2.4s)
+
+  2 passed (15.2s)
