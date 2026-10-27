@@ -22,6 +22,11 @@ class SWCRequest(StrictModel):
     text: str = Field(max_length=500_000)
 
 
+class ExhibitionBinding(StrictModel):
+    job_id: str = Field(min_length=1)
+    reference_id: str | None = None
+
+
 def export_zip(result):
     output = io.BytesIO()
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
@@ -111,6 +116,16 @@ def create_app(database=None):
     @app.get("/experiments")
     def history(limit: int = Query(100, ge=1, le=500)):
         return app.state.store.history(limit)
+
+    @app.get("/exhibition")
+    def exhibition():
+        return app.state.store.exhibition()
+
+    @app.post("/exhibition/{slot}")
+    def bind_exhibition(slot: int, binding: ExhibitionBinding):
+        return app.state.store.bind_exhibition(
+            slot, binding.job_id, binding.reference_id
+        )
 
     @app.get("/experiments/{jid}")
     def get(jid: str):
