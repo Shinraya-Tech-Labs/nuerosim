@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T005",
-  "next_unit": "U09",
+  "next_unit": "U10",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -241,6 +241,11 @@
       "status": "complete",
       "artifact": "python/neurosim/units_audit.py",
       "verification": "File-based module CLI accepted a temporary result JSON and emitted the expected report; focused test file passes (5 passed)."
+    },
+    "T005/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T005-scientific-units-audit.md",
+      "verification": "At 6173085, 2 spikes / 1 neuron / 1000 ms independently recomputed to 2.0 Hz; all five focused tests passed."
     }
   },
   "daily_stats": {
