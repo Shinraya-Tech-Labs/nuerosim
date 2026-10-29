@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T010",
+  "next_package": "T011",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -450,6 +450,56 @@
       "status": "complete",
       "artifact": "docs/omega/T009-ui-renderer-contract-audit.md",
       "verification": "Documented usage, coverage, renderer limitations, and evidence/contract links."
+    },
+    "T010/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T010-ci-platform-matrix-audit.md",
+      "verification": "Specified workflow inputs, output, runner/runtime fields, simple matrix counting, errors, PyYAML dependency, acceptance values, and interpretation limits."
+    },
+    "T010/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T010-ci-platform-matrix-audit/valid.json",
+      "verification": "Fixture expects 8 combinations from 2 platforms \u00d7 4 Python versions; independently checked against declared axes."
+    },
+    "T010/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T010-ci-platform-matrix-audit/invalid.json",
+      "verification": "Malformed scalar matrix axis is rejected by production parser and covered by focused test."
+    },
+    "T010/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/ci_matrix_audit.py",
+      "verification": "Added YAML audit CLI for runner labels, matrix axes, setup-python/setup-node versions, and deterministic combination counts."
+    },
+    "T010/U05": {
+      "status": "complete",
+      "artifact": "tests/test_ci_matrix_audit.py",
+      "verification": "Positive fixture, invalid matrix, actual workflow values, and CLI JSON tests passed (4 passed at U05)."
+    },
+    "T010/U06": {
+      "status": "complete",
+      "artifact": "tests/test_ci_matrix_audit.py",
+      "verification": "Empty matrix and missing-runner boundaries covered; focused suite passes (6 passed)."
+    },
+    "T010/U07": {
+      "status": "complete",
+      "artifact": "pyproject.toml",
+      "verification": "Audited actual CPU and web workflows (4 jobs, 11 combinations); added PyYAML to dev dependencies for CI/test availability."
+    },
+    "T010/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T010-ci-platform-matrix-audit.md",
+      "verification": "Documented CLI command and reproducible setup using .[dev]."
+    },
+    "T010/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T010-ci-platform-matrix-audit.md",
+      "verification": "At 967d6a8, actual workflow audit reported 4 jobs/11 combinations; CPU tests matrix 8 combos, focused tests 6 passed."
+    },
+    "T010/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T010-ci-platform-matrix-audit.md",
+      "verification": "Documented output meaning, malformed inputs, and limits; links contract and evidence."
     }
   },
   "daily_stats": {
