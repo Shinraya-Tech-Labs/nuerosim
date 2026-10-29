@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T002",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -64,6 +64,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T002-environment-reproducibility-lockfile-inventory/valid.json",
       "verification": "JSON parsed; independently recomputed UTF-8 byte lengths and SHA-256 values match expected fixture output."
+    },
+    "T002/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T002-environment-reproducibility-lockfile-inventory/invalid.json",
+      "verification": "JSON parsed; Git rejected the unresolved fixture revision with exit 128 and no stdout. Feature-level rejection will be covered by U05/U07."
     }
   },
   "daily_stats": {

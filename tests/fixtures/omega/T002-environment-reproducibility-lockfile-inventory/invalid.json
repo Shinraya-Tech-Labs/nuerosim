@@ -1,0 +1,4 @@
+{
+  "revision": "omega-lock-fixture-revision-that-does-not-exist-01c4aa",
+  "expected_error": "revision must resolve to a commit"
+}
