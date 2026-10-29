@@ -50,6 +50,8 @@ def audit_workflow(path):
         for axis, values in sorted(matrix.items()):
             if axis in {"include", "exclude"}:
                 continue
+            if not isinstance(values, list):
+                raise ValueError(f"matrix axis {axis} must be a non-empty list")
             axes[axis] = _strings(values, f"matrix axis {axis}")
         runs_on = _strings(job["runs-on"], "runs-on") if "runs-on" in job else []
         matrix_platforms = axes.get("os", [])
