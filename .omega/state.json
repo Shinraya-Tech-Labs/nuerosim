@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T004",
-  "next_unit": "U01",
+  "next_unit": "U02",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -152,6 +152,11 @@
       "status": "complete",
       "artifact": "docs/omega/T003-legacy-modules-boundary-map.md",
       "verification": "Usage, scope, failure behavior, limitations, and checklist documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T004/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T004-api-endpoint-contract-snapshot.md",
+      "verification": "Defined the current-app input, deterministic OpenAPI output/hash, side-effect limits, errors, and runtime/security exclusions."
     }
   },
   "daily_stats": {
