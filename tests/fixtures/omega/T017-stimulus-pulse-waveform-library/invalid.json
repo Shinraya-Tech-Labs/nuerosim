@@ -1,0 +1,8 @@
+{
+  "start_ms": 0,
+  "width_ms": 2,
+  "interval_ms": 1,
+  "count": 3,
+  "amplitude_uA_cm2": 2,
+  "expected_error": "pulse train interval must be at least its width"
+}
