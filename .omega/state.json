@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T003",
-  "next_unit": "U02",
+  "next_unit": "U03",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -108,6 +108,11 @@
       "status": "complete",
       "artifact": "docs/omega/contracts/T003-legacy-modules-boundary-map.md",
       "verification": "Defined the tracked path and console-script scope, deterministic JSON fields, error conditions, acceptance example, and naming/import-graph limitations."
+    },
+    "T003/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T003-legacy-modules-boundary-map/valid.json",
+      "verification": "Fixture JSON parsed; legacy module and archived path lists plus project entry-point counts match the declared expectations."
     }
   },
   "daily_stats": {
