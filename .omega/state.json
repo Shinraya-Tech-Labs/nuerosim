@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U08",
+  "next_unit": "U09",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -336,6 +336,11 @@
       "status": "complete",
       "artifact": "tests/test_event_schedule.py",
       "verification": "Real LIF network with 2.01 ms request audited to 2.025 ms; target unchanged through arrival and responds on next step; focused tests pass (4 passed)."
+    },
+    "T007/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/event_schedule.py",
+      "verification": "File-based CLI accepted the valid fixture and emitted the expected report; focused test file passes (5 passed)."
     }
   },
   "daily_stats": {

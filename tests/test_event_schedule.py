@@ -1,8 +1,11 @@
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
-import pytest
 import numpy as np
+import pytest
 
 from neurosim.event_schedule import audit_schedule
 from neurosim.workbench.config import Experiment, Pulse
@@ -63,3 +66,26 @@ def test_T007_event_scheduling_audit_real_event_integration():
     assert report["effective_delay_ms"] == 2.025
     np.testing.assert_allclose(target_voltage[times <= arrival + 1e-9], -65, atol=1e-10)
     assert target_voltage[np.searchsorted(times, arrival + config.dt)] > -65
+
+
+def test_T007_event_scheduling_audit_cli(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    fixture = json.loads(
+        Path("tests/fixtures/omega/T007-event-scheduling-audit/valid.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    result_path = tmp_path / "result.json"
+    result_path.write_text(json.dumps(fixture["result"]), encoding="utf-8")
+    env = os.environ | {"PYTHONPATH": str(root / "python")}
+    run = subprocess.run(
+        [sys.executable, "-m", "neurosim.event_schedule", str(result_path)],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert run.returncode == 0, run.stderr
+    assert json.loads(run.stdout) == fixture["expected"]
