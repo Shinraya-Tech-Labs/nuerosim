@@ -1,0 +1,7 @@
+{
+  "profile": "hh",
+  "repeats": 3,
+  "sample_wall_seconds": [1.0, 2.0, 3.0],
+  "expected_median_seconds": 2.0,
+  "expected_config": {"model": "hh", "n": 1, "duration_ms": 50, "dt_ms": 0.025}
+}
