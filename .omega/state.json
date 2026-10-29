@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T011",
+  "next_package": "T012",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -500,6 +500,56 @@
       "status": "complete",
       "artifact": "docs/omega/T010-ci-platform-matrix-audit.md",
       "verification": "Documented output meaning, malformed inputs, and limits; links contract and evidence."
+    },
+    "T011/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T011-test-baseline-capture.md",
+      "verification": "Defined argument-vector execution, bounded outputs, timeout, metadata, errors, defaults, and limitations."
+    },
+    "T011/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T011-test-baseline-capture/valid.json",
+      "verification": "Fixture specifies portable success output without newline translation; production capture matches exit code and output."
+    },
+    "T011/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T011-test-baseline-capture/invalid.json",
+      "verification": "Empty command and zero timeout fixture rejected with the expected ValueError."
+    },
+    "T011/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/test_baseline.py",
+      "verification": "Implemented shell-free command capture with revision/platform metadata, bounded output, timeout handling, and CLI status propagation."
+    },
+    "T011/U05": {
+      "status": "complete",
+      "artifact": "tests/test_test_baseline.py",
+      "verification": "Focused behavior tests cover success, nonzero exit, timeout, CLI report, and output capture; 5 passed."
+    },
+    "T011/U06": {
+      "status": "complete",
+      "artifact": "tests/test_test_baseline.py",
+      "verification": "Tested invalid timeout/directory and zero-length output bound; focused suite passes (7 passed)."
+    },
+    "T011/U07": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T011-test-baseline-capture.md",
+      "verification": "Captured actual `python -m pytest tests/test_test_baseline.py -q`: exit 0, 7 passed, 5.565141 seconds total command time."
+    },
+    "T011/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T011-test-baseline-capture.md",
+      "verification": "Published reproducible CLI command and JSON artifact behavior."
+    },
+    "T011/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T011-test-baseline-capture.md",
+      "verification": "At fd0fe341, Windows 11/Python 3.14.2 run recorded 7 passed and a non-timeout exit 0."
+    },
+    "T011/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T011-test-baseline-capture.md",
+      "verification": "Documented usage, command result status, timeout/errors, output bound, and evidence links."
     }
   },
   "daily_stats": {
