@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T003",
-  "next_unit": "U10",
+  "next_package": "T004",
+  "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -147,6 +147,11 @@
       "status": "complete",
       "artifact": "docs/omega/evidence/T003-legacy-modules-boundary-map.md",
       "verification": "At 8b90737, direct tree/script scan matched the report: 1 legacy module, 9 archived docs, 2 supported entry points. Five runs: median 251.78 ms; range 228.41–273.43 ms."
+    },
+    "T003/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T003-legacy-modules-boundary-map.md",
+      "verification": "Usage, scope, failure behavior, limitations, and checklist documented. Day report linkage is deferred to the Day 01 gate."
     }
   },
   "daily_stats": {
