@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T007",
-  "next_unit": "U10",
+  "next_package": "T008",
+  "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -346,6 +346,11 @@
       "status": "complete",
       "artifact": "docs/omega/evidence/T007-event-scheduling-audit.md",
       "verification": "At 6b8f4f3, real run requested 2.01 ms at dt 0.025 ms; engine/audit agree on 81 steps and 2.025 ms effective delay."
+    },
+    "T007/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T007-event-scheduling-audit.md",
+      "verification": "Usage, timing fields, failure behavior, scope, and limitations documented. Day report linkage is deferred to the Day 01 gate."
     }
   },
   "daily_stats": {
