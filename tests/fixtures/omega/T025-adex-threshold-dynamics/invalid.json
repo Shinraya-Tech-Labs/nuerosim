@@ -1,0 +1,7 @@
+{
+  "units": {"time": "ms", "voltage": "mV", "current_density": "uA/cm^2"},
+  "experiment": {"model": "lif", "duration": 20, "dt": 0.025, "pulses": []},
+  "expected_spike_times_ms": [],
+  "spike_time_tolerance_ms": 1e-9,
+  "expected_error": "requires model='adex'"
+}
