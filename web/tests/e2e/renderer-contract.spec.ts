@@ -28,6 +28,10 @@ test("T009 UI renderer contract selects WebGL2 and falls back to 2D", async ({
   await expect(page.locator(".renderer-badge")).toContainText(
     valid.expected.renderer_label_contains,
   );
+  await page.getByLabel("Rendering backend").selectOption("webgl2");
+  await expect(page.locator(".renderer-badge")).toContainText("WebGL2");
+  await page.getByLabel("Rendering backend").selectOption("auto");
+  await expect(page.locator(".renderer-badge")).toContainText("WebGL2");
 
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
