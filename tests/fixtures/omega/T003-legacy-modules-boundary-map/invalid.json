@@ -1,0 +1,4 @@
+{
+  "pyproject_contents": "[project.scripts\nneurosim = \"neurosim.workbench.cli:main\"\n",
+  "expected_error": "pyproject.toml must contain valid TOML"
+}

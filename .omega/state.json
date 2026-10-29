@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T003",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -113,6 +113,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T003-legacy-modules-boundary-map/valid.json",
       "verification": "Fixture JSON parsed; legacy module and archived path lists plus project entry-point counts match the declared expectations."
+    },
+    "T003/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T003-legacy-modules-boundary-map/invalid.json",
+      "verification": "JSON parsed; Python tomllib rejected the malformed pyproject fixture with TOMLDecodeError. Feature-level failure behavior will be checked after implementation."
     }
   },
   "daily_stats": {
