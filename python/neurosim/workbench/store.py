@@ -13,6 +13,21 @@ from pathlib import Path
 from .config import Experiment
 from .engine import Cancelled, manifest, simulate
 
+SCHEMA_DDL = (
+    """CREATE TABLE IF NOT EXISTS jobs (
+        id TEXT PRIMARY KEY, created REAL NOT NULL, updated REAL NOT NULL,
+        status TEXT NOT NULL, progress REAL NOT NULL DEFAULT 0,
+        manifest TEXT NOT NULL, parent_id TEXT, error TEXT, result BLOB)""",
+    """CREATE TABLE IF NOT EXISTS exhibition (
+        slot INTEGER PRIMARY KEY CHECK (slot BETWEEN 1 AND 4),
+        job_id TEXT NOT NULL, reference_id TEXT)""",
+)
+
+
+def create_schema(db):
+    for statement in SCHEMA_DDL:
+        db.execute(statement)
+
 
 class Store:
     def __init__(self, path):
@@ -20,13 +35,7 @@ class Store:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.connection() as db:
             db.execute("PRAGMA journal_mode=WAL")
-            db.execute("""CREATE TABLE IF NOT EXISTS jobs (
-                id TEXT PRIMARY KEY, created REAL NOT NULL, updated REAL NOT NULL,
-                status TEXT NOT NULL, progress REAL NOT NULL DEFAULT 0,
-                manifest TEXT NOT NULL, parent_id TEXT, error TEXT, result BLOB)""")
-            db.execute("""CREATE TABLE IF NOT EXISTS exhibition (
-                slot INTEGER PRIMARY KEY CHECK (slot BETWEEN 1 AND 4),
-                job_id TEXT NOT NULL, reference_id TEXT)""")
+            create_schema(db)
 
     @contextmanager
     def connection(self):
