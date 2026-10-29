@@ -1,0 +1,7 @@
+{
+  "duration_ms": 20,
+  "current_uA_cm2": 10,
+  "coarse_dt_ms": 0.025,
+  "fine_dt_ms": 0.0125,
+  "expected": {"fourth_order_range": [3.5, 4.6], "voltage_error_unit": "mV"}
+}
