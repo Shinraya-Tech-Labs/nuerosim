@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T006",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -261,6 +261,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T006-model-parameter-bounds-audit/valid.json",
       "verification": "Fixture parsed; independently enumerated 3 numeric fields and confirmed each default lies within its declared inclusive bounds."
+    },
+    "T006/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T006-model-parameter-bounds-audit/invalid.json",
+      "verification": "Fixture parsed; Experiment.dt default 0.03 exceeds its maximum 0.025. Production rejection will be checked in U05."
     }
   },
   "daily_stats": {
