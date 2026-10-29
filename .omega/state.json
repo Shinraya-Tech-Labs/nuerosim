@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T005",
-  "next_unit": "U08",
+  "next_unit": "U09",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -236,6 +236,11 @@
       "status": "complete",
       "artifact": "tests/test_units_audit.py",
       "verification": "Generated a real 1 ms workbench simulation result and audited its manifest/spike trains; focused test file passes (4 passed)."
+    },
+    "T005/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/units_audit.py",
+      "verification": "File-based module CLI accepted a temporary result JSON and emitted the expected report; focused test file passes (5 passed)."
     }
   },
   "daily_stats": {

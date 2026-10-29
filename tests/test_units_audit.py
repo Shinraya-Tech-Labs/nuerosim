@@ -1,6 +1,9 @@
 import copy
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -59,3 +62,26 @@ def test_T005_scientific_units_audit_real_result_integration():
     assert report["status"] == "pass"
     assert report["units"] == result["manifest"]["units"]
     assert report["mean_rate_hz"] == result["mean_rate_hz"]
+
+
+def test_T005_scientific_units_audit_cli(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    fixture = json.loads(
+        Path("tests/fixtures/omega/T005-scientific-units-audit/valid.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    result_path = tmp_path / "result.json"
+    result_path.write_text(json.dumps(fixture["result"]), encoding="utf-8")
+    env = os.environ | {"PYTHONPATH": str(root / "python")}
+    run = subprocess.run(
+        [sys.executable, "-m", "neurosim.units_audit", str(result_path)],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert run.returncode == 0, run.stderr
+    assert json.loads(run.stdout) == fixture["expected"]
