@@ -1,6 +1,7 @@
 {
   "result": {
     "manifest": {
+      "units": {"time": "ms"},
       "config": {
         "delay": 1.01,
         "dt": 0.025
