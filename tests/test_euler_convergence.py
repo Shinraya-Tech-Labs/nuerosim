@@ -48,6 +48,22 @@ def test_invalid_grid_or_value_boundaries(tmp_path, field, value, error):
         audit_fixture(path)
 
 
+@pytest.mark.parametrize(
+    ("field", "value", "error"),
+    [
+        ("fine_dt_ms", 0.0005, "greater than or equal to 0.001"),
+        ("current_uA_cm2", 101, "less than or equal to 100"),
+    ],
+)
+def test_model_resource_bounds_are_enforced(tmp_path, field, value, error):
+    fixture = json.loads((FIXTURES / "valid.json").read_text(encoding="utf-8"))
+    fixture[field] = value
+    path = tmp_path / "fixture.json"
+    path.write_text(json.dumps(fixture), encoding="utf-8")
+    with pytest.raises(ValueError, match=error):
+        audit_fixture(path)
+
+
 def test_cli_exposes_real_convergence_harness():
     result = subprocess.run(
         [sys.executable, "-m", "neurosim.euler_convergence", str(FIXTURES / "valid.json")],
