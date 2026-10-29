@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T002",
-  "next_unit": "U02",
+  "next_unit": "U03",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -59,6 +59,11 @@
       "status": "complete",
       "artifact": "docs/omega/contracts/T002-environment-reproducibility-lockfile-inventory.md",
       "verification": "Defined commit-tree input, current lockfile scope, output schema/units, failures, acceptance criteria, and limits on reproducibility claims."
+    },
+    "T002/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T002-environment-reproducibility-lockfile-inventory/valid.json",
+      "verification": "JSON parsed; independently recomputed UTF-8 byte lengths and SHA-256 values match expected fixture output."
     }
   },
   "daily_stats": {
