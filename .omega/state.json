@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T001",
-  "next_unit": "U05",
+  "next_unit": "U06",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -25,6 +25,11 @@
       "status": "complete",
       "artifact": "python/neurosim/repo_inventory.py",
       "verification": "Module CLI emitted valid sorted JSON for HEAD (146 tracked paths); unresolved revision returned exit 2 with a clear error."
+    },
+    "T001/U05": {
+      "status": "complete",
+      "artifact": "tests/test_repo_inventory.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_repo_inventory.py -q: 1 passed."
     }
   },
   "daily_stats": {
