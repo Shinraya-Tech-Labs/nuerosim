@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T005",
-  "next_unit": "U07",
+  "next_unit": "U08",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -231,6 +231,11 @@
       "status": "complete",
       "artifact": "tests/test_units_audit.py",
       "verification": "Tests reject zero duration, an out-of-range spike, and a stored-rate mismatch; focused test file passes (3 passed)."
+    },
+    "T005/U07": {
+      "status": "complete",
+      "artifact": "tests/test_units_audit.py",
+      "verification": "Generated a real 1 ms workbench simulation result and audited its manifest/spike trains; focused test file passes (4 passed)."
     }
   },
   "daily_stats": {

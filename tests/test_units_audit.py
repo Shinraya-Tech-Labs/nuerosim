@@ -5,6 +5,8 @@ from pathlib import Path
 import pytest
 
 from neurosim.units_audit import audit_units
+from neurosim.workbench.config import Experiment
+from neurosim.workbench.engine import simulate
 
 
 def test_T005_scientific_units_audit_unit():
@@ -47,3 +49,13 @@ def test_T005_scientific_units_audit_boundaries():
         audit_units(out_of_range_spike)
     with pytest.raises(ValueError, match="mean_rate_hz does not match"):
         audit_units(inconsistent_rate)
+
+
+def test_T005_scientific_units_audit_real_result_integration():
+    result = simulate(Experiment(duration=1, pulses=[]))
+
+    report = audit_units(result)
+
+    assert report["status"] == "pass"
+    assert report["units"] == result["manifest"]["units"]
+    assert report["mean_rate_hz"] == result["mean_rate_hz"]
