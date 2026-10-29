@@ -59,6 +59,17 @@ def test_missing_required_check_leaves_gate_failed():
     assert report["missing_checks"] == ["web-e2e"]
 
 
+def test_invalid_risk_severity_or_empty_evidence_is_rejected():
+    fixture = json.loads((FIXTURES / "valid.json").read_text(encoding="utf-8"))
+    fixture["risks"][0]["severity"] = "urgent"
+    with pytest.raises(ValueError, match="invalid severity"):
+        validate_signoff(fixture)
+    fixture = json.loads((FIXTURES / "valid.json").read_text(encoding="utf-8"))
+    fixture["checks"][0]["evidence"] = " "
+    with pytest.raises(ValueError, match="non-empty evidence"):
+        validate_signoff(fixture)
+
+
 def test_cli_emits_signoff_json():
     result = subprocess.run(
         [sys.executable, "-m", "neurosim.baseline_signoff", str(FIXTURES / "valid.json")],
