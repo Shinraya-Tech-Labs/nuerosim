@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T001",
-  "next_unit": "U08",
+  "next_unit": "U10",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -40,6 +40,15 @@
       "status": "complete",
       "artifact": "tests/test_repo_inventory.py",
       "verification": "CLI integration test checks resolved HEAD, count/path consistency, and invalid revision error; focused test file passes (3 passed)."
+    },
+    "T001/U08": {
+      "status": "N/A",
+      "evidence": "U04 already exposes the module CLI `python -m neurosim.repo_inventory`; U07 verifies its user-visible output. A second wrapper would duplicate the interface."
+    },
+    "T001/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T001-repo-tree-provenance-inventory.md",
+      "verification": "At 067b377, inventory, commit tree, and Git index each contained 148 paths. Five CLI runs: median 176.85 ms; range 171.79–192.31 ms, including Python startup."
     }
   },
   "daily_stats": {
