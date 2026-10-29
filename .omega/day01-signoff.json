@@ -1,0 +1,55 @@
+{
+  "tested_revision": "91231ea64f4cb4455cb7ee808f1f05b1e785fdd6",
+  "checks": [
+    {
+      "id": "python",
+      "command": "PYTHONPATH=python python -m pytest tests -q",
+      "status": "passed",
+      "evidence": "107 passed in 21.91s"
+    },
+    {
+      "id": "web-unit",
+      "command": "npm test (web/)",
+      "status": "passed",
+      "evidence": "6 passed in 0.744s"
+    },
+    {
+      "id": "web-build",
+      "command": "npm run build (web/)",
+      "status": "passed",
+      "evidence": "Next.js production build and TypeScript completed successfully"
+    },
+    {
+      "id": "web-e2e",
+      "command": "npm run test:e2e (web/)",
+      "status": "passed",
+      "evidence": "6 passed in 1.4m; generated tracked validation outputs were restored"
+    }
+  ],
+  "risks": [
+    {
+      "id": "webgpu",
+      "title": "Physical WebGPU behavior and performance are unverified",
+      "severity": "medium",
+      "disposition": "accepted",
+      "rationale": "No usable WebGPU adapter was exposed in headless Chromium; the verified path used WebGL2 and the 2D fallback.",
+      "evidence": "docs/WEB_VALIDATION_REPORT.md"
+    },
+    {
+      "id": "remote-ci",
+      "title": "GitHub Actions matrix has not been run in this session",
+      "severity": "medium",
+      "disposition": "accepted",
+      "rationale": "The local Windows baseline passes, but Ubuntu/Windows hosted runner results remain external evidence.",
+      "evidence": ".github/workflows/cpu.yml; .github/workflows/web.yml"
+    },
+    {
+      "id": "docker-runtime",
+      "title": "Docker runtime was not verified in the Day 01 gate",
+      "severity": "medium",
+      "disposition": "accepted",
+      "rationale": "The Day 01 exit commands do not include Docker; prior validation records the local engine limitation.",
+      "evidence": "docs/VALIDATION.md"
+    }
+  ]
+}
