@@ -1,0 +1,11 @@
+{
+  "units": {"time": "ms", "voltage": "mV", "current_density": "uA/cm^2"},
+  "experiment": {
+    "model": "lif", "duration": 30, "dt": 0.025, "record_every": 1, "n": 1,
+    "parameters": {"rest": -65, "reset": -65, "threshold": -50, "refractory": 2, "tau_m": 20},
+    "pulses": [{"start": 0, "stop": 20, "amplitude": 20}]
+  },
+  "minimum_interval_tolerance_ms": 1e-12,
+  "expected_first_spike_ms": 0.775,
+  "expected_minimum_interspike_interval_ms": 2.775
+}
