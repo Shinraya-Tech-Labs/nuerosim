@@ -62,3 +62,12 @@ def test_cli_exposes_real_rk4_convergence_harness():
     report = json.loads(result.stdout)
     assert report["passed"] is True
     assert report["observed_order"] == pytest.approx(4.296705, abs=1e-5)
+
+
+def test_current_limit_is_enforced(tmp_path):
+    fixture = json.loads((FIXTURES / "valid.json").read_text(encoding="utf-8"))
+    fixture["current_uA_cm2"] = 101
+    path = tmp_path / "fixture.json"
+    path.write_text(json.dumps(fixture), encoding="utf-8")
+    with pytest.raises(ValueError, match="less than or equal to 100"):
+        audit_fixture(path)
