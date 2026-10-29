@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T019",
+  "next_package": "T020",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -885,6 +885,56 @@
       "status": "complete",
       "artifact": "docs/omega/T018-euler-convergence-harness.md",
       "verification": "Documented numeric units, independent reference, failure behavior, use, and scope limits."
+    },
+    "T019/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T019-rk4-convergence-harness.md",
+      "verification": "Specified RK4/HHDOP853 reference, ms/mV units, expected fourth-order interval, and limitations."
+    },
+    "T019/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T019-rk4-convergence-harness/valid.json",
+      "verification": "Fixture sets 20 ms HH constant current and dt .025/.0125 ms with expected order range 3.5\u20134.6."
+    },
+    "T019/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T019-rk4-convergence-harness/invalid.json",
+      "verification": "RK4 timestep above configured maximum is rejected by shared convergence core."
+    },
+    "T019/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/rk4_convergence.py",
+      "verification": "Shared HH convergence engine supports RK4 and Euler while preserving the existing Euler CLI; RK4 emits manifests and measured order."
+    },
+    "T019/U05": {
+      "status": "complete",
+      "artifact": "tests/test_rk4_convergence.py",
+      "verification": "Two real RK4 traces yielded decreasing errors and order in fixture range; CLI checks actual manifests."
+    },
+    "T019/U06": {
+      "status": "complete",
+      "artifact": "tests/test_rk4_convergence.py",
+      "verification": "Covered timestep maxima/minima/order, duration grid, nonfinite input and current bounds; RK4/Euler combined tests 18 passed."
+    },
+    "T019/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_convergence.py",
+      "verification": "Both numerical runs use production Experiment/simulate and return actual config manifests."
+    },
+    "T019/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T019-rk4-convergence-harness.md",
+      "verification": "Documented fixture-driven CLI and outcome statuses."
+    },
+    "T019/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T019-rk4-convergence-harness.md",
+      "verification": "At a8fb0f7, RK4 errors .006001657/.000305376 mV; ratio 19.653366, observed order 4.296705."
+    },
+    "T019/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T019-rk4-convergence-harness.md",
+      "verification": "Documented reference, outputs, errors, invocation, order scope, and links."
     }
   },
   "daily_stats": {
