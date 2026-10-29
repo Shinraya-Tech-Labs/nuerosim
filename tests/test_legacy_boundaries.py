@@ -1,5 +1,8 @@
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -49,3 +52,29 @@ def test_T003_legacy_modules_boundary_map_empty_and_prefix_boundary():
         "archived_file_count": 0,
         "entry_point_count": 1,
     }
+
+
+def test_T003_legacy_modules_boundary_map_cli_integration():
+    root = Path(__file__).resolve().parents[1]
+    env = os.environ | {"PYTHONPATH": str(root / "python")}
+    run = subprocess.run(
+        [sys.executable, "-m", "neurosim.legacy_boundaries", "HEAD"],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert run.returncode == 0, run.stderr
+    result = json.loads(run.stdout)
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True
+    ).stdout.strip()
+
+    assert result["revision"] == head
+    assert "python/neurosim/legacy_cli.py" in result["legacy_modules"]
+    assert result["archived_file_count"] == len(result["archived_legacy_files"])
+    assert result["entry_points"]["neurosim.workbench"]["neurosim"] == (
+        "neurosim.workbench.cli:main"
+    )
+    assert result["entry_points"]["neurosim.legacy"] == {}

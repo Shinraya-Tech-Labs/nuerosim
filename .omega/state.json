@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T003",
-  "next_unit": "U07",
+  "next_unit": "U08",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -133,6 +133,11 @@
       "status": "complete",
       "artifact": "tests/test_legacy_boundaries.py",
       "verification": "Added empty-map and near-prefix routing boundary checks; focused test file passes (3 passed)."
+    },
+    "T003/U07": {
+      "status": "complete",
+      "artifact": "tests/test_legacy_boundaries.py",
+      "verification": "CLI integration confirms selected SHA, legacy module listing, docs count, and workbench route; focused test file passes (4 passed)."
     }
   },
   "daily_stats": {
