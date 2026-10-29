@@ -121,8 +121,8 @@
     },
     "T003/U04": {
       "status": "complete",
-      "artifact": "python/neurosim/legacy_boundaries.py",
-      "verification": "CLI reports 1 legacy-named Python module, 9 archived docs, and the 2 supported workbench entry points from the selected Git tree."
+      "artifact": "python/neurosim/module_boundaries.py",
+      "verification": "CLI maps the selected Git tree and scripts. The audit utility was renamed to module_boundaries.py so it cannot classify itself; integration now asserts the exact single legacy_cli.py path."
     },
     "T003/U05": {
       "status": "complete",

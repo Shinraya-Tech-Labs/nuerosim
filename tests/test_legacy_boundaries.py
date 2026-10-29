@@ -6,7 +6,7 @@ import sys
 
 import pytest
 
-from neurosim.legacy_boundaries import parse_project_scripts, summarize_boundaries
+from neurosim.module_boundaries import parse_project_scripts, summarize_boundaries
 
 
 def test_T003_legacy_modules_boundary_map_unit():
@@ -58,7 +58,7 @@ def test_T003_legacy_modules_boundary_map_cli_integration():
     root = Path(__file__).resolve().parents[1]
     env = os.environ | {"PYTHONPATH": str(root / "python")}
     run = subprocess.run(
-        [sys.executable, "-m", "neurosim.legacy_boundaries", "HEAD"],
+        [sys.executable, "-m", "neurosim.module_boundaries", "HEAD"],
         cwd=root,
         env=env,
         capture_output=True,
@@ -72,7 +72,7 @@ def test_T003_legacy_modules_boundary_map_cli_integration():
     ).stdout.strip()
 
     assert result["revision"] == head
-    assert "python/neurosim/legacy_cli.py" in result["legacy_modules"]
+    assert result["legacy_modules"] == ["python/neurosim/legacy_cli.py"]
     assert result["archived_file_count"] == len(result["archived_legacy_files"])
     assert result["entry_points"]["neurosim.workbench"]["neurosim"] == (
         "neurosim.workbench.cli:main"
