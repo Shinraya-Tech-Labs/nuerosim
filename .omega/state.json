@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T001",
-  "next_unit": "U10",
+  "next_package": "T002",
+  "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -49,6 +49,11 @@
       "status": "complete",
       "artifact": "docs/omega/evidence/T001-repo-tree-provenance-inventory.md",
       "verification": "At 067b377, inventory, commit tree, and Git index each contained 148 paths. Five CLI runs: median 176.85 ms; range 171.79–192.31 ms, including Python startup."
+    },
+    "T001/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T001-repo-tree-provenance-inventory.md",
+      "verification": "Usage, output interpretation, failure behavior, limitations, and checklist documented. Link from DAY_01_REPORT.md will be added at the day gate."
     }
   },
   "daily_stats": {
