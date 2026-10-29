@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U05",
+  "next_unit": "U06",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -315,12 +315,17 @@
     "T007/U03": {
       "status": "complete",
       "artifact": "tests/fixtures/omega/T007-event-scheduling-audit/invalid.json",
-      "verification": "Fixture parsed; saved effective delay 1.0 ms is too short for a 1.01 ms request. Production rejection will be checked after implementation."
+      "verification": "Production audit rejects saved effective delay 1.0 ms for the 1.01 ms request; covered by focused test."
     },
     "T007/U04": {
       "status": "complete",
       "artifact": "python/neurosim/event_schedule.py",
       "verification": "Audit matches the 41-step fixture and rejects inconsistent effective delay. Engine now shares the exact delay-step helper; existing tests/test_events.py passes (2 passed)."
+    },
+    "T007/U05": {
+      "status": "complete",
+      "artifact": "tests/test_event_schedule.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_event_schedule.py -q: 2 passed for delay rounding and mismatch rejection."
     }
   },
   "daily_stats": {
