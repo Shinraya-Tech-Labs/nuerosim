@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T004",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -162,6 +162,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T004-api-endpoint-contract-snapshot/valid.json",
       "verification": "JSON parsed; independently counted the two HTTP operations and recomputed the canonical SHA-256 fixture digest."
+    },
+    "T004/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T004-api-endpoint-contract-snapshot/invalid.json",
+      "verification": "JSON parsed; fixture explicitly supplies a non-object paths value and expected validation error. Production rejection will be verified in U05."
     }
   },
   "daily_stats": {
