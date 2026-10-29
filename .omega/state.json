@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U06",
+  "next_unit": "U07",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -326,6 +326,11 @@
       "status": "complete",
       "artifact": "tests/test_event_schedule.py",
       "verification": "PYTHONPATH=python python -m pytest tests/test_event_schedule.py -q: 2 passed for delay rounding and mismatch rejection."
+    },
+    "T007/U06": {
+      "status": "complete",
+      "artifact": "tests/test_event_schedule.py",
+      "verification": "Minimum grid-aligned delay is one timestep with zero rounding; focused tests pass (3 passed)."
     }
   },
   "daily_stats": {
