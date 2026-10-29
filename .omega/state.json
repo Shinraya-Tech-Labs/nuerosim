@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T022",
+  "next_package": "T023",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -1035,6 +1035,56 @@
       "status": "complete",
       "artifact": "docs/omega/T021-hh-gating-kinetics-edge-cases.md",
       "verification": "Documented usage, classic HH scope, units, failures, limitations, and links."
+    },
+    "T022/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T022-hh-6-3-celsius-reference.md",
+      "verification": "Defined the fixed 6.3 C input contract, explicit units, outputs, rejection cases, reference point, and scientific limits."
+    },
+    "T022/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T022-hh-6-3-celsius-reference/valid.json",
+      "verification": "Valid fixture contains independent six-rate and three-gate reference values at -65 mV with 1e-12 tolerance."
+    },
+    "T022/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T022-hh-6-3-celsius-reference/invalid.json",
+      "verification": "37 C fixture is rejected because the production HH model has no temperature scaling."
+    },
+    "T022/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_reference.py",
+      "verification": "CLI audits six production rates, derived gate equilibria, and production initializer values; valid fixture passes and invalid temperature exits 2."
+    },
+    "T022/U05": {
+      "status": "complete",
+      "artifact": "tests/test_hh_reference.py",
+      "verification": "Focused unit test verifies six rates, steady gates, production initialization and tolerance."
+    },
+    "T022/U06": {
+      "status": "complete",
+      "artifact": "tests/test_hh_reference.py",
+      "verification": "Edge coverage rejects unsupported temperature, non-finite voltage/tolerance, nonpositive tolerance, and incorrect units."
+    },
+    "T022/U07": {
+      "status": "complete",
+      "artifact": "tests/test_hh_reference.py",
+      "verification": "CLI integration check confirms machine-readable passing output; full focused file passes 7 tests."
+    },
+    "T022/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_reference.py",
+      "verification": "Exposed `python -m neurosim.hh_reference <fixture>` with exit codes 0 pass, 1 numeric mismatch, 2 invalid input."
+    },
+    "T022/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T022-hh-6-3-celsius-reference.md",
+      "verification": "Recorded environment, exact reference values, 7 passing focused checks, CLI result, and initialization agreement."
+    },
+    "T022/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T022-hh-6-3-celsius-reference.md",
+      "verification": "Documented usage, outputs, exit codes, fixed-temperature limitation, and links to contract/evidence."
     }
   },
   "daily_stats": {
