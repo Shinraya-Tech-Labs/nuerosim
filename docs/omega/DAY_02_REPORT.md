@@ -18,5 +18,6 @@ Continuous execution for Day 02 began at T016 after the Day 01 gate. Packages be
 - [T027 — spike crossing precision report](T027-spike-crossing-precision-report.md)
 - [T027 — spike crossing precision report](T027-spike-crossing-precision-report.md)
 - [T028 — current balance conservation diagnostic](T028-current-balance-conservation-diagnostic.md)
+- [T029 — time grid and sampling conventions](T029-time-grid-and-sampling-conventions.md)
 
 The Day 02 full exit gate is pending at T030. Individual package evidence links focused verification only and does not substitute for that gate.
