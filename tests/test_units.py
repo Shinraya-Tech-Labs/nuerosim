@@ -4,6 +4,9 @@ from pathlib import Path
 import pytest
 
 from neurosim.units import Quantity, Unit, mean_population_rate
+from neurosim.units_audit import audit_units
+from neurosim.workbench.config import Experiment, Pulse
+from neurosim.workbench.engine import simulate
 
 
 FIXTURE = Path("tests/fixtures/omega/T016-units-typed-primitives/valid.json")
@@ -45,6 +48,24 @@ def test_zero_identity_and_overflow_boundaries():
         Quantity(1e308, Unit.SECOND).to(Unit.MILLISECOND)
     with pytest.raises(ValueError, match="unsupported unit"):
         Unit.from_symbol("fortnight")
+
+
+def test_units_audit_uses_typed_duration_for_real_lif_result():
+    result = simulate(
+        Experiment(
+            model="lif",
+            duration=10,
+            pulses=[Pulse(start=0, stop=10, amplitude=2)],
+        )
+    )
+    report = audit_units(result)
+    typed_rate = mean_population_rate(
+        sum(map(len, result["spikes"])),
+        result["manifest"]["config"]["n"],
+        Quantity(result["manifest"]["config"]["duration"], Unit.MILLISECOND),
+    )
+    assert report["status"] == "pass"
+    assert result["mean_rate_hz"] == typed_rate.value
 
 
 @pytest.mark.parametrize(
