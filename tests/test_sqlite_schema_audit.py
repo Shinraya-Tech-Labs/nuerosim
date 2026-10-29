@@ -1,4 +1,5 @@
 import json
+import hashlib
 import sqlite3
 import subprocess
 import sys
@@ -70,3 +71,16 @@ def test_wal_sidecars_are_rejected_without_opening_database(tmp_path):
     sidecar.write_bytes(b"")
     with pytest.raises(ValueError, match="WAL sidecars"):
         audit_database(path)
+
+
+def test_column_metadata_mismatch_is_reported_without_modification(tmp_path):
+    path = tmp_path / "different-default.db"
+    with sqlite3.connect(path) as db:
+        db.execute("CREATE TABLE jobs (id TEXT PRIMARY KEY, progress REAL DEFAULT 1)")
+        db.execute("CREATE TABLE exhibition (slot INTEGER PRIMARY KEY, job_id TEXT, reference_id TEXT)")
+    before = hashlib.sha256(path.read_bytes()).hexdigest()
+    report = audit_database(path)
+    after = hashlib.sha256(path.read_bytes()).hexdigest()
+    assert report["compatible"] is False
+    assert report["differences"]["mismatched_columns"]["jobs"]["progress"]["actual"]["default"] == "1"
+    assert before == after
