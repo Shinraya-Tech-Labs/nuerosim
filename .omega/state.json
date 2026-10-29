@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T026",
+  "next_package": "T027",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -1235,6 +1235,56 @@
       "status": "complete",
       "artifact": "docs/omega/T025-adex-threshold-dynamics.md",
       "verification": "Documented reproducible CLI use and linked contract/evidence from Day 02 report."
+    },
+    "T026/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T026-refractory-period-scheduling.md",
+      "verification": "Defined supported models, units, interval lower bound, example, and limitations."
+    },
+    "T026/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T026-refractory-period-scheduling/valid.json",
+      "verification": "Reference LIF run records 0.775 ms first spike and 2.775 ms subsequent intervals for a 2 ms refractory period."
+    },
+    "T026/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T026-refractory-period-scheduling/invalid.json",
+      "verification": "HH configuration is rejected because only LIF/AdEx refractory scheduling is audited."
+    },
+    "T026/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/refractory_audit.py",
+      "verification": "Audits production spike intervals against configured refractory time and calculates refractory steps at dt."
+    },
+    "T026/U05": {
+      "status": "complete",
+      "artifact": "tests/test_refractory_audit.py",
+      "verification": "Named unit test verifies first spike, minimum interval, refractory step count, and manifest configuration."
+    },
+    "T026/U06": {
+      "status": "complete",
+      "artifact": "tests/test_refractory_audit.py",
+      "verification": "Focused checks cover unsupported model, invalid units and nonpositive tolerance."
+    },
+    "T026/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/refractory_audit.py",
+      "verification": "Uses validated Experiment and real simulate runner; output includes manifest."
+    },
+    "T026/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/refractory_audit.py",
+      "verification": "Exposes module CLI with persisted JSON report support."
+    },
+    "T026/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T026-refractory-period-scheduling.md",
+      "verification": "Recorded first spike, refractory interval, step count, four passing checks, code revision, environment, and limitation."
+    },
+    "T026/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T026-refractory-period-scheduling.md",
+      "verification": "Documented CLI usage, failure behavior, and Day 02 report link."
     }
   },
   "daily_stats": {

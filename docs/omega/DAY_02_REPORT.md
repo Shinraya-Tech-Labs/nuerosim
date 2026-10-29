@@ -14,5 +14,6 @@ Continuous execution for Day 02 began at T016 after the Day 01 gate. Packages be
 - [T023 — HH conductance sweeps](T023-hh-conductance-sweeps.md)
 - [T024 — LIF exact reference solution](T024-lif-exact-reference-solution.md)
 - [T025 — AdEx threshold dynamics](T025-adex-threshold-dynamics.md)
+- [T026 — refractory period scheduling](T026-refractory-period-scheduling.md)
 
 The Day 02 full exit gate is pending at T030. Individual package evidence links focused verification only and does not substitute for that gate.
