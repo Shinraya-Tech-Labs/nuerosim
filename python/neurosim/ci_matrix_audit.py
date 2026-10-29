@@ -59,6 +59,23 @@ def audit_workflow(path):
             for axis, values in axes.items()
             if axis in RUNTIME_AXES
         }
+        steps = job.get("steps", [])
+        if not isinstance(steps, list):
+            raise ValueError(f"workflow {path} job {job_id} steps must be a list")
+        for step in steps:
+            if not isinstance(step, dict) or not isinstance(step.get("with", {}), dict):
+                continue
+            action = step.get("uses", "")
+            action_inputs = step.get("with", {})
+            if "setup-python" in action and "python" not in runtime_axes:
+                version = action_inputs.get("python-version")
+                if isinstance(version, (str, int, float)) and "${{" not in str(version):
+                    runtime_axes["python"] = [str(version)]
+            if "setup-node" in action and "node" not in runtime_axes:
+                version = action_inputs.get("node-version")
+                if isinstance(version, (str, int, float)) and "${{" not in str(version):
+                    runtime_axes["node"] = [str(version)]
+        runtime_axes = dict(sorted(runtime_axes.items()))
         combination_count = math.prod(len(values) for values in axes.values())
         records.append(
             {
