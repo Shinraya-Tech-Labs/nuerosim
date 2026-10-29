@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T005",
-  "next_unit": "U01",
+  "next_unit": "U02",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -201,6 +201,11 @@
       "status": "complete",
       "artifact": "docs/omega/T004-api-endpoint-contract-snapshot.md",
       "verification": "Usage, digest meaning, failure behavior, side-effect guarantees, and limitations documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T005/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T005-scientific-units-audit.md",
+      "verification": "Scoped audit to documented manifest units and mean-rate dimensional arithmetic, with explicit validation, tolerance, and excluded claims."
     }
   },
   "daily_stats": {
