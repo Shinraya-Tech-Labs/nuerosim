@@ -1,0 +1,6 @@
+{
+  "units": {"voltage": "mV", "axial": "mS/cm^2", "current": "uA/cm^2"},
+  "voltages_mV": [-65],
+  "axial_mS_cm2": 0.1,
+  "expected_error": "at least two compartments"
+}
