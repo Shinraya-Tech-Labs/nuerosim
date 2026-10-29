@@ -1,0 +1,10 @@
+{
+  "units": {"time": "ms", "voltage": "mV", "current_density": "uA/cm^2"},
+  "experiment": {
+    "model": "hh", "duration": 50, "dt": 0.025, "record_every": 1, "n": 1,
+    "pulses": [{"start": 10, "stop": 40, "amplitude": 10}]
+  },
+  "expected_spike_times_ms": [11.925, 26.825],
+  "expected_interpolated_crossings_ms": [11.901300985428811, 26.822719207241708],
+  "maximum_crossing_offset_ms": 0.025
+}

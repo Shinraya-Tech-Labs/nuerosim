@@ -63,6 +63,10 @@ describe("scientific display projections", () => {
     expect(visibleEdges(edges, 3, 10, "all", 0.1, null, 1)).toEqual([]);
   });
   it("provides deterministic finite coordinates without changing connectivity", () => {
+    expect(positions(2, "columns")).toEqual([
+      [-3, 0, 0],
+      [3, 0, 0],
+    ]);
     for (const layout of ["columns", "sphere", "grid"] as const) {
       expect(positions(512, layout)).toEqual(positions(512, layout));
       expect(positions(512, layout).flat().every(Number.isFinite)).toBe(true);

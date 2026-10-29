@@ -1,0 +1,1341 @@
+{
+  "schema": 1,
+  "current_day": 2,
+  "next_package": "T027",
+  "next_unit": "U01",
+  "branch": "exhibition-2026-10-28",
+  "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
+  "results": {
+    "T001/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T001-repo-tree-provenance-inventory.md",
+      "verification": "Contract scope, input, output, units, defaults, errors, acceptance example, and exclusions recorded."
+    },
+    "T001/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T001-repo-tree-provenance-inventory/valid.json",
+      "verification": "JSON parsed; standard-library assertion confirmed counts and sorted summaries match fixture paths."
+    },
+    "T001/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T001-repo-tree-provenance-inventory/invalid.json",
+      "verification": "JSON parsed; git rev-parse --verify <fixture>^{commit} rejected the unresolved revision with exit 128 and no stdout."
+    },
+    "T001/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/repo_inventory.py",
+      "verification": "Module CLI emitted valid sorted JSON for HEAD (146 tracked paths); unresolved revision returned exit 2 with a clear error."
+    },
+    "T001/U05": {
+      "status": "complete",
+      "artifact": "tests/test_repo_inventory.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_repo_inventory.py -q: 1 passed."
+    },
+    "T001/U06": {
+      "status": "complete",
+      "artifact": "tests/test_repo_inventory.py",
+      "verification": "Added empty-tree boundary check; focused test file passes (2 passed)."
+    },
+    "T001/U07": {
+      "status": "complete",
+      "artifact": "tests/test_repo_inventory.py",
+      "verification": "CLI integration test checks resolved HEAD, count/path consistency, and invalid revision error; focused test file passes (3 passed)."
+    },
+    "T001/U08": {
+      "status": "N/A",
+      "evidence": "U04 already exposes the module CLI `python -m neurosim.repo_inventory`; U07 verifies its user-visible output. A second wrapper would duplicate the interface."
+    },
+    "T001/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T001-repo-tree-provenance-inventory.md",
+      "verification": "At 067b377, inventory, commit tree, and Git index each contained 148 paths. Five CLI runs: median 176.85 ms; range 171.79\u2013192.31 ms, including Python startup."
+    },
+    "T001/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T001-repo-tree-provenance-inventory.md",
+      "verification": "Usage, output interpretation, failure behavior, limitations, and checklist documented. Link from DAY_01_REPORT.md will be added at the day gate."
+    },
+    "T002/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T002-environment-reproducibility-lockfile-inventory.md",
+      "verification": "Defined commit-tree input, current lockfile scope, output schema/units, failures, acceptance criteria, and limits on reproducibility claims."
+    },
+    "T002/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T002-environment-reproducibility-lockfile-inventory/valid.json",
+      "verification": "JSON parsed; independently recomputed UTF-8 byte lengths and SHA-256 values match expected fixture output."
+    },
+    "T002/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T002-environment-reproducibility-lockfile-inventory/invalid.json",
+      "verification": "JSON parsed; Git rejected the unresolved fixture revision with exit 128 and no stdout. Feature-level rejection will be covered by U05/U07."
+    },
+    "T002/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/lockfile_inventory.py",
+      "verification": "CLI read the two tracked lockfiles at HEAD (367 and 106896 bytes), emitted SHA-256 records, and returned exit 2 for an unresolved revision."
+    },
+    "T002/U05": {
+      "status": "complete",
+      "artifact": "tests/test_lockfile_inventory.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_lockfile_inventory.py -q: 1 passed against the deterministic fixture."
+    },
+    "T002/U06": {
+      "status": "complete",
+      "artifact": "tests/test_lockfile_inventory.py",
+      "verification": "Added zero-byte lockfile boundary with exact empty-content SHA-256; focused test file passes (2 passed)."
+    },
+    "T002/U07": {
+      "status": "complete",
+      "artifact": "tests/test_lockfile_inventory.py",
+      "verification": "CLI integration cross-checks each lockfile hash/size against git show and tests invalid revision; focused test file passes (3 passed)."
+    },
+    "T002/U08": {
+      "status": "N/A",
+      "evidence": "U04 exposes `python -m neurosim.lockfile_inventory`; U07 verifies its visible output. A second console wrapper would duplicate the interface."
+    },
+    "T002/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T002-environment-reproducibility-lockfile-inventory.md",
+      "verification": "At 5111900, both Git blob sizes and hashes matched. Five CLI runs: median 291.47 ms; range 272.88\u2013292.90 ms including startup and Git reads."
+    },
+    "T002/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T002-environment-reproducibility-lockfile-inventory.md",
+      "verification": "Usage, output meaning, failure behavior, limitations, and checklist documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T003/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T003-legacy-modules-boundary-map.md",
+      "verification": "Defined the tracked path and console-script scope, deterministic JSON fields, error conditions, acceptance example, and naming/import-graph limitations."
+    },
+    "T003/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T003-legacy-modules-boundary-map/valid.json",
+      "verification": "Fixture JSON parsed; legacy module and archived path lists plus project entry-point counts match the declared expectations."
+    },
+    "T003/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T003-legacy-modules-boundary-map/invalid.json",
+      "verification": "Malformed TOML fixture raises the documented ValueError through the production parser; covered by the focused tests."
+    },
+    "T003/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/module_boundaries.py",
+      "verification": "CLI maps the selected Git tree and scripts. The audit utility was renamed to module_boundaries.py so it cannot classify itself; integration now asserts the exact single legacy_cli.py path."
+    },
+    "T003/U05": {
+      "status": "complete",
+      "artifact": "tests/test_legacy_boundaries.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_legacy_boundaries.py -q: 2 passed, including the malformed metadata error case."
+    },
+    "T003/U06": {
+      "status": "complete",
+      "artifact": "tests/test_legacy_boundaries.py",
+      "verification": "Added empty-map and near-prefix routing boundary checks; focused test file passes (3 passed)."
+    },
+    "T003/U07": {
+      "status": "complete",
+      "artifact": "tests/test_legacy_boundaries.py",
+      "verification": "CLI integration confirms selected SHA, legacy module listing, docs count, and workbench route; focused test file passes (4 passed)."
+    },
+    "T003/U08": {
+      "status": "N/A",
+      "evidence": "U04 exposes `python -m neurosim.module_boundaries`; U07 verifies visible output. A second console wrapper would duplicate the interface."
+    },
+    "T003/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T003-legacy-modules-boundary-map.md",
+      "verification": "At 8b90737, direct tree/script scan matched the report: 1 legacy module, 9 archived docs, 2 supported entry points. Five runs: median 251.78 ms; range 228.41\u2013273.43 ms."
+    },
+    "T003/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T003-legacy-modules-boundary-map.md",
+      "verification": "Usage, scope, failure behavior, limitations, and checklist documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T004/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T004-api-endpoint-contract-snapshot.md",
+      "verification": "Defined the current-app input, deterministic OpenAPI output/hash, side-effect limits, errors, and runtime/security exclusions."
+    },
+    "T004/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T004-api-endpoint-contract-snapshot/valid.json",
+      "verification": "JSON parsed; independently counted the two HTTP operations and recomputed the canonical SHA-256 fixture digest."
+    },
+    "T004/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T004-api-endpoint-contract-snapshot/invalid.json",
+      "verification": "Production snapshot builder rejects the non-object paths fixture with the documented ValueError; covered by focused tests."
+    },
+    "T004/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/api_snapshot.py",
+      "verification": "Module emitted valid JSON for the current FastAPI app with 18 operations and a 64-character digest; malformed paths raised the specified error. No server lifespan was started."
+    },
+    "T004/U05": {
+      "status": "complete",
+      "artifact": "tests/test_api_snapshot.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_api_snapshot.py -q: 2 passed for golden digest and invalid paths."
+    },
+    "T004/U06": {
+      "status": "complete",
+      "artifact": "tests/test_api_snapshot.py",
+      "verification": "Added empty-path boundary and key-order determinism check; focused test file passes (3 passed)."
+    },
+    "T004/U07": {
+      "status": "complete",
+      "artifact": "tests/test_api_snapshot.py",
+      "verification": "CLI output matches the live app's OpenAPI document without starting lifespan; focused test file passes (4 passed)."
+    },
+    "T004/U08": {
+      "status": "N/A",
+      "evidence": "U04 exposes `python -m neurosim.api_snapshot`; U07 verifies its output against FastAPI. A second wrapper would duplicate the CLI."
+    },
+    "T004/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T004-api-endpoint-contract-snapshot.md",
+      "verification": "At 6cb3252, five runs were identical: 18 operations, 16 paths, schema SHA-256 61bc9d8a\u202619989; median 886.49 ms including startup."
+    },
+    "T004/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T004-api-endpoint-contract-snapshot.md",
+      "verification": "Usage, digest meaning, failure behavior, side-effect guarantees, and limitations documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T005/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T005-scientific-units-audit.md",
+      "verification": "Scoped audit to documented manifest units and mean-rate dimensional arithmetic, with explicit validation, tolerance, and excluded claims."
+    },
+    "T005/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T005-scientific-units-audit/valid.json",
+      "verification": "JSON parsed; two spikes / one neuron / 1000 ms independently recomputed to 2 Hz."
+    },
+    "T005/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T005-scientific-units-audit/invalid.json",
+      "verification": "Production audit rejects the invalid nA current unit with the fixture's expected ValueError; covered by focused tests."
+    },
+    "T005/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/units_audit.py",
+      "verification": "Audit returns the fixture's expected report; mean rate is 2 Hz for 2 spikes / 1 neuron / 1 second. Uses stdlib only."
+    },
+    "T005/U05": {
+      "status": "complete",
+      "artifact": "tests/test_units_audit.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_units_audit.py -q: 2 passed for valid arithmetic and wrong-unit rejection."
+    },
+    "T005/U06": {
+      "status": "complete",
+      "artifact": "tests/test_units_audit.py",
+      "verification": "Tests reject zero duration, an out-of-range spike, and a stored-rate mismatch; focused test file passes (3 passed)."
+    },
+    "T005/U07": {
+      "status": "complete",
+      "artifact": "tests/test_units_audit.py",
+      "verification": "Generated a real 1 ms workbench simulation result and audited its manifest/spike trains; focused test file passes (4 passed)."
+    },
+    "T005/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/units_audit.py",
+      "verification": "File-based module CLI accepted a temporary result JSON and emitted the expected report; focused test file passes (5 passed)."
+    },
+    "T005/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T005-scientific-units-audit.md",
+      "verification": "At 6173085, 2 spikes / 1 neuron / 1000 ms independently recomputed to 2.0 Hz; all five focused tests passed."
+    },
+    "T005/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T005-scientific-units-audit.md",
+      "verification": "Usage, checks, tolerance, failure behavior, and scope limits documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T006/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T006-model-parameter-bounds-audit.md",
+      "verification": "Defined Pydantic numeric field scope, bound units, default checks, failure behavior, and cross-field/stability exclusions."
+    },
+    "T006/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T006-model-parameter-bounds-audit/valid.json",
+      "verification": "Fixture parsed; independently enumerated 3 numeric fields and confirmed each default lies within its declared inclusive bounds."
+    },
+    "T006/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T006-model-parameter-bounds-audit/invalid.json",
+      "verification": "Production audit rejects Experiment.dt default 0.03 above maximum 0.025; covered by focused test."
+    },
+    "T006/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/parameter_bounds.py",
+      "verification": "CLI audited 32 numeric fields; Experiment.dt reports default 0.025 and inclusive bounds 0.001\u20130.025. Invalid fixture raises the expected ValueError."
+    },
+    "T006/U05": {
+      "status": "complete",
+      "artifact": "tests/test_parameter_bounds.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_parameter_bounds.py -q: 2 passed for fixture output and out-of-range rejection."
+    },
+    "T006/U06": {
+      "status": "complete",
+      "artifact": "tests/test_parameter_bounds.py",
+      "verification": "Added an exclusive-minimum boundary case; default equal to `exclusiveMinimum` is rejected and all 3 focused tests pass."
+    },
+    "T006/U07": {
+      "status": "complete",
+      "artifact": "tests/test_parameter_bounds.py",
+      "verification": "Actual Experiment.model_json_schema() reports 32 bounded numeric fields; dt default/max/min match config; focused tests pass (4 passed)."
+    },
+    "T006/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/parameter_bounds.py",
+      "verification": "Module CLI output matches the live schema audit; focused test file passes (5 passed)."
+    },
+    "T006/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T006-model-parameter-bounds-audit.md",
+      "verification": "At ce723a3, audit reported 32 numeric fields, matching an independent schema count; dt and pulse-stop constraints matched Pydantic schema values."
+    },
+    "T006/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T006-model-parameter-bounds-audit.md",
+      "verification": "Usage, output scope, failure behavior, cross-field exclusions, and verification checklist documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T007/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T007-event-scheduling-audit.md",
+      "verification": "Defined saved-result inputs, delay rounding formula, units, tolerance, event ordering context, errors, and exclusions."
+    },
+    "T007/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T007-event-scheduling-audit/valid.json",
+      "verification": "JSON parsed; independent ceil calculation gives 41 steps and 1.025 ms effective delay for 1.01 ms request at 0.025 ms timestep."
+    },
+    "T007/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T007-event-scheduling-audit/invalid.json",
+      "verification": "Production audit rejects saved effective delay 1.0 ms for the 1.01 ms request; covered by focused test."
+    },
+    "T007/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/event_schedule.py",
+      "verification": "Audit matches the 41-step fixture and rejects inconsistent effective delay. Engine now shares the exact delay-step helper; existing tests/test_events.py passes (2 passed)."
+    },
+    "T007/U05": {
+      "status": "complete",
+      "artifact": "tests/test_event_schedule.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_event_schedule.py -q: 2 passed for delay rounding and mismatch rejection."
+    },
+    "T007/U06": {
+      "status": "complete",
+      "artifact": "tests/test_event_schedule.py",
+      "verification": "Minimum grid-aligned delay is one timestep with zero rounding; focused tests pass (3 passed)."
+    },
+    "T007/U07": {
+      "status": "complete",
+      "artifact": "tests/test_event_schedule.py",
+      "verification": "Real LIF network with 2.01 ms request audited to 2.025 ms; target unchanged through arrival and responds on next step; focused tests pass (4 passed)."
+    },
+    "T007/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/event_schedule.py",
+      "verification": "File-based CLI accepted the valid fixture and emitted the expected report; focused test file passes (5 passed)."
+    },
+    "T007/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T007-event-scheduling-audit.md",
+      "verification": "At 6b8f4f3, real run requested 2.01 ms at dt 0.025 ms; engine/audit agree on 81 steps and 2.025 ms effective delay."
+    },
+    "T007/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T007-event-scheduling-audit.md",
+      "verification": "Usage, timing fields, failure behavior, scope, and limitations documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T008/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T008-sqlite-schema-compatibility-audit.md",
+      "verification": "Defined read-only path input, shared Store DDL reference, structural comparison fields, output, errors, and schema/history exclusions."
+    },
+    "T008/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T008-sqlite-schema-compatibility-audit/valid.json",
+      "verification": "Executed fixture DDL in an in-memory SQLite DB; it has the expected 2 tables and 12 columns."
+    },
+    "T008/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T008-sqlite-schema-compatibility-audit/invalid.json",
+      "verification": "Executed fixture DDL; it intentionally lacks the exhibition table and jobs.result column. Production mismatch reporting will be verified in U05."
+    },
+    "T008/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/sqlite_schema_audit.py",
+      "verification": "Added deterministic structural comparison against the shared Store DDL; CLI rejects missing paths and WAL sidecars and opens existing databases immutable read-only."
+    },
+    "T008/U05": {
+      "status": "complete",
+      "artifact": "tests/test_sqlite_schema_audit.py",
+      "verification": "Fixture tests passed for compatible and incompatible database structures; final focused suite passes (7 passed)."
+    },
+    "T008/U06": {
+      "status": "complete",
+      "artifact": "tests/test_sqlite_schema_audit.py",
+      "verification": "Covered differing column defaults, no input-byte changes, WAL sidecars, and immediate file deletion after audit; focused tests pass (7 passed)."
+    },
+    "T008/U07": {
+      "status": "complete",
+      "artifact": "tests/test_sqlite_schema_audit.py",
+      "verification": "Database initialized by Store reports compatible with 2 tables and 12 columns; confirmed shared DDL reference."
+    },
+    "T008/U08": {
+      "status": "N/A",
+      "evidence": "U04 provides the module CLI `python -m neurosim.sqlite_schema_audit`; U07 exercises it and checks deterministic JSON. A separate wrapper would duplicate the interface."
+    },
+    "T008/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T008-sqlite-schema-compatibility-audit.md",
+      "verification": "At d7b0801, Store DB audit reported 2 tables/12 columns. Seven focused tests passed; five audit timings had 0.896 ms median after first run."
+    },
+    "T008/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T008-sqlite-schema-compatibility-audit.md",
+      "verification": "Documented offline database requirement, invocation, output, errors, scope limits, and verification checklist."
+    },
+    "T009/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T009-ui-renderer-contract-audit.md",
+      "verification": "Defined browser inputs, renderer-selection behavior, failure handling, labels, environment-specific evidence, and limits."
+    },
+    "T009/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T009-ui-renderer-contract-audit/valid.json",
+      "verification": "Positive fixture specifies auto mode with WebGPU unavailable and expected WebGL2 label/canvas state; consumed by focused Playwright audit."
+    },
+    "T009/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T009-ui-renderer-contract-audit/invalid.json",
+      "verification": "Boundary fixture specifies unavailable WebGL2 and expected accessible 2D fallback; consumed by focused Playwright audit."
+    },
+    "T009/U04": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Added focused browser audit using a real completed LIF experiment and controllable WebGL context creation."
+    },
+    "T009/U05": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Headless Chromium verified auto and explicit WebGL2 selection; focused test passed (1 passed)."
+    },
+    "T009/U06": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Denied WebGL creation on reload; verified accessible 2D fallback and neuron selection remain functional. Focused test passed (1 passed)."
+    },
+    "T009/U07": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Loaded a persisted completed two-neuron LIF experiment through the actual API/UI before checking renderer behavior."
+    },
+    "T009/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T009-ui-renderer-contract-audit.md",
+      "verification": "Documented reproducible Playwright command from web/ and fixture-driven real-browser behavior."
+    },
+    "T009/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T009-ui-renderer-contract-audit.md",
+      "verification": "At e75ac82, Chromium reported WebGL2 in auto mode, explicit WebGL2, and interactive 2D fallback when WebGL creation was denied; 1 passed in 9.9s."
+    },
+    "T009/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T009-ui-renderer-contract-audit.md",
+      "verification": "Documented usage, coverage, renderer limitations, and evidence/contract links."
+    },
+    "T010/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T010-ci-platform-matrix-audit.md",
+      "verification": "Specified workflow inputs, output, runner/runtime fields, simple matrix counting, errors, PyYAML dependency, acceptance values, and interpretation limits."
+    },
+    "T010/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T010-ci-platform-matrix-audit/valid.json",
+      "verification": "Fixture expects 8 combinations from 2 platforms \u00d7 4 Python versions; independently checked against declared axes."
+    },
+    "T010/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T010-ci-platform-matrix-audit/invalid.json",
+      "verification": "Malformed scalar matrix axis is rejected by production parser and covered by focused test."
+    },
+    "T010/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/ci_matrix_audit.py",
+      "verification": "Added YAML audit CLI for runner labels, matrix axes, setup-python/setup-node versions, and deterministic combination counts."
+    },
+    "T010/U05": {
+      "status": "complete",
+      "artifact": "tests/test_ci_matrix_audit.py",
+      "verification": "Positive fixture, invalid matrix, actual workflow values, and CLI JSON tests passed (4 passed at U05)."
+    },
+    "T010/U06": {
+      "status": "complete",
+      "artifact": "tests/test_ci_matrix_audit.py",
+      "verification": "Empty matrix and missing-runner boundaries covered; focused suite passes (6 passed)."
+    },
+    "T010/U07": {
+      "status": "complete",
+      "artifact": "pyproject.toml",
+      "verification": "Audited actual CPU and web workflows (4 jobs, 11 combinations); added PyYAML to dev dependencies for CI/test availability."
+    },
+    "T010/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T010-ci-platform-matrix-audit.md",
+      "verification": "Documented CLI command and reproducible setup using .[dev]."
+    },
+    "T010/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T010-ci-platform-matrix-audit.md",
+      "verification": "At 967d6a8, actual workflow audit reported 4 jobs/11 combinations; CPU tests matrix 8 combos, focused tests 6 passed."
+    },
+    "T010/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T010-ci-platform-matrix-audit.md",
+      "verification": "Documented output meaning, malformed inputs, and limits; links contract and evidence."
+    },
+    "T011/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T011-test-baseline-capture.md",
+      "verification": "Defined argument-vector execution, bounded outputs, timeout, metadata, errors, defaults, and limitations."
+    },
+    "T011/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T011-test-baseline-capture/valid.json",
+      "verification": "Fixture specifies portable success output without newline translation; production capture matches exit code and output."
+    },
+    "T011/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T011-test-baseline-capture/invalid.json",
+      "verification": "Empty command and zero timeout fixture rejected with the expected ValueError."
+    },
+    "T011/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/test_baseline.py",
+      "verification": "Implemented shell-free command capture with revision/platform metadata, bounded output, timeout handling, and CLI status propagation."
+    },
+    "T011/U05": {
+      "status": "complete",
+      "artifact": "tests/test_test_baseline.py",
+      "verification": "Focused behavior tests cover success, nonzero exit, timeout, CLI report, and output capture; 5 passed."
+    },
+    "T011/U06": {
+      "status": "complete",
+      "artifact": "tests/test_test_baseline.py",
+      "verification": "Tested invalid timeout/directory and zero-length output bound; focused suite passes (7 passed)."
+    },
+    "T011/U07": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T011-test-baseline-capture.md",
+      "verification": "Captured actual `python -m pytest tests/test_test_baseline.py -q`: exit 0, 7 passed, 5.565141 seconds total command time."
+    },
+    "T011/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T011-test-baseline-capture.md",
+      "verification": "Published reproducible CLI command and JSON artifact behavior."
+    },
+    "T011/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T011-test-baseline-capture.md",
+      "verification": "At fd0fe341, Windows 11/Python 3.14.2 run recorded 7 passed and a non-timeout exit 0."
+    },
+    "T011/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T011-test-baseline-capture.md",
+      "verification": "Documented usage, command result status, timeout/errors, output bound, and evidence links."
+    },
+    "T012/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T012-performance-benchmark-harness.md",
+      "verification": "Defined real simulation profiles, units, repeats, outputs, error bounds, timing variability, and excluded performance claims."
+    },
+    "T012/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T012-performance-benchmark-harness/valid.json",
+      "verification": "Fixture fixes the HH profile and demonstrates median of [1, 2, 3] seconds is exactly 2 seconds."
+    },
+    "T012/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T012-performance-benchmark-harness/invalid.json",
+      "verification": "Zero repeats rejected before simulation with the declared error."
+    },
+    "T012/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/performance_benchmark.py",
+      "verification": "Implemented profile selection, repeat validation, real serial execution, medians, scientific-output equality, and JSON CLI; legacy script routes to same harness."
+    },
+    "T012/U05": {
+      "status": "complete",
+      "artifact": "tests/test_performance_benchmark.py",
+      "verification": "Verified numeric median, Pydantic HH profile, and real CLI HH simulation; focused suite passes (9 passed)."
+    },
+    "T012/U06": {
+      "status": "complete",
+      "artifact": "tests/test_performance_benchmark.py",
+      "verification": "Covered non-finite/negative/empty time samples, unknown/duplicate profile, and repeat bounds; focused suite passes (9 passed)."
+    },
+    "T012/U07": {
+      "status": "complete",
+      "artifact": "tests/test_performance_benchmark.py",
+      "verification": "Real CLI output manifest matched the HH config and included measured wall time; compatibility script also ran a real HH simulation."
+    },
+    "T012/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T012-performance-benchmark-harness.md",
+      "verification": "Documented profile/repeat controls, command invocation, JSON output, and compatibility entry point."
+    },
+    "T012/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T012-performance-benchmark-harness.md",
+      "verification": "At 4a9ca30, two real HH runs measured 0.821412 and 0.738805 s (median 0.780109); 4 spikes, 0 edges, identical outputs."
+    },
+    "T012/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T012-performance-benchmark-harness.md",
+      "verification": "Documented inputs, outputs, host-sensitive timing, limits, and evidence links."
+    },
+    "T013/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T013-golden-hh-trace-fixture.md",
+      "verification": "Specified independent DOP853 reference inputs, ms/mV units, tolerance, acceptance behavior, and scientific limits."
+    },
+    "T013/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T013-golden-hh-trace-fixture/valid.json",
+      "verification": "Positive fixture contains independently integrated classic HH reference values at 0, 5, 10, 15, and 20 ms."
+    },
+    "T013/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T013-golden-hh-trace-fixture/invalid.json",
+      "verification": "Invalid time unit fixture is rejected by production audit and covered by focused test."
+    },
+    "T013/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/golden_hh.py",
+      "verification": "Implemented fixture validation, real HH simulation, grid sampling, error comparison, provenance report, and CLI statuses."
+    },
+    "T013/U05": {
+      "status": "complete",
+      "artifact": "tests/test_golden_hh.py",
+      "verification": "Real trace matched five DOP853 reference points; maximum absolute error 5.6051e-6 mV, two spikes, within 0.02 mV."
+    },
+    "T013/U06": {
+      "status": "complete",
+      "artifact": "tests/test_golden_hh.py",
+      "verification": "Covered invalid units, malformed arrays, unsorted/off-grid times, invalid tolerance, and a reference perturbed beyond tolerance; focused suite 8 passed."
+    },
+    "T013/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/golden_hh.py",
+      "verification": "Uses the production Experiment model and simulate engine; report includes actual simulation config/unit manifest and hashes."
+    },
+    "T013/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T013-golden-hh-trace-fixture.md",
+      "verification": "Documented reproducible fixture CLI and pass/fail/error exit codes."
+    },
+    "T013/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T013-golden-hh-trace-fixture.md",
+      "verification": "At 457cb35, HH/DOP853 max sampled difference 5.6051e-6 mV; Windows 11/Python 3.14.2, NumPy 2.4.2."
+    },
+    "T013/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T013-golden-hh-trace-fixture.md",
+      "verification": "Documented units, tolerance, invocation, failure modes, provenance, and sparse-sample limitations."
+    },
+    "T014/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T014-golden-lif-trace-fixture.md",
+      "verification": "Specified LIF analytic reference, millisecond/millivolt units, tolerance, no-spike requirement, and model scope."
+    },
+    "T014/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T014-golden-lif-trace-fixture/valid.json",
+      "verification": "Fixture values independently computed from the closed-form RC solution at five 5 ms intervals."
+    },
+    "T014/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T014-golden-lif-trace-fixture/invalid.json",
+      "verification": "Invalid volts unit fixture rejected by the audit and covered by focused test."
+    },
+    "T014/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/golden_lif.py",
+      "verification": "Implemented validated fixture loading, real LIF simulation, saved-grid sample comparison, spike guard, manifest output, and CLI."
+    },
+    "T014/U05": {
+      "status": "complete",
+      "artifact": "tests/test_golden_lif.py",
+      "verification": "Five real simulation samples matched analytic values; max error 2.13e-14 mV, zero spikes, within 1e-9 mV."
+    },
+    "T014/U06": {
+      "status": "complete",
+      "artifact": "tests/test_golden_lif.py",
+      "verification": "Tested invalid units, array mismatch, unsorted/off-grid samples, tolerance miss, and a spiking input; focused suite passes (9 passed)."
+    },
+    "T014/U07": {
+      "status": "complete",
+      "artifact": "tests/test_golden_lif.py",
+      "verification": "Audit runs the production Experiment/simulate path and reports actual manifest/config hash."
+    },
+    "T014/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T014-golden-lif-trace-fixture.md",
+      "verification": "Documented reproducible CLI and pass/fail/error exit behavior."
+    },
+    "T014/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T014-golden-lif-trace-fixture.md",
+      "verification": "At bb976f4, actual trace max error 2.13e-14 mV vs 1e-9 mV; Windows 11/Python 3.14.2/NumPy 2.4.2."
+    },
+    "T014/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T014-golden-lif-trace-fixture.md",
+      "verification": "Documented usage, analytic assumptions, limits, evidence, and contract."
+    },
+    "T015/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/baseline_signoff.py",
+      "verification": "Implemented revision/check/risk validation, missing/failed check reporting, and gate exit statuses."
+    },
+    "T015/U05": {
+      "status": "complete",
+      "artifact": "tests/test_baseline_signoff.py",
+      "verification": "Positive fixture passes with 4 required checks and a visible accepted risk; focused suite passes (9 passed)."
+    },
+    "T015/U06": {
+      "status": "complete",
+      "artifact": "tests/test_baseline_signoff.py",
+      "verification": "Covered malformed SHA, failed/missing checks, duplicate IDs, empty risks, invalid severity/disposition/evidence; focused suite passes (9 passed)."
+    },
+    "T015/U07": {
+      "status": "complete",
+      "artifact": ".omega/day01-signoff.json",
+      "verification": "Actual Python/web unit/build/E2E gate records passed against tested revision 91231ea64f4cb4455cb7ee808f1f05b1e785fdd6; CLI returns baseline_gate_passed true, 4/4 checks, 3 accepted risks."
+    },
+    "T015/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T015-risk-register-and-baseline-signoff.md",
+      "verification": "Documented reproducible signoff CLI, report statuses, and the distinction between baseline and release approval."
+    },
+    "T015/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T015-risk-register-and-baseline-signoff.md",
+      "verification": "Recorded full Day 01 test gate, scientific fixture results, performance sample, and accepted residual risks."
+    },
+    "T015/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/DAY_01_REPORT.md",
+      "verification": "Published Day 01 results, capabilities, environment limits, exact commit counts, and next execution point."
+    },
+    "T016/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T016-units-typed-primitives.md",
+      "verification": "Defined runtime quantity conversion dimensions, scales, invalid-input behavior, rate computation, and stored/API exclusions."
+    },
+    "T016/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T016-units-typed-primitives/valid.json",
+      "verification": "Fixture expected conversions independently checked: ms/s, V/mV, current, conductance, capacitance, frequency, and a 2 Hz population rate."
+    },
+    "T016/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T016-units-typed-primitives/invalid.json",
+      "verification": "Cross-dimension voltage-to-time conversion is rejected by the production Quantity implementation."
+    },
+    "T016/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/units.py",
+      "verification": "Added immutable finite Quantity and explicit same-dimension conversion; integrated mean_population_rate into the existing units audit."
+    },
+    "T016/U05": {
+      "status": "complete",
+      "artifact": "tests/test_units.py",
+      "verification": "Supported conversions and 2 spikes/1 neuron/1 s = 2 Hz passed; focused units + audit suite passes (15 passed)."
+    },
+    "T016/U06": {
+      "status": "complete",
+      "artifact": "tests/test_units.py",
+      "verification": "Covered booleans, NaN/infinity, overflow, zero identity, unsupported units, invalid counts, duration, and dimension edges."
+    },
+    "T016/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/units_audit.py",
+      "verification": "A real LIF result was audited; typed duration/rate matched the engine result without changing JSON fields."
+    },
+    "T016/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T016-units-typed-primitives.md",
+      "verification": "Provided a runnable Python example and described existing results-audit integration."
+    },
+    "T016/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T016-units-typed-primitives.md",
+      "verification": "At 31812b1, expected unit conversions and actual LIF audit passed; focused tests 15 passed."
+    },
+    "T016/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T016-units-typed-primitives.md",
+      "verification": "Documented usage, supported conversions, errors, storage/schema limits, and links."
+    },
+    "T017/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T017-stimulus-pulse-waveform-library.md",
+      "verification": "Defined ms/current-density units, step/train/biphasic semantics, charge example, errors, and electrode/model scope limits."
+    },
+    "T017/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T017-stimulus-pulse-waveform-library/valid.json",
+      "verification": "Fixture train intervals 0\u20131, 3\u20134, 6\u20137 ms and biphasic \u00b12 \u00b5A/cm\u00b2 phases independently sum to zero ideal charge."
+    },
+    "T017/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T017-stimulus-pulse-waveform-library/invalid.json",
+      "verification": "Overlapping interval<width train fixture is rejected by the production helper."
+    },
+    "T017/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/stimuli.py",
+      "verification": "Implemented single step, bounded train, and equal-duration charge-balanced biphasic Pulse constructors."
+    },
+    "T017/U05": {
+      "status": "complete",
+      "artifact": "tests/test_stimuli.py",
+      "verification": "Exact interval/amplitude/charge assertions passed; focused suite passes (10 passed)."
+    },
+    "T017/U06": {
+      "status": "complete",
+      "artifact": "tests/test_stimuli.py",
+      "verification": "Covered overlap, count limits, amplitude, NaN, invalid target, bool arguments, and invalid phase width."
+    },
+    "T017/U07": {
+      "status": "complete",
+      "artifact": "tests/test_stimuli.py",
+      "verification": "Generated Pulse train runs through production Experiment/simulate and is preserved in the actual result manifest."
+    },
+    "T017/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T017-stimulus-pulse-waveform-library.md",
+      "verification": "Added a runnable Experiment config example for all protocol constructors."
+    },
+    "T017/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T017-stimulus-pulse-waveform-library.md",
+      "verification": "At 614dce2, 3-pulse LIF run ended at -62.35056 mV vs -65 mV baseline, zero spikes; biphasic net command charge 0."
+    },
+    "T017/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T017-stimulus-pulse-waveform-library.md",
+      "verification": "Documented protocols, input units, Experiment limits, charge assumption, and evidence links."
+    },
+    "T018/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T018-euler-convergence-harness.md",
+      "verification": "Defined HH Euler limit, DOP853 reference, ms/mV units, first-order expected convergence range, and limits."
+    },
+    "T018/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T018-euler-convergence-harness/valid.json",
+      "verification": "Fixture sets 20 ms constant current, coarse dt .005 ms, fine dt .0025 ms, and dimensionless first-order range .7\u20131.3."
+    },
+    "T018/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T018-euler-convergence-harness/invalid.json",
+      "verification": "HH Euler dt .01 ms fixture rejected at the production config bound."
+    },
+    "T018/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/euler_convergence.py",
+      "verification": "Implemented independent DOP853 reference and two real Experiment/simulate Euler runs with error/order report and CLI."
+    },
+    "T018/U05": {
+      "status": "complete",
+      "artifact": "tests/test_euler_convergence.py",
+      "verification": "Measured errors decreased on halving timestep and observed order fell in the expected first-order interval."
+    },
+    "T018/U06": {
+      "status": "complete",
+      "artifact": "tests/test_euler_convergence.py",
+      "verification": "Covered invalid timestep order/bounds, duration grid, current, nonfinite input, and HH Euler limits; focused tests 9 passed."
+    },
+    "T018/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/euler_convergence.py",
+      "verification": "Actual Experiment manifests confirm HH/Euler configurations for both timestep runs."
+    },
+    "T018/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T018-euler-convergence-harness.md",
+      "verification": "Documented fixture-based CLI and exit statuses."
+    },
+    "T018/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T018-euler-convergence-harness.md",
+      "verification": "At 7a80211, errors 2.633780 and 1.320323 mV; ratio 1.994800, observed order .996244, Windows 11/Python 3.14.2."
+    },
+    "T018/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T018-euler-convergence-harness.md",
+      "verification": "Documented numeric units, independent reference, failure behavior, use, and scope limits."
+    },
+    "T019/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T019-rk4-convergence-harness.md",
+      "verification": "Specified RK4/HHDOP853 reference, ms/mV units, expected fourth-order interval, and limitations."
+    },
+    "T019/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T019-rk4-convergence-harness/valid.json",
+      "verification": "Fixture sets 20 ms HH constant current and dt .025/.0125 ms with expected order range 3.5\u20134.6."
+    },
+    "T019/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T019-rk4-convergence-harness/invalid.json",
+      "verification": "RK4 timestep above configured maximum is rejected by shared convergence core."
+    },
+    "T019/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/rk4_convergence.py",
+      "verification": "Shared HH convergence engine supports RK4 and Euler while preserving the existing Euler CLI; RK4 emits manifests and measured order."
+    },
+    "T019/U05": {
+      "status": "complete",
+      "artifact": "tests/test_rk4_convergence.py",
+      "verification": "Two real RK4 traces yielded decreasing errors and order in fixture range; CLI checks actual manifests."
+    },
+    "T019/U06": {
+      "status": "complete",
+      "artifact": "tests/test_rk4_convergence.py",
+      "verification": "Covered timestep maxima/minima/order, duration grid, nonfinite input and current bounds; RK4/Euler combined tests 18 passed."
+    },
+    "T019/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_convergence.py",
+      "verification": "Both numerical runs use production Experiment/simulate and return actual config manifests."
+    },
+    "T019/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T019-rk4-convergence-harness.md",
+      "verification": "Documented fixture-driven CLI and outcome statuses."
+    },
+    "T019/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T019-rk4-convergence-harness.md",
+      "verification": "At a8fb0f7, RK4 errors .006001657/.000305376 mV; ratio 19.653366, observed order 4.296705."
+    },
+    "T019/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T019-rk4-convergence-harness.md",
+      "verification": "Documented reference, outputs, errors, invocation, order scope, and links."
+    },
+    "T020/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T020-adaptive-reference-comparisons.md",
+      "verification": "Defined adaptive tolerance comparison, voltage error units, RK4 threshold, and one-trajectory scope."
+    },
+    "T020/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T020-adaptive-reference-comparisons/valid.json",
+      "verification": "Positive fixture uses 20 ms HH, RK4 dt .025 ms, and ordered DOP853 tolerance pairs with explicit units."
+    },
+    "T020/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T020-adaptive-reference-comparisons/invalid.json",
+      "verification": "Reversed loose/tight tolerance pairs are rejected by production audit."
+    },
+    "T020/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/adaptive_reference.py",
+      "verification": "Implemented dual DOP853 integrations, production RK4 comparison, gating-state tolerances, manifest output, and CLI."
+    },
+    "T020/U05": {
+      "status": "complete",
+      "artifact": "tests/test_adaptive_reference.py",
+      "verification": "Real fixed HH trace met both reference-sensitivity and RK4 error limits; focused tests passed."
+    },
+    "T020/U06": {
+      "status": "complete",
+      "artifact": "tests/test_adaptive_reference.py",
+      "verification": "Covered units, durations, ordered tolerances, sampling/config bounds, current limit, and numeric threshold failure; 10 passed."
+    },
+    "T020/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_convergence.py",
+      "verification": "DOP853 reference uses same real HH equations; RK4 result comes from production Experiment/simulate with actual manifest."
+    },
+    "T020/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T020-adaptive-reference-comparisons.md",
+      "verification": "Documented reproducible fixture CLI and exit statuses."
+    },
+    "T020/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T020-adaptive-reference-comparisons.md",
+      "verification": "At 87d723d, loose/tight DOP853 max delta 9.9613e-6 mV; RK4 error 0.00571947 mV; both within limits."
+    },
+    "T020/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T020-adaptive-reference-comparisons.md",
+      "verification": "Documented uncertainty/error distinction, units, CLI, failure modes, and links."
+    },
+    "T021/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "Defined mV/ms^-1 units, singularity limits, continuity, finite-rate requirements, and scientific exclusions."
+    },
+    "T021/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T021-hh-gating-kinetics-edge-cases/valid.json",
+      "verification": "Fixture samples exact -40/-55 mV limits and \u00b11e-6 mV neighbors with 1e-7 ms^-1 continuity tolerance."
+    },
+    "T021/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T021-hh-gating-kinetics-edge-cases/invalid.json",
+      "verification": "Empty voltage boundary rejected by the production audit."
+    },
+    "T021/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_rates_audit.py",
+      "verification": "Implemented fixture CLI around production HH rates with exact-limit, continuity, finite, and nonnegative checks."
+    },
+    "T021/U05": {
+      "status": "complete",
+      "artifact": "tests/test_hh_rates_audit.py",
+      "verification": "Verified alpha_m(-40)=1 ms^-1 and alpha_n(-55)=0.1 ms^-1; both adjacent limits pass."
+    },
+    "T021/U06": {
+      "status": "complete",
+      "artifact": "tests/test_hh_rates_audit.py",
+      "verification": "Covered empty/nonfinite/bool voltage, unit mismatch, tolerance bound, and kinetic overflow; focused suite 9 passed."
+    },
+    "T021/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/workbench/engine.py",
+      "verification": "Audit invokes the production rates function used in the actual HH engine; existing real rest/rate-limit test also passed."
+    },
+    "T021/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "Documented fixture-driven module CLI and its exit statuses."
+    },
+    "T021/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "At 24835ba, near-limit alpha_m deviation 5e-8 and alpha_n 5e-9 ms^-1; Windows 11/Python 3.14.2/NumPy 2.4.2."
+    },
+    "T021/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "Documented usage, classic HH scope, units, failures, limitations, and links."
+    },
+    "T022/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T022-hh-6-3-celsius-reference.md",
+      "verification": "Defined the fixed 6.3 C input contract, explicit units, outputs, rejection cases, reference point, and scientific limits."
+    },
+    "T022/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T022-hh-6-3-celsius-reference/valid.json",
+      "verification": "Valid fixture contains independent six-rate and three-gate reference values at -65 mV with 1e-12 tolerance."
+    },
+    "T022/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T022-hh-6-3-celsius-reference/invalid.json",
+      "verification": "37 C fixture is rejected because the production HH model has no temperature scaling."
+    },
+    "T022/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_reference.py",
+      "verification": "CLI audits six production rates, derived gate equilibria, and production initializer values; valid fixture passes and invalid temperature exits 2."
+    },
+    "T022/U05": {
+      "status": "complete",
+      "artifact": "tests/test_hh_reference.py",
+      "verification": "Focused unit test verifies six rates, steady gates, production initialization and tolerance."
+    },
+    "T022/U06": {
+      "status": "complete",
+      "artifact": "tests/test_hh_reference.py",
+      "verification": "Edge coverage rejects unsupported temperature, non-finite voltage/tolerance, nonpositive tolerance, and incorrect units."
+    },
+    "T022/U07": {
+      "status": "complete",
+      "artifact": "tests/test_hh_reference.py",
+      "verification": "CLI integration check confirms machine-readable passing output; full focused file passes 7 tests."
+    },
+    "T022/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_reference.py",
+      "verification": "Exposed `python -m neurosim.hh_reference <fixture>` with exit codes 0 pass, 1 numeric mismatch, 2 invalid input."
+    },
+    "T022/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T022-hh-6-3-celsius-reference.md",
+      "verification": "Recorded environment, exact reference values, 7 passing focused checks, CLI result, and initialization agreement."
+    },
+    "T022/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T022-hh-6-3-celsius-reference.md",
+      "verification": "Documented usage, outputs, exit codes, fixed-temperature limitation, and links to contract/evidence."
+    },
+    "T023/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T023-hh-conductance-sweeps.md",
+      "verification": "Defined fixed-experiment input, units, acceptance sample, bounds, errors, and excluded claims."
+    },
+    "T023/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T023-hh-conductance-sweeps/valid.json",
+      "verification": "Deterministic three-point conductance fixture includes expected spike counts and final voltages."
+    },
+    "T023/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T023-hh-conductance-sweeps/invalid.json",
+      "verification": "Duplicate conductance boundary is rejected with the declared strictly increasing error."
+    },
+    "T023/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_conductance_sweep.py",
+      "verification": "Runs each point through production `simulate`, overrides only g_na, validates bounds/work, and returns real results with manifests."
+    },
+    "T023/U05": {
+      "status": "complete",
+      "artifact": "tests/test_hh_conductance_sweep.py",
+      "verification": "Named unit test verifies 1/2/3 spikes, final voltages, and persisted manifest conductances."
+    },
+    "T023/U06": {
+      "status": "complete",
+      "artifact": "tests/test_hh_conductance_sweep.py",
+      "verification": "Focused checks cover duplicate values, wrong units, out-of-range values, sweep size, and total work limits."
+    },
+    "T023/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_conductance_sweep.py",
+      "verification": "Each row carries a real production result manifest; CLI integration test verifies persisted JSON output."
+    },
+    "T023/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_conductance_sweep.py",
+      "verification": "Exposed a reproducible module CLI with optional --output persistence."
+    },
+    "T023/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T023-hh-conductance-sweeps.md",
+      "verification": "Recorded 5 passing checks, exact spike times/counts and voltages, code revision, environment, CLI persistence, and limits."
+    },
+    "T023/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T023-hh-conductance-sweeps.md",
+      "verification": "Documented CLI usage, output, errors, scope, and links from the Day 02 report."
+    },
+    "T024/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T024-lif-exact-reference-solution.md",
+      "verification": "Defined the piecewise constant-current LIF equation, supported subthreshold scope, units, acceptance values, and exclusions."
+    },
+    "T024/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T024-lif-exact-reference-solution/valid.json",
+      "verification": "Positive fixture contains the analytic 15 and 20 ms voltage values for a bounded one-neuron LIF experiment."
+    },
+    "T024/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T024-lif-exact-reference-solution/invalid.json",
+      "verification": "Threshold-crossing fixture is rejected because reset events are outside the closed-form scope."
+    },
+    "T024/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/lif_exact_reference.py",
+      "verification": "Computes piecewise analytic values and compares every production simulation recording with its actual result manifest."
+    },
+    "T024/U05": {
+      "status": "complete",
+      "artifact": "tests/test_lif_exact_reference.py",
+      "verification": "Named test verifies independent closed-form reference values, production agreement, and manifest model identity."
+    },
+    "T024/U06": {
+      "status": "complete",
+      "artifact": "tests/test_lif_exact_reference.py",
+      "verification": "Focused tests cover threshold crossing, invalid units, invalid tolerance, wrong model, and multi-neuron rejection."
+    },
+    "T024/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/lif_exact_reference.py",
+      "verification": "Integrated production Experiment validation and simulate runner; persisted CLI output includes manifest and both traces."
+    },
+    "T024/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/lif_exact_reference.py",
+      "verification": "Exposed module CLI with optional JSON output file."
+    },
+    "T024/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T024-lif-exact-reference-solution.md",
+      "verification": "Recorded analytic values, production error, five passing checks, environment, code revision, and limitation."
+    },
+    "T024/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T024-lif-exact-reference-solution.md",
+      "verification": "Documented CLI use, errors, supported subthreshold scope, and Day 02 report link."
+    },
+    "T025/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T025-adex-threshold-dynamics.md",
+      "verification": "Defined numerical cutoff, AdEx input scope, units, expected spike example, and excluded biological claims."
+    },
+    "T025/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T025-adex-threshold-dynamics/valid.json",
+      "verification": "Positive one-neuron fixture gives cutoff -40 mV and expected spike times 1.5, 4, 6.5, and 9 ms."
+    },
+    "T025/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T025-adex-threshold-dynamics/invalid.json",
+      "verification": "Wrong-model fixture is rejected with the declared AdEx-only error."
+    },
+    "T025/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/adex_threshold_audit.py",
+      "verification": "Runs actual AdEx experiment and reports the configured cutoff, spike timing, intervals, final state, and manifest."
+    },
+    "T025/U05": {
+      "status": "complete",
+      "artifact": "tests/test_adex_threshold_audit.py",
+      "verification": "Named unit test confirms cutoff and expected spike timing from the production engine."
+    },
+    "T025/U06": {
+      "status": "complete",
+      "artifact": "tests/test_adex_threshold_audit.py",
+      "verification": "Edge tests reject wrong units/model and verify finite high-drive behavior under the exponential cutoff."
+    },
+    "T025/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/adex_threshold_audit.py",
+      "verification": "Integrated with Experiment validation and production simulate runner; report includes production manifest."
+    },
+    "T025/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/adex_threshold_audit.py",
+      "verification": "Exposed module CLI and optional persisted JSON report."
+    },
+    "T025/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T025-adex-threshold-dynamics.md",
+      "verification": "Captured exact spike times, high-drive result, five passing focused tests, code revision, and limitation."
+    },
+    "T025/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T025-adex-threshold-dynamics.md",
+      "verification": "Documented reproducible CLI use and linked contract/evidence from Day 02 report."
+    },
+    "T026/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T026-refractory-period-scheduling.md",
+      "verification": "Defined supported models, units, interval lower bound, example, and limitations."
+    },
+    "T026/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T026-refractory-period-scheduling/valid.json",
+      "verification": "Reference LIF run records 0.775 ms first spike and 2.775 ms subsequent intervals for a 2 ms refractory period."
+    },
+    "T026/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T026-refractory-period-scheduling/invalid.json",
+      "verification": "HH configuration is rejected because only LIF/AdEx refractory scheduling is audited."
+    },
+    "T026/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/refractory_audit.py",
+      "verification": "Audits production spike intervals against configured refractory time and calculates refractory steps at dt."
+    },
+    "T026/U05": {
+      "status": "complete",
+      "artifact": "tests/test_refractory_audit.py",
+      "verification": "Named unit test verifies first spike, minimum interval, refractory step count, and manifest configuration."
+    },
+    "T026/U06": {
+      "status": "complete",
+      "artifact": "tests/test_refractory_audit.py",
+      "verification": "Focused checks cover unsupported model, invalid units and nonpositive tolerance."
+    },
+    "T026/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/refractory_audit.py",
+      "verification": "Uses validated Experiment and real simulate runner; output includes manifest."
+    },
+    "T026/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/refractory_audit.py",
+      "verification": "Exposes module CLI with persisted JSON report support."
+    },
+    "T026/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T026-refractory-period-scheduling.md",
+      "verification": "Recorded first spike, refractory interval, step count, four passing checks, code revision, environment, and limitation."
+    },
+    "T026/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T026-refractory-period-scheduling.md",
+      "verification": "Documented CLI usage, failure behavior, and Day 02 report link."
+    }
+  },
+  "daily_stats": {
+    "day_01_baseline": {
+      "python": "3.14.2",
+      "node": "v22.23.0",
+      "cpu": "AMD Ryzen 7 7730U with Radeon Graphics",
+      "ram_gib": 15.4,
+      "gpu": "Not measured; nvidia-smi unavailable",
+      "commands": {
+        "python -m pytest tests -q": "passed; 23 passed in 14.02s",
+        "web: npm test": "passed; 6 tests",
+        "web: npm run build": "passed; TypeScript and production build succeeded",
+        "web: npm run test:e2e": "passed; 5 tests in 2.7m"
+      },
+      "warnings": [
+        "Headless browser could not create a WebGL context; E2E tests passed.",
+        "Three.js Clock deprecation warning.",
+        "Playwright reported slow filesystem detection for the local project path."
+      ],
+      "scientific_outputs": "No scientific source or result files were changed. E2E-generated edits to tracked docs/validation screenshots and benchmark JSON were restored from the clean starting revision.",
+      "last_verified_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2"
+    },
+    "day_01_final": {
+      "tested_revision": "91231ea64f4cb4455cb7ee808f1f05b1e785fdd6",
+      "python": "3.14.2",
+      "os": "Windows 11",
+      "results": {
+        "python_full_suite": "passed; 107 passed in 21.91s",
+        "web_unit": "passed; 6 passed",
+        "web_build": "passed; Next.js production build and TypeScript succeeded",
+        "web_e2e": "passed; 6 passed in 1.4m",
+        "signoff": "passed; 4/4 required checks; 3 accepted residual risks"
+      },
+      "generated_changes": "Nine tracked validation artifacts regenerated by E2E and restored to their pre-run versions.",
+      "delivery": {
+        "remote": "origin",
+        "branch": "exhibition-2026-10-28",
+        "remote_sha": "1c9e3ca827519366181afd1f54839818bb5660b8",
+        "day_01_commits_pushed": 149,
+        "merged": 0,
+        "default_branch_graph_eligible": 0,
+        "ci": {
+          "cpu_run_id": 40925897619,
+          "cpu": "success",
+          "web_run_id": 40925897526,
+          "web": "success"
+        }
+      }
+    }
+  },
+  "blockers": [],
+  "last_green_sha": "91231ea64f4cb4455cb7ee808f1f05b1e785fdd6"
+}

@@ -1,0 +1,5 @@
+{
+  "command": [],
+  "timeout_seconds": 0,
+  "expected_error": "command must not be empty"
+}

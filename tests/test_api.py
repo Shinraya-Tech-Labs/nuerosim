@@ -22,6 +22,29 @@ def wait(client, jid):
     pytest.fail("real worker did not finish in 15 seconds")
 
 
+def test_exhibition_order_and_persistence(tmp_path):
+    path = tmp_path / "jobs.db"
+    with TestClient(create_app(path)) as client:
+        ids = []
+        for name in ("first", "second", "comparison"):
+            job = client.post(
+                "/experiments",
+                json={"name": name, "model": "lif", "duration": 1, "pulses": []},
+            ).json()
+            assert wait(client, job["id"])["status"] == "completed"
+            ids.append(job["id"])
+        assert client.post("/exhibition/4", json={"job_id": ids[2], "reference_id": ids[0]}).status_code == 200
+        assert client.post("/exhibition/1", json={"job_id": ids[1]}).status_code == 200
+        assert [entry["slot"] for entry in client.get("/exhibition").json()] == [1, 4]
+        assert client.delete(f"/experiments/{ids[0]}").status_code == 409
+        assert client.delete(f"/experiments/{ids[1]}").status_code == 409
+        assert client.post("/exhibition/2", json={"job_id": "absent"}).status_code == 404
+        assert client.post("/exhibition/3", json={"job_id": ids[0], "reference_id": ids[2]}).status_code == 409
+    with TestClient(create_app(path)) as client:
+        assert [entry["slot"] for entry in client.get("/exhibition").json()] == [1, 4]
+        assert len(client.get("/experiments").json()) == 3
+
+
 def test_execution_export_retry_restart(tmp_path):
     path = tmp_path / "jobs.db"
     config = Experiment(duration=10, pulses=[], model="lif").model_dump()

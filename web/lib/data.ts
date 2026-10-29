@@ -82,6 +82,11 @@ export type Job = {
     config_sha256: string;
   };
 };
+export type ExhibitionEntry = {
+  slot: number;
+  job_id: string;
+  reference_id: string | null;
+};
 export type Pulse = {
   target: number;
   start: number;
@@ -121,6 +126,11 @@ export function positions(
   count: number,
   layout: Layout,
 ): [number, number, number][] {
+  if (count === 2 && layout === "columns")
+    return [
+      [-3, 0, 0],
+      [3, 0, 0],
+    ];
   return Array.from({ length: count }, (_, i) => {
     if (layout === "sphere") {
       const y = 1 - (2 * (i + 0.5)) / count;

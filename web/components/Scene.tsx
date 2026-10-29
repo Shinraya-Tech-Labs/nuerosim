@@ -73,6 +73,20 @@ function Geometry(p: SceneProps) {
     geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
     return geometry;
   }, [p.edges, p.positions, p.selected]);
+  const arrow = useMemo(() => {
+    if (p.nodes.length !== 2 || p.edges.length !== 1) return null;
+    const edge = p.edges[0],
+      source = new THREE.Vector3(...p.positions[edge.source]),
+      target = new THREE.Vector3(...p.positions[edge.target]),
+      direction = target.clone().sub(source).normalize();
+    return {
+      position: target.addScaledVector(direction, -0.65),
+      rotation: new THREE.Quaternion().setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0),
+        direction,
+      ),
+    };
+  }, [p.nodes.length, p.edges, p.positions]);
   useEffect(() => () => lines.dispose(), [lines]);
   useEffect(() => {
     if (!mesh.current) return;
@@ -143,11 +157,21 @@ function Geometry(p: SceneProps) {
   });
   return (
     <>
+      {arrow && (
+        <mesh position={arrow.position} quaternion={arrow.rotation}>
+          <coneGeometry args={[0.28, 0.6, 12]} />
+          <meshBasicMaterial color="#ffe0a3" />
+        </mesh>
+      )}
       <lineSegments geometry={lines}>
         <lineBasicMaterial
           vertexColors
           transparent
-          opacity={Math.min(0.32, 8 / Math.sqrt(Math.max(1, p.edges.length)))}
+          opacity={
+            p.edges.length === 1
+              ? 0.9
+              : Math.min(0.32, 8 / Math.sqrt(Math.max(1, p.edges.length)))
+          }
           depthWrite={false}
         />
       </lineSegments>
@@ -165,7 +189,13 @@ function Geometry(p: SceneProps) {
         onPointerOut={() => p.onHover(null)}
       >
         <sphereGeometry
-          args={[Math.min(0.12, 24 / Math.max(1, p.nodes.length)), 8, 6]}
+          args={[
+            p.nodes.length === 2
+              ? 0.5
+              : Math.min(0.12, 24 / Math.max(1, p.nodes.length)),
+            8,
+            6,
+          ]}
         />
         <meshBasicMaterial />
       </instancedMesh>

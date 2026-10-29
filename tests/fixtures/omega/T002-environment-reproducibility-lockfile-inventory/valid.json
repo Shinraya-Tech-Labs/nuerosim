@@ -1,0 +1,33 @@
+{
+  "revision": "fixture-revision",
+  "blobs": [
+    {
+      "path": "web/package-lock.json",
+      "contents": "{}\n"
+    },
+    {
+      "path": "pyproject.toml",
+      "contents": "[project]\n"
+    },
+    {
+      "path": "requirements-runtime.lock",
+      "contents": "numpy==1.26.4\n"
+    }
+  ],
+  "expected": {
+    "revision": "fixture-revision",
+    "lockfile_count": 2,
+    "lockfiles": [
+      {
+        "path": "requirements-runtime.lock",
+        "size_bytes": 14,
+        "sha256": "e77e7045d01a9431264f9262c6b199d8e7988c139276a5266a3cf689588ad66e"
+      },
+      {
+        "path": "web/package-lock.json",
+        "size_bytes": 3,
+        "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      }
+    ]
+  }
+}

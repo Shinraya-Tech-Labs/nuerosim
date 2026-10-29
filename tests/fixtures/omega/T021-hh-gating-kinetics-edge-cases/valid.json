@@ -1,0 +1,6 @@
+{
+  "units": {"voltage": "mV", "rate": "ms^-1"},
+  "voltages_mV": [-40.000001, -40, -39.999999, -55.000001, -55, -54.999999],
+  "singular_limits": {"alpha_m_at_minus40": 1, "alpha_n_at_minus55": 0.1},
+  "continuity_tolerance_ms^-1": 1e-7
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CPU validation",
+  "jobs": {
+    "tests": {
+      "runs-on": "${{ matrix.os }}",
+      "strategy": {
+        "matrix": {
+          "os": ["ubuntu-latest", "windows-latest"],
+          "python": ["3.11", "3.12", "3.13", "3.14"]
+        }
+      }
+    }
+  },
+  "expected": {
+    "job_count": 1,
+    "matrix_combinations": 8,
+    "platforms": ["ubuntu-latest", "windows-latest"],
+    "runtime_axes": {"python": ["3.11", "3.12", "3.13", "3.14"]}
+  }
+}

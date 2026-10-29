@@ -1,0 +1,11 @@
+{
+  "schema": {
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Invalid Fixture API",
+      "version": "1.0"
+    },
+    "paths": []
+  },
+  "expected_error": "OpenAPI paths must be an object"
+}

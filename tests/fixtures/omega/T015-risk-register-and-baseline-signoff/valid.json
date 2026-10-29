@@ -1,0 +1,13 @@
+{
+  "tested_revision": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
+  "checks": [
+    {"id": "python", "command": "python -m pytest tests -q", "status": "passed", "evidence": "23 passed"},
+    {"id": "web-unit", "command": "npm test", "status": "passed", "evidence": "6 passed"},
+    {"id": "web-build", "command": "npm run build", "status": "passed", "evidence": "build succeeded"},
+    {"id": "web-e2e", "command": "npm run test:e2e", "status": "passed", "evidence": "5 passed"}
+  ],
+  "risks": [
+    {"id": "webgpu", "title": "Physical WebGPU not measured", "severity": "medium", "disposition": "accepted", "rationale": "No usable WebGPU adapter was available in the recorded headless environment.", "evidence": "docs/WEB_VALIDATION_REPORT.md"}
+  ],
+  "expected": {"baseline_gate_passed": true, "required_check_count": 4, "risk_count": 1}
+}

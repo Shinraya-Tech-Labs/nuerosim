@@ -1,0 +1,6 @@
+{
+  "units": {"temperature": "C", "voltage": "mV", "rate": "ms^-1", "gate": "1"},
+  "temperature_c": 37,
+  "voltage_mV": -65,
+  "tolerance": 1e-12
+}

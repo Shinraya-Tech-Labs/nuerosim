@@ -1,0 +1,5 @@
+{
+  "units": {"voltage": "mV", "rate": "ms^-1"},
+  "voltages_mV": [],
+  "expected_error": "voltages_mV must be a non-empty list"
+}

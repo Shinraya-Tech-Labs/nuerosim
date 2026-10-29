@@ -1,0 +1,6 @@
+{
+  "units": {"time": "ms", "voltage": "mV", "current_density": "uA/cm^2"},
+  "experiment": {"model": "hh", "duration": 30, "dt": 0.025, "pulses": []},
+  "minimum_interval_tolerance_ms": 1e-12,
+  "expected_error": "requires model='lif' or model='adex'"
+}

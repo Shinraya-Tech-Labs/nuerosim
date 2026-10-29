@@ -1,0 +1,12 @@
+{
+  "units": {"conductance": "mS/cm^2", "time": "ms", "voltage": "mV", "current_density": "uA/cm^2"},
+  "experiment": {
+    "model": "hh", "duration": 50, "dt": 0.025, "record_every": 4,
+    "initial_voltage": -65,
+    "pulses": [{"start": 10, "stop": 40, "amplitude": 10}]
+  },
+  "g_na_mS_cm2": [60, 120, 180],
+  "expected_spike_counts": [1, 2, 3],
+  "expected_final_voltage_mV": [-65.63596520061942, -65.44700087955275, -68.23661771872393],
+  "voltage_tolerance_mV": 1e-9
+}

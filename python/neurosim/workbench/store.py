@@ -13,6 +13,21 @@ from pathlib import Path
 from .config import Experiment
 from .engine import Cancelled, manifest, simulate
 
+SCHEMA_DDL = (
+    """CREATE TABLE IF NOT EXISTS jobs (
+        id TEXT PRIMARY KEY, created REAL NOT NULL, updated REAL NOT NULL,
+        status TEXT NOT NULL, progress REAL NOT NULL DEFAULT 0,
+        manifest TEXT NOT NULL, parent_id TEXT, error TEXT, result BLOB)""",
+    """CREATE TABLE IF NOT EXISTS exhibition (
+        slot INTEGER PRIMARY KEY CHECK (slot BETWEEN 1 AND 4),
+        job_id TEXT NOT NULL, reference_id TEXT)""",
+)
+
+
+def create_schema(db):
+    for statement in SCHEMA_DDL:
+        db.execute(statement)
+
 
 class Store:
     def __init__(self, path):
@@ -20,10 +35,7 @@ class Store:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.connection() as db:
             db.execute("PRAGMA journal_mode=WAL")
-            db.execute("""CREATE TABLE IF NOT EXISTS jobs (
-                id TEXT PRIMARY KEY, created REAL NOT NULL, updated REAL NOT NULL,
-                status TEXT NOT NULL, progress REAL NOT NULL DEFAULT 0,
-                manifest TEXT NOT NULL, parent_id TEXT, error TEXT, result BLOB)""")
+            create_schema(db)
 
     @contextmanager
     def connection(self):
@@ -76,6 +88,32 @@ class Store:
             ]
         return [self.get(jid) for jid in ids]
 
+    def exhibition(self):
+        with self.connection() as db:
+            return [
+                dict(row)
+                for row in db.execute(
+                    "SELECT slot,job_id,reference_id FROM exhibition ORDER BY slot"
+                )
+            ]
+
+    def bind_exhibition(self, slot, jid, reference_id=None):
+        if slot not in (1, 2, 3, 4) or (slot == 4) != (reference_id is not None):
+            raise ValueError("EX 04 requires a reference run; other slots do not")
+        if jid == reference_id:
+            raise ValueError("comparison runs must differ")
+        for run_id in (jid, reference_id):
+            if run_id is not None and self.get(run_id)["status"] != "completed":
+                raise ValueError("exhibition runs must be completed")
+        with self.connection() as db:
+            db.execute(
+                """INSERT INTO exhibition(slot,job_id,reference_id) VALUES(?,?,?)
+                ON CONFLICT(slot) DO UPDATE SET job_id=excluded.job_id,
+                reference_id=excluded.reference_id""",
+                (slot, jid, reference_id),
+            )
+        return {"slot": slot, "job_id": jid, "reference_id": reference_id}
+
     def result(self, jid):
         job = self.get(jid)
         if job["status"] != "completed":
@@ -99,6 +137,11 @@ class Store:
     def delete(self, jid):
         self.get(jid)
         with self.connection() as db:
+            if db.execute(
+                "SELECT 1 FROM exhibition WHERE job_id=? OR reference_id=?",
+                (jid, jid),
+            ).fetchone():
+                raise ValueError("exhibition run is pinned")
             n = db.execute(
                 "DELETE FROM jobs WHERE id=? AND status IN ('completed','failed','cancelled')",
                 (jid,),

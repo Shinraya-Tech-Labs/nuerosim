@@ -1,9 +1,56 @@
 # NeuroSim exhibition demo
 
-This runbook uses the local CPU engine and persisted experiment API. The three
-guided actions in the workspace submit ordinary validated experiments; they do
-not load prewritten results. Their configurations are recorded in each saved
-manifest. Allow a few minutes for the first frontend build on a slow disk.
+This runbook uses the local CPU engine and persisted experiment API. Four
+completed runs are pinned in a separate SQLite exhibition index, independent
+of creation time. The existing guided actions still submit new CPU jobs. The
+exhibition runs are saved results, with original manifests and output retained.
+
+## Presenter click sequence
+
+1. Start the API and frontend, then open <http://127.0.0.1:3000/>. With no
+   experiment in the URL, **EX 01 — Two Connected Neurons** opens by default.
+   If using an old URL, clear `?experiment=...` first. Open **EXPERIMENT
+   HISTORY** to see **EXHIBITION EXPERIMENTS** before **OTHER EXPERIMENTS**.
+2. Inspect EX 01's two visible nodes, directed arrow, and one saved excitatory
+   edge. Expand **CONFIGURED CURRENT INPUT**: neuron 0 receives 20 µA/cm² for
+   `[0,20)` ms. Select neurons 0 and 1 to see their separate voltage traces;
+   play or scrub the recorded spikes. The recorded run has 7 and 8 spikes,
+   respectively. The display layout and arrow are illustrative; the edge is
+   saved model connectivity.
+3. Click **Next: EX 02 — Full Neural Network**, or choose EX 02 in history.
+   Inspect the 512 neurons and 20,786 saved synapses. The initial view limits
+   drawing to 2,048 edges; the stored graph remains complete. Use the edge
+   type filter for excitatory and inhibitory connections and select a neuron
+   to inspect actual endpoints. This specific 1 ms run recorded **zero
+   spikes**, so playback shows no firing activity. Do not narrate firing.
+4. Choose **EX 03 — Hodgkin–Huxley Action Potential**. Expand current input:
+   10 µA/cm² over `[10,40)` ms. Inspect the 50 ms recorded voltage trace and
+   two recorded spikes. The selected neuron is neuron 0.
+5. Choose **EX 04 — Stimulus Comparison**. The 12 µA/cm² run is the primary
+   entry; the 8 µA/cm² reference is a separate completed run in **OTHER
+   EXPERIMENTS**. The comparison selector loads it automatically. Inspect
+   both voltage traces in **Recorded analysis** and check the configured
+   pulse on each saved job. Both use `[10,40)` ms, 50 ms duration, and seed 42.
+6. Refresh the page at EX 04 and confirm the comparison returns. Reopen EX 01
+   from history. Use **Presentation** to enlarge the viewport, and **Export
+   data** for manifest, voltage, spikes, and connectivity CSVs.
+
+| Entry | Saved job ID | Neurons | Synapses | Recorded spikes |
+| --- | --- | ---: | ---: | ---: |
+| EX 01 | `b2a94559-f751-4275-a741-e651cab5d349` | 2 | 1 | 15 (7 + 8) |
+| EX 02 | `997ca049-c52b-49e4-838c-8dd7acafab5b` | 512 | 20,786 | 0 |
+| EX 03 | `4b4be8db-61f3-4c7f-aea0-a862e45ec958` | 1 | 0 | 2 |
+| EX 04 (12 µA/cm²) | `7dfedf22-ef59-4262-9abf-9d228cec1776` | 1 | 0 | 9 |
+| EX 04 reference (8 µA/cm²) | `d2e40a02-6e62-44c5-8aef-de0e27ec466f` | 1 | 0 | 8 |
+
+These IDs and counts describe the local database prepared on 2026-10-28, not
+fixtures shipped in Git. `neurosim-data/experiments.db` is ignored by Git;
+back it up with its SQLite WAL files or export each result before moving to
+another machine. A fresh clone needs new real runs and exhibition bindings.
+The EX 02 record was copied intact from a completed local browser-test SQLite
+database after its stored manifest matched the current engine manifest and
+its result was checked for 512 voltage series, 20,786 valid edges, and matching
+manifest. It was not rerun or renamed.
 
 ## First-time Windows setup
 
@@ -97,12 +144,11 @@ come from the saved simulation.”
 
 | Time | Action and narration |
 | --- | --- |
-| 0:00–0:20 | Open the workbench. Point out the active renderer badge, experiment history, and empty-state HH action. Explain that the service and SQLite database run locally. |
-| 0:20–0:55 | Click **01 · HH single-neuron firing**. Wait for completion. Expand **CONFIGURED CURRENT INPUT** and show the configured pulse, then inspect the recorded voltage trace and spike raster. The displayed pulse is configuration metadata, not a measured input trace. |
-| 0:55–1:35 | Click **02 · Seeded LIF network**. Inspect the saved 128-neuron topology and recorded excitatory/inhibitory edges. Press play and scrub the timeline; voltage, raster, rate, and node highlighting follow recorded timestamps. |
-| 1:35–2:15 | Select a neuron and inspect its saved connections. Change the connection filter or edge budget. Explain that coordinates are deterministic layout coordinates, not physical positions or axons. |
-| 2:15–2:45 | Click **03 · Compare 8 vs 12 µA/cm²**. It executes two separately persisted LIF experiments, with the pulse amplitude as the changed input. Wait for both jobs and point to the overlaid recorded voltage traces. Describe only the observed traces. |
-| 2:45–3:00 | Show the manifest seed/configuration or export a completed result. State limitations: bounded CPU simulations, single-user local service, and no clinical or anatomical claim. |
+| 0:00–0:40 | Open EX 01. Show the 0→1 excitatory edge, both neuron traces, and recorded spikes. |
+| 0:40–1:25 | Click Next to EX 02. Show the 512/20,786 counts, 2,048 initial drawn edges, type filter, and inspector. State that this run has zero spikes. |
+| 1:25–2:05 | Choose EX 03. Show the configured HH pulse, voltage graph, and raster. |
+| 2:05–2:45 | Choose EX 04. Show the automatic overlay of the saved 8 and 12 µA/cm² traces. Refresh and verify it persists. |
+| 2:45–3:00 | Export a result or show its manifest and seed. State model and layout limitations. |
 
 The guided configurations are named “Exhibition · HH current clamp”,
 “Exhibition · seeded LIF network”, and “Exhibition · LIF pulse 8/12 µA/cm²”.
@@ -158,6 +204,21 @@ median 12.0 FPS at 2,048 edges and 2.1 FPS at all 20,786 edges; the environment
 is headless and does not measure exhibition-hardware performance. The real
 1366×768 screenshot is `docs/validation/exhibition-workspace.png`.
 
+On 2026-10-28, this exhibition change passed **23 Python tests** (one
+Starlette/httpx deprecation warning), **6 frontend unit tests**, a Next.js
+production build with TypeScript checks, and **5/5 browser tests**. The new
+browser test exercised the actual API worker and saved database, verified EX
+01's stored 0→1 excitatory edge, ordered labels, default loading, navigation,
+and EX 04 overlay after reload. The full browser suite also exercised a real
+512-neuron network at 2,048 and all 20,786 visible edges. The local live
+workbench displayed EX 01 under WebGPU at roughly 42–52 FPS in a brief
+observation; that is not a controlled benchmark. EX 02 device performance was
+not measured in this setup.
+
+![EX 01 with two saved neurons and one directed synapse](validation/exhibition-history.png)
+
+![EX 04 saved voltage comparison](validation/exhibition-comparison.png)
+
 See `docs/validation/web-render-benchmark-redesign.json` and
 `docs/WEB_VALIDATION_REPORT.md` for renderer context and raw samples.
 Exhibition-device performance and WebGPU performance are unmeasured. No
@@ -167,9 +228,10 @@ speedup is claimed.
 
 - [ ] Start API and UI from a fresh login.
 - [ ] Confirm health endpoint and renderer badge.
-- [ ] Run HH; inspect voltage, raster, and configured pulse metadata.
-- [ ] Run seeded network; verify topology, playback, and synchronized plots.
-- [ ] Run the two-parameter comparison; confirm both jobs complete and overlay.
+- [ ] Select EX 01; inspect both recorded neuron traces and the 0→1 edge.
+- [ ] Select EX 02; verify 512/20,786 totals and zero recorded spikes.
+- [ ] Select EX 03; inspect HH voltage, raster, and pulse metadata.
+- [ ] Select EX 04; verify both saved runs and the automatic overlay.
 - [ ] Pause, scrub, resume, select a neuron, and export results.
 - [ ] Refresh and reopen a completed run from history.
 - [ ] Confirm 1366×768 layout and test a narrow viewport.

@@ -1,0 +1,5 @@
+{
+  "scenario": "webgl2-context-unavailable",
+  "capabilities": {"webgpu": false, "webgl2": false},
+  "expected": {"renderer_label_contains": "2D canvas", "fallback_2d": true, "canvas_visible": false}
+}

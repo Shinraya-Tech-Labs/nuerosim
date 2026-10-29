@@ -1,0 +1,5 @@
+{
+  "tested_revision": "not-a-git-sha",
+  "checks": [{"id": "python", "command": "python -m pytest", "status": "passed", "evidence": "ok"}],
+  "risks": []
+}

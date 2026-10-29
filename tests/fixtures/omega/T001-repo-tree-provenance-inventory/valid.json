@@ -1,0 +1,27 @@
+{
+  "paths": [
+    ".github/workflows/check.yml",
+    "README.md",
+    "docs/SCIENCE.md",
+    "python/neurosim/simulate.py",
+    "tests/test_science.py",
+    "web/app/page.tsx"
+  ],
+  "expected": {
+    "tracked_files": 6,
+    "by_top_level": {
+      ".": 1,
+      ".github": 1,
+      "docs": 1,
+      "python": 1,
+      "tests": 1,
+      "web": 1
+    },
+    "by_extension": {
+      ".md": 2,
+      ".py": 2,
+      ".tsx": 1,
+      ".yml": 1
+    }
+  }
+}

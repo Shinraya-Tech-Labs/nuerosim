@@ -17,6 +17,7 @@ neurosim-data/
 node_modules/
 .next/
 .next-e2e/
+.next-build/
 test-results/
 playwright-report/
 *.tsbuildinfo

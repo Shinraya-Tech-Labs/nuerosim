@@ -1,0 +1,35 @@
+{
+  "result": {
+    "manifest": {
+      "units": {
+        "time": "ms",
+        "voltage": "mV",
+        "current": "uA/cm^2",
+        "conductance": "mS/cm^2",
+        "capacitance": "uF/cm^2"
+      },
+      "config": {
+        "duration": 1000,
+        "n": 1
+      }
+    },
+    "spikes": [
+      [100, 500]
+    ],
+    "mean_rate_hz": 2
+  },
+  "expected": {
+    "status": "pass",
+    "units": {
+      "time": "ms",
+      "voltage": "mV",
+      "current": "uA/cm^2",
+      "conductance": "mS/cm^2",
+      "capacitance": "uF/cm^2"
+    },
+    "duration_ms": 1000,
+    "neurons": 1,
+    "spike_count": 2,
+    "mean_rate_hz": 2
+  }
+}

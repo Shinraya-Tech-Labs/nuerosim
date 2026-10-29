@@ -25,6 +25,10 @@ class Cancelled(Exception):
     """Cooperative cancellation at a simulation boundary."""
 
 
+def effective_delay_steps(delay_ms, dt_ms):
+    return max(1, math.ceil(delay_ms / dt_ms - 1e-10))
+
+
 def rates(v):
     """Classic HH alpha/beta rates, ms^-1 at 6.3 C; removable singularities."""
 
@@ -143,7 +147,7 @@ def simulate(config: Experiment, progress=None, cancelled=None):
     times, voltages = [0.0], [state[0].copy()]
     spikes = [[] for _ in range(config.n)]
     steps = round(config.duration / config.dt)
-    delay_steps = max(1, math.ceil(config.delay / config.dt - 1e-10))
+    delay_steps = effective_delay_steps(config.delay, config.dt)
     p = config.parameters
     for step in range(steps):
         if step % 20 == 0:

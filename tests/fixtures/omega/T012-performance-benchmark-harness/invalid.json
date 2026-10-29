@@ -1,0 +1,5 @@
+{
+  "profile": "unknown",
+  "repeats": 0,
+  "expected_error": "repeats must be between 1 and 20"
+}

@@ -1,0 +1,13 @@
+{
+  "ddl": [
+    "CREATE TABLE jobs (id TEXT PRIMARY KEY, created REAL NOT NULL, updated REAL NOT NULL, status TEXT NOT NULL, progress REAL NOT NULL DEFAULT 0, manifest TEXT NOT NULL, parent_id TEXT, error TEXT, result BLOB)",
+    "CREATE TABLE exhibition (slot INTEGER PRIMARY KEY CHECK (slot BETWEEN 1 AND 4), job_id TEXT NOT NULL, reference_id TEXT)"
+  ],
+  "expected": {
+    "compatible": true,
+    "table_count": 2,
+    "column_count": 12,
+    "tables": ["exhibition", "jobs"],
+    "differences": []
+  }
+}

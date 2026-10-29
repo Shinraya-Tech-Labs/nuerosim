@@ -1,0 +1,14 @@
+{
+  "train": {"start_ms": 0, "width_ms": 1, "interval_ms": 3, "count": 3, "amplitude_uA_cm2": 2, "target": 0},
+  "expected_train": [
+    {"start": 0, "stop": 1, "amplitude": 2, "target": 0},
+    {"start": 3, "stop": 4, "amplitude": 2, "target": 0},
+    {"start": 6, "stop": 7, "amplitude": 2, "target": 0}
+  ],
+  "biphasic": {"start_ms": 10, "phase_width_ms": 1, "amplitude_uA_cm2": 2, "target": 0},
+  "expected_biphasic": [
+    {"start": 10, "stop": 11, "amplitude": 2, "target": 0},
+    {"start": 11, "stop": 12, "amplitude": -2, "target": 0}
+  ],
+  "expected_net_charge_uA_ms_cm2": 0
+}

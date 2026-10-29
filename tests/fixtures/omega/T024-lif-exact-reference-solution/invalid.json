@@ -1,0 +1,11 @@
+{
+  "units": {"time": "ms", "voltage": "mV", "current_density": "uA/cm^2", "capacitance_density": "uF/cm^2"},
+  "experiment": {
+    "model": "lif", "duration": 20, "dt": 0.025, "record_every": 4, "n": 1,
+    "initial_voltage": -65,
+    "parameters": {"rest": -65, "tau_m": 20, "cm": 1, "threshold": -50},
+    "pulses": [{"start": 5, "stop": 15, "amplitude": 10}]
+  },
+  "tolerance_mV": 1e-8,
+  "expected_error": "without threshold crossing"
+}

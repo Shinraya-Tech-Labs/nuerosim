@@ -1,0 +1,62 @@
+{
+  "schema": {
+    "properties": {
+      "dt": {
+        "type": "number",
+        "default": 0.025,
+        "minimum": 0.001,
+        "maximum": 0.025
+      },
+      "model": {
+        "type": "string",
+        "default": "hh",
+        "enum": ["hh", "lif", "adex", "cable"]
+      }
+    },
+    "$defs": {
+      "Parameters": {
+        "properties": {
+          "cm": {
+            "type": "number",
+            "default": 1,
+            "minimum": 0.5,
+            "maximum": 2
+          },
+          "threshold": {
+            "type": "number",
+            "default": -50,
+            "minimum": -54,
+            "maximum": -40
+          }
+        }
+      }
+    }
+  },
+  "expected": {
+    "status": "pass",
+    "field_count": 3,
+    "bounds": [
+      {
+        "model": "Experiment",
+        "field": "dt",
+        "default": 0.025,
+        "minimum": 0.001,
+        "maximum": 0.025
+      },
+      {
+        "model": "Parameters",
+        "field": "cm",
+        "default": 1,
+        "minimum": 0.5,
+        "maximum": 2
+      },
+      {
+        "model": "Parameters",
+        "field": "threshold",
+        "default": -50,
+        "minimum": -54,
+        "maximum": -40
+      }
+    ]
+  }
+}

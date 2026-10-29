@@ -13,6 +13,7 @@ import {
   type Trace,
   type Topology,
   type Job,
+  type ExhibitionEntry,
   type Layout,
 } from "../lib/data";
 import Fallback from "./Fallback";
@@ -22,6 +23,12 @@ const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
   loading: () => <p>Loading 3D renderer…</p>,
 });
+const EXHIBITION_TITLES = [
+  "EX 01 — Two Connected Neurons",
+  "EX 02 — Full Neural Network",
+  "EX 03 — Hodgkin–Huxley Action Potential",
+  "EX 04 — Stimulus Comparison",
+];
 const HH_DEMO = {
   name: "Exhibition · HH current clamp",
   model: "hh",
@@ -59,6 +66,7 @@ const pairedLifDemo = (amplitude: number, label: string) => ({
 });
 export default function Workspace() {
   const [jobs, setJobs] = useState<Job[]>([]),
+    [exhibition, setExhibition] = useState<ExhibitionEntry[]>([]),
     [id, setId] = useState(""),
     [data, setData] = useState<Topology | null>(null),
     [error, setError] = useState(""),
@@ -98,12 +106,20 @@ export default function Workspace() {
     [compare, setCompare] = useState(""),
     [comparison, setComparison] = useState<Trace | null>(null);
   const job = jobs.find((j) => j.id === id);
+  const exhibitionIndex = exhibition.findIndex((entry) => entry.job_id === id);
+  const exhibitionSlot = exhibition[exhibitionIndex]?.slot;
   const displayEdgeBudget = adaptive
     ? Math.min(edgeBudget, adaptiveBudget)
     : edgeBudget;
   useEffect(() => {
     const q = new URLSearchParams(location.search).get("experiment");
     if (q) setId(q);
+    api<ExhibitionEntry[]>("/exhibition")
+      .then((entries) => {
+        setExhibition(entries);
+        if (!q && entries[0]?.slot === 1) choose(entries[0].job_id);
+      })
+      .catch((e) => setError(String(e)));
     api("/defaults")
       .then((v) => setConfig(JSON.stringify(v, null, 2)))
       .catch((e) => setError(String(e)));
@@ -228,6 +244,10 @@ export default function Workspace() {
       });
     return () => controller.abort();
   }, [compare, selected]);
+  useEffect(() => {
+    if (data && exhibitionSlot === 4)
+      setCompare(exhibition[exhibitionIndex].reference_id || "");
+  }, [data, exhibition, exhibitionIndex, exhibitionSlot]);
   useEffect(() => {
     if (!comparisonPair) return;
     const pair = [comparisonPair.referenceId, comparisonPair.changedId].map(
@@ -379,7 +399,7 @@ export default function Workspace() {
           <span className="live-dot" />
           <span>
             {job
-              ? `${String(job.manifest.config.name || job.manifest.config.model)} · ${job.status}`
+              ? `${exhibitionSlot ? EXHIBITION_TITLES[exhibitionSlot - 1] : String(job.manifest.config.name || job.manifest.config.model)} · ${job.status}`
               : "No experiment loaded"}
           </span>
           <small>{job?.id.slice(0, 8) || "LOCAL CPU WORKSPACE"}</small>
@@ -428,13 +448,40 @@ export default function Workspace() {
                 onChange={(e) => choose(e.target.value)}
               >
                 <option value="">Select an experiment…</option>
-                {jobs.map((j) => (
-                  <option key={j.id} value={j.id}>
-                    {j.id.slice(0, 8)} · {j.status}
-                  </option>
-                ))}
+                {exhibition.length > 0 && (
+                  <optgroup label="EXHIBITION EXPERIMENTS">
+                    {exhibition.map((entry) => (
+                      <option key={entry.job_id} value={entry.job_id}>
+                        {EXHIBITION_TITLES[entry.slot - 1]}
+                      </option>
+                    ))}
+                  </optgroup>
+                )}
+                <optgroup label="OTHER EXPERIMENTS">
+                  {jobs
+                    .filter(
+                      (j) => !exhibition.some((entry) => entry.job_id === j.id),
+                    )
+                    .map((j) => (
+                      <option key={j.id} value={j.id}>
+                        {String(j.manifest.config.name || j.id.slice(0, 8))} ·{" "}
+                        {j.status}
+                      </option>
+                    ))}
+                </optgroup>
               </select>
             </label>
+            {exhibitionIndex >= 0 &&
+              exhibitionIndex < exhibition.length - 1 && (
+                <button
+                  className="subtle-button full-width"
+                  onClick={() => choose(exhibition[exhibitionIndex + 1].job_id)}
+                >
+                  Next:{" "}
+                  {EXHIBITION_TITLES[exhibition[exhibitionIndex + 1].slot - 1]}{" "}
+                  →
+                </button>
+              )}
             {job && (
               <div className="job-card">
                 <div className="job-state">

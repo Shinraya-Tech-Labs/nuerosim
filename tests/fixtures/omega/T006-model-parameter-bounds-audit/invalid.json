@@ -1,0 +1,13 @@
+{
+  "schema": {
+    "properties": {
+      "dt": {
+        "type": "number",
+        "default": 0.03,
+        "minimum": 0.001,
+        "maximum": 0.025
+      }
+    }
+  },
+  "expected_error": "default is outside declared bounds"
+}

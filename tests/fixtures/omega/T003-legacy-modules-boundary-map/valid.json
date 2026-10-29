@@ -1,0 +1,35 @@
+{
+  "revision": "fixture-revision",
+  "paths": [
+    "README.md",
+    "docs/legacy/README.md",
+    "docs/legacy/deployment.yaml",
+    "python/neurosim/legacy_cli.py",
+    "python/neurosim/workbench/cli.py"
+  ],
+  "project_scripts": {
+    "neurosim": "neurosim.workbench.cli:main",
+    "neurosim-serve": "neurosim.workbench.api:serve"
+  },
+  "expected": {
+    "revision": "fixture-revision",
+    "legacy_modules": [
+      "python/neurosim/legacy_cli.py"
+    ],
+    "archived_legacy_files": [
+      "docs/legacy/README.md",
+      "docs/legacy/deployment.yaml"
+    ],
+    "entry_points": {
+      "neurosim.workbench": {
+        "neurosim": "neurosim.workbench.cli:main",
+        "neurosim-serve": "neurosim.workbench.api:serve"
+      },
+      "neurosim.legacy": {},
+      "other": {}
+    },
+    "legacy_module_count": 1,
+    "archived_file_count": 2,
+    "entry_point_count": 2
+  }
+}
