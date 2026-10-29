@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T025",
+  "next_package": "T026",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -1185,6 +1185,56 @@
       "status": "complete",
       "artifact": "docs/omega/T024-lif-exact-reference-solution.md",
       "verification": "Documented CLI use, errors, supported subthreshold scope, and Day 02 report link."
+    },
+    "T025/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T025-adex-threshold-dynamics.md",
+      "verification": "Defined numerical cutoff, AdEx input scope, units, expected spike example, and excluded biological claims."
+    },
+    "T025/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T025-adex-threshold-dynamics/valid.json",
+      "verification": "Positive one-neuron fixture gives cutoff -40 mV and expected spike times 1.5, 4, 6.5, and 9 ms."
+    },
+    "T025/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T025-adex-threshold-dynamics/invalid.json",
+      "verification": "Wrong-model fixture is rejected with the declared AdEx-only error."
+    },
+    "T025/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/adex_threshold_audit.py",
+      "verification": "Runs actual AdEx experiment and reports the configured cutoff, spike timing, intervals, final state, and manifest."
+    },
+    "T025/U05": {
+      "status": "complete",
+      "artifact": "tests/test_adex_threshold_audit.py",
+      "verification": "Named unit test confirms cutoff and expected spike timing from the production engine."
+    },
+    "T025/U06": {
+      "status": "complete",
+      "artifact": "tests/test_adex_threshold_audit.py",
+      "verification": "Edge tests reject wrong units/model and verify finite high-drive behavior under the exponential cutoff."
+    },
+    "T025/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/adex_threshold_audit.py",
+      "verification": "Integrated with Experiment validation and production simulate runner; report includes production manifest."
+    },
+    "T025/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/adex_threshold_audit.py",
+      "verification": "Exposed module CLI and optional persisted JSON report."
+    },
+    "T025/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T025-adex-threshold-dynamics.md",
+      "verification": "Captured exact spike times, high-drive result, five passing focused tests, code revision, and limitation."
+    },
+    "T025/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T025-adex-threshold-dynamics.md",
+      "verification": "Documented reproducible CLI use and linked contract/evidence from Day 02 report."
     }
   },
   "daily_stats": {
