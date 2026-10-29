@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T023",
+  "next_package": "T024",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -1085,6 +1085,56 @@
       "status": "complete",
       "artifact": "docs/omega/T022-hh-6-3-celsius-reference.md",
       "verification": "Documented usage, outputs, exit codes, fixed-temperature limitation, and links to contract/evidence."
+    },
+    "T023/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T023-hh-conductance-sweeps.md",
+      "verification": "Defined fixed-experiment input, units, acceptance sample, bounds, errors, and excluded claims."
+    },
+    "T023/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T023-hh-conductance-sweeps/valid.json",
+      "verification": "Deterministic three-point conductance fixture includes expected spike counts and final voltages."
+    },
+    "T023/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T023-hh-conductance-sweeps/invalid.json",
+      "verification": "Duplicate conductance boundary is rejected with the declared strictly increasing error."
+    },
+    "T023/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_conductance_sweep.py",
+      "verification": "Runs each point through production `simulate`, overrides only g_na, validates bounds/work, and returns real results with manifests."
+    },
+    "T023/U05": {
+      "status": "complete",
+      "artifact": "tests/test_hh_conductance_sweep.py",
+      "verification": "Named unit test verifies 1/2/3 spikes, final voltages, and persisted manifest conductances."
+    },
+    "T023/U06": {
+      "status": "complete",
+      "artifact": "tests/test_hh_conductance_sweep.py",
+      "verification": "Focused checks cover duplicate values, wrong units, out-of-range values, sweep size, and total work limits."
+    },
+    "T023/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_conductance_sweep.py",
+      "verification": "Each row carries a real production result manifest; CLI integration test verifies persisted JSON output."
+    },
+    "T023/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_conductance_sweep.py",
+      "verification": "Exposed a reproducible module CLI with optional --output persistence."
+    },
+    "T023/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T023-hh-conductance-sweeps.md",
+      "verification": "Recorded 5 passing checks, exact spike times/counts and voltages, code revision, environment, CLI persistence, and limits."
+    },
+    "T023/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T023-hh-conductance-sweeps.md",
+      "verification": "Documented CLI usage, output, errors, scope, and links from the Day 02 report."
     }
   },
   "daily_stats": {
