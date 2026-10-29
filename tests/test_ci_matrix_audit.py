@@ -28,6 +28,21 @@ def test_invalid_matrix_axis_is_rejected():
         audit_workflow(FIXTURES / "invalid.json")
 
 
+def test_empty_matrix_axis_is_rejected(tmp_path):
+    path = tmp_path / "empty-matrix.json"
+    path.write_text('{"jobs":{"job":{"strategy":{"matrix":{"os":[]}}}}}', encoding="utf-8")
+    with pytest.raises(ValueError, match="non-empty scalar list"):
+        audit_workflow(path)
+
+
+def test_missing_runner_is_reported_without_inference(tmp_path):
+    path = tmp_path / "unknown-runner.json"
+    path.write_text('{"jobs":{"job":{"steps":[]}}}', encoding="utf-8")
+    job = audit_workflow(path)["jobs"][0]
+    assert job["platforms"] == []
+    assert job["matrix_combinations"] == 1
+
+
 def test_repository_workflows_report_declared_coverage():
     report = audit_workflows(
         [".github/workflows/web.yml", ".github/workflows/cpu.yml"]
