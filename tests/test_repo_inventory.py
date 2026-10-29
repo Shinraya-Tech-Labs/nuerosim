@@ -17,3 +17,13 @@ def test_T001_repo_tree_provenance_inventory_unit():
     assert result["by_top_level"] == fixture["expected"]["by_top_level"]
     assert result["by_extension"] == fixture["expected"]["by_extension"]
     assert result["paths"] == sorted(fixture["paths"])
+
+
+def test_T001_repo_tree_provenance_inventory_empty_tree_boundary():
+    assert summarize_paths([], "empty-tree") == {
+        "revision": "empty-tree",
+        "tracked_files": 0,
+        "by_top_level": {},
+        "by_extension": {},
+        "paths": [],
+    }
