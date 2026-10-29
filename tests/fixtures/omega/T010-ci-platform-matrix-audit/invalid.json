@@ -1,0 +1,9 @@
+{
+  "name": "Malformed matrix",
+  "jobs": {
+    "tests": {
+      "runs-on": "ubuntu-latest",
+      "strategy": {"matrix": {"python": "3.12"}}
+    }
+  }
+}
