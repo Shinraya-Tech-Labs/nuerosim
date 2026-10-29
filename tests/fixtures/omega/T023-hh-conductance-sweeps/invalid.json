@@ -1,0 +1,6 @@
+{
+  "units": {"conductance": "mS/cm^2", "time": "ms", "voltage": "mV", "current_density": "uA/cm^2"},
+  "experiment": {"model": "hh", "duration": 50, "dt": 0.025, "pulses": [{"start": 10, "stop": 40, "amplitude": 10}]},
+  "g_na_mS_cm2": [60, 120, 120],
+  "expected_error": "strictly increasing"
+}
