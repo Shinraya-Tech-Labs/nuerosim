@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T008",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -361,6 +361,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T008-sqlite-schema-compatibility-audit/valid.json",
       "verification": "Executed fixture DDL in an in-memory SQLite DB; it has the expected 2 tables and 12 columns."
+    },
+    "T008/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T008-sqlite-schema-compatibility-audit/invalid.json",
+      "verification": "Executed fixture DDL; it intentionally lacks the exhibition table and jobs.result column. Production mismatch reporting will be verified in U05."
     }
   },
   "daily_stats": {

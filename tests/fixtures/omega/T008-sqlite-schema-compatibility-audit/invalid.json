@@ -1,0 +1,18 @@
+{
+  "ddl": [
+    "CREATE TABLE jobs (id TEXT PRIMARY KEY, created REAL NOT NULL, updated REAL NOT NULL, status TEXT NOT NULL, progress REAL NOT NULL DEFAULT 0, manifest TEXT NOT NULL, parent_id TEXT, error TEXT)"
+  ],
+  "expected": {
+    "compatible": false,
+    "table_count": 1,
+    "column_count": 8,
+    "tables": ["jobs"],
+    "differences": {
+      "missing_tables": ["exhibition"],
+      "unexpected_tables": [],
+      "missing_columns": {"jobs": ["result"]},
+      "unexpected_columns": {},
+      "mismatched_columns": {}
+    }
+  }
+}
