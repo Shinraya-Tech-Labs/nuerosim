@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T003",
-  "next_unit": "U01",
+  "next_unit": "U02",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -103,6 +103,11 @@
       "status": "complete",
       "artifact": "docs/omega/T002-environment-reproducibility-lockfile-inventory.md",
       "verification": "Usage, output meaning, failure behavior, limitations, and checklist documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T003/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T003-legacy-modules-boundary-map.md",
+      "verification": "Defined the tracked path and console-script scope, deterministic JSON fields, error conditions, acceptance example, and naming/import-graph limitations."
     }
   },
   "daily_stats": {
