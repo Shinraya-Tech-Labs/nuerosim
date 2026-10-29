@@ -36,6 +36,7 @@ def test_invalid_tolerance_fixture_is_rejected():
         (lambda data: data.update(loose_atol_mV=0), "loose DOP853 tolerances"),
         (lambda data: data.update(record_every=0), "greater than or equal to 1"),
         (lambda data: data.update(current_uA_cm2=101), "less than or equal to 100"),
+        (lambda data: data.update(dt_ms=0.05), "less than or equal to 0.025"),
     ],
 )
 def test_invalid_units_tolerances_and_config_are_rejected(tmp_path, change, message):
