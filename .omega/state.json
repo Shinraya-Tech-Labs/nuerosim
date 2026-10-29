@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T012",
+  "next_package": "T013",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -550,6 +550,56 @@
       "status": "complete",
       "artifact": "docs/omega/T011-test-baseline-capture.md",
       "verification": "Documented usage, command result status, timeout/errors, output bound, and evidence links."
+    },
+    "T012/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T012-performance-benchmark-harness.md",
+      "verification": "Defined real simulation profiles, units, repeats, outputs, error bounds, timing variability, and excluded performance claims."
+    },
+    "T012/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T012-performance-benchmark-harness/valid.json",
+      "verification": "Fixture fixes the HH profile and demonstrates median of [1, 2, 3] seconds is exactly 2 seconds."
+    },
+    "T012/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T012-performance-benchmark-harness/invalid.json",
+      "verification": "Zero repeats rejected before simulation with the declared error."
+    },
+    "T012/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/performance_benchmark.py",
+      "verification": "Implemented profile selection, repeat validation, real serial execution, medians, scientific-output equality, and JSON CLI; legacy script routes to same harness."
+    },
+    "T012/U05": {
+      "status": "complete",
+      "artifact": "tests/test_performance_benchmark.py",
+      "verification": "Verified numeric median, Pydantic HH profile, and real CLI HH simulation; focused suite passes (9 passed)."
+    },
+    "T012/U06": {
+      "status": "complete",
+      "artifact": "tests/test_performance_benchmark.py",
+      "verification": "Covered non-finite/negative/empty time samples, unknown/duplicate profile, and repeat bounds; focused suite passes (9 passed)."
+    },
+    "T012/U07": {
+      "status": "complete",
+      "artifact": "tests/test_performance_benchmark.py",
+      "verification": "Real CLI output manifest matched the HH config and included measured wall time; compatibility script also ran a real HH simulation."
+    },
+    "T012/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T012-performance-benchmark-harness.md",
+      "verification": "Documented profile/repeat controls, command invocation, JSON output, and compatibility entry point."
+    },
+    "T012/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T012-performance-benchmark-harness.md",
+      "verification": "At 4a9ca30, two real HH runs measured 0.821412 and 0.738805 s (median 0.780109); 4 spikes, 0 edges, identical outputs."
+    },
+    "T012/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T012-performance-benchmark-harness.md",
+      "verification": "Documented inputs, outputs, host-sensitive timing, limits, and evidence links."
     }
   },
   "daily_stats": {
