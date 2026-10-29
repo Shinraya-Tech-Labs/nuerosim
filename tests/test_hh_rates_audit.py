@@ -51,6 +51,20 @@ def test_nonpositive_continuity_tolerance_is_rejected():
         audit_rates([-40, -55], 0)
 
 
+def test_extreme_voltage_that_overflows_kinetics_is_rejected():
+    with pytest.raises(ValueError, match="rates must be finite and non-negative"):
+        audit_rates([1e6])
+
+
+def test_fixture_rejects_wrong_units(tmp_path):
+    fixture = json.loads((FIXTURES / "valid.json").read_text(encoding="utf-8"))
+    fixture["units"]["voltage"] = "V"
+    path = tmp_path / "fixture.json"
+    path.write_text(json.dumps(fixture), encoding="utf-8")
+    with pytest.raises(ValueError, match="units must be mV and ms\^-1"):
+        audit_fixture(path)
+
+
 def test_cli_exposes_rate_edge_audit():
     result = subprocess.run(
         [sys.executable, "-m", "neurosim.hh_rates_audit", str(FIXTURES / "valid.json")],

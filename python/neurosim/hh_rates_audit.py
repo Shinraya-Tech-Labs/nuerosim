@@ -26,7 +26,8 @@ def audit_rates(voltages_mV, continuity_tolerance=1e-7):
         raise ValueError("voltages_mV values must be finite numbers")
     if not isinstance(continuity_tolerance, (int, float)) or not math.isfinite(continuity_tolerance) or continuity_tolerance <= 0:
         raise ValueError("continuity tolerance must be finite and positive")
-    values = rates(np.asarray(voltages_mV, dtype=float))
+    with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+        values = rates(np.asarray(voltages_mV, dtype=float))
     if any(not np.isfinite(array).all() or (array < 0).any() for array in values):
         raise ValueError("HH gating rates must be finite and non-negative")
     rows = [
