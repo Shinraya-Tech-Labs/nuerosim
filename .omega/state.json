@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U01",
+  "next_unit": "U02",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -301,6 +301,11 @@
       "status": "complete",
       "artifact": "docs/omega/T006-model-parameter-bounds-audit.md",
       "verification": "Usage, output scope, failure behavior, cross-field exclusions, and verification checklist documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T007/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T007-event-scheduling-audit.md",
+      "verification": "Defined saved-result inputs, delay rounding formula, units, tolerance, event ordering context, errors, and exclusions."
     }
   },
   "daily_stats": {
