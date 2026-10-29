@@ -9,7 +9,7 @@ from .workbench.config import Experiment, Pulse
 from .workbench.engine import simulate
 
 
-def _reference(t, y, current):
+def hh_rhs(t, y, current):
     v, m, h, n = y
     am = 1 if abs(v + 40) < 1e-8 else 0.1 * (v + 40) / (1 - np.exp(-(v + 40) / 10))
     an = 0.1 if abs(v + 55) < 1e-8 else 0.01 * (v + 55) / (1 - np.exp(-(v + 55) / 10))
@@ -36,7 +36,7 @@ def run_convergence(solver, duration_ms, current_uA_cm2, coarse_dt_ms, fine_dt_m
         raise ValueError("coarse_dt_ms must be <= 0.025 ms")
     initial = [-65, 0.052932485257, 0.596120753508, 0.317676914061]
     reference = solve_ivp(
-        lambda t, y: _reference(t, y, current_uA_cm2),
+        lambda t, y: hh_rhs(t, y, current_uA_cm2),
         (0, duration_ms),
         initial,
         method="DOP853",
