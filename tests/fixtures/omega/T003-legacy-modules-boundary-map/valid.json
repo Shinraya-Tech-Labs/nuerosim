@@ -1,4 +1,5 @@
 {
+  "revision": "fixture-revision",
   "paths": [
     "README.md",
     "docs/legacy/README.md",
@@ -11,6 +12,7 @@
     "neurosim-serve": "neurosim.workbench.api:serve"
   },
   "expected": {
+    "revision": "fixture-revision",
     "legacy_modules": [
       "python/neurosim/legacy_cli.py"
     ],
