@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T005",
-  "next_unit": "U04",
+  "next_unit": "U05",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -216,6 +216,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T005-scientific-units-audit/invalid.json",
       "verification": "JSON parsed; fixture uses an invalid nA current unit with a clear expected mismatch error. Production rejection will be tested in U05."
+    },
+    "T005/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/units_audit.py",
+      "verification": "Audit returns the fixture's expected report; mean rate is 2 Hz for 2 spikes / 1 neuron / 1 second. Uses stdlib only."
     }
   },
   "daily_stats": {
