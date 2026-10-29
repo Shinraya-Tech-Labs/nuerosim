@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T002",
-  "next_unit": "U08",
+  "next_unit": "U10",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -89,6 +89,15 @@
       "status": "complete",
       "artifact": "tests/test_lockfile_inventory.py",
       "verification": "CLI integration cross-checks each lockfile hash/size against git show and tests invalid revision; focused test file passes (3 passed)."
+    },
+    "T002/U08": {
+      "status": "N/A",
+      "evidence": "U04 exposes `python -m neurosim.lockfile_inventory`; U07 verifies its visible output. A second console wrapper would duplicate the interface."
+    },
+    "T002/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T002-environment-reproducibility-lockfile-inventory.md",
+      "verification": "At 5111900, both Git blob sizes and hashes matched. Five CLI runs: median 291.47 ms; range 272.88–292.90 ms including startup and Git reads."
     }
   },
   "daily_stats": {
