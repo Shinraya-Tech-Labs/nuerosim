@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T020",
+  "next_package": "T021",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -935,6 +935,56 @@
       "status": "complete",
       "artifact": "docs/omega/T019-rk4-convergence-harness.md",
       "verification": "Documented reference, outputs, errors, invocation, order scope, and links."
+    },
+    "T020/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T020-adaptive-reference-comparisons.md",
+      "verification": "Defined adaptive tolerance comparison, voltage error units, RK4 threshold, and one-trajectory scope."
+    },
+    "T020/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T020-adaptive-reference-comparisons/valid.json",
+      "verification": "Positive fixture uses 20 ms HH, RK4 dt .025 ms, and ordered DOP853 tolerance pairs with explicit units."
+    },
+    "T020/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T020-adaptive-reference-comparisons/invalid.json",
+      "verification": "Reversed loose/tight tolerance pairs are rejected by production audit."
+    },
+    "T020/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/adaptive_reference.py",
+      "verification": "Implemented dual DOP853 integrations, production RK4 comparison, gating-state tolerances, manifest output, and CLI."
+    },
+    "T020/U05": {
+      "status": "complete",
+      "artifact": "tests/test_adaptive_reference.py",
+      "verification": "Real fixed HH trace met both reference-sensitivity and RK4 error limits; focused tests passed."
+    },
+    "T020/U06": {
+      "status": "complete",
+      "artifact": "tests/test_adaptive_reference.py",
+      "verification": "Covered units, durations, ordered tolerances, sampling/config bounds, current limit, and numeric threshold failure; 10 passed."
+    },
+    "T020/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_convergence.py",
+      "verification": "DOP853 reference uses same real HH equations; RK4 result comes from production Experiment/simulate with actual manifest."
+    },
+    "T020/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T020-adaptive-reference-comparisons.md",
+      "verification": "Documented reproducible fixture CLI and exit statuses."
+    },
+    "T020/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T020-adaptive-reference-comparisons.md",
+      "verification": "At 87d723d, loose/tight DOP853 max delta 9.9613e-6 mV; RK4 error 0.00571947 mV; both within limits."
+    },
+    "T020/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T020-adaptive-reference-comparisons.md",
+      "verification": "Documented uncertainty/error distinction, units, CLI, failure modes, and links."
     }
   },
   "daily_stats": {
