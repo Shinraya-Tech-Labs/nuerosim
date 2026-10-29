@@ -53,7 +53,7 @@ def test_nonpositive_continuity_tolerance_is_rejected():
 
 def test_extreme_voltage_that_overflows_kinetics_is_rejected():
     with pytest.raises(ValueError, match="rates must be finite and non-negative"):
-        audit_rates([1e308])
+        audit_rates([-1e308])
 
 
 def test_fixture_rejects_wrong_units(tmp_path):
