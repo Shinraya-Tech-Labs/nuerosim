@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T002",
-  "next_unit": "U06",
+  "next_unit": "U07",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -79,6 +79,11 @@
       "status": "complete",
       "artifact": "tests/test_lockfile_inventory.py",
       "verification": "PYTHONPATH=python python -m pytest tests/test_lockfile_inventory.py -q: 1 passed against the deterministic fixture."
+    },
+    "T002/U06": {
+      "status": "complete",
+      "artifact": "tests/test_lockfile_inventory.py",
+      "verification": "Added zero-byte lockfile boundary with exact empty-content SHA-256; focused test file passes (2 passed)."
     }
   },
   "daily_stats": {
