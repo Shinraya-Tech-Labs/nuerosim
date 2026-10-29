@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T004",
-  "next_unit": "U10",
+  "next_package": "T005",
+  "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -196,6 +196,11 @@
       "status": "complete",
       "artifact": "docs/omega/evidence/T004-api-endpoint-contract-snapshot.md",
       "verification": "At 6cb3252, five runs were identical: 18 operations, 16 paths, schema SHA-256 61bc9d8a…19989; median 886.49 ms including startup."
+    },
+    "T004/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T004-api-endpoint-contract-snapshot.md",
+      "verification": "Usage, digest meaning, failure behavior, side-effect guarantees, and limitations documented. Day report linkage is deferred to the Day 01 gate."
     }
   },
   "daily_stats": {
