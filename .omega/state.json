@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T024",
+  "next_package": "T025",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -1135,6 +1135,56 @@
       "status": "complete",
       "artifact": "docs/omega/T023-hh-conductance-sweeps.md",
       "verification": "Documented CLI usage, output, errors, scope, and links from the Day 02 report."
+    },
+    "T024/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T024-lif-exact-reference-solution.md",
+      "verification": "Defined the piecewise constant-current LIF equation, supported subthreshold scope, units, acceptance values, and exclusions."
+    },
+    "T024/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T024-lif-exact-reference-solution/valid.json",
+      "verification": "Positive fixture contains the analytic 15 and 20 ms voltage values for a bounded one-neuron LIF experiment."
+    },
+    "T024/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T024-lif-exact-reference-solution/invalid.json",
+      "verification": "Threshold-crossing fixture is rejected because reset events are outside the closed-form scope."
+    },
+    "T024/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/lif_exact_reference.py",
+      "verification": "Computes piecewise analytic values and compares every production simulation recording with its actual result manifest."
+    },
+    "T024/U05": {
+      "status": "complete",
+      "artifact": "tests/test_lif_exact_reference.py",
+      "verification": "Named test verifies independent closed-form reference values, production agreement, and manifest model identity."
+    },
+    "T024/U06": {
+      "status": "complete",
+      "artifact": "tests/test_lif_exact_reference.py",
+      "verification": "Focused tests cover threshold crossing, invalid units, invalid tolerance, wrong model, and multi-neuron rejection."
+    },
+    "T024/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/lif_exact_reference.py",
+      "verification": "Integrated production Experiment validation and simulate runner; persisted CLI output includes manifest and both traces."
+    },
+    "T024/U08": {
+      "status": "complete",
+      "artifact": "python/neurosim/lif_exact_reference.py",
+      "verification": "Exposed module CLI with optional JSON output file."
+    },
+    "T024/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T024-lif-exact-reference-solution.md",
+      "verification": "Recorded analytic values, production error, five passing checks, environment, code revision, and limitation."
+    },
+    "T024/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T024-lif-exact-reference-solution.md",
+      "verification": "Documented CLI use, errors, supported subthreshold scope, and Day 02 report link."
     }
   },
   "daily_stats": {
