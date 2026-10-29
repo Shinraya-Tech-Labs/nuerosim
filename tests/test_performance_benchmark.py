@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from neurosim.performance_benchmark import median_seconds, profile_config
+from neurosim.performance_benchmark import median_seconds, profile_config, run_benchmarks
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +43,15 @@ def test_invalid_timing_samples_are_rejected(samples):
 def test_unknown_profile_is_rejected():
     with pytest.raises(ValueError, match="unknown benchmark profile"):
         profile_config("not-a-profile")
+
+
+def test_duplicate_profiles_and_repeat_limit_are_rejected():
+    from neurosim.performance_benchmark import run_profile
+
+    with pytest.raises(ValueError, match="profiles must not repeat"):
+        run_benchmarks(["hh", "hh"])
+    with pytest.raises(ValueError, match="repeats must be between 1 and 20"):
+        run_profile("hh", 21)
 
 
 def test_cli_runs_real_seeded_hh_simulation():
