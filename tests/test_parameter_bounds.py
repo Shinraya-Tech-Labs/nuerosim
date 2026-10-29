@@ -1,5 +1,8 @@
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -50,3 +53,19 @@ def test_T006_model_parameter_bounds_audit_workbench_integration():
     assert report["status"] == "pass"
     assert report["field_count"] == 32
     assert (dt["default"], dt["minimum"], dt["maximum"]) == (0.025, 0.001, 0.025)
+
+
+def test_T006_model_parameter_bounds_audit_cli():
+    root = Path(__file__).resolve().parents[1]
+    env = os.environ | {"PYTHONPATH": str(root / "python")}
+    run = subprocess.run(
+        [sys.executable, "-m", "neurosim.parameter_bounds"],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert run.returncode == 0, run.stderr
+    assert json.loads(run.stdout) == audit_schema(Experiment.model_json_schema())
