@@ -29,3 +29,23 @@ def test_T003_malformed_pyproject_fixture_has_clear_error():
 
     with pytest.raises(ValueError, match=fixture["expected_error"]):
         parse_project_scripts(fixture["pyproject_contents"])
+
+
+def test_T003_legacy_modules_boundary_map_empty_and_prefix_boundary():
+    result = summarize_boundaries(
+        [], {"unrelated": "neurosim.workbenchish.cli:main"}, "empty-tree"
+    )
+
+    assert result == {
+        "revision": "empty-tree",
+        "legacy_modules": [],
+        "archived_legacy_files": [],
+        "entry_points": {
+            "neurosim.workbench": {},
+            "neurosim.legacy": {},
+            "other": {"unrelated": "neurosim.workbenchish.cli:main"},
+        },
+        "legacy_module_count": 0,
+        "archived_file_count": 0,
+        "entry_point_count": 1,
+    }
