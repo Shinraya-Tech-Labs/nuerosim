@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T003",
-  "next_unit": "U08",
+  "next_unit": "U10",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -138,6 +138,15 @@
       "status": "complete",
       "artifact": "tests/test_legacy_boundaries.py",
       "verification": "CLI integration confirms selected SHA, legacy module listing, docs count, and workbench route; focused test file passes (4 passed)."
+    },
+    "T003/U08": {
+      "status": "N/A",
+      "evidence": "U04 exposes `python -m neurosim.module_boundaries`; U07 verifies visible output. A second console wrapper would duplicate the interface."
+    },
+    "T003/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T003-legacy-modules-boundary-map.md",
+      "verification": "At 8b90737, direct tree/script scan matched the report: 1 legacy module, 9 archived docs, 2 supported entry points. Five runs: median 251.78 ms; range 228.41–273.43 ms."
     }
   },
   "daily_stats": {
