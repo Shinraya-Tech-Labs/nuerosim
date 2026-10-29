@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T006",
-  "next_unit": "U04",
+  "next_unit": "U05",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -266,6 +266,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T006-model-parameter-bounds-audit/invalid.json",
       "verification": "Fixture parsed; Experiment.dt default 0.03 exceeds its maximum 0.025. Production rejection will be checked in U05."
+    },
+    "T006/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/parameter_bounds.py",
+      "verification": "CLI audited 32 numeric fields; Experiment.dt reports default 0.025 and inclusive bounds 0.001–0.025. Invalid fixture raises the expected ValueError."
     }
   },
   "daily_stats": {
