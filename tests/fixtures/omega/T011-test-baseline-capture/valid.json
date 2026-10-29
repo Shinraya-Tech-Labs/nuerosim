@@ -1,0 +1,5 @@
+{
+  "command": ["python", "-c", "print('baseline-ok')"],
+  "timeout_seconds": 10,
+  "expected": {"exit_code": 0, "stdout_tail": "baseline-ok\n", "timed_out": false}
+}
