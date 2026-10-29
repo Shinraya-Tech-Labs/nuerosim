@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "current_day": 1,
+  "next_package": "T001",
+  "next_unit": "U02",
+  "branch": "exhibition-2026-10-28",
+  "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
+  "results": {
+    "T001/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T001-repo-tree-provenance-inventory.md",
+      "verification": "Contract scope, input, output, units, defaults, errors, acceptance example, and exclusions recorded."
+    }
+  },
+  "daily_stats": {
+    "day_01_baseline": {
+      "python": "3.14.2",
+      "node": "v22.23.0",
+      "cpu": "AMD Ryzen 7 7730U with Radeon Graphics",
+      "ram_gib": 15.4,
+      "gpu": "Not measured; nvidia-smi unavailable",
+      "commands": {
+        "python -m pytest tests -q": "passed; 23 passed in 14.02s",
+        "web: npm test": "passed; 6 tests",
+        "web: npm run build": "passed; TypeScript and production build succeeded",
+        "web: npm run test:e2e": "passed; 5 tests in 2.7m"
+      },
+      "warnings": [
+        "Headless browser could not create a WebGL context; E2E tests passed.",
+        "Three.js Clock deprecation warning.",
+        "Playwright reported slow filesystem detection for the local project path."
+      ],
+      "scientific_outputs": "No scientific source or result files were changed. E2E-generated edits to tracked docs/validation screenshots and benchmark JSON were restored from the clean starting revision.",
+      "last_verified_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2"
+    }
+  },
+  "blockers": [],
+  "last_green_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2"
+}
