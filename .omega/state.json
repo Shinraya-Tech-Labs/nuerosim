@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T006",
-  "next_unit": "U09",
+  "next_unit": "U10",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -291,6 +291,11 @@
       "status": "complete",
       "artifact": "python/neurosim/parameter_bounds.py",
       "verification": "Module CLI output matches the live schema audit; focused test file passes (5 passed)."
+    },
+    "T006/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T006-model-parameter-bounds-audit.md",
+      "verification": "At ce723a3, audit reported 32 numeric fields, matching an independent schema count; dt and pulse-stop constraints matched Pydantic schema values."
     }
   },
   "daily_stats": {
