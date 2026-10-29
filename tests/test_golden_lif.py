@@ -56,6 +56,32 @@ def test_reference_outside_tolerance_fails(tmp_path):
     assert report["max_abs_error_mV"] > report["tolerance_mV"]
 
 
+@pytest.mark.parametrize(
+    ("key", "value", "error"),
+    [
+        ("sample_times_ms", [0, 10, 5, 15, 20], "strictly increasing"),
+        ("tolerance_mV", 0, "finite positive number"),
+    ],
+)
+def test_invalid_order_or_tolerance_is_rejected(tmp_path, key, value, error):
+    fixture = json.loads((FIXTURES / "valid.json").read_text(encoding="utf-8"))
+    fixture[key] = value
+    path = tmp_path / "fixture.json"
+    path.write_text(json.dumps(fixture), encoding="utf-8")
+    with pytest.raises(ValueError, match=error):
+        audit_fixture(path)
+
+
+def test_spiking_run_fails_subthreshold_contract(tmp_path):
+    fixture = json.loads((FIXTURES / "valid.json").read_text(encoding="utf-8"))
+    fixture["config"]["pulses"][0]["amplitude"] = 2
+    path = tmp_path / "fixture.json"
+    path.write_text(json.dumps(fixture), encoding="utf-8")
+    report = audit_fixture(path)
+    assert report["spike_count"] > 0
+    assert report["passed"] is False
+
+
 def test_cli_exposes_fixture_audit():
     result = subprocess.run(
         [sys.executable, "-m", "neurosim.golden_lif", str(FIXTURES / "valid.json")],
