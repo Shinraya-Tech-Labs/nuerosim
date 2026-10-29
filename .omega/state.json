@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T001",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -15,6 +15,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T001-repo-tree-provenance-inventory/valid.json",
       "verification": "JSON parsed; standard-library assertion confirmed counts and sorted summaries match fixture paths."
+    },
+    "T001/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T001-repo-tree-provenance-inventory/invalid.json",
+      "verification": "JSON parsed; git rev-parse --verify <fixture>^{commit} rejected the unresolved revision with exit 128 and no stdout."
     }
   },
   "daily_stats": {
