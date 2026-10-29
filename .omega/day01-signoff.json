@@ -36,14 +36,6 @@
       "evidence": "docs/WEB_VALIDATION_REPORT.md"
     },
     {
-      "id": "remote-ci",
-      "title": "GitHub Actions matrix has not been run in this session",
-      "severity": "medium",
-      "disposition": "accepted",
-      "rationale": "The local Windows baseline passes, but Ubuntu/Windows hosted runner results remain external evidence.",
-      "evidence": ".github/workflows/cpu.yml; .github/workflows/web.yml"
-    },
-    {
       "id": "docker-runtime",
       "title": "Docker runtime was not verified in the Day 01 gate",
       "severity": "medium",
@@ -51,5 +43,17 @@
       "rationale": "The Day 01 exit commands do not include Docker; prior validation records the local engine limitation.",
       "evidence": "docs/VALIDATION.md"
     }
-  ]
+  ],
+  "delivery": {
+    "remote": "origin",
+    "branch": "exhibition-2026-10-28",
+    "remote_sha": "1c9e3ca827519366181afd1f54839818bb5660b8",
+    "day01_commits_pushed": 149,
+    "merged": 0,
+    "default_branch_graph_eligible": 0,
+    "ci": [
+      {"workflow": "CPU validation", "run_id": 40925897619, "conclusion": "success"},
+      {"workflow": "Web workbench validation", "run_id": 40925897526, "conclusion": "success"}
+    ]
+  }
 }

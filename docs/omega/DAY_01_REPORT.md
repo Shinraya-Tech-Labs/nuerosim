@@ -38,11 +38,11 @@ E2E regenerated nine tracked screenshots/benchmark files. They were restored to 
 
 ## Risks and limits
 
-The baseline is local to Windows 11 / Python 3.14.2 and the recorded web toolchain. Physical WebGPU behavior/performance, hosted GitHub Actions results, and Docker runtime were not established in this gate. These are documented as accepted residual risks in the signoff record; acceptance does not constitute release approval. The HH fixture samples five times from one configuration; the LIF fixture covers one subthreshold case only. CPU benchmark timings are host/load-dependent observations.
+The baseline is local to Windows 11 / Python 3.14.2 and the recorded web toolchain. Physical WebGPU behavior/performance and Docker runtime remain unverified. GitHub Actions subsequently passed both workflows on the published checkpoint below. The HH fixture samples five times from one configuration; the LIF fixture covers one subthreshold case only. CPU benchmark timings are host/load-dependent observations.
 
 ## Commit and delivery counts
 
-From base `5416e0f87040924e68ebd47eea332d0e98fd1dc2` through completion of Day 01, **149 authored substantive commits** were recorded on this feature branch. **Pushed: 0; merged: 0; default-branch/graph-eligible: 0.** This is **1 below** the document's 150-commit target; no empty or artificial commits were added. No release or merge is claimed.
+From base `5416e0f87040924e68ebd47eea332d0e98fd1dc2` through completion of Day 01, **149 authored substantive commits** were recorded and pushed to `origin/exhibition-2026-10-28`. Published SHA: `1c9e3ca827519366181afd1f54839818bb5660b8`. CPU validation run `40925897619` and Web workbench validation run `40925897526` both passed on that checkpoint. **Merged: 0; default-branch/graph-eligible: 0.** The phase ended **1 commit below** the document's 150-commit target; no empty or artificial commits were added. No release or merge is claimed.
 
 ## Next execution point
 

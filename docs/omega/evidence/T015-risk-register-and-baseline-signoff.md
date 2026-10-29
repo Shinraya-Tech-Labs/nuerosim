@@ -9,7 +9,7 @@ At tested code revision `91231ea64f4cb4455cb7ee808f1f05b1e785fdd6` on Windows 11
 - Next.js production build and TypeScript: passed.
 - Playwright E2E: 6 passed in 1.4 min, including the 512-neuron renderer benchmark and the new renderer fallback audit.
 
-The signoff command reported `baseline_gate_passed: true`, 4/4 checks passed, and 3 reviewed accepted risks. The E2E run regenerated nine tracked validation artifacts; those files were restored and the worktree was clean before this evidence was written.
+The signoff command reported `baseline_gate_passed: true` with 4/4 local checks passed. The E2E run regenerated nine tracked validation artifacts; those files were restored. After publication, both GitHub Actions workflows passed on checkpoint `1c9e3ca827519366181afd1f54839818bb5660b8` (CPU run `40925897619`, web run `40925897526`). The signoff record now lists two accepted risks: physical WebGPU and Docker runtime remain unverified.
 
 ## Scientific reference fixtures
 
