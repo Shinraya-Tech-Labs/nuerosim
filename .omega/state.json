@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T004",
-  "next_unit": "U05",
+  "next_unit": "U06",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -166,12 +166,17 @@
     "T004/U03": {
       "status": "complete",
       "artifact": "tests/fixtures/omega/T004-api-endpoint-contract-snapshot/invalid.json",
-      "verification": "JSON parsed; fixture explicitly supplies a non-object paths value and expected validation error. Production rejection will be verified in U05."
+      "verification": "Production snapshot builder rejects the non-object paths fixture with the documented ValueError; covered by focused tests."
     },
     "T004/U04": {
       "status": "complete",
       "artifact": "python/neurosim/api_snapshot.py",
       "verification": "Module emitted valid JSON for the current FastAPI app with 18 operations and a 64-character digest; malformed paths raised the specified error. No server lifespan was started."
+    },
+    "T004/U05": {
+      "status": "complete",
+      "artifact": "tests/test_api_snapshot.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_api_snapshot.py -q: 2 passed for golden digest and invalid paths."
     }
   },
   "daily_stats": {
