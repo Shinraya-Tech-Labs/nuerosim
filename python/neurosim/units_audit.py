@@ -5,6 +5,8 @@ import math
 import sys
 from pathlib import Path
 
+from .units import Quantity, Unit, mean_population_rate
+
 EXPECTED_UNITS = {
     "time": "ms",
     "voltage": "mV",
@@ -41,7 +43,8 @@ def audit_units(result: dict) -> dict[str, object]:
 
     duration_ms = _finite_number(config.get("duration"), "duration_ms")
     neurons = config.get("n")
-    if duration_ms <= 0 or duration_ms / 1000 <= 0:
+    duration = Quantity(duration_ms, Unit.MILLISECOND)
+    if duration_ms <= 0 or duration.to(Unit.SECOND).value <= 0:
         raise ValueError("duration_ms must be positive")
     if isinstance(neurons, bool) or not isinstance(neurons, int) or neurons <= 0:
         raise ValueError("n must be a positive integer")
@@ -59,7 +62,7 @@ def audit_units(result: dict) -> dict[str, object]:
                 raise ValueError("spike_time_ms must be within the simulation duration")
             spike_count += 1
 
-    computed_rate_hz = spike_count / neurons / (duration_ms / 1000)
+    computed_rate_hz = mean_population_rate(spike_count, neurons, duration).value
     stored_rate_hz = _finite_number(result.get("mean_rate_hz"), "mean_rate_hz")
     if not math.isclose(
         stored_rate_hz,
