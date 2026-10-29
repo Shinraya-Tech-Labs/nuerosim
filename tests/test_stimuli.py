@@ -56,6 +56,17 @@ def test_single_step_and_touching_intervals_are_valid():
     assert [(pulse.start, pulse.stop) for pulse in train] == [(0, 1), (1, 2)]
 
 
+def test_biphasic_and_pulse_argument_limits():
+    with pytest.raises(ValueError, match="phase_width_ms positive"):
+        biphasic(0, 0, 1)
+    with pytest.raises(ValueError, match="target must be a non-negative integer"):
+        single_step(0, 1, 1, target=True)
+    with pytest.raises(ValueError, match="count must be between 1 and 128"):
+        pulse_train(0, 1, 1, True, 1)
+    with pytest.raises(ValueError, match="start_ms must be a finite number"):
+        single_step(True, 1, 1)
+
+
 def test_generated_train_drives_real_experiment():
     pulses = pulse_train(0, 1, 3, 3, 2)
     config = Experiment(model="lif", duration=20, pulses=pulses, record_every=40)
