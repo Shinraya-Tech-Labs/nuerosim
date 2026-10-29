@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T001",
-  "next_unit": "U02",
+  "next_unit": "U03",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -10,6 +10,11 @@
       "status": "complete",
       "artifact": "docs/omega/contracts/T001-repo-tree-provenance-inventory.md",
       "verification": "Contract scope, input, output, units, defaults, errors, acceptance example, and exclusions recorded."
+    },
+    "T001/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T001-repo-tree-provenance-inventory/valid.json",
+      "verification": "JSON parsed; standard-library assertion confirmed counts and sorted summaries match fixture paths."
     }
   },
   "daily_stats": {
