@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T001",
-  "next_unit": "U07",
+  "next_unit": "U08",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -35,6 +35,11 @@
       "status": "complete",
       "artifact": "tests/test_repo_inventory.py",
       "verification": "Added empty-tree boundary check; focused test file passes (2 passed)."
+    },
+    "T001/U07": {
+      "status": "complete",
+      "artifact": "tests/test_repo_inventory.py",
+      "verification": "CLI integration test checks resolved HEAD, count/path consistency, and invalid revision error; focused test file passes (3 passed)."
     }
   },
   "daily_stats": {

@@ -1,5 +1,8 @@
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 from neurosim.repo_inventory import summarize_paths
 
@@ -27,3 +30,39 @@ def test_T001_repo_tree_provenance_inventory_empty_tree_boundary():
         "by_extension": {},
         "paths": [],
     }
+
+
+def test_T001_repo_tree_provenance_inventory_cli_integration():
+    root = Path(__file__).resolve().parents[1]
+    env = os.environ | {"PYTHONPATH": str(root / "python")}
+    valid = subprocess.run(
+        [sys.executable, "-m", "neurosim.repo_inventory", "HEAD"],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert valid.returncode == 0, valid.stderr
+    output = json.loads(valid.stdout)
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True
+    ).stdout.strip()
+    assert output["revision"] == head
+    assert output["tracked_files"] == len(output["paths"])
+
+    fixture = json.loads(
+        (root / "tests/fixtures/omega/T001-repo-tree-provenance-inventory/invalid.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    invalid = subprocess.run(
+        [sys.executable, "-m", "neurosim.repo_inventory", fixture["revision"]],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert invalid.returncode == 2
+    assert fixture["expected_error"] in invalid.stderr
