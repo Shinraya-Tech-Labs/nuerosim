@@ -3,6 +3,7 @@ import hashlib
 import sqlite3
 import subprocess
 import sys
+from contextlib import closing
 
 import pytest
 
@@ -15,9 +16,10 @@ FIXTURES = "tests/fixtures/omega/T008-sqlite-schema-compatibility-audit"
 
 def build_fixture(path, name):
     fixture = json.load(open(f"{FIXTURES}/{name}.json", encoding="utf-8"))
-    with sqlite3.connect(path) as db:
+    with closing(sqlite3.connect(path)) as db:
         for statement in fixture["ddl"]:
             db.execute(statement)
+        db.commit()
     return fixture
 
 
@@ -64,9 +66,10 @@ def test_missing_database_is_not_created(tmp_path):
 
 def test_wal_sidecars_are_rejected_without_opening_database(tmp_path):
     path = tmp_path / "offline.db"
-    with sqlite3.connect(path) as db:
+    with closing(sqlite3.connect(path)) as db:
         for statement in SCHEMA_DDL:
             db.execute(statement)
+        db.commit()
     sidecar = tmp_path / "offline.db-wal"
     sidecar.write_bytes(b"")
     with pytest.raises(ValueError, match="WAL sidecars"):
@@ -75,12 +78,21 @@ def test_wal_sidecars_are_rejected_without_opening_database(tmp_path):
 
 def test_column_metadata_mismatch_is_reported_without_modification(tmp_path):
     path = tmp_path / "different-default.db"
-    with sqlite3.connect(path) as db:
+    with closing(sqlite3.connect(path)) as db:
         db.execute("CREATE TABLE jobs (id TEXT PRIMARY KEY, progress REAL DEFAULT 1)")
         db.execute("CREATE TABLE exhibition (slot INTEGER PRIMARY KEY, job_id TEXT, reference_id TEXT)")
+        db.commit()
     before = hashlib.sha256(path.read_bytes()).hexdigest()
     report = audit_database(path)
     after = hashlib.sha256(path.read_bytes()).hexdigest()
     assert report["compatible"] is False
     assert report["differences"]["mismatched_columns"]["jobs"]["progress"]["actual"]["default"] == "1"
     assert before == after
+
+
+def test_audit_closes_database_file(tmp_path):
+    path = tmp_path / "close.db"
+    build_fixture(path, "valid")
+    audit_database(path)
+    path.unlink()
+    assert not path.exists()

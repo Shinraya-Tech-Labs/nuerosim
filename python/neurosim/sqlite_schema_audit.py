@@ -4,6 +4,7 @@ import argparse
 import json
 import sqlite3
 import sys
+from contextlib import closing
 from pathlib import Path
 
 from .workbench.store import create_schema
@@ -69,11 +70,11 @@ def audit_database(path):
     if any(sidecar.exists() for sidecar in sidecars):
         raise ValueError("database has WAL sidecars; audit an offline checkpointed copy")
     try:
-        with sqlite3.connect(":memory:") as reference:
+        with closing(sqlite3.connect(":memory:")) as reference:
             create_schema(reference)
             expected = schema_signature(reference)
         uri = path.as_uri() + "?mode=ro&immutable=1"
-        with sqlite3.connect(uri, uri=True) as actual_db:
+        with closing(sqlite3.connect(uri, uri=True)) as actual_db:
             actual = schema_signature(actual_db)
     except sqlite3.Error as exc:
         raise ValueError(f"cannot read SQLite schema: {exc}") from exc
