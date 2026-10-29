@@ -1,0 +1,8 @@
+{
+  "reference": "fixture with invalid time unit",
+  "units": {"time": "s", "voltage": "mV"},
+  "config": {"model": "hh", "duration": 20, "dt": 0.025, "record_every": 200, "pulses": [{"start": 0, "stop": 20, "amplitude": 10}]},
+  "sample_times_ms": [0, 5, 10, 15, 20],
+  "reference_voltage_mV": [-65, -75.05820541417508, -66.68666594682723, -56.655731311815295, -74.64332140330637],
+  "tolerance_mV": 0.02
+}
