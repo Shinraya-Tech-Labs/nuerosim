@@ -49,6 +49,20 @@ def test_timeout_is_recorded_and_process_stopped():
     assert report["exit_code"] == 124
 
 
+def test_invalid_timeout_and_working_directory_are_rejected(tmp_path):
+    with pytest.raises(ValueError, match="timeout must be"):
+        capture_baseline([sys.executable, "-c", "pass"], timeout=0)
+    with pytest.raises(ValueError, match="working directory does not exist"):
+        capture_baseline([sys.executable, "-c", "pass"], cwd=tmp_path / "missing")
+
+
+def test_zero_output_limit_returns_empty_tail():
+    report = capture_baseline(
+        [sys.executable, "-c", "print('discarded')"], cwd=ROOT, output_limit=0
+    )
+    assert report["stdout_tail"] == ""
+
+
 def test_cli_emits_baseline_json():
     env = {**os.environ, "PYTHONPATH": "python"}
     result = subprocess.run(
