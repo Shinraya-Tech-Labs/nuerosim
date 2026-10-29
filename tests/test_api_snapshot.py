@@ -29,3 +29,11 @@ def test_T004_api_endpoint_contract_snapshot_rejects_invalid_paths():
 
     with pytest.raises(ValueError, match=fixture["expected_error"]):
         build_snapshot(fixture["schema"])
+
+
+def test_T004_api_endpoint_contract_snapshot_empty_paths_boundary():
+    first = build_snapshot({"openapi": "3.1.0", "paths": {}})
+    second = build_snapshot({"paths": {}, "openapi": "3.1.0"})
+
+    assert first["operation_count"] == 0
+    assert first["sha256"] == second["sha256"]

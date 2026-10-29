@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T004",
-  "next_unit": "U06",
+  "next_unit": "U07",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -177,6 +177,11 @@
       "status": "complete",
       "artifact": "tests/test_api_snapshot.py",
       "verification": "PYTHONPATH=python python -m pytest tests/test_api_snapshot.py -q: 2 passed for golden digest and invalid paths."
+    },
+    "T004/U06": {
+      "status": "complete",
+      "artifact": "tests/test_api_snapshot.py",
+      "verification": "Added empty-path boundary and key-order determinism check; focused test file passes (3 passed)."
     }
   },
   "daily_stats": {
