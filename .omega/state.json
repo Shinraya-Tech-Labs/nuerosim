@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T008",
-  "next_unit": "U04",
+  "next_package": "T009",
+  "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -48,7 +48,7 @@
     "T001/U09": {
       "status": "complete",
       "artifact": "docs/omega/evidence/T001-repo-tree-provenance-inventory.md",
-      "verification": "At 067b377, inventory, commit tree, and Git index each contained 148 paths. Five CLI runs: median 176.85 ms; range 171.79–192.31 ms, including Python startup."
+      "verification": "At 067b377, inventory, commit tree, and Git index each contained 148 paths. Five CLI runs: median 176.85 ms; range 171.79\u2013192.31 ms, including Python startup."
     },
     "T001/U10": {
       "status": "complete",
@@ -97,7 +97,7 @@
     "T002/U09": {
       "status": "complete",
       "artifact": "docs/omega/evidence/T002-environment-reproducibility-lockfile-inventory.md",
-      "verification": "At 5111900, both Git blob sizes and hashes matched. Five CLI runs: median 291.47 ms; range 272.88–292.90 ms including startup and Git reads."
+      "verification": "At 5111900, both Git blob sizes and hashes matched. Five CLI runs: median 291.47 ms; range 272.88\u2013292.90 ms including startup and Git reads."
     },
     "T002/U10": {
       "status": "complete",
@@ -146,7 +146,7 @@
     "T003/U09": {
       "status": "complete",
       "artifact": "docs/omega/evidence/T003-legacy-modules-boundary-map.md",
-      "verification": "At 8b90737, direct tree/script scan matched the report: 1 legacy module, 9 archived docs, 2 supported entry points. Five runs: median 251.78 ms; range 228.41–273.43 ms."
+      "verification": "At 8b90737, direct tree/script scan matched the report: 1 legacy module, 9 archived docs, 2 supported entry points. Five runs: median 251.78 ms; range 228.41\u2013273.43 ms."
     },
     "T003/U10": {
       "status": "complete",
@@ -195,7 +195,7 @@
     "T004/U09": {
       "status": "complete",
       "artifact": "docs/omega/evidence/T004-api-endpoint-contract-snapshot.md",
-      "verification": "At 6cb3252, five runs were identical: 18 operations, 16 paths, schema SHA-256 61bc9d8a…19989; median 886.49 ms including startup."
+      "verification": "At 6cb3252, five runs were identical: 18 operations, 16 paths, schema SHA-256 61bc9d8a\u202619989; median 886.49 ms including startup."
     },
     "T004/U10": {
       "status": "complete",
@@ -270,7 +270,7 @@
     "T006/U04": {
       "status": "complete",
       "artifact": "python/neurosim/parameter_bounds.py",
-      "verification": "CLI audited 32 numeric fields; Experiment.dt reports default 0.025 and inclusive bounds 0.001–0.025. Invalid fixture raises the expected ValueError."
+      "verification": "CLI audited 32 numeric fields; Experiment.dt reports default 0.025 and inclusive bounds 0.001\u20130.025. Invalid fixture raises the expected ValueError."
     },
     "T006/U05": {
       "status": "complete",
@@ -366,6 +366,40 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T008-sqlite-schema-compatibility-audit/invalid.json",
       "verification": "Executed fixture DDL; it intentionally lacks the exhibition table and jobs.result column. Production mismatch reporting will be verified in U05."
+    },
+    "T008/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/sqlite_schema_audit.py",
+      "verification": "Added deterministic structural comparison against the shared Store DDL; CLI rejects missing paths and WAL sidecars and opens existing databases immutable read-only."
+    },
+    "T008/U05": {
+      "status": "complete",
+      "artifact": "tests/test_sqlite_schema_audit.py",
+      "verification": "Fixture tests passed for compatible and incompatible database structures; final focused suite passes (7 passed)."
+    },
+    "T008/U06": {
+      "status": "complete",
+      "artifact": "tests/test_sqlite_schema_audit.py",
+      "verification": "Covered differing column defaults, no input-byte changes, WAL sidecars, and immediate file deletion after audit; focused tests pass (7 passed)."
+    },
+    "T008/U07": {
+      "status": "complete",
+      "artifact": "tests/test_sqlite_schema_audit.py",
+      "verification": "Database initialized by Store reports compatible with 2 tables and 12 columns; confirmed shared DDL reference."
+    },
+    "T008/U08": {
+      "status": "N/A",
+      "evidence": "U04 provides the module CLI `python -m neurosim.sqlite_schema_audit`; U07 exercises it and checks deterministic JSON. A separate wrapper would duplicate the interface."
+    },
+    "T008/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T008-sqlite-schema-compatibility-audit.md",
+      "verification": "At d7b0801, Store DB audit reported 2 tables/12 columns. Seven focused tests passed; five audit timings had 0.896 ms median after first run."
+    },
+    "T008/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T008-sqlite-schema-compatibility-audit.md",
+      "verification": "Documented offline database requirement, invocation, output, errors, scope limits, and verification checklist."
     }
   },
   "daily_stats": {
