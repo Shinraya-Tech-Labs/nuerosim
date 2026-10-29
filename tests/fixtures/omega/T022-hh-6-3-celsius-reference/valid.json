@@ -1,0 +1,15 @@
+{
+  "units": {"temperature": "C", "voltage": "mV", "rate": "ms^-1", "gate": "1"},
+  "temperature_c": 6.3,
+  "voltage_mV": -65,
+  "tolerance": 1e-12,
+  "expected_rates_ms^-1": {
+    "alpha_m": 0.22356372458463003,
+    "beta_m": 4.0,
+    "alpha_h": 0.07,
+    "beta_h": 0.04742587317756678,
+    "alpha_n": 0.05819767068693265,
+    "beta_n": 0.125
+  },
+  "expected_gates": {"m": 0.05293248525724958, "h": 0.5961207535084603, "n": 0.3176769140606974}
+}
