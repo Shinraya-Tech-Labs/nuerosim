@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T003",
-  "next_unit": "U05",
+  "next_unit": "U06",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -117,12 +117,17 @@
     "T003/U03": {
       "status": "complete",
       "artifact": "tests/fixtures/omega/T003-legacy-modules-boundary-map/invalid.json",
-      "verification": "JSON parsed; Python tomllib rejected the malformed pyproject fixture with TOMLDecodeError. Feature-level failure behavior will be checked after implementation."
+      "verification": "Malformed TOML fixture raises the documented ValueError through the production parser; covered by the focused tests."
     },
     "T003/U04": {
       "status": "complete",
       "artifact": "python/neurosim/legacy_boundaries.py",
       "verification": "CLI reports 1 legacy-named Python module, 9 archived docs, and the 2 supported workbench entry points from the selected Git tree."
+    },
+    "T003/U05": {
+      "status": "complete",
+      "artifact": "tests/test_legacy_boundaries.py",
+      "verification": "PYTHONPATH=python python -m pytest tests/test_legacy_boundaries.py -q: 2 passed, including the malformed metadata error case."
     }
   },
   "daily_stats": {
