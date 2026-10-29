@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -311,6 +311,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T007-event-scheduling-audit/valid.json",
       "verification": "JSON parsed; independent ceil calculation gives 41 steps and 1.025 ms effective delay for 1.01 ms request at 0.025 ms timestep."
+    },
+    "T007/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T007-event-scheduling-audit/invalid.json",
+      "verification": "Fixture parsed; saved effective delay 1.0 ms is too short for a 1.01 ms request. Production rejection will be checked after implementation."
     }
   },
   "daily_stats": {

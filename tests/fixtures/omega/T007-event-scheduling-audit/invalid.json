@@ -1,0 +1,12 @@
+{
+  "result": {
+    "manifest": {
+      "config": {
+        "delay": 1.01,
+        "dt": 0.025
+      }
+    },
+    "effective_delay_ms": 1.0
+  },
+  "expected_error": "effective_delay_ms does not match timestep scheduling"
+}
