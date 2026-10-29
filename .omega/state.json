@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T005",
-  "next_unit": "U03",
+  "next_unit": "U04",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -211,6 +211,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T005-scientific-units-audit/valid.json",
       "verification": "JSON parsed; two spikes / one neuron / 1000 ms independently recomputed to 2 Hz."
+    },
+    "T005/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T005-scientific-units-audit/invalid.json",
+      "verification": "JSON parsed; fixture uses an invalid nA current unit with a clear expected mismatch error. Production rejection will be tested in U05."
     }
   },
   "daily_stats": {

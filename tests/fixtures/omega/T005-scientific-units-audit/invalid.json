@@ -1,0 +1,22 @@
+{
+  "result": {
+    "manifest": {
+      "units": {
+        "time": "ms",
+        "voltage": "mV",
+        "current": "nA",
+        "conductance": "mS/cm^2",
+        "capacitance": "uF/cm^2"
+      },
+      "config": {
+        "duration": 1000,
+        "n": 1
+      }
+    },
+    "spikes": [
+      [100, 500]
+    ],
+    "mean_rate_hz": 2
+  },
+  "expected_error": "manifest units do not match workbench contract"
+}
