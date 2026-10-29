@@ -20,6 +20,8 @@ def test_T013_golden_hh_trace_fixture_unit():
     assert report["sample_count"] == fixture["expected"]["sample_count"] == 5
     assert report["spike_count"] == fixture["expected"]["spike_count"] == 2
     assert report["max_abs_error_mV"] < report["tolerance_mV"] == 0.02
+    assert report["manifest"]["config"]["model"] == "hh"
+    assert report["manifest"]["units"]["voltage"] == "mV"
 
 
 def test_invalid_unit_fixture_is_rejected():

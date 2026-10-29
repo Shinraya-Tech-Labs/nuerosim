@@ -56,6 +56,7 @@ def audit_fixture(path):
         "tolerance_mV": tolerance,
         "errors_mV": errors,
         "spike_count": len(result["spikes"][0]),
+        "manifest": result["manifest"],
     }
 
 
