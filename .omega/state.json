@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T018",
+  "next_package": "T019",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -835,6 +835,56 @@
       "status": "complete",
       "artifact": "docs/omega/T017-stimulus-pulse-waveform-library.md",
       "verification": "Documented protocols, input units, Experiment limits, charge assumption, and evidence links."
+    },
+    "T018/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T018-euler-convergence-harness.md",
+      "verification": "Defined HH Euler limit, DOP853 reference, ms/mV units, first-order expected convergence range, and limits."
+    },
+    "T018/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T018-euler-convergence-harness/valid.json",
+      "verification": "Fixture sets 20 ms constant current, coarse dt .005 ms, fine dt .0025 ms, and dimensionless first-order range .7\u20131.3."
+    },
+    "T018/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T018-euler-convergence-harness/invalid.json",
+      "verification": "HH Euler dt .01 ms fixture rejected at the production config bound."
+    },
+    "T018/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/euler_convergence.py",
+      "verification": "Implemented independent DOP853 reference and two real Experiment/simulate Euler runs with error/order report and CLI."
+    },
+    "T018/U05": {
+      "status": "complete",
+      "artifact": "tests/test_euler_convergence.py",
+      "verification": "Measured errors decreased on halving timestep and observed order fell in the expected first-order interval."
+    },
+    "T018/U06": {
+      "status": "complete",
+      "artifact": "tests/test_euler_convergence.py",
+      "verification": "Covered invalid timestep order/bounds, duration grid, current, nonfinite input, and HH Euler limits; focused tests 9 passed."
+    },
+    "T018/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/euler_convergence.py",
+      "verification": "Actual Experiment manifests confirm HH/Euler configurations for both timestep runs."
+    },
+    "T018/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T018-euler-convergence-harness.md",
+      "verification": "Documented fixture-based CLI and exit statuses."
+    },
+    "T018/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T018-euler-convergence-harness.md",
+      "verification": "At 7a80211, errors 2.633780 and 1.320323 mV; ratio 1.994800, observed order .996244, Windows 11/Python 3.14.2."
+    },
+    "T018/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T018-euler-convergence-harness.md",
+      "verification": "Documented numeric units, independent reference, failure behavior, use, and scope limits."
     }
   },
   "daily_stats": {
