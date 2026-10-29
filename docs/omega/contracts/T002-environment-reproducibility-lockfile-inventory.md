@@ -7,7 +7,7 @@ Record which dependency lockfiles are present at a Git revision and identify the
 ## Contract
 
 - **Input:** a Git repository and a revision that resolves to a commit; default to `HEAD`.
-- **Lockfile scope:** recognized tracked lockfiles only. At this revision the known files are `requirements-runtime.lock` and `web/package-lock.json`. `pyproject.toml` and `web/package.json` are dependency manifests, not lockfiles.
+- **Lockfile scope:** recognized tracked lockfiles only: basenames ending in `.lock`, plus `package-lock.json`. At this revision the known files are `requirements-runtime.lock` and `web/package-lock.json`. `pyproject.toml` and `web/package.json` are dependency manifests, not lockfiles.
 - **Output:** deterministic JSON containing the resolved commit SHA and each sorted lockfile's repository-relative path, byte length, and SHA-256. Include the total lockfile count. Read blob contents from the selected Git tree, not the current working copy.
 - **Units:** byte lengths are non-negative integer bytes; lockfile count is an integer; hashes are lowercase 64-character SHA-256 hex strings.
 - **Defaults:** include only files recognized as lockfiles and tracked at the selected revision. Report zero if none are present; do not silently substitute a manifest.

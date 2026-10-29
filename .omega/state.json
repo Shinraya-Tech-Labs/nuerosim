@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T002",
-  "next_unit": "U04",
+  "next_unit": "U05",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -69,6 +69,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T002-environment-reproducibility-lockfile-inventory/invalid.json",
       "verification": "JSON parsed; Git rejected the unresolved fixture revision with exit 128 and no stdout. Feature-level rejection will be covered by U05/U07."
+    },
+    "T002/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/lockfile_inventory.py",
+      "verification": "CLI read the two tracked lockfiles at HEAD (367 and 106896 bytes), emitted SHA-256 records, and returned exit 2 for an unresolved revision."
     }
   },
   "daily_stats": {
