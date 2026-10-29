@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T013",
+  "next_package": "T014",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -600,6 +600,56 @@
       "status": "complete",
       "artifact": "docs/omega/T012-performance-benchmark-harness.md",
       "verification": "Documented inputs, outputs, host-sensitive timing, limits, and evidence links."
+    },
+    "T013/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T013-golden-hh-trace-fixture.md",
+      "verification": "Specified independent DOP853 reference inputs, ms/mV units, tolerance, acceptance behavior, and scientific limits."
+    },
+    "T013/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T013-golden-hh-trace-fixture/valid.json",
+      "verification": "Positive fixture contains independently integrated classic HH reference values at 0, 5, 10, 15, and 20 ms."
+    },
+    "T013/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T013-golden-hh-trace-fixture/invalid.json",
+      "verification": "Invalid time unit fixture is rejected by production audit and covered by focused test."
+    },
+    "T013/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/golden_hh.py",
+      "verification": "Implemented fixture validation, real HH simulation, grid sampling, error comparison, provenance report, and CLI statuses."
+    },
+    "T013/U05": {
+      "status": "complete",
+      "artifact": "tests/test_golden_hh.py",
+      "verification": "Real trace matched five DOP853 reference points; maximum absolute error 5.6051e-6 mV, two spikes, within 0.02 mV."
+    },
+    "T013/U06": {
+      "status": "complete",
+      "artifact": "tests/test_golden_hh.py",
+      "verification": "Covered invalid units, malformed arrays, unsorted/off-grid times, invalid tolerance, and a reference perturbed beyond tolerance; focused suite 8 passed."
+    },
+    "T013/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/golden_hh.py",
+      "verification": "Uses the production Experiment model and simulate engine; report includes actual simulation config/unit manifest and hashes."
+    },
+    "T013/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T013-golden-hh-trace-fixture.md",
+      "verification": "Documented reproducible fixture CLI and pass/fail/error exit codes."
+    },
+    "T013/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T013-golden-hh-trace-fixture.md",
+      "verification": "At 457cb35, HH/DOP853 max sampled difference 5.6051e-6 mV; Windows 11/Python 3.14.2, NumPy 2.4.2."
+    },
+    "T013/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T013-golden-hh-trace-fixture.md",
+      "verification": "Documented units, tolerance, invocation, failure modes, provenance, and sparse-sample limitations."
     }
   },
   "daily_stats": {
