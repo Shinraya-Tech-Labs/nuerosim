@@ -25,3 +25,14 @@ def test_T006_model_parameter_bounds_audit_rejects_out_of_range_default():
 
     with pytest.raises(ValueError, match=fixture["expected_error"]):
         audit_schema(fixture["schema"])
+
+
+def test_T006_model_parameter_bounds_audit_exclusive_boundary():
+    schema = {
+        "properties": {
+            "stop": {"type": "number", "default": 0, "exclusiveMinimum": 0}
+        }
+    }
+
+    with pytest.raises(ValueError, match="default is outside declared bounds"):
+        audit_schema(schema)
