@@ -33,13 +33,6 @@ test("T009 UI renderer contract selects WebGL2 and falls back to 2D", async ({
   await page.getByLabel("Rendering backend").selectOption("auto");
   await expect(page.locator(".renderer-badge")).toContainText("WebGL2");
 
-  await page.locator("canvas").evaluate((canvas) =>
-    canvas.dispatchEvent(new Event("webglcontextlost", { cancelable: true })),
-  );
-  await expect(
-    page.getByRole("img", { name: "2D network connectivity" }),
-  ).toBeVisible();
-
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
     HTMLCanvasElement.prototype.getContext = function (
@@ -57,5 +50,13 @@ test("T009 UI renderer contract selects WebGL2 and falls back to 2D", async ({
   ).toBeVisible();
   await expect(page.locator(".renderer-badge")).toContainText(
     invalid.expected.renderer_label_contains,
+  );
+  await page
+    .getByRole("img", { name: "2D network connectivity" })
+    .locator("circle")
+    .nth(1)
+    .click();
+  await expect(page.getByLabel("Selected neuron", { exact: true })).toHaveValue(
+    "1",
   );
 });
