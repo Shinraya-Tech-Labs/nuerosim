@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T009",
+  "next_package": "T010",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -400,6 +400,56 @@
       "status": "complete",
       "artifact": "docs/omega/T008-sqlite-schema-compatibility-audit.md",
       "verification": "Documented offline database requirement, invocation, output, errors, scope limits, and verification checklist."
+    },
+    "T009/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T009-ui-renderer-contract-audit.md",
+      "verification": "Defined browser inputs, renderer-selection behavior, failure handling, labels, environment-specific evidence, and limits."
+    },
+    "T009/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T009-ui-renderer-contract-audit/valid.json",
+      "verification": "Positive fixture specifies auto mode with WebGPU unavailable and expected WebGL2 label/canvas state; consumed by focused Playwright audit."
+    },
+    "T009/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T009-ui-renderer-contract-audit/invalid.json",
+      "verification": "Boundary fixture specifies unavailable WebGL2 and expected accessible 2D fallback; consumed by focused Playwright audit."
+    },
+    "T009/U04": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Added focused browser audit using a real completed LIF experiment and controllable WebGL context creation."
+    },
+    "T009/U05": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Headless Chromium verified auto and explicit WebGL2 selection; focused test passed (1 passed)."
+    },
+    "T009/U06": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Denied WebGL creation on reload; verified accessible 2D fallback and neuron selection remain functional. Focused test passed (1 passed)."
+    },
+    "T009/U07": {
+      "status": "complete",
+      "artifact": "web/tests/e2e/renderer-contract.spec.ts",
+      "verification": "Loaded a persisted completed two-neuron LIF experiment through the actual API/UI before checking renderer behavior."
+    },
+    "T009/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T009-ui-renderer-contract-audit.md",
+      "verification": "Documented reproducible Playwright command from web/ and fixture-driven real-browser behavior."
+    },
+    "T009/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T009-ui-renderer-contract-audit.md",
+      "verification": "At e75ac82, Chromium reported WebGL2 in auto mode, explicit WebGL2, and interactive 2D fallback when WebGL creation was denied; 1 passed in 9.9s."
+    },
+    "T009/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T009-ui-renderer-contract-audit.md",
+      "verification": "Documented usage, coverage, renderer limitations, and evidence/contract links."
     }
   },
   "daily_stats": {
