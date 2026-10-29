@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U09",
+  "next_unit": "U10",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -341,6 +341,11 @@
       "status": "complete",
       "artifact": "python/neurosim/event_schedule.py",
       "verification": "File-based CLI accepted the valid fixture and emitted the expected report; focused test file passes (5 passed)."
+    },
+    "T007/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T007-event-scheduling-audit.md",
+      "verification": "At 6b8f4f3, real run requested 2.01 ms at dt 0.025 ms; engine/audit agree on 81 steps and 2.025 ms effective delay."
     }
   },
   "daily_stats": {
