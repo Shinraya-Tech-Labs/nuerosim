@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U02",
+  "next_unit": "U03",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -306,6 +306,11 @@
       "status": "complete",
       "artifact": "docs/omega/contracts/T007-event-scheduling-audit.md",
       "verification": "Defined saved-result inputs, delay rounding formula, units, tolerance, event ordering context, errors, and exclusions."
+    },
+    "T007/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T007-event-scheduling-audit/valid.json",
+      "verification": "JSON parsed; independent ceil calculation gives 41 steps and 1.025 ms effective delay for 1.01 ms request at 0.025 ms timestep."
     }
   },
   "daily_stats": {
