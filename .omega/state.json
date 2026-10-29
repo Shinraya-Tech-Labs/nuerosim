@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T006",
-  "next_unit": "U10",
+  "next_package": "T007",
+  "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -296,6 +296,11 @@
       "status": "complete",
       "artifact": "docs/omega/evidence/T006-model-parameter-bounds-audit.md",
       "verification": "At ce723a3, audit reported 32 numeric fields, matching an independent schema count; dt and pulse-stop constraints matched Pydantic schema values."
+    },
+    "T006/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T006-model-parameter-bounds-audit.md",
+      "verification": "Usage, output scope, failure behavior, cross-field exclusions, and verification checklist documented. Day report linkage is deferred to the Day 01 gate."
     }
   },
   "daily_stats": {
