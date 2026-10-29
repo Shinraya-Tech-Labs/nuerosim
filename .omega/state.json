@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T005",
-  "next_unit": "U02",
+  "next_unit": "U03",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -206,6 +206,11 @@
       "status": "complete",
       "artifact": "docs/omega/contracts/T005-scientific-units-audit.md",
       "verification": "Scoped audit to documented manifest units and mean-rate dimensional arithmetic, with explicit validation, tolerance, and excluded claims."
+    },
+    "T005/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T005-scientific-units-audit/valid.json",
+      "verification": "JSON parsed; two spikes / one neuron / 1000 ms independently recomputed to 2 Hz."
     }
   },
   "daily_stats": {
