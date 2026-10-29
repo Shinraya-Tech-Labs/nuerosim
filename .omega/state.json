@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T002",
-  "next_unit": "U10",
+  "next_package": "T003",
+  "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -98,6 +98,11 @@
       "status": "complete",
       "artifact": "docs/omega/evidence/T002-environment-reproducibility-lockfile-inventory.md",
       "verification": "At 5111900, both Git blob sizes and hashes matched. Five CLI runs: median 291.47 ms; range 272.88–292.90 ms including startup and Git reads."
+    },
+    "T002/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T002-environment-reproducibility-lockfile-inventory.md",
+      "verification": "Usage, output meaning, failure behavior, limitations, and checklist documented. Day report linkage is deferred to the Day 01 gate."
     }
   },
   "daily_stats": {
