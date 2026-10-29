@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T006",
-  "next_unit": "U01",
+  "next_unit": "U02",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -251,6 +251,11 @@
       "status": "complete",
       "artifact": "docs/omega/T005-scientific-units-audit.md",
       "verification": "Usage, checks, tolerance, failure behavior, and scope limits documented. Day report linkage is deferred to the Day 01 gate."
+    },
+    "T006/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T006-model-parameter-bounds-audit.md",
+      "verification": "Defined Pydantic numeric field scope, bound units, default checks, failure behavior, and cross-field/stability exclusions."
     }
   },
   "daily_stats": {
