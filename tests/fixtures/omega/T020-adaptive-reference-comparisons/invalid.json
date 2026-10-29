@@ -1,0 +1,14 @@
+{
+  "units": {"time": "ms", "current": "uA/cm^2", "voltage": "mV"},
+  "duration_ms": 20,
+  "current_uA_cm2": 10,
+  "dt_ms": 0.025,
+  "record_every": 4,
+  "loose_rtol": 1e-11,
+  "loose_atol_mV": 1e-13,
+  "tight_rtol": 1e-8,
+  "tight_atol_mV": 1e-10,
+  "reference_limit_mV": 0.001,
+  "rk4_limit_mV": 0.02,
+  "expected_error": "loose DOP853 tolerances must be looser than tight tolerances"
+}
