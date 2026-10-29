@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T004",
-  "next_unit": "U07",
+  "next_unit": "U08",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -182,6 +182,11 @@
       "status": "complete",
       "artifact": "tests/test_api_snapshot.py",
       "verification": "Added empty-path boundary and key-order determinism check; focused test file passes (3 passed)."
+    },
+    "T004/U07": {
+      "status": "complete",
+      "artifact": "tests/test_api_snapshot.py",
+      "verification": "CLI output matches the live app's OpenAPI document without starting lifespan; focused test file passes (4 passed)."
     }
   },
   "daily_stats": {

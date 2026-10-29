@@ -1,9 +1,13 @@
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
 from neurosim.api_snapshot import build_snapshot
+from neurosim.workbench.api import app
 
 
 def test_T004_api_endpoint_contract_snapshot_unit():
@@ -37,3 +41,19 @@ def test_T004_api_endpoint_contract_snapshot_empty_paths_boundary():
 
     assert first["operation_count"] == 0
     assert first["sha256"] == second["sha256"]
+
+
+def test_T004_api_endpoint_contract_snapshot_cli_integration():
+    root = Path(__file__).resolve().parents[1]
+    env = os.environ | {"PYTHONPATH": str(root / "python")}
+    run = subprocess.run(
+        [sys.executable, "-m", "neurosim.api_snapshot"],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert run.returncode == 0, run.stderr
+    assert json.loads(run.stdout) == build_snapshot(app.openapi())
