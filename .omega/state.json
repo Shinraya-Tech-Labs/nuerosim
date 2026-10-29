@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T007",
-  "next_unit": "U07",
+  "next_unit": "U08",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -331,6 +331,11 @@
       "status": "complete",
       "artifact": "tests/test_event_schedule.py",
       "verification": "Minimum grid-aligned delay is one timestep with zero rounding; focused tests pass (3 passed)."
+    },
+    "T007/U07": {
+      "status": "complete",
+      "artifact": "tests/test_event_schedule.py",
+      "verification": "Real LIF network with 2.01 ms request audited to 2.025 ms; target unchanged through arrival and responds on next step; focused tests pass (4 passed)."
     }
   },
   "daily_stats": {
