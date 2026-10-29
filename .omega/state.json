@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T004",
-  "next_unit": "U08",
+  "next_unit": "U10",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -187,6 +187,15 @@
       "status": "complete",
       "artifact": "tests/test_api_snapshot.py",
       "verification": "CLI output matches the live app's OpenAPI document without starting lifespan; focused test file passes (4 passed)."
+    },
+    "T004/U08": {
+      "status": "N/A",
+      "evidence": "U04 exposes `python -m neurosim.api_snapshot`; U07 verifies its output against FastAPI. A second wrapper would duplicate the CLI."
+    },
+    "T004/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T004-api-endpoint-contract-snapshot.md",
+      "verification": "At 6cb3252, five runs were identical: 18 operations, 16 paths, schema SHA-256 61bc9d8a…19989; median 886.49 ms including startup."
     }
   },
   "daily_stats": {
