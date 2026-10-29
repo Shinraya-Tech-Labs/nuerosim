@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 1,
-  "next_package": "T014",
+  "next_package": "T015",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -650,6 +650,56 @@
       "status": "complete",
       "artifact": "docs/omega/T013-golden-hh-trace-fixture.md",
       "verification": "Documented units, tolerance, invocation, failure modes, provenance, and sparse-sample limitations."
+    },
+    "T014/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T014-golden-lif-trace-fixture.md",
+      "verification": "Specified LIF analytic reference, millisecond/millivolt units, tolerance, no-spike requirement, and model scope."
+    },
+    "T014/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T014-golden-lif-trace-fixture/valid.json",
+      "verification": "Fixture values independently computed from the closed-form RC solution at five 5 ms intervals."
+    },
+    "T014/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T014-golden-lif-trace-fixture/invalid.json",
+      "verification": "Invalid volts unit fixture rejected by the audit and covered by focused test."
+    },
+    "T014/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/golden_lif.py",
+      "verification": "Implemented validated fixture loading, real LIF simulation, saved-grid sample comparison, spike guard, manifest output, and CLI."
+    },
+    "T014/U05": {
+      "status": "complete",
+      "artifact": "tests/test_golden_lif.py",
+      "verification": "Five real simulation samples matched analytic values; max error 2.13e-14 mV, zero spikes, within 1e-9 mV."
+    },
+    "T014/U06": {
+      "status": "complete",
+      "artifact": "tests/test_golden_lif.py",
+      "verification": "Tested invalid units, array mismatch, unsorted/off-grid samples, tolerance miss, and a spiking input; focused suite passes (9 passed)."
+    },
+    "T014/U07": {
+      "status": "complete",
+      "artifact": "tests/test_golden_lif.py",
+      "verification": "Audit runs the production Experiment/simulate path and reports actual manifest/config hash."
+    },
+    "T014/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T014-golden-lif-trace-fixture.md",
+      "verification": "Documented reproducible CLI and pass/fail/error exit behavior."
+    },
+    "T014/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T014-golden-lif-trace-fixture.md",
+      "verification": "At bb976f4, actual trace max error 2.13e-14 mV vs 1e-9 mV; Windows 11/Python 3.14.2/NumPy 2.4.2."
+    },
+    "T014/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T014-golden-lif-trace-fixture.md",
+      "verification": "Documented usage, analytic assumptions, limits, evidence, and contract."
     }
   },
   "daily_stats": {
