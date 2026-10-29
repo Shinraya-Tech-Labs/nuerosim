@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T001",
-  "next_unit": "U04",
+  "next_unit": "U05",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -20,6 +20,11 @@
       "status": "complete",
       "artifact": "tests/fixtures/omega/T001-repo-tree-provenance-inventory/invalid.json",
       "verification": "JSON parsed; git rev-parse --verify <fixture>^{commit} rejected the unresolved revision with exit 128 and no stdout."
+    },
+    "T001/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/repo_inventory.py",
+      "verification": "Module CLI emitted valid sorted JSON for HEAD (146 tracked paths); unresolved revision returned exit 2 with a clear error."
     }
   },
   "daily_stats": {
