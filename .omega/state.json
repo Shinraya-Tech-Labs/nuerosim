@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T008",
-  "next_unit": "U02",
+  "next_unit": "U03",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -356,6 +356,11 @@
       "status": "complete",
       "artifact": "docs/omega/contracts/T008-sqlite-schema-compatibility-audit.md",
       "verification": "Defined read-only path input, shared Store DDL reference, structural comparison fields, output, errors, and schema/history exclusions."
+    },
+    "T008/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T008-sqlite-schema-compatibility-audit/valid.json",
+      "verification": "Executed fixture DDL in an in-memory SQLite DB; it has the expected 2 tables and 12 columns."
     }
   },
   "daily_stats": {
