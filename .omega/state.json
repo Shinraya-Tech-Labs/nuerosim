@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T017",
+  "next_package": "T018",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -785,6 +785,56 @@
       "status": "complete",
       "artifact": "docs/omega/T016-units-typed-primitives.md",
       "verification": "Documented usage, supported conversions, errors, storage/schema limits, and links."
+    },
+    "T017/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T017-stimulus-pulse-waveform-library.md",
+      "verification": "Defined ms/current-density units, step/train/biphasic semantics, charge example, errors, and electrode/model scope limits."
+    },
+    "T017/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T017-stimulus-pulse-waveform-library/valid.json",
+      "verification": "Fixture train intervals 0\u20131, 3\u20134, 6\u20137 ms and biphasic \u00b12 \u00b5A/cm\u00b2 phases independently sum to zero ideal charge."
+    },
+    "T017/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T017-stimulus-pulse-waveform-library/invalid.json",
+      "verification": "Overlapping interval<width train fixture is rejected by the production helper."
+    },
+    "T017/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/stimuli.py",
+      "verification": "Implemented single step, bounded train, and equal-duration charge-balanced biphasic Pulse constructors."
+    },
+    "T017/U05": {
+      "status": "complete",
+      "artifact": "tests/test_stimuli.py",
+      "verification": "Exact interval/amplitude/charge assertions passed; focused suite passes (10 passed)."
+    },
+    "T017/U06": {
+      "status": "complete",
+      "artifact": "tests/test_stimuli.py",
+      "verification": "Covered overlap, count limits, amplitude, NaN, invalid target, bool arguments, and invalid phase width."
+    },
+    "T017/U07": {
+      "status": "complete",
+      "artifact": "tests/test_stimuli.py",
+      "verification": "Generated Pulse train runs through production Experiment/simulate and is preserved in the actual result manifest."
+    },
+    "T017/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T017-stimulus-pulse-waveform-library.md",
+      "verification": "Added a runnable Experiment config example for all protocol constructors."
+    },
+    "T017/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T017-stimulus-pulse-waveform-library.md",
+      "verification": "At 614dce2, 3-pulse LIF run ended at -62.35056 mV vs -65 mV baseline, zero spikes; biphasic net command charge 0."
+    },
+    "T017/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T017-stimulus-pulse-waveform-library.md",
+      "verification": "Documented protocols, input units, Experiment limits, charge assumption, and evidence links."
     }
   },
   "daily_stats": {
