@@ -12,5 +12,5 @@ Report the declared operating-system and runtime-version coverage in GitHub Acti
 - **Defaults:** no inferred platform or runtime coverage. Missing declarations are reported as empty/unknown.
 - **Acceptance examples:** the CPU workflow reports Ubuntu and Windows over Python 3.11–3.14 (8 combinations); the web workflow reports Ubuntu and Python 3.12 / Node 22.23.0 (one declared job combination).
 - **Errors:** reject unreadable, invalid YAML, or malformed workflow/job structures with a nonzero exit and concise error.
-- **Dependencies:** YAML parsing uses the repository's optional PyYAML dependency (`.[legacy]`).
+- **Dependencies:** YAML parsing uses PyYAML, included in the repository's development extra (`.[dev]`).
 - **Exclusions:** do not infer actual runner image versions, architecture, browser or GPU availability, job success, trigger coverage, secrets, reusable workflow expansion, or all GitHub Actions expression semantics. Matrix `include`/`exclude` transformations are not expanded.
