@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "current_day": 2,
-  "next_package": "T021",
+  "next_package": "T022",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
@@ -985,6 +985,56 @@
       "status": "complete",
       "artifact": "docs/omega/T020-adaptive-reference-comparisons.md",
       "verification": "Documented uncertainty/error distinction, units, CLI, failure modes, and links."
+    },
+    "T021/U01": {
+      "status": "complete",
+      "artifact": "docs/omega/contracts/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "Defined mV/ms^-1 units, singularity limits, continuity, finite-rate requirements, and scientific exclusions."
+    },
+    "T021/U02": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T021-hh-gating-kinetics-edge-cases/valid.json",
+      "verification": "Fixture samples exact -40/-55 mV limits and \u00b11e-6 mV neighbors with 1e-7 ms^-1 continuity tolerance."
+    },
+    "T021/U03": {
+      "status": "complete",
+      "artifact": "tests/fixtures/omega/T021-hh-gating-kinetics-edge-cases/invalid.json",
+      "verification": "Empty voltage boundary rejected by the production audit."
+    },
+    "T021/U04": {
+      "status": "complete",
+      "artifact": "python/neurosim/hh_rates_audit.py",
+      "verification": "Implemented fixture CLI around production HH rates with exact-limit, continuity, finite, and nonnegative checks."
+    },
+    "T021/U05": {
+      "status": "complete",
+      "artifact": "tests/test_hh_rates_audit.py",
+      "verification": "Verified alpha_m(-40)=1 ms^-1 and alpha_n(-55)=0.1 ms^-1; both adjacent limits pass."
+    },
+    "T021/U06": {
+      "status": "complete",
+      "artifact": "tests/test_hh_rates_audit.py",
+      "verification": "Covered empty/nonfinite/bool voltage, unit mismatch, tolerance bound, and kinetic overflow; focused suite 9 passed."
+    },
+    "T021/U07": {
+      "status": "complete",
+      "artifact": "python/neurosim/workbench/engine.py",
+      "verification": "Audit invokes the production rates function used in the actual HH engine; existing real rest/rate-limit test also passed."
+    },
+    "T021/U08": {
+      "status": "complete",
+      "artifact": "docs/omega/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "Documented fixture-driven module CLI and its exit statuses."
+    },
+    "T021/U09": {
+      "status": "complete",
+      "artifact": "docs/omega/evidence/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "At 24835ba, near-limit alpha_m deviation 5e-8 and alpha_n 5e-9 ms^-1; Windows 11/Python 3.14.2/NumPy 2.4.2."
+    },
+    "T021/U10": {
+      "status": "complete",
+      "artifact": "docs/omega/T021-hh-gating-kinetics-edge-cases.md",
+      "verification": "Documented usage, classic HH scope, units, failures, limitations, and links."
     }
   },
   "daily_stats": {
