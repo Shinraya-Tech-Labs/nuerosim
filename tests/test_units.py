@@ -39,6 +39,14 @@ def test_invalid_quantity_values_are_rejected(value):
         Quantity(value, Unit.MILLISECOND)
 
 
+def test_zero_identity_and_overflow_boundaries():
+    assert Quantity(0, Unit.MILLISECOND).to(Unit.SECOND).value == 0
+    with pytest.raises(ValueError, match="finite number"):
+        Quantity(1e308, Unit.SECOND).to(Unit.MILLISECOND)
+    with pytest.raises(ValueError, match="unsupported unit"):
+        Unit.from_symbol("fortnight")
+
+
 @pytest.mark.parametrize(
     ("spikes", "neurons", "duration", "message"),
     [
