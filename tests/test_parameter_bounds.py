@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from neurosim.parameter_bounds import audit_schema
+from neurosim.workbench.config import Experiment
 
 
 def test_T006_model_parameter_bounds_audit_unit():
@@ -36,3 +37,16 @@ def test_T006_model_parameter_bounds_audit_exclusive_boundary():
 
     with pytest.raises(ValueError, match="default is outside declared bounds"):
         audit_schema(schema)
+
+
+def test_T006_model_parameter_bounds_audit_workbench_integration():
+    report = audit_schema(Experiment.model_json_schema())
+    dt = next(
+        item
+        for item in report["bounds"]
+        if item["model"] == "Experiment" and item["field"] == "dt"
+    )
+
+    assert report["status"] == "pass"
+    assert report["field_count"] == 32
+    assert (dt["default"], dt["minimum"], dt["maximum"]) == (0.025, 0.001, 0.025)

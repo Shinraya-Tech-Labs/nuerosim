@@ -2,7 +2,7 @@
   "schema": 1,
   "current_day": 1,
   "next_package": "T006",
-  "next_unit": "U07",
+  "next_unit": "U08",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
@@ -281,6 +281,11 @@
       "status": "complete",
       "artifact": "tests/test_parameter_bounds.py",
       "verification": "Added an exclusive-minimum boundary case; default equal to `exclusiveMinimum` is rejected and all 3 focused tests pass."
+    },
+    "T006/U07": {
+      "status": "complete",
+      "artifact": "tests/test_parameter_bounds.py",
+      "verification": "Actual Experiment.model_json_schema() reports 32 bounded numeric fields; dt default/max/min match config; focused tests pass (4 passed)."
     }
   },
   "daily_stats": {
