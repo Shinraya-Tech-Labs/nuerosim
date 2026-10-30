@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "suite": "neurosim-v020-cpu-workloads",
+  "warmup_repeats": 1,
+  "repetitions": 5,
+  "workloads": [
+    {
+      "id": "hh-single-50ms",
+      "category": "single-neuron",
+      "config": {"model": "hh", "n": 1, "duration": 50, "dt": 0.025, "record_every": 10, "seed": 42, "probability": 0, "pulses": [{"target": 0, "start": 0, "stop": 50, "amplitude": 10}]}
+    },
+    {
+      "id": "lif-single-500ms",
+      "category": "single-neuron-long-duration",
+      "config": {"model": "lif", "n": 1, "duration": 500, "dt": 0.025, "record_every": 20, "seed": 42, "probability": 0, "pulses": [{"target": 0, "start": 0, "stop": 500, "amplitude": 2}]}
+    },
+    {
+      "id": "adex-single-200ms",
+      "category": "single-neuron",
+      "config": {"model": "adex", "n": 1, "duration": 200, "dt": 0.025, "record_every": 10, "seed": 42, "probability": 0, "pulses": [{"target": 0, "start": 0, "stop": 200, "amplitude": 2}]}
+    },
+    {
+      "id": "lif-network-8-p50-30ms",
+      "category": "small-seeded-network",
+      "config": {"model": "lif", "n": 8, "duration": 30, "dt": 0.025, "record_every": 10, "seed": 42, "probability": 0.5, "pulses": [{"target": 0, "start": 0, "stop": 30, "amplitude": 3}]}
+    },
+    {
+      "id": "lif-network-16-p05-30ms",
+      "category": "network-neuron-scaling",
+      "config": {"model": "lif", "n": 16, "duration": 30, "dt": 0.025, "record_every": 40, "seed": 42, "probability": 0.05, "pulses": [{"target": 0, "start": 0, "stop": 30, "amplitude": 3}]}
+    },
+    {
+      "id": "lif-network-64-p05-30ms",
+      "category": "network-neuron-scaling",
+      "config": {"model": "lif", "n": 64, "duration": 30, "dt": 0.025, "record_every": 40, "seed": 42, "probability": 0.05, "pulses": [{"target": 0, "start": 0, "stop": 30, "amplitude": 3}]}
+    },
+    {
+      "id": "lif-network-256-p05-30ms",
+      "category": "network-neuron-scaling",
+      "config": {"model": "lif", "n": 256, "duration": 30, "dt": 0.025, "record_every": 40, "seed": 42, "probability": 0.05, "pulses": [{"target": 0, "start": 0, "stop": 30, "amplitude": 3}]}
+    },
+    {
+      "id": "lif-network-64-p05-50ms",
+      "category": "network-connectivity-scaling",
+      "config": {"model": "lif", "n": 64, "duration": 50, "dt": 0.025, "record_every": 40, "seed": 42, "probability": 0.05, "pulses": [{"target": 0, "start": 0, "stop": 50, "amplitude": 3}]}
+    },
+    {
+      "id": "lif-network-64-p50-50ms",
+      "category": "network-connectivity-scaling",
+      "config": {"model": "lif", "n": 64, "duration": 50, "dt": 0.025, "record_every": 40, "seed": 42, "probability": 0.5, "pulses": [{"target": 0, "start": 0, "stop": 50, "amplitude": 3}]}
+    },
+    {
+      "id": "lif-long-1000ms",
+      "category": "single-neuron-long-duration",
+      "config": {"model": "lif", "n": 1, "duration": 1000, "dt": 0.025, "record_every": 40, "seed": 42, "probability": 0, "pulses": [{"target": 0, "start": 0, "stop": 1000, "amplitude": 2}]}
+    },
+    {
+      "id": "lif-result-serialization-64x200ms",
+      "category": "result-serialization-retrieval",
+      "config": {"model": "lif", "n": 64, "duration": 200, "dt": 0.025, "record_every": 4, "seed": 42, "probability": 0.1, "pulses": [{"target": 0, "start": 0, "stop": 200, "amplitude": 3}]}
+    }
+  ]
+}

@@ -17,8 +17,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP05 | Complete | `767d52c44f39dc49565c389f0312fb0e0229ce73` | Hodgkin-Huxley stimulus-response and DOP853 convergence evidence. |
 | CP06 | Complete | `2d91981eb14190ff26f211083a4807d6934570a4` | LIF analytic periods and LIF/AdEx stimulus response. |
 | CP07 | Complete | `df4e3dd` | Cable DOP853 trajectory check and seeded-network invariants. |
-| CP08 | Implemented; commit SHA recorded in CP09 ledger update | Pending this commit | Seven-reference report with unit-separated errors and convergence orders. |
-| CP09 | Pending | — | Reproducible benchmark harness and methodology. |
+| CP08 | Complete | `927a929345aa2025286c5243608f40c0d05d1dc3` | Seven-reference report with unit-separated errors and convergence orders. |
+| CP09 | Implemented; commit SHA recorded in CP10 ledger update | Pending this commit | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
 | CP10 | Pending | — | Benchmark runs, raw measurements, and results. |
 | CP11 | Pending | — | API, worker, storage, and lifecycle integration. |
 | CP12 | Pending | — | Frontend, browser, and export integration. |
@@ -207,7 +207,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   and [run 41116806300](https://github.com/sreerevanth/nuerosim/actions/runs/41116806300).
 - Remaining issues: passive cable/network validation was completed in CP07;
   combined reference results are captured in CP08.
-- Push status: pushed to `origin/codex/neurosim`; remote SHA verified at
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA verified at
   `2d91981eb14190ff26f211083a4807d6934570a4`.
 
 ## CP07 — Passive cable and seeded network validation
@@ -235,13 +235,13 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   [run 41117106783](https://github.com/sreerevanth/nuerosim/actions/runs/41117106783)
   and web workflow PASS in [run 41117106807](https://github.com/sreerevanth/nuerosim/actions/runs/41117106807).
 - Remaining issues: none for CP07; aggregated reference report is in CP08.
-- Push status: pushed to `origin/codex/neurosim`; remote SHA verified at
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA verified at
   `df4e3ddf1acd72d05def26ca876ef1052a880259`.
 
 ## CP08 — Independent reference comparisons and convergence
 
 - Commit point ID: CP08.
-- Commit SHA: recorded in CP09 ledger update after this commit exists.
+- Commit SHA: `927a929345aa2025286c5243608f40c0d05d1dc3`.
 - Files changed: `scripts/run_reference_validation.py`,
   `tests/test_reference_validation_runner.py`, `.github/workflows/cpu.yml`,
   `scientific/README.md`, `scientific/results/v020-reference-comparisons-002.json`,
@@ -261,8 +261,38 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `8.467822e-10 mV`; all within recorded limits.
 - Evidence: `scientific/results/v020-reference-comparisons-002.json` and the
   methodology/results sections in `scientific/README.md`.
-- Pass/fail: local reference and convergence suite PASS; hosted CI will run on
-  this commit.
+- Pass/fail: local reference/convergence suite PASS; Ubuntu/Python 3.12 science
+  report and web workflow PASS in [CPU run 41117788665](https://github.com/sreerevanth/nuerosim/actions/runs/41117788665)
+  and [web run 41117788680](https://github.com/sreerevanth/nuerosim/actions/runs/41117788680).
+  Docker build/runtime and all matrix jobs in the CPU run PASS.
 - Remaining issues: benchmark methodology and measured benchmark results in
   CP09–CP10; broader documentation consolidated in CP13.
+- Push status: pushed to `origin/codex/neurosim-v020-release`;
+  remote branch is `codex/neurosim-v020-release` at
+  `927a929345aa2025286c5243608f40c0d05d1dc3`.
+
+## CP09 — Benchmark harness and measurement methodology
+
+- Commit point ID: CP09.
+- Commit SHA: recorded in CP10 ledger update after this commit exists.
+- Files changed: `benchmarks/v020-workloads.json`,
+  `scripts/run_release_benchmarks.py`, `tests/test_release_benchmarks.py`,
+  `docs/BENCHMARK_METHODOLOGY.md`, `.github/workflows/cpu.yml`, and this ledger.
+- Implementation: 11 representative CPU workloads across HH/LIF/AdEx, seeded
+  network size/connectivity, duration, and result handling; one discarded
+  warm-up and five measured repetitions by default; each sample runs in a fresh
+  subprocess. Separately measures setup, simulation, JSON encode/decode,
+  process peak RSS and incremental RSS; emits raw samples plus mean, median,
+  sample standard deviation, p95, min, and max. Records hardware, OS, versions,
+  thread environment, workload config, source revision, and input/runner hashes.
+- Tests/commands: `$env:PYTHONPATH='python'; python -m pytest tests/test_release_benchmarks.py -q` — 3 passed; `python -m ruff check --isolated --select E4,E7,E9,F scripts/run_release_benchmarks.py tests/test_release_benchmarks.py` — PASS; `python -m py_compile scripts/run_release_benchmarks.py` — PASS; `$env:PYTHONPATH='python'; python -c "import json; from pathlib import Path; from scripts.run_release_benchmarks import _validate_document; d=json.loads(Path('benchmarks/v020-workloads.json').read_text()); print(_validate_document(d)); print('workloads',len(d['workloads']))"` — warm-up/repetition policy valid; 11 workloads accepted.
+- Failure fixed: the first Windows run showed that `GetProcessMemoryInfo` used
+  an implicit 32-bit handle signature. Explicit Win32 function prototypes fixed
+  it; the complete focused test rerun passed.
+- Pass/fail: harness unit tests and configuration validation PASS; actual
+  benchmark execution and raw measurement results are CP10.
+- Evidence: `docs/BENCHMARK_METHODOLOGY.md`,
+  `benchmarks/v020-workloads.json`, and `tests/test_release_benchmarks.py`.
+- Remaining issues: execute all configured workloads on the captured host and
+  publish unaltered samples/aggregates in CP10.
 - Push status: pending commit and push.
