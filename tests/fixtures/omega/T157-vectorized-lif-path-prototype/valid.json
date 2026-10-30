@@ -1,0 +1,1 @@
+{"task":"T157","input":{"currents":[1,1],"dt":0.1,"tau":10,"rest":-65},"expected":{"count":2}}
