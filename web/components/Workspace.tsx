@@ -578,6 +578,30 @@ export default function Workspace() {
                 Validated CPU experiment settings. Configure the model, inputs
                 and network in the engine schema.
               </p>
+              <label className="control-label">
+                INTEGRATOR
+                <select
+                  aria-label="Simulation solver"
+                  value={(() => {
+                    try {
+                      return JSON.parse(config).solver ?? "rk4";
+                    } catch {
+                      return "rk4";
+                    }
+                  })()}
+                  onChange={(e) => {
+                    try {
+                      setConfig(JSON.stringify({ ...JSON.parse(config), solver: e.target.value }, null, 2));
+                      setError("");
+                    } catch {
+                      setError("Fix the experiment JSON before choosing an integrator.");
+                    }
+                  }}
+                >
+                  <option value="rk4">RK4 · fourth order</option>
+                  <option value="euler">Euler · first order</option>
+                </select>
+              </label>
               <textarea
                 aria-label="Experiment configuration"
                 value={config}
