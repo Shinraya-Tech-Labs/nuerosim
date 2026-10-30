@@ -23,7 +23,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP11 | Complete; hosted CPU and web checks pass | `134c10cee0a45e531d43b6112a7f03fec507d305` | API, worker, storage, and lifecycle integration verification. |
 | CP12 | Complete; hosted checks pass | `a4b5e1bafd6fcec7c6db0f86f92f8616b78072bc` | Browser workbench, rendering, persistence, and export integration. |
 | CP13 | Complete; hosted checks pass | `8687dc53a97bdc58b1d85f92cf8447e47f2dc82e` | Verified capabilities, deployment, and limitations docs. |
-| CP14 | Release review complete; license gate remains | Pending this commit | Full regression, CI, security, and release-gate review. |
+| CP14 | Complete; technical gates pass, publication blocked by license | `f3516e820836bf29a9a55401d7796cefef0e9dc0` | Full regression, CI, security, and release-gate review. |
 | CP15 | Prohibited pending license confirmation | — | Version, annotated tag, and GitHub release only after all gates pass. |
 
 ## CP01 — Establish v0.2.0 baseline
@@ -462,8 +462,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 ## CP14 — Full regression, CI, security, and release-gate review
 
 - Commit point ID: CP14.
-- Commit SHA: recorded in the immediate CP14 closure ledger commit after this
-  commit exists (a commit cannot contain its own SHA).
+- Commit SHA: `f3516e820836bf29a9a55401d7796cefef0e9dc0` (recorded in this
+  closure update because a commit cannot contain its own SHA).
 - Files changed: `docs/RELEASE_GATE.md`, `docs/VALIDATION.md`, `README.md`,
   and this ledger.
 - Implementation: reviewed the full test suite in both the checkout and a
@@ -523,4 +523,6 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   build and runtime check passed.
 - Remaining issues: resolve and document the project license before any v0.2.0
   tag or GitHub release. Keep version `0.2.0.dev0` until then.
-- Push status: pending commit and push.
+- Push status: CP14 report commit pushed to
+  `origin/codex/neurosim-v020-release`; remote SHA verified at
+  `f3516e820836bf29a9a55401d7796cefef0e9dc0`.
