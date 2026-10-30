@@ -1,6 +1,6 @@
 # NeuroSim v0.2.0 CPU benchmark results
 
-Run `v020-run-001` measured 11 NeuroSim workloads on **2026-10-30 19:52 UTC**.
+Run `v020-run-004` measured 11 NeuroSim workloads on **2026-10-30 20:16 UTC**.
 The report captured five measured repetitions per workload after one discarded
 warm-up. Every repeated workload produced the same output hash.
 
@@ -10,13 +10,13 @@ warm-up. Every repeated workload produced the same output hash.
   CPUs, and 15.35 GiB system memory.
 - Python 3.14.2, NumPy 2.4.2, SciPy 1.17.1, FastAPI 0.129.0, Pydantic 2.12.5,
   and NeuroSim 0.2.0.dev0.
-- Source revision: `60c00909ef07a97f5c0267db52047f68aaaf750e`.
+- Source revision: `89f9745a87dd01bf54f554d739cec74175becddc`.
 - Workload config SHA-256:
-  `4d7ee2eba90479bf8f7a86f329f060e08924dbed24c51b72f1d4d47421999b1c`.
+  `7b009521a3b95d838d8cb93a9301424f67d6251448ab24a53c77acd873776429`.
 - Runner SHA-256:
-  `42aeb03eb1f470a2394cc1d82a2acd459e32a7ea6fe59d9d6aefbafeb7632934`.
+  `a17b49db4f8b8c1ac6ed57df8d92726d1fbbfde9aa7e357e87504297452914d0`.
 - Raw report SHA-256:
-  `106367d3ea4ef55dc08d1e16e48c2e3a47bc5dc6159d5dae412fb40153ab4666`.
+  `72b27b56508b92e8aefd072375b928170e9f4b2b3315ad29afa8d93655a040bf`.
 
 ## Measurements
 
@@ -28,17 +28,17 @@ size.
 
 | Workload | Cells | Steps | Edges | Spikes | Sim mean | Sim median | Sim SD | Sim p95 | JSON encode | JSON decode | Peak RSS | Result bytes |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `hh-single-50ms` | 1 | 2,000 | 0 | 4 | 0.901 | 0.898 | 0.012 | 0.916 | 0.228 | 0.153 | 8.07 | 6,440 |
-| `lif-single-500ms` | 1 | 20,000 | 0 | 43 | 2.739 | 2.666 | 0.183 | 2.989 | 0.744 | 0.498 | 8.19 | 26,664 |
-| `adex-single-200ms` | 1 | 8,000 | 0 | 10 | 1.557 | 1.564 | 0.039 | 1.591 | 0.536 | 0.342 | 8.14 | 21,168 |
-| `lif-network-8-p50-30ms` | 8 | 1,200 | 28 | 15 | 0.246 | 0.244 | 0.013 | 0.264 | 0.386 | 0.265 | 8.00 | 14,830 |
-| `lif-network-16-p05-30ms` | 16 | 1,200 | 8 | 4 | 0.243 | 0.240 | 0.005 | 0.250 | 0.179 | 0.128 | 7.93 | 6,185 |
-| `lif-network-64-p05-30ms` | 64 | 1,200 | 195 | 8 | 0.250 | 0.244 | 0.012 | 0.267 | 0.491 | 0.389 | 8.05 | 22,796 |
-| `lif-network-256-p05-30ms` | 256 | 1,200 | 3,269 | 249 | 0.290 | 0.272 | 0.044 | 0.349 | 2.786 | 2.148 | 9.51 | 153,083 |
-| `lif-network-64-p05-50ms` | 64 | 2,000 | 195 | 17 | 0.352 | 0.354 | 0.014 | 0.367 | 0.688 | 0.558 | 8.24 | 33,315 |
-| `lif-network-64-p50-50ms` | 64 | 2,000 | 2,041 | 960 | 0.369 | 0.362 | 0.019 | 0.395 | 2.231 | 1.507 | 8.78 | 106,841 |
-| `lif-long-1000ms` | 1 | 40,000 | 0 | 87 | 4.701 | 4.665 | 0.058 | 4.778 | 0.694 | 0.477 | 8.12 | 29,472 |
-| `lif-result-serialization-64x200ms` | 64 | 8,000 | 403 | 3,607 | 1.130 | 1.109 | 0.037 | 1.178 | 35.837 | 27.977 | 20.67 | 1,501,263 |
+| `hh-single-50ms` | 1 | 2,000 | 0 | 4 | 0.861 | 0.860 | 0.027 | 0.891 | 0.210 | 0.148 | 7.95 | 6,440 |
+| `lif-single-500ms` | 1 | 20,000 | 0 | 43 | 2.474 | 2.463 | 0.029 | 2.512 | 0.645 | 0.427 | 8.07 | 26,664 |
+| `adex-single-200ms` | 1 | 8,000 | 0 | 10 | 1.492 | 1.492 | 0.021 | 1.516 | 0.536 | 0.346 | 8.00 | 21,168 |
+| `lif-network-8-p50-30ms` | 8 | 1,200 | 28 | 15 | 0.241 | 0.237 | 0.010 | 0.253 | 0.375 | 0.265 | 7.96 | 14,830 |
+| `lif-network-16-p05-30ms` | 16 | 1,200 | 8 | 4 | 0.242 | 0.242 | 0.006 | 0.249 | 0.180 | 0.139 | 8.05 | 6,185 |
+| `lif-network-64-p05-30ms` | 64 | 1,200 | 195 | 8 | 0.266 | 0.261 | 0.016 | 0.285 | 0.489 | 0.413 | 8.09 | 22,796 |
+| `lif-network-256-p05-30ms` | 256 | 1,200 | 3,269 | 249 | 0.273 | 0.271 | 0.012 | 0.290 | 2.779 | 2.167 | 9.46 | 153,083 |
+| `lif-network-64-p05-50ms` | 64 | 2,000 | 195 | 17 | 0.356 | 0.350 | 0.014 | 0.373 | 0.693 | 0.571 | 8.23 | 33,315 |
+| `lif-network-64-p50-50ms` | 64 | 2,000 | 2,041 | 960 | 0.384 | 0.377 | 0.026 | 0.419 | 2.190 | 1.509 | 8.77 | 106,841 |
+| `lif-long-1000ms` | 1 | 40,000 | 0 | 87 | 4.756 | 4.727 | 0.068 | 4.849 | 0.720 | 0.478 | 8.12 | 29,472 |
+| `lif-result-serialization-64x200ms` | 64 | 8,000 | 403 | 3,607 | 1.103 | 1.097 | 0.015 | 1.124 | 35.424 | 26.921 | 20.82 | 1,501,263 |
 
 ## Reproduce
 
@@ -48,11 +48,11 @@ new run; the harness refuses to overwrite existing evidence.
 
 ```powershell
 python -m pip install '.[dev]'
-python scripts/run_release_benchmarks.py --config benchmarks/v020-workloads.json --output benchmarks/results/v020-run-002.json
-python scripts/verify_release_benchmark_report.py --report benchmarks/results/v020-run-002.json
+python scripts/run_release_benchmarks.py --config benchmarks/v020-workloads.json --output benchmarks/results/v020-run-005.json
+python scripts/verify_release_benchmark_report.py --report benchmarks/results/v020-run-005.json
 ```
 
-The raw report is `benchmarks/results/v020-run-001.json`. It includes all
+The raw report is `benchmarks/results/v020-run-004.json`. It includes all
 sample-level measurements, individual output hashes, phase summaries,
 environment metadata, and workload configurations. See
 [`BENCHMARK_METHODOLOGY.md`](BENCHMARK_METHODOLOGY.md) for timing and memory

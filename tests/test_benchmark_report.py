@@ -10,6 +10,12 @@ from scripts.verify_release_benchmark_report import validate_report
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / "scripts/run_release_benchmarks.py"
+CAPTURED_REPORT = ROOT / "benchmarks/results/v020-run-004.json"
+CAPTURED_CONFIG = ROOT / "benchmarks/v020-workloads.json"
+
+
+def test_captured_release_benchmark_report_matches_raw_samples():
+    assert validate_report(CAPTURED_REPORT, CAPTURED_CONFIG, RUNNER) == (11, 5)
 
 
 def _create_report(tmp_path):

@@ -19,8 +19,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP07 | Complete | `df4e3dd` | Cable DOP853 trajectory check and seeded-network invariants. |
 | CP08 | Complete | `927a929345aa2025286c5243608f40c0d05d1dc3` | Seven-reference report with unit-separated errors and convergence orders. |
 | CP09 | Complete | `60c00909ef07a97f5c0267db52047f68aaaf750e` | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
-| CP10 | Pushed; CI pending | `0717caff6f10ecf9368b920c314b2af3d985f8f7` | Captured five-repeat measurements for all 11 workloads with raw samples and results. |
-| CP11 | Implemented; commit SHA recorded in CP12 ledger update | Pending this commit | API, worker, storage, and lifecycle integration verification. |
+| CP10 | Final run captured; publication pending | `0717caff` + `26f5290` + `89f9745` | Captured five-repeat measurements for all 11 workloads with stable cross-platform provenance. |
+| CP11 | Pushed; hosted rerun pending | `134c10cee0a45e531d43b6112a7f03fec507d305` | API, worker, storage, and lifecycle integration verification. |
 | CP12 | Pending | — | Frontend, browser, and export integration. |
 | CP13 | Pending | — | Verified capabilities, deployment, and limitations docs. |
 | CP14 | Pending | — | Full regression, CI, security, and release-gate review. |
@@ -303,37 +303,55 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 
 - Commit point ID: CP10.
 - Commit SHA: `0717caff6f10ecf9368b920c314b2af3d985f8f7`.
-- Files changed: `benchmarks/results/v020-run-001.json` (captured raw samples and
-  aggregates), `docs/BENCHMARK_RESULTS.md`,
+- Corrective commit SHA: `26f52904b368a99dfd7a8e26130c4a426dce11f8`.
+- Stable artifact writer commit SHA: `89f9745a87dd01bf54f554d739cec74175becddc`.
+- Results publication commit SHA: recorded in CP12 ledger update after this
+  commit exists.
+- Files changed: `benchmarks/results/v020-run-004.json` (captured raw samples
+  and aggregates), `docs/BENCHMARK_RESULTS.md`,
+  `docs/BENCHMARK_METHODOLOGY.md`, `scripts/run_release_benchmarks.py`,
   `scripts/verify_release_benchmark_report.py`,
-  `tests/test_benchmark_report.py`, and this ledger.
+  `tests/test_benchmark_report.py`, `tests/test_release_benchmarks.py`,
+  `.gitattributes`, and this ledger. The tracked run-001 report was removed after CI exposed
+  checkout-dependent raw-byte hashes; local draft runs 002 and 003 were
+  replaced by the LF-stable run 004.
 - Implementation: ran the configured 11 CPU workloads with one discarded
   warm-up and five fresh-process repetitions each. Every workload produced the
   same deterministic output SHA across its repetitions. Published the measured
   timing, result-size, and incremental RSS summaries with host metadata and
   clear scope limits. Added a report verifier that recomputes summaries from
-  raw samples and checks the captured input hashes.
-- Tests/commands: `$env:PYTHONPATH='python'; python scripts/run_release_benchmarks.py --config benchmarks/v020-workloads.json --output benchmarks/results/v020-run-001.json` — 11 workloads, 5 repetitions each, PASS; `python scripts/verify_release_benchmark_report.py` — PASS; `$env:PYTHONPATH='python'; python -m pytest tests/test_benchmark_report.py tests/test_release_benchmarks.py -q` — 5 passed; `python -m ruff check --isolated --select E4,E7,E9,F scripts/verify_release_benchmark_report.py tests/test_benchmark_report.py` — PASS; `python -m py_compile scripts/verify_release_benchmark_report.py tests/test_benchmark_report.py` — PASS.
-- Outcome: simulation median ranged from 0.240 s (`lif-network-16-p05-30ms`)
-  to 4.665 s (`lif-long-1000ms`). The 64-cell 200 ms serialization workload
-  produced a 1,501,263-byte JSON result with 35.837 ms median encoding,
-  27.977 ms median decoding, and 20.67 MiB incremental peak RSS. These are
+  raw samples and checks canonicalized config and runner hashes. Canonical
+  sorted-key JSON and LF-normalized source/output make hashes stable across
+  Windows and Unix checkouts.
+- Tests/commands: `$env:PYTHONPATH='python'; python scripts/run_release_benchmarks.py --config benchmarks/v020-workloads.json --output benchmarks/results/v020-run-004.json` — 11 workloads, 5 repetitions each, PASS; `python scripts/verify_release_benchmark_report.py --report benchmarks/results/v020-run-004.json` — PASS; `$env:PYTHONPATH='python'; python -m pytest tests/test_benchmark_report.py tests/test_release_benchmarks.py -q` — 7 passed; `python -m ruff check --isolated --select E4,E7,E9,F scripts/run_release_benchmarks.py tests/test_release_benchmarks.py scripts/verify_release_benchmark_report.py tests/test_benchmark_report.py` — PASS; `python -m py_compile scripts/run_release_benchmarks.py tests/test_release_benchmarks.py scripts/verify_release_benchmark_report.py tests/test_benchmark_report.py` — PASS.
+- Failure fixed: CPU run 41119339102 and the CP11 workflow at 41119716700
+  rejected the earlier run on Windows because the config hash included
+  checkout-specific line endings. The harness now hashes canonical JSON, and
+  regression tests verify LF/CRLF config and runner inputs and LF output bytes.
+  Hosted validation for the corrected code is still pending.
+- Outcome: simulation median ranged from 0.237 s (`lif-network-8-p50-30ms`)
+  to 4.727 s (`lif-long-1000ms`). The 64-cell 200 ms serialization workload
+  produced a 1,501,263-byte JSON result with 35.424 ms median encoding,
+  26.921 ms median decoding, and 20.82 MiB incremental peak RSS. These are
   single-host serial CPU measurements, not throughput claims.
-- Evidence: `benchmarks/results/v020-run-001.json` (SHA-256
-  `106367d3ea4ef55dc08d1e16e48c2e3a47bc5dc6159d5dae412fb40153ab4666`),
+- Evidence: `benchmarks/results/v020-run-004.json` (SHA-256
+  `72b27b56508b92e8aefd072375b928170e9f4b2b3315ad29afa8d93655a040bf`),
   `docs/BENCHMARK_RESULTS.md`, and `docs/BENCHMARK_METHODOLOGY.md`.
-- Pass/fail: benchmark execution, report verification, and focused tests PASS;
-  hosted CPU and web workflows for this commit are still running.
+- Pass/fail: corrected benchmark execution, LF/CRLF hash regression, stable
+  report-byte regression, report verification, and focused tests PASS; hosted
+  CPU and web workflows for the corrected code head are pending.
 - Remaining issues: API/worker/storage lifecycle integration is CP11; this
   benchmark does not measure API queuing, concurrent users, or deployment
   storage.
-- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
-  verified at `0717caff6f10ecf9368b920c314b2af3d985f8f7`.
+- Push status: harness/verifier and stable-output fixes pushed as
+  `26f52904b368a99dfd7a8e26130c4a426dce11f8` and
+  `89f9745a87dd01bf54f554d739cec74175becddc`; final raw report and results
+  record are pending this commit.
 
 ## CP11 — API, worker, storage, and lifecycle integration
 
 - Commit point ID: CP11.
-- Commit SHA: recorded in CP12 ledger update after this commit exists.
+- Commit SHA: `134c10cee0a45e531d43b6112a7f03fec507d305`.
 - Files changed: `tests/test_release_reliability.py` and this ledger.
 - Implementation: added an end-to-end large-result check using the production
   64-cell workload shape. It verifies API result retrieval, history limit
@@ -351,7 +369,10 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Evidence: `tests/test_release_reliability.py`,
   `tests/test_api.py`, `tests/test_visualization_api.py`, and
   `tests/test_post_t210_remediation.py`.
-- Pass/fail: focused local integration suite PASS; hosted CI will run on push.
+- Pass/fail: focused local integration suite PASS. Hosted CPU and web runs
+  41119716700 and 41119717047 also hit the CP10 cross-platform config-hash
+  defect; corrected-head reruns are pending.
 - Remaining issues: frontend and browser flows are CP12; full regression and
   security/release gate review are CP14.
-- Push status: pending commit and push.
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
+  verified at `134c10cee0a45e531d43b6112a7f03fec507d305`.
