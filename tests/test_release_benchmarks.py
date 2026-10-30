@@ -45,6 +45,7 @@ def test_release_benchmark_measures_isolated_run_phases_and_peak_rss(tmp_path):
     assert workload["phase_summary_seconds"]["simulation"]["count"] == 3
     assert workload["phase_summary_seconds"]["simulation"]["p95"] >= 0
     assert workload["memory_summary_bytes"]["process_peak_rss_bytes"]["median"] > 0
+    assert b"\r\n" not in output.read_bytes()
     assert all(
         sample["process_peak_rss_bytes"] >= sample["process_baseline_rss_bytes"]
         for sample in workload["sample_records"]

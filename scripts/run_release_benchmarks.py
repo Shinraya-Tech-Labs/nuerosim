@@ -405,6 +405,7 @@ def run_benchmarks(config_path, output_path):
     output_path.write_text(
         json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
     return report
 
