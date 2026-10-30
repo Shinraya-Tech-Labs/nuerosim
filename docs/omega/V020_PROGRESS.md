@@ -15,8 +15,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP03 | Complete | `57051899`, `5fc38b70`, `21139cef` | Clean Docker build and full-stack lifecycle smoke verified in hosted CI. |
 | CP04 | Complete | `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c` | Reproducible eight-case suite, two matching raw runs, hosted science artifact. |
 | CP05 | Pushed; hosted CI pending | `767d52c44f39dc49565c389f0312fb0e0229ce73` | Hodgkin-Huxley stimulus-response and DOP853 convergence evidence. |
-| CP06 | Implemented; commit SHA recorded in CP07 ledger update | Pending this commit | LIF analytic periods and LIF/AdEx stimulus response. |
-| CP07 | Pending | — | Passive cable and seeded network validation. |
+| CP06 | Pushed; hosted CI pending | `2d91981eb14190ff26f211083a4807d6934570a4` | LIF analytic periods and LIF/AdEx stimulus response. |
+| CP07 | Implemented; commit SHA recorded in CP08 ledger update | Pending this commit | Cable DOP853 trajectory check and seeded-network invariants. |
 | CP08 | Pending | — | Independent references and convergence studies. |
 | CP09 | Pending | — | Reproducible benchmark harness and methodology. |
 | CP10 | Pending | — | Benchmark runs, raw measurements, and results. |
@@ -188,7 +188,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 ## CP06 — LIF and AdEx validation
 
 - Commit point ID: CP06.
-- Commit SHA: recorded in CP07 ledger update after this commit exists.
+- Commit SHA: `2d91981eb14190ff26f211083a4807d6934570a4`.
 - Files changed: `tests/test_science.py`, `scientific/README.md`,
   and this ledger.
 - Implementation: parameterized the LIF analytic inter-spike period check at
@@ -205,4 +205,31 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Pass/fail: local focused validation PASS; hosted CI will run on this commit.
 - Remaining issues: passive cable/network validation in CP07; combined
   independent reference and convergence report in CP08.
+- Push status: pushed to `origin/codex/neurosim`; remote SHA verified at
+  `2d91981eb14190ff26f211083a4807d6934570a4`.
+
+## CP07 — Passive cable and seeded network validation
+
+- Commit point ID: CP07.
+- Commit SHA: recorded in CP08 ledger update after this commit exists.
+- Files changed: `tests/test_science.py`, `scientific/README.md`,
+  and this ledger.
+- Implementation: compare the actual cable solver's full three-compartment
+  trajectory against a separately integrated DOP853 system; strengthen network
+  same-seed checks to include spikes and prohibit self-edges; document sealed
+  cable assumptions, units, defaults, network seed, connectivity, synaptic
+  decay, and implementation size limits.
+- Tests/commands: `$env:PYTHONPATH='python'; python -m pytest tests/test_science.py::test_cable_production_trajectory_matches_dop853_reference tests/test_science.py::test_passive_cable_conservation_and_decay tests/test_science.py::test_network_seed_inhibition_and_recording tests/test_current_balance.py -q -s` — 7 passed; Ruff E4/E7/E9/F on `tests/test_science.py` — PASS.
+- Outcome: cable maximum absolute voltage error against DOP853 was
+  `8.467822e-10 mV` (required below `1e-7 mV`); exact deterministic network
+  traces and changed-seed topology checks passed.
+- Reference basis: SciPy DOP853 high-accuracy reference for the explicit
+  passive chain ODE; Rall (1959),
+  [DOI 10.1016/0014-4886(59)90046-9](https://doi.org/10.1016/0014-4886(59)90046-9)
+  for passive cable context.
+- Evidence: `scientific/results/v020-core-run-002/cable_charge.json`,
+  `network_seeded.json`, and `scientific/README.md`.
+- Pass/fail: local focused validation PASS; hosted CI will run on this commit.
+- Remaining issues: consolidated independent reference and convergence study in
+  CP08.
 - Push status: pending commit and push.

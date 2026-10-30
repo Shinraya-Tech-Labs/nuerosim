@@ -89,3 +89,35 @@ integrate-and-fire model as an effective description of neuronal activity
 (2005)](https://doi.org/10.1152/jn.00686.2005). The comparisons here establish
 implementation and numerical consistency for these fixtures; they do not
 validate the defaults against a particular biological cell recording.
+
+## Passive cable and seeded network validation
+
+The passive cable is a sealed, equal-area compartment chain with
+`dV_i/dt = (I_i - gL*(V_i-EL) + Iaxial_i)/Cm`. Adjacent compartments exchange
+equal and opposite axial currents; the endpoints have no axial current beyond
+their neighbor. Defaults are `Cm=1 uF/cm^2`, `gL=0.3 mS/cm^2`,
+`EL=-54.387 mV`, and axial coupling `0.1 mS/cm^2`. The core charge experiment
+sets `gL=0`, starts three compartments at `-65 mV`, and injects
+`1 uA/cm^2` into compartment 0 for 10 ms with RK4 at `dt=0.025 ms`. It checks
+conservation of total voltage-area under axial flow and compares the full
+production trajectory against a separately integrated SciPy DOP853 system
+(`rtol=1e-11`, `atol=1e-12`; max absolute voltage error below `1e-7 mV`).
+The measured maximum voltage error was `8.467822e-10 mV`.
+
+The network fixture uses LIF cells with `n=8`, edge probability 0.5, seed 42,
+30 ms duration, and a 3 `uA/cm^2` pulse on cell 0. Topology excludes self-edges;
+the default inhibitory fraction is 0.2, excitatory/inhibitory inputs use
+conductance-based reversal potentials of 0/-80 mV, and synaptic conductance
+decays with `tau_syn=5 ms`. The seeded topology and complete voltage/spike
+outputs must repeat exactly for the same configuration; changing the seed must
+change the sampled topology. The implementation supports at most 512 neurons
+and 32,768 realized synapses. These checks establish deterministic CPU behavior
+and local conservation; they are not a cross-simulator network validation.
+
+Both raw cable and seeded-network traces, full manifests, and deterministic
+output hashes are in the committed core experiment records under
+`scientific/results/v020-core-run-002/`.
+The passive cable context follows the classical treatment in Rall, [Branching
+dendritic trees and motoneuron membrane resistivity
+(1959)](https://doi.org/10.1016/0014-4886(59)90046-9); this implementation is a
+small sealed compartment chain, not a morphology-resolved dendritic model.

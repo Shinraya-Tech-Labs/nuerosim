@@ -192,6 +192,33 @@ def test_passive_cable_conservation_and_decay():
     assert abs(sum(v[-1] for v in driven["voltage"]) - (-195 + 10)) < 1e-9
 
 
+def test_cable_production_trajectory_matches_dop853_reference():
+    config = Experiment(
+        model="cable",
+        n=3,
+        duration=10,
+        dt=0.025,
+        record_every=1,
+        parameters=Parameters(g_leak=0, axial=0.1),
+        pulses=[Pulse(start=0, stop=10, amplitude=1)],
+    )
+    reference = solve_ivp(
+        lambda t, v: np.array([1.0, 0.0, 0.0]) + cable_current(v, 0.1),
+        (0, 10),
+        [-65.0, -65.0, -65.0],
+        method="DOP853",
+        rtol=1e-11,
+        atol=1e-12,
+        dense_output=True,
+    )
+    result = simulate(config)
+    error = np.max(
+        np.abs(np.array(result["voltage"]) - reference.sol(result["t"]))
+    )
+    print(f"Cable DOP853 maximum voltage error: {error:.9g} mV")
+    assert error < 1e-7
+
+
 def test_network_seed_inhibition_and_recording():
     c = Experiment(
         model="lif",
@@ -202,6 +229,8 @@ def test_network_seed_inhibition_and_recording():
     )
     a, b = simulate(c), simulate(c)
     assert a["voltage"] == b["voltage"] and a["edges"] == b["edges"]
+    assert a["spikes"] == b["spikes"]
+    assert all(source != target for source, target, _ in a["edges"])
     assert a["edges"] != simulate(c.model_copy(update={"seed": 43}))["edges"]
     assert len(a["voltage"]) == 8 and np.isfinite(a["voltage"]).all()
     state = initial_state(c)
