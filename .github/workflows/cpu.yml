@@ -36,19 +36,29 @@ jobs:
       - run: python -m pip_audit
   docker:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: tests
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - run: docker version && docker compose version
       - env:
-          NEUROSIM_AUTH_TOKEN: ci-neurosim-token-2026
-        run: docker compose build
+          NEUROSIM_AUTH_TOKEN: release-ci-token-2026-verified
+        run: docker compose -p neurosim-v020-ci --profile web down --volumes --remove-orphans
       - env:
-          NEUROSIM_AUTH_TOKEN: ci-neurosim-token-2026
-        run: docker compose up -d --wait
+          NEUROSIM_AUTH_TOKEN: release-ci-token-2026-verified
+        run: docker compose -p neurosim-v020-ci --profile web build
       - env:
-          NEUROSIM_AUTH_TOKEN: ci-neurosim-token-2026
-        run: python scripts/smoke_http.py
+          NEUROSIM_AUTH_TOKEN: release-ci-token-2026-verified
+        run: docker compose -p neurosim-v020-ci --profile web up -d --wait --wait-timeout 180
+      - env:
+          NEUROSIM_AUTH_TOKEN: release-ci-token-2026-verified
+          NEUROSIM_COMPOSE_PROJECT: neurosim-v020-ci
+        run: python scripts/smoke_docker_stack.py
       - if: always()
         env:
-          NEUROSIM_AUTH_TOKEN: ci-neurosim-token-2026
-        run: docker compose down
+          NEUROSIM_AUTH_TOKEN: release-ci-token-2026-verified
+        run: docker compose -p neurosim-v020-ci --profile web logs --no-color
+      - if: always()
+        env:
+          NEUROSIM_AUTH_TOKEN: release-ci-token-2026-verified
+        run: docker compose -p neurosim-v020-ci --profile web down --volumes --remove-orphans

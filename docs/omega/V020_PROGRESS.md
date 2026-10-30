@@ -11,8 +11,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | Point | Status | Commit | Summary |
 |---|---|---|---|
 | CP01 | Complete | `5dbe7d49f702e06e5edbc1e17587fcf0a9906679` | Verified merge/base and captured baseline suite. |
-| CP02 | Complete; daemon build deferred to CP03 CI | SHA recorded in CP03 ledger update | Improved container health ordering and Next.js runtime token proxy. |
-| CP03 | Pending | — | Full stack runtime, persistence, and lifecycle verification. |
+| CP02 | Complete; daemon build deferred to CP03 CI | `7c2d883c2e992018836a13443ffbdb8a3377faa9` | Improved container health ordering and Next.js runtime token proxy. |
+| CP03 | Pushed; awaiting daemon-enabled CI result | SHA recorded in CP04 ledger update | Added clean full-stack container lifecycle smoke. |
 | CP04 | Pending | — | Scientific validation framework and machine-readable configurations. |
 | CP05 | Pending | — | Hodgkin-Huxley validation. |
 | CP06 | Pending | — | LIF and AdEx validation. |
@@ -65,3 +65,24 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `docs/omega/POST_T210_VALIDATION_RESULTS.md` for earlier host details.
 - Remaining issues: full image build and runtime stack tests required in CP03.
 - Push status: CP02 push result recorded in CP03 ledger update.
+
+## CP03 — Docker full-stack runtime and lifecycle verification
+
+- Commit point ID: CP03.
+- Commit SHA: recorded in CP04 ledger update after remote CI completes.
+- Files changed: `.github/workflows/cpu.yml`, `scripts/smoke_docker_stack.py`.
+- Implementation: the daemon-enabled workflow builds and starts the clean API
+  plus web stack, waits for health checks, exercises direct API rejection and
+  authenticated web proxy access, runs a simulation, retrieves results, retries,
+  cancels a running simulation, restarts the API and verifies persisted results,
+  captures service logs, then removes only the CI-scoped Compose volume.
+- Local checks: `python -m py_compile scripts/smoke_docker_stack.py` — PASS;
+  `python -m ruff check scripts/smoke_docker_stack.py` — PASS;
+  `docker compose -p neurosim-v020-ci --profile web config --quiet` — PASS.
+- Docker runtime: pending daemon-enabled GitHub Actions job; this host has no
+  Docker engine (`dockerDesktopLinuxEngine` named pipe unavailable).
+- Pass/fail: harness and configuration PASS; actual build/runtime result PENDING.
+- Evidence: CI run link and Docker version/log output to be added after workflow
+  completes.
+- Remaining issues: do not treat Docker as verified until that job passes.
+- Push status: pending CP03 push.
