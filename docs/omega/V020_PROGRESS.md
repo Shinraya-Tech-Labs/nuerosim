@@ -13,9 +13,9 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP01 | Complete | `5dbe7d49f702e06e5edbc1e17587fcf0a9906679` | Verified merge/base and captured baseline suite. |
 | CP02 | Complete; daemon build deferred to CP03 CI | `7c2d883c2e992018836a13443ffbdb8a3377faa9` | Improved container health ordering and Next.js runtime token proxy. |
 | CP03 | Complete | `57051899`, `5fc38b70`, `21139cef` | Clean Docker build and full-stack lifecycle smoke verified in hosted CI. |
-| CP04 | Pushed; hosted CI run pending | `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c` | Reproducible eight-case science suite, raw runs, safe runner, CI artifact. |
-| CP05 | Implemented; commit SHA recorded in CP06 ledger update | Pending this commit | Hodgkin-Huxley stimulus-response and DOP853 convergence evidence. |
-| CP06 | Pending | — | LIF and AdEx validation. |
+| CP04 | Complete | `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c` | Reproducible eight-case suite, two matching raw runs, hosted science artifact. |
+| CP05 | Pushed; hosted CI pending | `767d52c44f39dc49565c389f0312fb0e0229ce73` | Hodgkin-Huxley stimulus-response and DOP853 convergence evidence. |
+| CP06 | Implemented; commit SHA recorded in CP07 ledger update | Pending this commit | LIF analytic periods and LIF/AdEx stimulus response. |
 | CP07 | Pending | — | Passive cable and seeded network validation. |
 | CP08 | Pending | — | Independent references and convergence studies. |
 | CP09 | Pending | — | Reproducible benchmark harness and methodology. |
@@ -144,8 +144,10 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Reproducibility: all 8 `scientific_outputs_sha256` values match between
   `scientific/results/v020-core-run-001/` and `run-002/`;
   suite SHA-256 `c6b0d60281ecd6879cae1f71781ae03b4baed6fadbbc28fbd6e8039325b2f43f`.
-- Pass/fail: local validation PASS; hosted CI [run 41116118687](https://github.com/sreerevanth/nuerosim/actions/runs/41116118687)
-  is still running after the push and must pass before final CP04 acceptance.
+- Pass/fail: PASS locally and in hosted CI [run 41116118687](https://github.com/sreerevanth/nuerosim/actions/runs/41116118687).
+  Ubuntu/Python 3.12 ran the suite and uploaded `scientific-validation-results`;
+  all eight Python matrix jobs, dependency audit, Docker, and web workflows
+  passed.
 - Evidence: `scientific/results/v020-core-run-001/summary.json`,
   `scientific/results/v020-core-run-002/summary.json`, and per-experiment JSON
   traces in both directories. Hosted artifact upload is added to CPU CI.
@@ -157,7 +159,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 ## CP05 — Hodgkin–Huxley validation
 
 - Commit point ID: CP05.
-- Commit SHA: recorded in CP06 ledger update after this commit exists.
+- Commit SHA: `767d52c44f39dc49565c389f0312fb0e0229ce73`.
 - Files changed: `tests/test_science.py`, `scientific/README.md`,
   `.github/workflows/cpu.yml`, and this ledger.
 - Implementation: added a stimulus-response regression across 0, 2, 5, and
@@ -175,7 +177,32 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `atol=1e-12`.
 - Evidence: `scientific/results/v020-core-run-002/hh_current_clamp.json`;
   stdout from the focused convergence test; `scientific/README.md`.
-- Pass/fail: focused model checks PASS; hosted CI will run on the next push.
+- Pass/fail: focused model checks PASS; CPU [run 41116458456](https://github.com/sreerevanth/nuerosim/actions/runs/41116458456)
+  and web CI [run 41116458540](https://github.com/sreerevanth/nuerosim/actions/runs/41116458540)
+  are still running.
 - Remaining issues: LIF/AdEx checks in CP06 and cross-model reference/convergence
   summary in CP08.
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA verified
+  at `767d52c44f39dc49565c389f0312fb0e0229ce73`.
+
+## CP06 — LIF and AdEx validation
+
+- Commit point ID: CP06.
+- Commit SHA: recorded in CP07 ledger update after this commit exists.
+- Files changed: `tests/test_science.py`, `scientific/README.md`,
+  and this ledger.
+- Implementation: parameterized the LIF analytic inter-spike period check at
+  three current levels; added monotonic firing-rate checks for LIF and AdEx;
+  documented equations, defaults, initial values, solver, operating currents,
+  AdEx cutoff/reset rule, and numerical reference tolerances.
+- Tests/commands: `$env:PYTHONPATH='python'; python -m pytest tests/test_science.py::test_lif_analytic_subthreshold tests/test_science.py::test_lif_spike_period_and_refractory tests/test_science.py::test_lif_increasing_current_increases_firing_rate tests/test_science.py::test_adex_subthreshold_reference_and_adaptation tests/test_science.py::test_adex_increasing_current_increases_mean_firing_rate tests/test_adaptive_reference.py tests/test_lif_exact_reference.py -q` — 22 passed; isolated Ruff E4/E7/E9/F on `tests/test_science.py` — PASS.
+- Outcomes: LIF firing rates at 1/2/4 uA/cm^2 were 30/80/160 Hz over 100 ms;
+  AdEx rates at 0.3/1/2/4 uA/cm^2 were 0/15/50/100 Hz over 200 ms. Existing
+  exact LIF and independent AdEx DOP853 comparisons passed.
+- Evidence: `scientific/results/v020-core-run-002/lif_subthreshold.json`,
+  `lif_spike_train.json`, `adex_subthreshold.json`, `adex_adaptation.json`,
+  and the LIF/AdEx sections of `scientific/README.md`.
+- Pass/fail: local focused validation PASS; hosted CI will run on this commit.
+- Remaining issues: passive cable/network validation in CP07; combined
+  independent reference and convergence report in CP08.
 - Push status: pending commit and push.

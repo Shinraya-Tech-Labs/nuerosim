@@ -97,14 +97,31 @@ def test_lif_analytic_subthreshold():
     np.testing.assert_allclose(r["voltage"][0], expected, atol=1e-9)
 
 
-def test_lif_spike_period_and_refractory():
+@pytest.mark.parametrize("amplitude", [1, 2, 4])
+def test_lif_spike_period_and_refractory(amplitude):
     r = simulate(
         Experiment(
-            model="lif", duration=100, pulses=[Pulse(start=0, stop=100, amplitude=2)]
+            model="lif",
+            duration=100,
+            pulses=[Pulse(start=0, stop=100, amplitude=amplitude)],
         )
     )
-    period = -20 * np.log(1 - 15 / 40) + 2
+    period = -20 * np.log(1 - 15 / (amplitude * 20)) + 2
     np.testing.assert_allclose(np.diff(r["spikes"][0]), period, atol=0.026)
+
+
+def test_lif_increasing_current_increases_firing_rate():
+    mean_rates = []
+    for amplitude in (1, 2, 4):
+        result = simulate(
+            Experiment(
+                model="lif",
+                duration=100,
+                pulses=[Pulse(start=0, stop=100, amplitude=amplitude)],
+            )
+        )
+        mean_rates.append(result["mean_rate_hz"])
+    assert all(left < right for left, right in zip(mean_rates, mean_rates[1:]))
 
 
 def test_adex_subthreshold_reference_and_adaptation():
@@ -131,6 +148,20 @@ def test_adex_subthreshold_reference_and_adaptation():
     )
     assert len(r["spikes"][0]) > 3
     assert np.diff(r["spikes"][0])[-1] > np.diff(r["spikes"][0])[0]
+
+
+def test_adex_increasing_current_increases_mean_firing_rate():
+    mean_rates = []
+    for amplitude in (0.3, 1, 2, 4):
+        result = simulate(
+            Experiment(
+                model="adex",
+                duration=200,
+                pulses=[Pulse(start=0, stop=200, amplitude=amplitude)],
+            )
+        )
+        mean_rates.append(result["mean_rate_hz"])
+    assert all(left < right for left, right in zip(mean_rates, mean_rates[1:]))
 
 
 def test_passive_cable_conservation_and_decay():

@@ -55,3 +55,37 @@ against new biological data.
 The model equations and rate form are based on Hodgkin and Huxley's primary
 paper: [A quantitative description of membrane current and its application to
 conduction and excitation in nerve (1952)](https://doi.org/10.1113/jphysiol.1952.sp004764).
+
+## LIF and AdEx validation
+
+For LIF, the implemented subthreshold equation is
+`dV/dt = (Vrest - V)/tau_m + I/Cm`, with threshold/reset and a fixed refractory
+interval. Defaults are `Vrest=-65 mV`, `Vthreshold=-50 mV`, `Vreset=-65 mV`,
+`tau_m=20 ms`, `Cm=1 uF/cm^2`, and `refractory=2 ms`; the initial voltage is
+`-65 mV`. The production method is RK4 at `dt=0.025 ms`. With constant input,
+the voltage has the analytic exponential solution and the inter-spike period
+is `-tau_m*ln(1 - (Vthreshold - Vreset)/(I*tau_m)) + refractory`. Tests compare
+the recorded subthreshold trajectory to the analytic curve and check the
+derived period at 1, 2, and 4 `uA/cm^2`. Separate checks require firing rate to
+increase with those current levels. The recorded 100 ms runs produced 30, 80,
+and 160 Hz, respectively.
+
+AdEx uses
+`dV/dt = (Vrest-V)/tau_m + I/Cm + Delta_T/tau_m*exp((V-Vthreshold)/Delta_T) - w/Cm`
+and `dw/dt = (a*(V-Vrest)-w)/tau_w`. Defaults are `Delta_T=2 mV`,
+`tau_w=100 ms`, `a=0.02 mS/cm^2`, and `b=0.1 uA/cm^2`, with `w(0)=0` and
+`V(0)=-65 mV`. For numerical stability, the production implementation caps
+the exponential at `threshold + 5*Delta_T`; a spike resets voltage to `-65 mV`
+and increments adaptation by `b`. The single-neuron tests use RK4 at
+`dt=0.025 ms`. A 0.3 `uA/cm^2`, 20 ms subthreshold trace is compared at the
+endpoint against a separately written SciPy DOP853 system (`rtol=1e-10`,
+`atol=1e-12`) with `1e-7` absolute tolerance. Sustained 2 `uA/cm^2` input
+checks adaptation by requiring successive inter-spike intervals to lengthen;
+0.3, 1, 2, and 4 `uA/cm^2` checks increasing mean firing rate. The recorded
+200 ms runs produced 0, 15, 50, and 100 Hz, respectively.
+
+The AdEx form follows Brette and Gerstner, [Adaptive exponential
+integrate-and-fire model as an effective description of neuronal activity
+(2005)](https://doi.org/10.1152/jn.00686.2005). The comparisons here establish
+implementation and numerical consistency for these fixtures; they do not
+validate the defaults against a particular biological cell recording.
