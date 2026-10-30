@@ -150,6 +150,7 @@ def manifest(config):
 def simulate(config: Experiment, progress=None, cancelled=None):
     start = time.perf_counter()
     state = initial_state(config)
+    rng = np.random.default_rng(config.seed)
     edges = connectivity(config)
     if len(edges) > 32768:
         raise ValueError("limit: 32768 realized synapses; reduce connectivity")
@@ -179,6 +180,8 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         for pulse in config.pulses:
             if round(pulse.start / config.dt) <= step < round(pulse.stop / config.dt):
                 current[pulse.target] += pulse.amplitude
+        if config.parameters.noise_std:
+            current += rng.normal(0, config.parameters.noise_std / np.sqrt(config.dt), config.n)
         t = step * config.dt
         old_v = state[0].copy()
         active = t + 1e-10 >= refractory_until

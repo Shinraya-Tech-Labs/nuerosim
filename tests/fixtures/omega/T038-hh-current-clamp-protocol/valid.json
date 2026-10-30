@@ -1,0 +1,1 @@
+{"experiment":{"model":"hh","duration":50,"dt":0.025,"record_every":1,"pulses":[{"start":10,"stop":40,"amplitude":10}]},"expected_spike_count":2}

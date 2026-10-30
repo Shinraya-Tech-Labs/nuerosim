@@ -1,0 +1,1 @@
+{"base":{"model":"lif","duration":20,"dt":0.025,"record_every":1,"parameters":{},"pulses":[]},"amplitudes":[0,20],"expected_counts":[0,7]}

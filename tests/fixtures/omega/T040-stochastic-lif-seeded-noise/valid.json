@@ -1,0 +1,1 @@
+{"experiment":{"model":"lif","duration":10,"dt":0.025,"record_every":1,"seed":7,"parameters":{"noise_std":1},"pulses":[]},"expected_final_voltage_mV":-69.86007121820472}

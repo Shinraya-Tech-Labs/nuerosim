@@ -42,6 +42,7 @@ class Parameters(StrictModel):
     fhn_epsilon: float = Field(0.08, gt=0, le=1)
     fhn_beta: float = Field(0.7, ge=0, le=2)
     fhn_gamma: float = Field(0.8, ge=0, le=2)
+    noise_std: float = Field(0, ge=0, le=100)
 
 
 class Experiment(StrictModel):
