@@ -85,8 +85,13 @@ Open http://127.0.0.1:3000. Select a saved experiment or create one from **New
 simulation**. Jobs run on the CPU and are saved in SQLite. Set `NEUROSIM_DB` to
 choose another database path; use one server worker per database. `NEUROSIM_API_URL`
 can point the frontend to a different API and must be set before the frontend
-build. This is a single-user local application without remote authentication;
-do not expose it to a network without an authenticated, TLS-terminating proxy.
+build. By default the API binds to 127.0.0.1 and is a single-user local
+application. For the supported container network mode, set a 16-character-or-
+longer `NEUROSIM_AUTH_TOKEN` and `NEUROSIM_ALLOW_REMOTE=1`; every non-health
+request then requires `Authorization: Bearer ...`. TLS termination, accounts,
+and fine-grained roles remain outside the application boundary. The web
+container forwards the token server-side, so it is never embedded in browser
+code.
 
 ## Models and methods
 
@@ -147,11 +152,11 @@ where recorded compartment voltage is present.
 
 ## Validation status
 
-The latest documented local run passed **22 Python tests**, **6 frontend unit
-tests**, a strict Next.js production build, and **4 Playwright end-to-end tests**
-that execute real simulations through the API. Test coverage and raw outputs are
-listed in [`docs/VALIDATION.md`](docs/VALIDATION.md) and the
-[web validation report](docs/WEB_VALIDATION_REPORT.md).
+The post-T210 remediation run passed **628 Python tests**, **6 frontend unit
+tests**, a strict Next.js production build, and **6 Playwright end-to-end tests**
+that execute real simulations through the API. Exact commands, scan results,
+and unavailable Docker validation are recorded in
+[`docs/omega/POST_T210_VALIDATION_RESULTS.md`](docs/omega/POST_T210_VALIDATION_RESULTS.md).
 
 Headless Chromium measured WebGL2 at a median 12.0 FPS for 2,048 visible edges
 and 2.1 FPS for all 20,786 edges in this 512-neuron graph in the latest run.
@@ -188,16 +193,17 @@ npm run test:e2e
 
 ## Deployment and security
 
-For local API use, `docker compose up --build`. To include the web frontend,
-run `docker compose --profile web up --build`. Docker configuration is provided,
-but local container execution has not been verified because the Docker daemon
-was unavailable during validation. Remote CI has not yet been observed green.
+For local API use, set `NEUROSIM_AUTH_TOKEN` and run `docker compose up --build`.
+To include the web frontend, run `docker compose --profile web up --build`.
+The compose profile uses authenticated remote mode on the loopback-published
+port; the Docker daemon was unavailable during this validation run, so container
+startup remains a CI check.
 CUDA and MPI are not supported or validated by the workbench; no acceleration
 or speedup is claimed.
 
-The application has no accounts, TLS or remote authorization. Its SQLite store
-is local and is not a distributed queue; network filesystems and multiple API
-workers are unsupported. Review [architecture and security notes](docs/ARCHITECTURE.md)
+The application has no accounts or built-in TLS. Its SQLite store is local and
+is not a distributed queue; network filesystems and multiple API workers are
+unsupported. Review [architecture and security notes](docs/ARCHITECTURE.md)
 before deployment. The dependency inventory and security scan results are in
 [`docs/validation/`](docs/validation/).
 

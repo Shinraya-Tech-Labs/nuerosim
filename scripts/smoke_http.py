@@ -1,6 +1,7 @@
 """Real job smoke test against localhost; suitable for Docker CI."""
 
 import json
+import os
 import time
 import urllib.request
 
@@ -10,7 +11,11 @@ def request(path, body=None):
     req = urllib.request.Request(
         "http://127.0.0.1:8000" + path,
         data=data,
-        headers={"Content-Type": "application/json"},
+        headers={
+            "Content-Type": "application/json",
+            **({"Authorization": f"Bearer {os.environ['NEUROSIM_AUTH_TOKEN']}"}
+               if os.environ.get("NEUROSIM_AUTH_TOKEN") else {}),
+        },
     )
     with urllib.request.urlopen(req, timeout=10) as response:
         return json.load(response)

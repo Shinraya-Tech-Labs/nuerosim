@@ -9,10 +9,16 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
+import platform
+import time
 import statistics
 import sys
 from pathlib import Path
 from typing import Any, Callable
+
+from .workbench.config import Experiment
+from .workbench.engine import simulate
 
 
 def _num(data: dict[str, Any], key: str, default: float | None = None) -> float:
@@ -34,29 +40,98 @@ def _nums(data: dict[str, Any], key: str) -> list[float]:
     return [float(v) for v in values]
 
 
+def _int(data: dict[str, Any], key: str, *, minimum: int | None = None) -> int:
+    value = data.get(key)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{key} must be an integer")
+    if minimum is not None and value < minimum:
+        raise ValueError(f"{key} must be at least {minimum}")
+    return value
+
+
+def _bool_map(data: dict[str, Any], key: str) -> dict[str, bool]:
+    values = data.get(key)
+    if not isinstance(values, dict) or any(type(value) is not bool for value in values.values()):
+        raise ValueError(f"{key} values must be booleans")
+    return values
+
+
+def _rss_mb() -> float | None:
+    if os.name == "nt":
+        try:
+            import ctypes
+            from ctypes import wintypes
+
+            class Counters(ctypes.Structure):
+                _fields_ = [("cb", wintypes.DWORD), ("page_fault_count", wintypes.DWORD),
+                            ("peak_working_set", ctypes.c_size_t), ("working_set", ctypes.c_size_t)]
+
+            counters = Counters()
+            counters.cb = ctypes.sizeof(counters)
+            ctypes.windll.psapi.GetProcessMemoryInfo(
+                ctypes.windll.kernel32.GetCurrentProcess(), ctypes.byref(counters), counters.cb
+            )
+            return counters.working_set / (1024 * 1024)
+        except (AttributeError, OSError):
+            return None
+    try:
+        import resource
+
+        value = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        return value / (1024 * 1024) if value > 1024 * 1024 else value / 1024
+    except (ImportError, OSError):
+        return None
+
+
 def _pass(**values: Any) -> dict[str, Any]:
     return {"status": "pass", **values}
 
 
 def performance_baseline(d: dict[str, Any]) -> dict[str, Any]:
-    steps = int(_num(d, "steps"))
-    neurons = int(_num(d, "neurons"))
-    if steps <= 0 or neurons <= 0:
-        raise ValueError("steps and neurons must be positive")
+    steps = _int(d, "steps", minimum=1)
+    neurons = _int(d, "neurons", minimum=1)
+    dt = _num(d, "dt", 0.025)
+    if dt <= 0 or dt > 0.025:
+        raise ValueError("dt must be in (0, 0.025]")
+    duration = steps * dt
+    if duration > 2000 or steps * neurons > 10_000_000:
+        raise ValueError("benchmark exceeds bounded simulation budget")
+    config = Experiment(model="lif", n=neurons, duration=duration, dt=dt, pulses=[])
+    before = _rss_mb()
+    started = time.perf_counter()
+    result = simulate(config)
+    wall_time = time.perf_counter() - started
+    after = _rss_mb()
     work = steps * neurons
-    return _pass(work_units=work, work_per_neuron=steps)
+    return _pass(
+        work_units=work,
+        work_per_neuron=steps,
+        wall_time_s=wall_time,
+        rss_before_mb=before,
+        rss_after_mb=after,
+        neurons=neurons,
+        steps=steps,
+        dt=dt,
+        platform=platform.platform(),
+        processor=platform.processor(),
+        simulated_wall_time_s=result["wall_time_s"],
+    )
 
 
 def rss_summary(d: dict[str, Any]) -> dict[str, Any]:
     samples = _nums(d, "samples")
+    if any(sample < 0 for sample in samples):
+        raise ValueError("RSS samples must be nonnegative")
     return _pass(peak_mb=max(samples), delta_mb=max(samples) - min(samples), samples=len(samples))
 
 
 def edge_selection(d: dict[str, Any]) -> dict[str, Any]:
     edges = d.get("edges")
-    limit = int(_num(d, "max_edges"))
+    limit = _int(d, "max_edges", minimum=0)
     if not isinstance(edges, list) or limit < 0:
         raise ValueError("edges must be a list and max_edges nonnegative")
+    if any(not isinstance(edge, dict) for edge in edges):
+        raise ValueError("edges must contain objects")
     ranked = sorted(edges, key=lambda e: (-float(e.get("weight", 0)), e.get("id", "")))
     return _pass(selected=[e.get("id") for e in ranked[:limit]], total=len(edges))
 
@@ -82,14 +157,17 @@ def fps_telemetry(d: dict[str, Any]) -> dict[str, Any]:
 
 
 def vectorized_lif(d: dict[str, Any]) -> dict[str, Any]:
-    currents = _nums(d, "currents")
+    raw = d.get("currents")
+    if isinstance(raw, (int, float)) and not isinstance(raw, bool):
+        currents = [float(raw)]
+    else:
+        currents = _nums(d, "currents")
     dt = _num(d, "dt")
     tau = _num(d, "tau")
     if dt <= 0 or tau <= 0:
         raise ValueError("dt and tau must be positive")
-    voltage = [_num(d, "rest", -65.0)] * len(currents)
-    for current in currents:
-        voltage = [v + dt * (-(v - _num(d, "rest", -65.0)) + current) / tau for v in voltage]
+    rest = _num(d, "rest", -65.0)
+    voltage = [rest + dt * (-(rest - rest) + current) / tau for current in currents]
     return _pass(voltages=voltage, count=len(voltage))
 
 
@@ -237,19 +315,19 @@ def challenge(d: dict[str, Any]) -> dict[str, Any]:
     checks = d.get("checks")
     if not isinstance(checks, list):
         raise ValueError("checks must be a list")
-    return _pass(passed=sum(bool(c) for c in checks), total=len(checks))
+    if any(type(c) is not bool for c in checks):
+        raise ValueError("checks must contain booleans")
+    return _pass(passed=sum(checks), total=len(checks))
 
 
 def gates(d: dict[str, Any]) -> dict[str, Any]:
-    checks = d.get("checks")
-    if not isinstance(checks, dict):
-        raise ValueError("checks must be an object")
-    return _pass(passed=all(bool(v) for v in checks.values()), failed=[k for k, v in checks.items() if not v])
+    checks = _bool_map(d, "checks")
+    return _pass(passed=all(checks.values()), failed=[k for k, v in checks.items() if not v])
 
 
 def rate_limit(d: dict[str, Any]) -> dict[str, Any]:
-    requests = int(_num(d, "requests"))
-    limit = int(_num(d, "limit"))
+    requests = _int(d, "requests", minimum=0)
+    limit = _int(d, "limit", minimum=0)
     return _pass(allowed=requests <= limit, remaining=max(0, limit - requests))
 
 
@@ -264,6 +342,8 @@ def read_only(d: dict[str, Any]) -> dict[str, Any]:
     actions = d.get("actions")
     if not isinstance(actions, list):
         raise ValueError("actions must be a list")
+    if any(not isinstance(action, dict) for action in actions):
+        raise ValueError("actions must contain objects")
     return _pass(allowed=[a for a in actions if a.get("method", "GET") in {"GET", "HEAD"}])
 
 
@@ -286,6 +366,8 @@ def licenses(d: dict[str, Any]) -> dict[str, Any]:
     items = d.get("items")
     if not isinstance(items, list):
         raise ValueError("items must be a list")
+    if any(not isinstance(item, dict) for item in items):
+        raise ValueError("items must contain objects")
     return _pass(unknown=sum(not item.get("license") for item in items))
 
 
@@ -317,15 +399,20 @@ def resilience(d: dict[str, Any]) -> dict[str, Any]:
 
 
 def platform_matrix(d: dict[str, Any]) -> dict[str, Any]:
-    platforms = d.get("platforms")
-    if not isinstance(platforms, dict):
-        raise ValueError("platforms must be an object")
-    return _pass(all_green=all(bool(v) for v in platforms.values()), count=len(platforms))
+    platforms = _bool_map(d, "platforms")
+    return _pass(all_green=all(platforms.values()), count=len(platforms))
 
 
 def checksum(d: dict[str, Any]) -> dict[str, Any]:
-    payload = d.get("payload")
-    digest = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+    if "path" in d:
+        path = Path(d["path"])
+        if not path.is_file():
+            raise ValueError("checksum path must reference a file")
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    elif "content" in d and isinstance(d["content"], str):
+        digest = hashlib.sha256(d["content"].encode()).hexdigest()
+    else:
+        raise ValueError("checksum requires a file path or string content")
     return _pass(sha256=digest)
 
 
@@ -333,6 +420,8 @@ def catalogue(d: dict[str, Any]) -> dict[str, Any]:
     models = d.get("models")
     if not isinstance(models, list):
         raise ValueError("models must be a list")
+    if any(not isinstance(model, dict) for model in models):
+        raise ValueError("models must contain objects")
     return _pass(count=len(models), ids=[m.get("id") for m in models])
 
 
@@ -394,7 +483,8 @@ _register("T193 T194 T195", platform_matrix)
 _register("T196 T197", challenge)
 _register("T198", catalogue)
 _register("T199 T200", comparison)
-_register("T201 T202 T203 T204 T205 T206 T207 T208 T209 T210", gates)
+_register("T201 T202 T203 T204 T205 T206 T207 T208 T210", gates)
+_register("T209", checksum)
 
 
 def run_task(task: str, payload: dict[str, Any]) -> dict[str, Any]:
@@ -408,6 +498,8 @@ def run_task(task: str, payload: dict[str, Any]) -> dict[str, Any]:
 
 def run_fixture(path: str | Path) -> dict[str, Any]:
     fixture = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(fixture, dict) or not isinstance(fixture.get("task"), str):
+        raise ValueError("fixture must contain a task string")
     output = run_task(fixture["task"], fixture)
     expected = fixture.get("expected")
     if expected is not None and any(output["result"].get(key) != value for key, value in expected.items()):
@@ -422,7 +514,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     try:
         print(json.dumps(run_fixture(args[1]), sort_keys=True))
-    except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+    except (OSError, KeyError, TypeError, ValueError, AttributeError, json.JSONDecodeError) as exc:
         print(f"omega audit: {exc}", file=sys.stderr)
         return 2
     return 0

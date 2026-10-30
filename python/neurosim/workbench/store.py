@@ -74,19 +74,37 @@ class Store:
             ).fetchone()
         if row is None:
             raise KeyError(jid)
+        return self._decode_job_row(row)
+
+    @staticmethod
+    def _decode_job_row(row):
         result = dict(row)
         result["manifest"] = json.loads(result["manifest"])
         return result
 
     def history(self, limit=100):
         with self.connection() as db:
-            ids = [
-                r[0]
-                for r in db.execute(
-                    "SELECT id FROM jobs ORDER BY created DESC LIMIT ?", (limit,)
-                )
-            ]
-        return [self.get(jid) for jid in ids]
+            rows = db.execute(
+                "SELECT id,created,updated,status,progress,manifest,parent_id,error "
+                "FROM jobs ORDER BY created DESC LIMIT ?",
+                (limit,),
+            ).fetchall()
+        return [self._decode_job_row(row) for row in rows]
+
+    def backup_to(self, destination):
+        """Create a consistent SQLite backup without copying a live file."""
+        target = Path(destination)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with self.connection() as source, sqlite3.connect(target) as backup:
+            source.backup(backup)
+
+    def restore_from(self, source):
+        """Restore this store from a SQLite backup using SQLite's backup API."""
+        source_path = Path(source)
+        if not source_path.is_file():
+            raise FileNotFoundError(source_path)
+        with sqlite3.connect(source_path) as backup, self.connection() as target:
+            backup.backup(target)
 
     def exhibition(self):
         with self.connection() as db:
@@ -181,11 +199,21 @@ class Store:
             current = db.execute(
                 "SELECT status FROM jobs WHERE id=?", (jid,)
             ).fetchone()[0]
+            if current in ("completed", "failed", "cancelled"):
+                return
             if current == "cancelling":
                 status, payload, error = "cancelled", None, None
             db.execute(
                 "UPDATE jobs SET status=?,result=?,error=?,updated=?,progress=CASE WHEN ?='completed' THEN 1 ELSE progress END WHERE id=?",
                 (status, payload, error, time.time(), status, jid),
+            )
+
+    def mark_interrupted(self, message):
+        with self.connection() as db:
+            db.execute(
+                "UPDATE jobs SET status='failed',error=?,updated=? "
+                "WHERE status IN ('running','cancelling')",
+                (message, time.time()),
             )
 
 
@@ -265,5 +293,11 @@ class Worker:
 
     def close(self):
         self.stop.set()
-        self.thread.join()
-        self.lock.close()
+        self.thread.join(timeout=5.0)
+        if self.thread.is_alive():
+            self.store.mark_interrupted(
+                "Worker shutdown timed out; execution interrupted safely; retry from manifest"
+            )
+            self.thread.join(timeout=0.25)
+        if not self.thread.is_alive():
+            self.lock.close()
