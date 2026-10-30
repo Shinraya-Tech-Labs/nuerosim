@@ -19,10 +19,10 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP07 | Complete | `df4e3dd` | Cable DOP853 trajectory check and seeded-network invariants. |
 | CP08 | Complete | `927a929345aa2025286c5243608f40c0d05d1dc3` | Seven-reference report with unit-separated errors and convergence orders. |
 | CP09 | Complete | `60c00909ef07a97f5c0267db52047f68aaaf750e` | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
-| CP10 | Pushed; hosted checks running | `59bb8de51b3b0be45d6aa65a75e3845108db463c` | Captured five-repeat measurements for all 11 workloads with stable cross-platform provenance. |
-| CP11 | CPU pass; web check running | `134c10cee0a45e531d43b6112a7f03fec507d305` | API, worker, storage, and lifecycle integration verification. |
-| CP12 | Implemented; local checks pass | Pending this commit | Browser workbench, rendering, persistence, and export integration. |
-| CP13 | Pending | — | Verified capabilities, deployment, and limitations docs. |
+| CP10 | Hosted CPU and web checks pass | `59bb8de51b3b0be45d6aa65a75e3845108db463c` | Captured five-repeat measurements for all 11 workloads with stable cross-platform provenance. |
+| CP11 | Complete; hosted CPU and web checks pass | `134c10cee0a45e531d43b6112a7f03fec507d305` | API, worker, storage, and lifecycle integration verification. |
+| CP12 | Pushed; hosted checks running | `a4b5e1bafd6fcec7c6db0f86f92f8616b78072bc` | Browser workbench, rendering, persistence, and export integration. |
+| CP13 | Implemented; local documentation checks pass | Pending this commit | Verified capabilities, deployment, and limitations docs. |
 | CP14 | Pending | — | Full regression, CI, security, and release-gate review. |
 | CP15 | Pending | — | Version, annotated tag, and GitHub release (only if all gates pass). |
 
@@ -338,10 +338,12 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `docs/BENCHMARK_RESULTS.md`, and `docs/BENCHMARK_METHODOLOGY.md`.
 - Pass/fail: corrected benchmark execution, LF/CRLF hash regression, stable
   report-byte regression, report verification, and focused tests PASS; hosted
-  CPU run 41122245333 is in progress and web run 41122245338 is queued.
-- Remaining issues: API/worker/storage lifecycle integration is CP11; this
-  benchmark does not measure API queuing, concurrent users, or deployment
-  storage.
+  CPU [run 41122245333](https://github.com/sreerevanth/nuerosim/actions/runs/41122245333)
+  and web [run 41122245338](https://github.com/sreerevanth/nuerosim/actions/runs/41122245338)
+  both passed on the report publication head.
+- Remaining issues: no benchmark-specific blocker remains. This benchmark does
+  not measure API queuing, concurrent users, or deployment storage; lifecycle
+  and storage behavior is covered separately in CP11.
 - Push status: all CP10 work pushed to
   `origin/codex/neurosim-v020-release`; remote SHA verified at
   `59bb8de51b3b0be45d6aa65a75e3845108db463c`.
@@ -367,20 +369,21 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Evidence: `tests/test_release_reliability.py`,
   `tests/test_api.py`, `tests/test_visualization_api.py`, and
   `tests/test_post_t210_remediation.py`.
-- Pass/fail: focused local integration suite PASS. Hosted CPU matrix passed
-  after the CP10 hash fix in [run 41121655259](https://github.com/sreerevanth/nuerosim/actions/runs/41121655259);
-  corrected web workflow [run 41121655282](https://github.com/sreerevanth/nuerosim/actions/runs/41121655282)
-  is still running. Earlier Windows failures on runs 41119716700 and
+- Pass/fail: focused local integration suite PASS. The hosted CPU matrix and
+  web integration workflow, including this test file, passed together on the
+  later publication head in runs
+  [41122245333](https://github.com/sreerevanth/nuerosim/actions/runs/41122245333)
+  and [41122245338](https://github.com/sreerevanth/nuerosim/actions/runs/41122245338).
+  Earlier Windows failures on runs 41119716700 and
   41119717047 were caused by the now-fixed CP10 line-ending hash defect.
-- Remaining issues: frontend and browser flows are CP12; full regression and
-  security/release gate review are CP14.
+- Remaining issues: full regression and security/release gate review are CP14.
 - Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
   verified at `134c10cee0a45e531d43b6112a7f03fec507d305`.
 
 ## CP12 — Frontend, browser, and export integration
 
 - Commit point ID: CP12.
-- Commit SHA: recorded in CP13 ledger update after this commit exists.
+- Commit SHA: `a4b5e1bafd6fcec7c6db0f86f92f8616b78072bc`.
 - Files changed: `.github/workflows/web.yml`,
   `web/tests/e2e/connectivity.spec.ts`, refreshed screenshots and measured
   browser results in `docs/validation/`,
@@ -406,8 +409,50 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `docs/validation/web-network-512-auto.png`,
   `docs/validation/web-network-512-redesign.png`, the exhibition screenshots,
   and `docs/validation/web-render-benchmark-redesign.json`.
-- Pass/fail: all focused local browser and frontend checks PASS; hosted CI runs
-  on push.
-- Remaining issues: deployment and capability/limitation documentation is
-  CP13; full release regression/security gate review is CP14.
+- Pass/fail: all focused local browser and frontend checks PASS. Hosted CPU
+  run [41122970088](https://github.com/sreerevanth/nuerosim/actions/runs/41122970088)
+  is queued; web run
+  [41122970014](https://github.com/sreerevanth/nuerosim/actions/runs/41122970014)
+  is in progress at the time this entry was written.
+- Remaining issues: full regression and security/release gate review are CP14.
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
+  verified at `a4b5e1bafd6fcec7c6db0f86f92f8616b78072bc`.
+
+## CP13 — Documentation, deployment, and limitations
+
+- Commit point ID: CP13.
+- Commit SHA: recorded in CP14 ledger update after this commit exists.
+- Files changed: `docs/DEPLOYMENT.md`, `docs/VALIDATION.md`, `README.md`, and
+  this ledger.
+- Implementation: added Compose instructions for API-only and full web startup,
+  generated bearer-token setup, loopback binding, health checks, SQLite volume
+  retention and online backup, and data-preserving shutdown. Documented the
+  reverse-proxy trust boundary, absent accounts/TLS/rotation, local-only SQLite
+  constraints, supported scientific bounds, unsupported CUDA/MPI, renderer
+  measurement limits, and unresolved licensing. Linked the deployment guide
+  from the README and refreshed the validation index with dated CP10–CP12
+  evidence and unresolved release gates.
+- Tests/commands (all PASS):
+
+  ```powershell
+  python -c "from pathlib import Path; fs=[Path('README.md'),Path('docs/DEPLOYMENT.md'),Path('docs/VALIDATION.md'),Path('docs/WEB_INTEGRATION_VALIDATION.md')]; links=[(f,u.split(')',1)[0]) for f in fs for u in f.read_text(encoding='utf-8').split('](')[1:]]; bad=[(str(f),u) for f,u in links if not u.startswith(('http://','https://','mailto:','#')) and u.split('#',1)[0] and not (f.parent/u.split('#',1)[0]).exists()]; print('Markdown local links: PASS' if not bad else bad); assert not bad"
+  python -c "import yaml; files=['docker-compose.yml','.github/workflows/cpu.yml','.github/workflows/web.yml']; [yaml.safe_load(open(f, encoding='utf-8')) for f in files]; print('YAML parse: PASS (3 files)')"
+  $env:NEUROSIM_AUTH_TOKEN='neurosim-documentation-validation-token'; docker compose config --quiet
+  git diff --check
+  ```
+
+  The local Docker daemon remains unavailable, so no local image startup was
+  claimed.
+- Outcome: deployment and validation guidance now describes verified behavior,
+  accurately distinguishes prior hosted Docker smoke evidence from local
+  runtime availability, and keeps license and release gates visible.
+- Evidence: `docs/DEPLOYMENT.md`, `docs/VALIDATION.md`,
+  `docs/omega/POST_T210_REMAINING_LIMITATIONS.md`, and CP10/CP11/CP12 records
+  above.
+- Pass/fail: documentation links, Compose configuration, YAML parsing, and
+  whitespace checks PASS. At recording time, CP12 CPU run 41122970088 was
+  queued and web run 41122970014 was in progress; CP14 must verify the final
+  hosted state and rerun current security scans.
+- Remaining issues: confirmed license terms remain an explicit release gate;
+  full regression, current security scans, and release review are CP14.
 - Push status: pending commit and push.

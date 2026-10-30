@@ -207,6 +207,9 @@ unsupported. Review [architecture and security notes](docs/ARCHITECTURE.md)
 before deployment. The dependency inventory and security scan results are in
 [`docs/validation/`](docs/validation/).
 
+See the [Compose deployment guide](docs/DEPLOYMENT.md) for startup, persistence,
+backup, and shutdown procedures.
+
 The repository has no confirmed project license. Its earlier Apache-2.0 claim
 was removed because a matching license file was absent. Do not redistribute
 until ownership and license terms are resolved. Version `0.2.0.dev0` denotes
@@ -218,6 +221,8 @@ development work, not a released package.
   reproducibility and scientific interpretation limits.
 - [Architecture and security](docs/ARCHITECTURE.md) — services, persistence,
   operations and release gates.
+- [Compose deployment](docs/DEPLOYMENT.md) — local deployment, data retention,
+  backups, and security boundaries.
 - [Web workbench guide](docs/WEB_WORKBENCH.md) — data endpoints, controls,
   playback, display budgets and browser tests.
 - [Implementation audit](docs/IMPLEMENTATION_AUDIT.md) — repository findings
