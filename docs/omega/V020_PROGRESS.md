@@ -81,6 +81,11 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `docker compose -p neurosim-v020-ci --profile web config --quiet` — PASS.
 - Docker runtime: pending daemon-enabled GitHub Actions job; this host has no
   Docker engine (`dockerDesktopLinuxEngine` named pipe unavailable).
+- Hosted CI: first candidate run `41113922670` failed at Ruff in Ubuntu/Python
+  3.12 after the Python suite passed; matrix fail-fast cancelled remaining jobs.
+  The runner selected different ambient lint rules than this host. The lint
+  command is now isolated with explicit E4/E7/E9/F selection and matrix fail-fast
+  is disabled. Await the new head's rerun before accepting this point.
 - Pass/fail: harness and configuration PASS; actual build/runtime result PENDING.
 - Evidence: CI run link and Docker version/log output to be added after workflow
   completes.
