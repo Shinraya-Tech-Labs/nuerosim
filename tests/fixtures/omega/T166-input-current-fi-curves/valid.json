@@ -1,0 +1,1 @@
+{"task":"T166","input":{"spikes":5,"duration":100},"expected":{"rate_hz":50}}
