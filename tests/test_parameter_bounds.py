@@ -51,7 +51,7 @@ def test_T006_model_parameter_bounds_audit_workbench_integration():
     )
 
     assert report["status"] == "pass"
-    assert report["field_count"] == 32
+    assert report["field_count"] == 40
     assert (dt["default"], dt["minimum"], dt["maximum"]) == (0.025, 0.001, 0.025)
 
 
