@@ -18,8 +18,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP06 | Complete | `2d91981eb14190ff26f211083a4807d6934570a4` | LIF analytic periods and LIF/AdEx stimulus response. |
 | CP07 | Complete | `df4e3dd` | Cable DOP853 trajectory check and seeded-network invariants. |
 | CP08 | Complete | `927a929345aa2025286c5243608f40c0d05d1dc3` | Seven-reference report with unit-separated errors and convergence orders. |
-| CP09 | Implemented; commit SHA recorded in CP10 ledger update | Pending this commit | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
-| CP10 | Pending | — | Benchmark runs, raw measurements, and results. |
+| CP09 | Complete | `60c00909ef07a97f5c0267db52047f68aaaf750e` | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
+| CP10 | Implemented; commit SHA recorded in CP11 ledger update | Pending this commit | Captured five-repeat measurements for all 11 workloads with raw samples and results. |
 | CP11 | Pending | — | API, worker, storage, and lifecycle integration. |
 | CP12 | Pending | — | Frontend, browser, and export integration. |
 | CP13 | Pending | — | Verified capabilities, deployment, and limitations docs. |
@@ -289,10 +289,41 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Failure fixed: the first Windows run showed that `GetProcessMemoryInfo` used
   an implicit 32-bit handle signature. Explicit Win32 function prototypes fixed
   it; the complete focused test rerun passed.
-- Pass/fail: harness unit tests and configuration validation PASS; actual
-  benchmark execution and raw measurement results are CP10.
+- Pass/fail: harness unit tests, configuration validation, Ubuntu CPU matrix,
+  Docker build/runtime smoke, and web workflow PASS in [CPU run 41118478729](https://github.com/sreerevanth/nuerosim/actions/runs/41118478729)
+  and [web run 41118478731](https://github.com/sreerevanth/nuerosim/actions/runs/41118478731).
 - Evidence: `docs/BENCHMARK_METHODOLOGY.md`,
   `benchmarks/v020-workloads.json`, and `tests/test_release_benchmarks.py`.
-- Remaining issues: execute all configured workloads on the captured host and
-  publish unaltered samples/aggregates in CP10.
+- Remaining issues: actual benchmark execution and raw measurements are
+  captured in CP10.
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
+  verified at `60c00909ef07a97f5c0267db52047f68aaaf750e`.
+
+## CP10 — Execute benchmarks and publish measured results
+
+- Commit point ID: CP10.
+- Commit SHA: recorded in CP11 ledger update after this commit exists.
+- Files changed: `benchmarks/results/v020-run-001.json` (captured raw samples and
+  aggregates), `docs/BENCHMARK_RESULTS.md`,
+  `scripts/verify_release_benchmark_report.py`,
+  `tests/test_benchmark_report.py`, and this ledger.
+- Implementation: ran the configured 11 CPU workloads with one discarded
+  warm-up and five fresh-process repetitions each. Every workload produced the
+  same deterministic output SHA across its repetitions. Published the measured
+  timing, result-size, and incremental RSS summaries with host metadata and
+  clear scope limits. Added a report verifier that recomputes summaries from
+  raw samples and checks the captured input hashes.
+- Tests/commands: `$env:PYTHONPATH='python'; python scripts/run_release_benchmarks.py --config benchmarks/v020-workloads.json --output benchmarks/results/v020-run-001.json` — 11 workloads, 5 repetitions each, PASS; `python scripts/verify_release_benchmark_report.py` — PASS; `$env:PYTHONPATH='python'; python -m pytest tests/test_benchmark_report.py tests/test_release_benchmarks.py -q` — 5 passed; `python -m ruff check --isolated --select E4,E7,E9,F scripts/verify_release_benchmark_report.py tests/test_benchmark_report.py` — PASS; `python -m py_compile scripts/verify_release_benchmark_report.py tests/test_benchmark_report.py` — PASS.
+- Outcome: simulation median ranged from 0.240 s (`lif-network-16-p05-30ms`)
+  to 4.665 s (`lif-long-1000ms`). The 64-cell 200 ms serialization workload
+  produced a 1,501,263-byte JSON result with 35.837 ms median encoding,
+  27.977 ms median decoding, and 20.67 MiB incremental peak RSS. These are
+  single-host serial CPU measurements, not throughput claims.
+- Evidence: `benchmarks/results/v020-run-001.json` (SHA-256
+  `106367d3ea4ef55dc08d1e16e48c2e3a47bc5dc6159d5dae412fb40153ab4666`),
+  `docs/BENCHMARK_RESULTS.md`, and `docs/BENCHMARK_METHODOLOGY.md`.
+- Pass/fail: benchmark execution and determinism checks PASS; report recorded.
+- Remaining issues: API/worker/storage lifecycle integration is CP11; this
+  benchmark does not measure API queuing, concurrent users, or deployment
+  storage.
 - Push status: pending commit and push.

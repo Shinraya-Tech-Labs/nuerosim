@@ -1,0 +1,2472 @@
+{
+  "benchmarks": [
+    {
+      "category": "single-neuron",
+      "config": {
+        "dt": 0.025,
+        "duration": 50,
+        "model": "hh",
+        "n": 1,
+        "probability": 0,
+        "pulses": [
+          {
+            "amplitude": 10,
+            "start": 0,
+            "stop": 50,
+            "target": 0
+          }
+        ],
+        "record_every": 10,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 1,
+        "neuron_steps": 2000,
+        "realized_edge_count": 0,
+        "serialized_result_bytes": 6440,
+        "spike_count": 4,
+        "time_steps": 2000
+      },
+      "id": "hh-single-50ms",
+      "identical_output_sha256": "774ccfe2fe238be354b46c5562d7702b7a390b4fe2fe36f60a82ffe1336d304a",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8585216.0,
+          "mean": 8480358.4,
+          "median": 8466432.0,
+          "min": 8380416.0,
+          "p95": 8583577.6,
+          "sample_stddev": 97730.59433360671
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42106880.0,
+          "mean": 42044620.8,
+          "median": 42029056.0,
+          "min": 42000384.0,
+          "p95": 42099507.2,
+          "sample_stddev": 43289.89520892838
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50593792.0,
+          "mean": 50524979.2,
+          "median": 50573312.0,
+          "min": 50421760.0,
+          "p95": 50592153.6,
+          "sample_stddev": 82093.89543199909
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 0.9190901999827474,
+          "mean": 0.9019949399749748,
+          "median": 0.8984771000104956,
+          "min": 0.8868621999281459,
+          "p95": 0.9171090999851004,
+          "sample_stddev": 0.012420371346163427
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.00023710000095888972,
+          "mean": 0.0001775199896655977,
+          "median": 0.00015279999934136868,
+          "min": 0.0001430999836884439,
+          "p95": 0.0002304399968124926,
+          "sample_stddev": 4.107976715937032e-05
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.00029120000544935465,
+          "mean": 0.00024691999424248935,
+          "median": 0.00022819999139755964,
+          "min": 0.00021169998217374086,
+          "p95": 0.0002899800078012049,
+          "sample_stddev": 3.8153351102364974e-05
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00020439998479560018,
+          "mean": 0.00014845998957753183,
+          "median": 0.0001441999920643866,
+          "min": 0.00011829996947199106,
+          "p95": 0.00019395998679101466,
+          "sample_stddev": 3.431148432455024e-05
+        },
+        "simulation": {
+          "count": 5,
+          "max": 0.9184490999905393,
+          "mean": 0.9014220400014892,
+          "median": 0.8979894000221975,
+          "min": 0.8863824000000022,
+          "p95": 0.9164915799978189,
+          "sample_stddev": 0.012388276307671826
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 0.8979456999804825,
+          "incremental_peak_rss_bytes": 8585216,
+          "neuron_count": 1,
+          "output_sha256": "774ccfe2fe238be354b46c5562d7702b7a390b4fe2fe36f60a82ffe1336d304a",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50585600,
+            "serialization": 50585600,
+            "setup": 42123264,
+            "simulation": 50585600
+          },
+          "process_baseline_rss_bytes": 42000384,
+          "process_peak_rss_bytes": 50585600,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00015279999934136868,
+          "serialization_s": 0.00021169998217374086,
+          "serialized_result_bytes": 6440,
+          "setup_s": 0.00012320000678300858,
+          "simulation_s": 0.8979894000221975,
+          "spike_count": 4,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.8863355999928899,
+          "incremental_peak_rss_bytes": 8577024,
+          "neuron_count": 1,
+          "output_sha256": "774ccfe2fe238be354b46c5562d7702b7a390b4fe2fe36f60a82ffe1336d304a",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50593792,
+            "serialization": 50593792,
+            "setup": 42139648,
+            "simulation": 50593792
+          },
+          "process_baseline_rss_bytes": 42016768,
+          "process_peak_rss_bytes": 50593792,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.0001430999836884439,
+          "serialization_s": 0.00021839997498318553,
+          "serialized_result_bytes": 6440,
+          "setup_s": 0.00011829996947199106,
+          "simulation_s": 0.8863824000000022,
+          "spike_count": 4,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.9086190999951214,
+          "incremental_peak_rss_bytes": 8466432,
+          "neuron_count": 1,
+          "output_sha256": "774ccfe2fe238be354b46c5562d7702b7a390b4fe2fe36f60a82ffe1336d304a",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50573312,
+            "serialization": 50573312,
+            "setup": 42229760,
+            "simulation": 50573312
+          },
+          "process_baseline_rss_bytes": 42106880,
+          "process_peak_rss_bytes": 50573312,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00015079998411238194,
+          "serialization_s": 0.00022819999139755964,
+          "serialized_result_bytes": 6440,
+          "setup_s": 0.0001441999920643866,
+          "simulation_s": 0.9086615000269376,
+          "spike_count": 4,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.9183928999700584,
+          "incremental_peak_rss_bytes": 8392704,
+          "neuron_count": 1,
+          "output_sha256": "774ccfe2fe238be354b46c5562d7702b7a390b4fe2fe36f60a82ffe1336d304a",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50421760,
+            "serialization": 50421760,
+            "setup": 42151936,
+            "simulation": 50421760
+          },
+          "process_baseline_rss_bytes": 42029056,
+          "process_peak_rss_bytes": 50421760,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00020379998022690415,
+          "serialization_s": 0.000285100017208606,
+          "serialized_result_bytes": 6440,
+          "setup_s": 0.00015219999477267265,
+          "simulation_s": 0.9184490999905393,
+          "spike_count": 4,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.8955546999932267,
+          "incremental_peak_rss_bytes": 8380416,
+          "neuron_count": 1,
+          "output_sha256": "774ccfe2fe238be354b46c5562d7702b7a390b4fe2fe36f60a82ffe1336d304a",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50450432,
+            "serialization": 50450432,
+            "setup": 42192896,
+            "simulation": 50450432
+          },
+          "process_baseline_rss_bytes": 42070016,
+          "process_peak_rss_bytes": 50450432,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00023710000095888972,
+          "serialization_s": 0.00029120000544935465,
+          "serialized_result_bytes": 6440,
+          "setup_s": 0.00020439998479560018,
+          "simulation_s": 0.8956277999677695,
+          "spike_count": 4,
+          "time_steps": 2000
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "single-neuron-long-duration",
+      "config": {
+        "dt": 0.025,
+        "duration": 500,
+        "model": "lif",
+        "n": 1,
+        "probability": 0,
+        "pulses": [
+          {
+            "amplitude": 2,
+            "start": 0,
+            "stop": 500,
+            "target": 0
+          }
+        ],
+        "record_every": 20,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 1,
+        "neuron_steps": 20000,
+        "realized_edge_count": 0,
+        "serialized_result_bytes": 26664,
+        "spike_count": 43,
+        "time_steps": 20000
+      },
+      "id": "lif-single-500ms",
+      "identical_output_sha256": "12e9190cbafece0ddf3dd9015f5e4c866e58deb5a930761c4896ecea28a82d69",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8609792.0,
+          "mean": 8534425.6,
+          "median": 8589312.0,
+          "min": 8355840.0,
+          "p95": 8606515.2,
+          "sample_stddev": 105092.5368082815
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42168320.0,
+          "mean": 42097049.6,
+          "median": 42090496.0,
+          "min": 42012672.0,
+          "p95": 42160947.2,
+          "sample_stddev": 58402.1233586588
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50700288.0,
+          "mean": 50631475.2,
+          "median": 50675712.0,
+          "min": 50487296.0,
+          "p95": 50698649.6,
+          "sample_stddev": 89476.7426496964
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 3.065522399963811,
+          "mean": 2.740890860010404,
+          "median": 2.6677388999960385,
+          "min": 2.627532400074415,
+          "p95": 2.9908377399784514,
+          "sample_stddev": 0.18299409610021083
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.0008556999964639544,
+          "mean": 0.0005994400009512902,
+          "median": 0.0004978000069968402,
+          "min": 0.00043349998304620385,
+          "p95": 0.0008284599985927344,
+          "sample_stddev": 0.00018012131583718634
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.0011532999924384058,
+          "mean": 0.0008541599963791668,
+          "median": 0.000744100019801408,
+          "min": 0.0006559999892488122,
+          "p95": 0.001118139992468059,
+          "sample_stddev": 0.00020562917371618646
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00015139998868107796,
+          "mean": 0.0001337000052444637,
+          "median": 0.00012969999806955457,
+          "min": 0.00012390001211315393,
+          "p95": 0.00014863999094814063,
+          "sample_stddev": 1.1195746412446694e-05
+        },
+        "simulation": {
+          "count": 5,
+          "max": 3.0642952999914996,
+          "mean": 2.739303560007829,
+          "median": 2.6663569000083953,
+          "min": 2.6261646000202745,
+          "p95": 2.9894283200032077,
+          "sample_stddev": 0.18316491324439052
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 2.6897942000068724,
+          "incremental_peak_rss_bytes": 8523776,
+          "neuron_count": 1,
+          "output_sha256": "12e9190cbafece0ddf3dd9015f5e4c866e58deb5a930761c4896ecea28a82d69",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50692096,
+            "serialization": 50692096,
+            "setup": 42287104,
+            "simulation": 50692096
+          },
+          "process_baseline_rss_bytes": 42168320,
+          "process_peak_rss_bytes": 50692096,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.0008556999964639544,
+          "serialization_s": 0.0011532999924384058,
+          "serialized_result_bytes": 26664,
+          "setup_s": 0.00012969999806955457,
+          "simulation_s": 2.6899604000500403,
+          "spike_count": 43,
+          "time_steps": 20000
+        },
+        {
+          "engine_reported_simulation_s": 2.6260389999952167,
+          "incremental_peak_rss_bytes": 8355840,
+          "neuron_count": 1,
+          "output_sha256": "12e9190cbafece0ddf3dd9015f5e4c866e58deb5a930761c4896ecea28a82d69",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50487296,
+            "serialization": 50487296,
+            "setup": 42254336,
+            "simulation": 50487296
+          },
+          "process_baseline_rss_bytes": 42131456,
+          "process_peak_rss_bytes": 50487296,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.0004978000069968402,
+          "serialization_s": 0.000744100019801408,
+          "serialized_result_bytes": 26664,
+          "setup_s": 0.00012590002734214067,
+          "simulation_s": 2.6261646000202745,
+          "spike_count": 43,
+          "time_steps": 20000
+        },
+        {
+          "engine_reported_simulation_s": 2.6495764999999665,
+          "incremental_peak_rss_bytes": 8609792,
+          "neuron_count": 1,
+          "output_sha256": "12e9190cbafece0ddf3dd9015f5e4c866e58deb5a930761c4896ecea28a82d69",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50700288,
+            "serialization": 50700288,
+            "setup": 42213376,
+            "simulation": 50700288
+          },
+          "process_baseline_rss_bytes": 42090496,
+          "process_peak_rss_bytes": 50700288,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.0007195000071078539,
+          "serialization_s": 0.0009774999925866723,
+          "serialized_result_bytes": 26664,
+          "setup_s": 0.00012390001211315393,
+          "simulation_s": 2.6497405999689363,
+          "spike_count": 43,
+          "time_steps": 20000
+        },
+        {
+          "engine_reported_simulation_s": 2.6662049999576993,
+          "incremental_peak_rss_bytes": 8589312,
+          "neuron_count": 1,
+          "output_sha256": "12e9190cbafece0ddf3dd9015f5e4c866e58deb5a930761c4896ecea28a82d69",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50601984,
+            "serialization": 50601984,
+            "setup": 42135552,
+            "simulation": 50601984
+          },
+          "process_baseline_rss_bytes": 42012672,
+          "process_peak_rss_bytes": 50601984,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.0004907000111415982,
+          "serialization_s": 0.0007398999878205359,
+          "serialized_result_bytes": 26664,
+          "setup_s": 0.00015139998868107796,
+          "simulation_s": 2.6663569000083953,
+          "spike_count": 43,
+          "time_steps": 20000
+        },
+        {
+          "engine_reported_simulation_s": 3.064176000014413,
+          "incremental_peak_rss_bytes": 8593408,
+          "neuron_count": 1,
+          "output_sha256": "12e9190cbafece0ddf3dd9015f5e4c866e58deb5a930761c4896ecea28a82d69",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50675712,
+            "serialization": 50675712,
+            "setup": 42205184,
+            "simulation": 50675712
+          },
+          "process_baseline_rss_bytes": 42082304,
+          "process_peak_rss_bytes": 50675712,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00043349998304620385,
+          "serialization_s": 0.0006559999892488122,
+          "serialized_result_bytes": 26663,
+          "setup_s": 0.00013760000001639128,
+          "simulation_s": 3.0642952999914996,
+          "spike_count": 43,
+          "time_steps": 20000
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "single-neuron",
+      "config": {
+        "dt": 0.025,
+        "duration": 200,
+        "model": "adex",
+        "n": 1,
+        "probability": 0,
+        "pulses": [
+          {
+            "amplitude": 2,
+            "start": 0,
+            "stop": 200,
+            "target": 0
+          }
+        ],
+        "record_every": 10,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 1,
+        "neuron_steps": 8000,
+        "realized_edge_count": 0,
+        "serialized_result_bytes": 21168,
+        "spike_count": 10,
+        "time_steps": 8000
+      },
+      "id": "adex-single-200ms",
+      "identical_output_sha256": "c000b7da0378ef9f25efb94971398d9ba754063f45f55c0239253380475adbb2",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8560640.0,
+          "mean": 8491827.2,
+          "median": 8531968.0,
+          "min": 8413184.0,
+          "p95": 8555724.8,
+          "sample_stddev": 70790.9204573581
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42147840.0,
+          "mean": 42087219.2,
+          "median": 42082304.0,
+          "min": 42037248.0,
+          "p95": 42135552.0,
+          "sample_stddev": 39436.63174258167
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50708480.0,
+          "mean": 50579046.4,
+          "median": 50569216.0,
+          "min": 50495488.0,
+          "p95": 50691276.8,
+          "sample_stddev": 89486.11734118316
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 1.5936393000301905,
+          "mean": 1.5576139999786391,
+          "median": 1.5650914999423549,
+          "min": 1.4983703999896534,
+          "p95": 1.5925396800157614,
+          "sample_stddev": 0.03877527225203405
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.0003522000042721629,
+          "mean": 0.0003442400135099888,
+          "median": 0.00034170004073530436,
+          "min": 0.00033660000190138817,
+          "p95": 0.000352040003053844,
+          "sample_stddev": 7.138830157339319e-06
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.0006041000015102327,
+          "mean": 0.0005524800042621791,
+          "median": 0.0005360000068321824,
+          "min": 0.0005273999995552003,
+          "p95": 0.0005967000033706427,
+          "sample_stddev": 3.3121247488601705e-05
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00012839998817071319,
+          "mean": 0.00011897997464984655,
+          "median": 0.0001175999641418457,
+          "min": 0.00011369999265298247,
+          "p95": 0.00012639998458325864,
+          "sample_stddev": 5.5589605845039615e-06
+        },
+        "simulation": {
+          "count": 5,
+          "max": 1.5925759000238031,
+          "mean": 1.5565982999862171,
+          "median": 1.564084899961017,
+          "min": 1.4973502999637276,
+          "p95": 1.5914898400194943,
+          "sample_stddev": 0.03876809532659397
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 1.5924847000278533,
+          "incremental_peak_rss_bytes": 8531968,
+          "neuron_count": 1,
+          "output_sha256": "c000b7da0378ef9f25efb94971398d9ba754063f45f55c0239253380475adbb2",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50569216,
+            "serialization": 50569216,
+            "setup": 42160128,
+            "simulation": 50569216
+          },
+          "process_baseline_rss_bytes": 42037248,
+          "process_peak_rss_bytes": 50569216,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00034170004073530436,
+          "serialization_s": 0.0006041000015102327,
+          "serialized_result_bytes": 21168,
+          "setup_s": 0.0001175999641418457,
+          "simulation_s": 1.5925759000238031,
+          "spike_count": 10,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.5639785999665037,
+          "incremental_peak_rss_bytes": 8413184,
+          "neuron_count": 1,
+          "output_sha256": "c000b7da0378ef9f25efb94971398d9ba754063f45f55c0239253380475adbb2",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50495488,
+            "serialization": 50495488,
+            "setup": 42201088,
+            "simulation": 50495488
+          },
+          "process_baseline_rss_bytes": 42082304,
+          "process_peak_rss_bytes": 50495488,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.0003522000042721629,
+          "serialization_s": 0.0005360000068321824,
+          "serialized_result_bytes": 21168,
+          "setup_s": 0.0001183999702334404,
+          "simulation_s": 1.564084899961017,
+          "spike_count": 10,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.587058499979321,
+          "incremental_peak_rss_bytes": 8560640,
+          "neuron_count": 1,
+          "output_sha256": "c000b7da0378ef9f25efb94971398d9ba754063f45f55c0239253380475adbb2",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50708480,
+            "serialization": 50708480,
+            "setup": 42270720,
+            "simulation": 50708480
+          },
+          "process_baseline_rss_bytes": 42147840,
+          "process_peak_rss_bytes": 50708480,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.0003513999981805682,
+          "serialization_s": 0.0005273999995552003,
+          "serialized_result_bytes": 21167,
+          "setup_s": 0.00011679995805025101,
+          "simulation_s": 1.587145600002259,
+          "spike_count": 10,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.5417503999779,
+          "incremental_peak_rss_bytes": 8417280,
+          "neuron_count": 1,
+          "output_sha256": "c000b7da0378ef9f25efb94971398d9ba754063f45f55c0239253380475adbb2",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50499584,
+            "serialization": 50499584,
+            "setup": 42205184,
+            "simulation": 50499584
+          },
+          "process_baseline_rss_bytes": 42082304,
+          "process_peak_rss_bytes": 50499584,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00033660000190138817,
+          "serialization_s": 0.0005278000026009977,
+          "serialized_result_bytes": 21165,
+          "setup_s": 0.00012839998817071319,
+          "simulation_s": 1.541834799980279,
+          "spike_count": 10,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.497259000025224,
+          "incremental_peak_rss_bytes": 8536064,
+          "neuron_count": 1,
+          "output_sha256": "c000b7da0378ef9f25efb94971398d9ba754063f45f55c0239253380475adbb2",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50622464,
+            "serialization": 50622464,
+            "setup": 42209280,
+            "simulation": 50622464
+          },
+          "process_baseline_rss_bytes": 42086400,
+          "process_peak_rss_bytes": 50622464,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00033930002246052027,
+          "serialization_s": 0.0005671000108122826,
+          "serialized_result_bytes": 21167,
+          "setup_s": 0.00011369999265298247,
+          "simulation_s": 1.4973502999637276,
+          "spike_count": 10,
+          "time_steps": 8000
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "small-seeded-network",
+      "config": {
+        "dt": 0.025,
+        "duration": 30,
+        "model": "lif",
+        "n": 8,
+        "probability": 0.5,
+        "pulses": [
+          {
+            "amplitude": 3,
+            "start": 0,
+            "stop": 30,
+            "target": 0
+          }
+        ],
+        "record_every": 10,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 8,
+        "neuron_steps": 9600,
+        "realized_edge_count": 28,
+        "serialized_result_bytes": 14830,
+        "spike_count": 15,
+        "time_steps": 1200
+      },
+      "id": "lif-network-8-p50-30ms",
+      "identical_output_sha256": "c60cd63358fd55c27c956a4283008a798b48f4c7dafd760417667cb42e823242",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8478720.0,
+          "mean": 8393523.2,
+          "median": 8388608.0,
+          "min": 8327168.0,
+          "p95": 8470528.0,
+          "sample_stddev": 65240.93576275558
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42270720.0,
+          "mean": 42178150.4,
+          "median": 42172416.0,
+          "min": 42033152.0,
+          "p95": 42268262.4,
+          "sample_stddev": 95604.5358589225
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50647040.0,
+          "mean": 50571673.6,
+          "median": 50597888.0,
+          "min": 50470912.0,
+          "p95": 50644582.4,
+          "sample_stddev": 78393.20264410684
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 0.2697143999976106,
+          "mean": 0.24718545998912306,
+          "median": 0.24440009996760637,
+          "min": 0.23652770003536716,
+          "p95": 0.2646876199985854,
+          "sample_stddev": 0.013016207003796056
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.0002897000522352755,
+          "mean": 0.00026878000935539605,
+          "median": 0.0002654999843798578,
+          "min": 0.0002555000246502459,
+          "p95": 0.0002856600331142545,
+          "sample_stddev": 1.2758225556474308e-05
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.00048320001224055886,
+          "mean": 0.0004012000048533082,
+          "median": 0.00038570002652704716,
+          "min": 0.0003722999827004969,
+          "p95": 0.0004642600077204406,
+          "sample_stddev": 4.631620071011541e-05
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00014809996355324984,
+          "mean": 0.00012457999400794506,
+          "median": 0.00012049998622387648,
+          "min": 0.00011369999265298247,
+          "p95": 0.00014331997372210025,
+          "sample_stddev": 1.3741054642372071e-05
+        },
+        "simulation": {
+          "count": 5,
+          "max": 0.2687933999695815,
+          "mean": 0.2463908999809064,
+          "median": 0.24363380001159385,
+          "min": 0.23576229996979237,
+          "p95": 0.26380033997120333,
+          "sample_stddev": 0.012948579112214123
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 0.26873609999893233,
+          "incremental_peak_rss_bytes": 8478720,
+          "neuron_count": 8,
+          "output_sha256": "c60cd63358fd55c27c956a4283008a798b48f4c7dafd760417667cb42e823242",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50634752,
+            "serialization": 50634752,
+            "setup": 42278912,
+            "simulation": 50634752
+          },
+          "process_baseline_rss_bytes": 42156032,
+          "process_peak_rss_bytes": 50634752,
+          "realized_edge_count": 28,
+          "retrieval_s": 0.0002897000522352755,
+          "serialization_s": 0.00048320001224055886,
+          "serialized_result_bytes": 14830,
+          "setup_s": 0.00014809996355324984,
+          "simulation_s": 0.2687933999695815,
+          "spike_count": 15,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.24378680001245812,
+          "incremental_peak_rss_bytes": 8327168,
+          "neuron_count": 8,
+          "output_sha256": "c60cd63358fd55c27c956a4283008a798b48f4c7dafd760417667cb42e823242",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50597888,
+            "serialization": 50597888,
+            "setup": 42393600,
+            "simulation": 50597888
+          },
+          "process_baseline_rss_bytes": 42270720,
+          "process_peak_rss_bytes": 50597888,
+          "realized_edge_count": 28,
+          "retrieval_s": 0.0002637000288814306,
+          "serialization_s": 0.0003722999827004969,
+          "serialized_result_bytes": 14830,
+          "setup_s": 0.00011640001321211457,
+          "simulation_s": 0.24382809997769073,
+          "spike_count": 15,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.24359090003417805,
+          "incremental_peak_rss_bytes": 8388608,
+          "neuron_count": 8,
+          "output_sha256": "c60cd63358fd55c27c956a4283008a798b48f4c7dafd760417667cb42e823242",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50647040,
+            "serialization": 50647040,
+            "setup": 42381312,
+            "simulation": 50647040
+          },
+          "process_baseline_rss_bytes": 42258432,
+          "process_peak_rss_bytes": 50647040,
+          "realized_edge_count": 28,
+          "retrieval_s": 0.00026949995663017035,
+          "serialization_s": 0.0003763000131584704,
+          "serialized_result_bytes": 14830,
+          "setup_s": 0.00012049998622387648,
+          "simulation_s": 0.24363380001159385,
+          "spike_count": 15,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.23989560001064092,
+          "incremental_peak_rss_bytes": 8437760,
+          "neuron_count": 8,
+          "output_sha256": "c60cd63358fd55c27c956a4283008a798b48f4c7dafd760417667cb42e823242",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50470912,
+            "serialization": 50470912,
+            "setup": 42156032,
+            "simulation": 50470912
+          },
+          "process_baseline_rss_bytes": 42033152,
+          "process_peak_rss_bytes": 50470912,
+          "realized_edge_count": 28,
+          "retrieval_s": 0.0002654999843798578,
+          "serialization_s": 0.0003884999896399677,
+          "serialized_result_bytes": 14830,
+          "setup_s": 0.00011369999265298247,
+          "simulation_s": 0.23993689997587353,
+          "spike_count": 15,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.2357153999619186,
+          "incremental_peak_rss_bytes": 8335360,
+          "neuron_count": 8,
+          "output_sha256": "c60cd63358fd55c27c956a4283008a798b48f4c7dafd760417667cb42e823242",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50507776,
+            "serialization": 50507776,
+            "setup": 42295296,
+            "simulation": 50507776
+          },
+          "process_baseline_rss_bytes": 42172416,
+          "process_peak_rss_bytes": 50507776,
+          "realized_edge_count": 28,
+          "retrieval_s": 0.0002555000246502459,
+          "serialization_s": 0.00038570002652704716,
+          "serialized_result_bytes": 14829,
+          "setup_s": 0.00012420001439750195,
+          "simulation_s": 0.23576229996979237,
+          "spike_count": 15,
+          "time_steps": 1200
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "network-neuron-scaling",
+      "config": {
+        "dt": 0.025,
+        "duration": 30,
+        "model": "lif",
+        "n": 16,
+        "probability": 0.05,
+        "pulses": [
+          {
+            "amplitude": 3,
+            "start": 0,
+            "stop": 30,
+            "target": 0
+          }
+        ],
+        "record_every": 40,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 16,
+        "neuron_steps": 19200,
+        "realized_edge_count": 8,
+        "serialized_result_bytes": 6185,
+        "spike_count": 4,
+        "time_steps": 1200
+      },
+      "id": "lif-network-16-p05-30ms",
+      "identical_output_sha256": "b98369512ee7376084c7eb3b42ff92d8c028af6ebf5aa1f956a85d8b9f6ece08",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8491008.0,
+          "mean": 8344371.2,
+          "median": 8310784.0,
+          "min": 8282112.0,
+          "p95": 8459878.4,
+          "sample_stddev": 84162.58429492288
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42270720.0,
+          "mean": 42167500.8,
+          "median": 42213376.0,
+          "min": 41971712.0,
+          "p95": 42268262.4,
+          "sample_stddev": 123811.72100895779
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50569216.0,
+          "mean": 50511872.0,
+          "median": 50548736.0,
+          "min": 50425856.0,
+          "p95": 50565939.2,
+          "sample_stddev": 63521.02366933329
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 0.2516415999853052,
+          "mean": 0.24325151999946684,
+          "median": 0.24063639994710684,
+          "min": 0.23928400001022965,
+          "p95": 0.2502913799951784,
+          "sample_stddev": 0.005185016300662386
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.00013190001482143998,
+          "mean": 0.0001273800036869943,
+          "median": 0.00012799998512491584,
+          "min": 0.00012310000602155924,
+          "p95": 0.00013154001208022238,
+          "sample_stddev": 3.851882292659487e-06
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.00018279999494552612,
+          "mean": 0.00017867999849841,
+          "median": 0.0001789000234566629,
+          "min": 0.00017479999223724008,
+          "p95": 0.0001821200014092028,
+          "sample_stddev": 2.9149689254426627e-06
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00013529998250305653,
+          "mean": 0.00012039999710395932,
+          "median": 0.00011929997708648443,
+          "min": 0.00011250004172325134,
+          "p95": 0.00013217998202890157,
+          "sample_stddev": 8.848147478626248e-06
+        },
+        "simulation": {
+          "count": 5,
+          "max": 0.2512152999988757,
+          "mean": 0.24282506000017748,
+          "median": 0.24021919997176155,
+          "min": 0.2388613999937661,
+          "p95": 0.2498611200018786,
+          "sample_stddev": 0.005180576924900831
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 0.23883369995746762,
+          "incremental_peak_rss_bytes": 8335360,
+          "neuron_count": 16,
+          "output_sha256": "b98369512ee7376084c7eb3b42ff92d8c028af6ebf5aa1f956a85d8b9f6ece08",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50548736,
+            "serialization": 50548736,
+            "setup": 42332160,
+            "simulation": 50548736
+          },
+          "process_baseline_rss_bytes": 42213376,
+          "process_peak_rss_bytes": 50548736,
+          "realized_edge_count": 8,
+          "retrieval_s": 0.00012799998512491584,
+          "serialization_s": 0.00017940002726390958,
+          "serialized_result_bytes": 6185,
+          "setup_s": 0.00011520000407472253,
+          "simulation_s": 0.2388613999937661,
+          "spike_count": 4,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.24441629997454584,
+          "incremental_peak_rss_bytes": 8302592,
+          "neuron_count": 16,
+          "output_sha256": "b98369512ee7376084c7eb3b42ff92d8c028af6ebf5aa1f956a85d8b9f6ece08",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50425856,
+            "serialization": 50425856,
+            "setup": 42246144,
+            "simulation": 50425856
+          },
+          "process_baseline_rss_bytes": 42123264,
+          "process_peak_rss_bytes": 50425856,
+          "realized_edge_count": 8,
+          "retrieval_s": 0.00013190001482143998,
+          "serialization_s": 0.0001789000234566629,
+          "serialized_result_bytes": 6185,
+          "setup_s": 0.00013529998250305653,
+          "simulation_s": 0.24444440001389012,
+          "spike_count": 4,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.2511872000177391,
+          "incremental_peak_rss_bytes": 8491008,
+          "neuron_count": 16,
+          "output_sha256": "b98369512ee7376084c7eb3b42ff92d8c028af6ebf5aa1f956a85d8b9f6ece08",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50462720,
+            "serialization": 50462720,
+            "setup": 42094592,
+            "simulation": 50462720
+          },
+          "process_baseline_rss_bytes": 41971712,
+          "process_peak_rss_bytes": 50462720,
+          "realized_edge_count": 8,
+          "retrieval_s": 0.0001238000113517046,
+          "serialization_s": 0.00018279999494552612,
+          "serialized_result_bytes": 6184,
+          "setup_s": 0.00011969998013228178,
+          "simulation_s": 0.2512152999988757,
+          "spike_count": 4,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.2393568999832496,
+          "incremental_peak_rss_bytes": 8282112,
+          "neuron_count": 16,
+          "output_sha256": "b98369512ee7376084c7eb3b42ff92d8c028af6ebf5aa1f956a85d8b9f6ece08",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50552832,
+            "serialization": 50552832,
+            "setup": 42393600,
+            "simulation": 50552832
+          },
+          "process_baseline_rss_bytes": 42270720,
+          "process_peak_rss_bytes": 50552832,
+          "realized_edge_count": 8,
+          "retrieval_s": 0.00013010000111535192,
+          "serialization_s": 0.00017749995458871126,
+          "serialized_result_bytes": 6184,
+          "setup_s": 0.00011250004172325134,
+          "simulation_s": 0.23938500002259389,
+          "spike_count": 4,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.24019149999367073,
+          "incremental_peak_rss_bytes": 8310784,
+          "neuron_count": 16,
+          "output_sha256": "b98369512ee7376084c7eb3b42ff92d8c028af6ebf5aa1f956a85d8b9f6ece08",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50569216,
+            "serialization": 50569216,
+            "setup": 42381312,
+            "simulation": 50569216
+          },
+          "process_baseline_rss_bytes": 42258432,
+          "process_peak_rss_bytes": 50569216,
+          "realized_edge_count": 8,
+          "retrieval_s": 0.00012310000602155924,
+          "serialization_s": 0.00017479999223724008,
+          "serialized_result_bytes": 6185,
+          "setup_s": 0.00011929997708648443,
+          "simulation_s": 0.24021919997176155,
+          "spike_count": 4,
+          "time_steps": 1200
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "network-neuron-scaling",
+      "config": {
+        "dt": 0.025,
+        "duration": 30,
+        "model": "lif",
+        "n": 64,
+        "probability": 0.05,
+        "pulses": [
+          {
+            "amplitude": 3,
+            "start": 0,
+            "stop": 30,
+            "target": 0
+          }
+        ],
+        "record_every": 40,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 64,
+        "neuron_steps": 76800,
+        "realized_edge_count": 195,
+        "serialized_result_bytes": 22796,
+        "spike_count": 8,
+        "time_steps": 1200
+      },
+      "id": "lif-network-64-p05-30ms",
+      "identical_output_sha256": "9745573535ec83e5288f36fe087475ecc132c052eea1d4dda7adb08de721d9bd",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8687616.0,
+          "mean": 8497561.6,
+          "median": 8437760.0,
+          "min": 8388608.0,
+          "p95": 8659763.2,
+          "sample_stddev": 121803.49793335165
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42311680.0,
+          "mean": 42189619.2,
+          "median": 42172416.0,
+          "min": 42106880.0,
+          "p95": 42291200.0,
+          "sample_stddev": 77737.72059431637
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50896896.0,
+          "mean": 50687180.8,
+          "median": 50696192.0,
+          "min": 50544640.0,
+          "p95": 50864947.2,
+          "sample_stddev": 143868.17361459762
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 0.2724286000011489,
+          "mean": 0.25051990000065416,
+          "median": 0.24510250001912937,
+          "min": 0.2431946000433527,
+          "p95": 0.2675318600027822,
+          "sample_stddev": 0.012380138171870541
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.00040229997830465436,
+          "mean": 0.0003923999844118953,
+          "median": 0.00038889999268576503,
+          "min": 0.00038380001205950975,
+          "p95": 0.00040193997556343676,
+          "sample_stddev": 8.435625979392326e-06
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.0005241999751888216,
+          "mean": 0.0004917000071145595,
+          "median": 0.0004909000126644969,
+          "min": 0.0004731999943032861,
+          "p95": 0.0005183599889278412,
+          "sample_stddev": 2.0507794572186816e-05
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.0001181000261567533,
+          "mean": 0.00011561999563127756,
+          "median": 0.00011550000635907054,
+          "min": 0.00011279998579993844,
+          "p95": 0.00011798001360148191,
+          "sample_stddev": 2.2174354931480263e-06
+        },
+        "simulation": {
+          "count": 5,
+          "max": 0.271415600029286,
+          "mean": 0.24952018001349643,
+          "median": 0.2441279999911785,
+          "min": 0.24219910003012046,
+          "p95": 0.2665160000324249,
+          "sample_stddev": 0.012370807685838335
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 0.24408360000234097,
+          "incremental_peak_rss_bytes": 8548352,
+          "neuron_count": 64,
+          "output_sha256": "9745573535ec83e5288f36fe087475ecc132c052eea1d4dda7adb08de721d9bd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50696192,
+            "serialization": 50696192,
+            "setup": 42266624,
+            "simulation": 50696192
+          },
+          "process_baseline_rss_bytes": 42147840,
+          "process_peak_rss_bytes": 50696192,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.00038380001205950975,
+          "serialization_s": 0.0004752000095322728,
+          "serialized_result_bytes": 22796,
+          "setup_s": 0.00011550000635907054,
+          "simulation_s": 0.2441279999911785,
+          "spike_count": 8,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.24688140000216663,
+          "incremental_peak_rss_bytes": 8687616,
+          "neuron_count": 64,
+          "output_sha256": "9745573535ec83e5288f36fe087475ecc132c052eea1d4dda7adb08de721d9bd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50896896,
+            "serialization": 50896896,
+            "setup": 42332160,
+            "simulation": 50896896
+          },
+          "process_baseline_rss_bytes": 42209280,
+          "process_peak_rss_bytes": 50896896,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.00038889999268576503,
+          "serialization_s": 0.0005241999751888216,
+          "serialized_result_bytes": 22796,
+          "setup_s": 0.00011419999646022916,
+          "simulation_s": 0.24691760004498065,
+          "spike_count": 8,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.27138160000322387,
+          "incremental_peak_rss_bytes": 8437760,
+          "neuron_count": 64,
+          "output_sha256": "9745573535ec83e5288f36fe087475ecc132c052eea1d4dda7adb08de721d9bd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50544640,
+            "serialization": 50544640,
+            "setup": 42229760,
+            "simulation": 50544640
+          },
+          "process_baseline_rss_bytes": 42106880,
+          "process_peak_rss_bytes": 50544640,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.0004004999645985663,
+          "serialization_s": 0.0004950000438839197,
+          "serialized_result_bytes": 22796,
+          "setup_s": 0.00011749996338039637,
+          "simulation_s": 0.271415600029286,
+          "spike_count": 8,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.24216570000862703,
+          "incremental_peak_rss_bytes": 8388608,
+          "neuron_count": 64,
+          "output_sha256": "9745573535ec83e5288f36fe087475ecc132c052eea1d4dda7adb08de721d9bd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50561024,
+            "serialization": 50561024,
+            "setup": 42295296,
+            "simulation": 50561024
+          },
+          "process_baseline_rss_bytes": 42172416,
+          "process_peak_rss_bytes": 50561024,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.00038649997441098094,
+          "serialization_s": 0.0004909000126644969,
+          "serialized_result_bytes": 22796,
+          "setup_s": 0.0001181000261567533,
+          "simulation_s": 0.24219910003012046,
+          "spike_count": 8,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.2429061000002548,
+          "incremental_peak_rss_bytes": 8425472,
+          "neuron_count": 64,
+          "output_sha256": "9745573535ec83e5288f36fe087475ecc132c052eea1d4dda7adb08de721d9bd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50737152,
+            "serialization": 50737152,
+            "setup": 42434560,
+            "simulation": 50737152
+          },
+          "process_baseline_rss_bytes": 42311680,
+          "process_peak_rss_bytes": 50737152,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.00040229997830465436,
+          "serialization_s": 0.0004731999943032861,
+          "serialized_result_bytes": 22795,
+          "setup_s": 0.00011279998579993844,
+          "simulation_s": 0.24294059997191653,
+          "spike_count": 8,
+          "time_steps": 1200
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "network-neuron-scaling",
+      "config": {
+        "dt": 0.025,
+        "duration": 30,
+        "model": "lif",
+        "n": 256,
+        "probability": 0.05,
+        "pulses": [
+          {
+            "amplitude": 3,
+            "start": 0,
+            "stop": 30,
+            "target": 0
+          }
+        ],
+        "record_every": 40,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 256,
+        "neuron_steps": 307200,
+        "realized_edge_count": 3269,
+        "serialized_result_bytes": 153083,
+        "spike_count": 249,
+        "time_steps": 1200
+      },
+      "id": "lif-network-256-p05-30ms",
+      "identical_output_sha256": "6cb33794e1885b9f7b7dc85a8d8609b4ab73158c5c5b422caca0f5e4bcb0a6fd",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 10031104.0,
+          "mean": 9970483.2,
+          "median": 9969664.0,
+          "min": 9928704.0,
+          "p95": 10019635.2,
+          "sample_stddev": 38358.334729234535
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42278912.0,
+          "mean": 42142924.8,
+          "median": 42106880.0,
+          "min": 42041344.0,
+          "p95": 42268262.4,
+          "sample_stddev": 104323.43945250272
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 52252672.0,
+          "mean": 52113408.0,
+          "median": 52072448.0,
+          "min": 51990528.0,
+          "p95": 52241203.2,
+          "sample_stddev": 107437.07278216397
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 0.37211740005295724,
+          "mean": 0.294589879992418,
+          "median": 0.2774933999753557,
+          "min": 0.26959309994708747,
+          "p95": 0.3538754400331527,
+          "sample_stddev": 0.04355455896792786
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.0022344999597407877,
+          "mean": 0.0021518999943509697,
+          "median": 0.0021484000026248395,
+          "min": 0.0020938999950885773,
+          "p95": 0.002217919973190874,
+          "sample_stddev": 5.155515108179012e-05
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.002825799980200827,
+          "mean": 0.002775959996506572,
+          "median": 0.0027857000241056085,
+          "min": 0.0027178999735042453,
+          "p95": 0.00282063998747617,
+          "sample_stddev": 4.237067079885324e-05
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00012600002810359,
+          "mean": 0.00011948000174015761,
+          "median": 0.00012129999231547117,
+          "min": 0.00011319998884573579,
+          "p95": 0.00012542002368718386,
+          "sample_stddev": 5.714643405451223e-06
+        },
+        "simulation": {
+          "count": 5,
+          "max": 0.36705699999583885,
+          "mean": 0.28954253999982027,
+          "median": 0.27248629997484386,
+          "min": 0.2646054999786429,
+          "p95": 0.34879230000078676,
+          "sample_stddev": 0.04354127181345876
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 0.26449619996128604,
+          "incremental_peak_rss_bytes": 9969664,
+          "neuron_count": 256,
+          "output_sha256": "6cb33794e1885b9f7b7dc85a8d8609b4ab73158c5c5b422caca0f5e4bcb0a6fd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 52195328,
+            "serialization": 52195328,
+            "setup": 42348544,
+            "simulation": 52195328
+          },
+          "process_baseline_rss_bytes": 42225664,
+          "process_peak_rss_bytes": 52195328,
+          "realized_edge_count": 3269,
+          "retrieval_s": 0.0021484000026248395,
+          "serialization_s": 0.0027178999735042453,
+          "serialized_result_bytes": 153083,
+          "setup_s": 0.00012129999231547117,
+          "simulation_s": 0.2646054999786429,
+          "spike_count": 249,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.26772130001336336,
+          "incremental_peak_rss_bytes": 10031104,
+          "neuron_count": 256,
+          "output_sha256": "6cb33794e1885b9f7b7dc85a8d8609b4ab73158c5c5b422caca0f5e4bcb0a6fd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 52072448,
+            "serialization": 52072448,
+            "setup": 42164224,
+            "simulation": 52072448
+          },
+          "process_baseline_rss_bytes": 42041344,
+          "process_peak_rss_bytes": 52072448,
+          "realized_edge_count": 3269,
+          "retrieval_s": 0.002131099987309426,
+          "serialization_s": 0.002750399988144636,
+          "serialized_result_bytes": 153083,
+          "setup_s": 0.00012600002810359,
+          "simulation_s": 0.26783040002919734,
+          "spike_count": 249,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.36693359998753294,
+          "incremental_peak_rss_bytes": 9928704,
+          "neuron_count": 256,
+          "output_sha256": "6cb33794e1885b9f7b7dc85a8d8609b4ab73158c5c5b422caca0f5e4bcb0a6fd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 51990528,
+            "serialization": 51990528,
+            "setup": 42184704,
+            "simulation": 51990528
+          },
+          "process_baseline_rss_bytes": 42061824,
+          "process_peak_rss_bytes": 51990528,
+          "realized_edge_count": 3269,
+          "retrieval_s": 0.0021516000269912183,
+          "serialization_s": 0.0027857000241056085,
+          "serialized_result_bytes": 153083,
+          "setup_s": 0.00012310000602155924,
+          "simulation_s": 0.36705699999583885,
+          "spike_count": 249,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.27563210000516847,
+          "incremental_peak_rss_bytes": 9949184,
+          "neuron_count": 256,
+          "output_sha256": "6cb33794e1885b9f7b7dc85a8d8609b4ab73158c5c5b422caca0f5e4bcb0a6fd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 52056064,
+            "serialization": 52056064,
+            "setup": 42229760,
+            "simulation": 52056064
+          },
+          "process_baseline_rss_bytes": 42106880,
+          "process_peak_rss_bytes": 52056064,
+          "realized_edge_count": 3269,
+          "retrieval_s": 0.0022344999597407877,
+          "serialization_s": 0.002825799980200827,
+          "serialized_result_bytes": 153083,
+          "setup_s": 0.00011379999341443181,
+          "simulation_s": 0.2757335000205785,
+          "spike_count": 249,
+          "time_steps": 1200
+        },
+        {
+          "engine_reported_simulation_s": 0.2723837999510579,
+          "incremental_peak_rss_bytes": 9973760,
+          "neuron_count": 256,
+          "output_sha256": "6cb33794e1885b9f7b7dc85a8d8609b4ab73158c5c5b422caca0f5e4bcb0a6fd",
+          "phase_peak_rss_bytes": {
+            "retrieval": 52252672,
+            "serialization": 52252672,
+            "setup": 42401792,
+            "simulation": 52252672
+          },
+          "process_baseline_rss_bytes": 42278912,
+          "process_peak_rss_bytes": 52252672,
+          "realized_edge_count": 3269,
+          "retrieval_s": 0.0020938999950885773,
+          "serialization_s": 0.002800000016577542,
+          "serialized_result_bytes": 153082,
+          "setup_s": 0.00011319998884573579,
+          "simulation_s": 0.27248629997484386,
+          "spike_count": 249,
+          "time_steps": 1200
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "network-connectivity-scaling",
+      "config": {
+        "dt": 0.025,
+        "duration": 50,
+        "model": "lif",
+        "n": 64,
+        "probability": 0.05,
+        "pulses": [
+          {
+            "amplitude": 3,
+            "start": 0,
+            "stop": 50,
+            "target": 0
+          }
+        ],
+        "record_every": 40,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 64,
+        "neuron_steps": 128000,
+        "realized_edge_count": 195,
+        "serialized_result_bytes": 33315,
+        "spike_count": 17,
+        "time_steps": 2000
+      },
+      "id": "lif-network-64-p05-50ms",
+      "identical_output_sha256": "f9f5143aaa027cfb8d0c2d45c279c5469c890105fec04a056436a8d49b53565e",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8761344.0,
+          "mean": 8621260.8,
+          "median": 8642560.0,
+          "min": 8359936.0,
+          "p95": 8751513.6,
+          "sample_stddev": 155497.02151231066
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42164224.0,
+          "mean": 42051993.6,
+          "median": 42074112.0,
+          "min": 41869312.0,
+          "p95": 42160128.0,
+          "sample_stddev": 119122.49700539357
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50794496.0,
+          "mean": 50673254.4,
+          "median": 50716672.0,
+          "min": 50503680.0,
+          "p95": 50789580.8,
+          "sample_stddev": 125601.01991942582
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 0.3698747000307776,
+          "mean": 0.3534699200186878,
+          "median": 0.3551992999855429,
+          "min": 0.3376486000488512,
+          "p95": 0.36889344002120195,
+          "sample_stddev": 0.014537789797589308
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.0007072999724186957,
+          "mean": 0.0006091400049626827,
+          "median": 0.0005577999982051551,
+          "min": 0.0005487000453285873,
+          "p95": 0.0007016599760390818,
+          "sample_stddev": 7.7447979149349e-05
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.0007356000132858753,
+          "mean": 0.0006989600136876106,
+          "median": 0.0006880000000819564,
+          "min": 0.0006685000262223184,
+          "p95": 0.0007336600101552904,
+          "sample_stddev": 3.0030192570754568e-05
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00012229999992996454,
+          "mean": 0.00011647999053820968,
+          "median": 0.00011480000102892518,
+          "min": 0.0001107999705709517,
+          "p95": 0.00012223999947309495,
+          "sample_stddev": 5.368156929193455e-06
+        },
+        "simulation": {
+          "count": 5,
+          "max": 0.3683170000440441,
+          "mean": 0.35204534000949933,
+          "median": 0.35384270001668483,
+          "min": 0.3363050000043586,
+          "p95": 0.36734188003465534,
+          "sample_stddev": 0.014439480589041953
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 0.3362681000144221,
+          "incremental_peak_rss_bytes": 8630272,
+          "neuron_count": 64,
+          "output_sha256": "f9f5143aaa027cfb8d0c2d45c279c5469c890105fec04a056436a8d49b53565e",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50794496,
+            "serialization": 50794496,
+            "setup": 42287104,
+            "simulation": 50794496
+          },
+          "process_baseline_rss_bytes": 42164224,
+          "process_peak_rss_bytes": 50794496,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.0005528000183403492,
+          "serialization_s": 0.0006685000262223184,
+          "serialized_result_bytes": 33315,
+          "setup_s": 0.00012229999992996454,
+          "simulation_s": 0.3363050000043586,
+          "spike_count": 17,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.35380240000085905,
+          "incremental_peak_rss_bytes": 8642560,
+          "neuron_count": 64,
+          "output_sha256": "f9f5143aaa027cfb8d0c2d45c279c5469c890105fec04a056436a8d49b53565e",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50716672,
+            "serialization": 50716672,
+            "setup": 42196992,
+            "simulation": 50716672
+          },
+          "process_baseline_rss_bytes": 42074112,
+          "process_peak_rss_bytes": 50716672,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.0005577999982051551,
+          "serialization_s": 0.0006880000000819564,
+          "serialized_result_bytes": 33316,
+          "setup_s": 0.0001107999705709517,
+          "simulation_s": 0.35384270001668483,
+          "spike_count": 17,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.3634025999926962,
+          "incremental_peak_rss_bytes": 8359936,
+          "neuron_count": 64,
+          "output_sha256": "f9f5143aaa027cfb8d0c2d45c279c5469c890105fec04a056436a8d49b53565e",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50503680,
+            "serialization": 50503680,
+            "setup": 42266624,
+            "simulation": 50503680
+          },
+          "process_baseline_rss_bytes": 42143744,
+          "process_peak_rss_bytes": 50503680,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.0006790999905206263,
+          "serialization_s": 0.0007258999976329505,
+          "serialized_result_bytes": 33315,
+          "setup_s": 0.00012199999764561653,
+          "simulation_s": 0.36344139999710023,
+          "spike_count": 17,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.36827010003617033,
+          "incremental_peak_rss_bytes": 8712192,
+          "neuron_count": 64,
+          "output_sha256": "f9f5143aaa027cfb8d0c2d45c279c5469c890105fec04a056436a8d49b53565e",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50581504,
+            "serialization": 50581504,
+            "setup": 41992192,
+            "simulation": 50581504
+          },
+          "process_baseline_rss_bytes": 41869312,
+          "process_peak_rss_bytes": 50581504,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.0007072999724186957,
+          "serialization_s": 0.0007356000132858753,
+          "serialized_result_bytes": 33316,
+          "setup_s": 0.00011480000102892518,
+          "simulation_s": 0.3683170000440441,
+          "spike_count": 17,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.33827819995349273,
+          "incremental_peak_rss_bytes": 8761344,
+          "neuron_count": 64,
+          "output_sha256": "f9f5143aaa027cfb8d0c2d45c279c5469c890105fec04a056436a8d49b53565e",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50769920,
+            "serialization": 50769920,
+            "setup": 42127360,
+            "simulation": 50769920
+          },
+          "process_baseline_rss_bytes": 42008576,
+          "process_peak_rss_bytes": 50769920,
+          "realized_edge_count": 195,
+          "retrieval_s": 0.0005487000453285873,
+          "serialization_s": 0.0006768000312149525,
+          "serialized_result_bytes": 33316,
+          "setup_s": 0.00011249998351559043,
+          "simulation_s": 0.33832059998530895,
+          "spike_count": 17,
+          "time_steps": 2000
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "network-connectivity-scaling",
+      "config": {
+        "dt": 0.025,
+        "duration": 50,
+        "model": "lif",
+        "n": 64,
+        "probability": 0.5,
+        "pulses": [
+          {
+            "amplitude": 3,
+            "start": 0,
+            "stop": 50,
+            "target": 0
+          }
+        ],
+        "record_every": 40,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 64,
+        "neuron_steps": 128000,
+        "realized_edge_count": 2041,
+        "serialized_result_bytes": 106841,
+        "spike_count": 960,
+        "time_steps": 2000
+      },
+      "id": "lif-network-64-p50-50ms",
+      "identical_output_sha256": "be2fa188a13c72d8ee8edb3ef11f9832f417d46c3bf0f41d6f99cc2537e0a178",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 9285632.0,
+          "mean": 9088204.8,
+          "median": 9203712.0,
+          "min": 8658944.0,
+          "p95": 9270886.4,
+          "sample_stddev": 250968.17389302573
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42266624.0,
+          "mean": 42145382.4,
+          "median": 42156032.0,
+          "min": 42012672.0,
+          "p95": 42247782.4,
+          "sample_stddev": 91982.33541718758
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 51478528.0,
+          "mean": 51233587.2,
+          "median": 51298304.0,
+          "min": 50831360.0,
+          "p95": 51454771.2,
+          "sample_stddev": 246482.56445274176
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 0.4032248998992145,
+          "mean": 0.37293997997185213,
+          "median": 0.36605179990874603,
+          "min": 0.3555589999887161,
+          "p95": 0.39872423992492256,
+          "sample_stddev": 0.019478469964191805
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.0015408999752253294,
+          "mean": 0.0015042200102470815,
+          "median": 0.001507100008893758,
+          "min": 0.0014471000176854432,
+          "p95": 0.0015375399845652283,
+          "sample_stddev": 3.541540963153538e-05
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.002459999988786876,
+          "mean": 0.002254439995158464,
+          "median": 0.0022314999951049685,
+          "min": 0.0021303999819792807,
+          "p95": 0.0024286799947731198,
+          "sample_stddev": 0.00013428422823449755
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00011749996338039637,
+          "mean": 0.00011449998710304499,
+          "median": 0.00011559994891285896,
+          "min": 0.00011039996752515435,
+          "p95": 0.00011713997228071093,
+          "sample_stddev": 2.7340372323735864e-06
+        },
+        "simulation": {
+          "count": 5,
+          "max": 0.399142199952621,
+          "mean": 0.36906681997934354,
+          "median": 0.36216189997503534,
+          "min": 0.351621099980548,
+          "p95": 0.394705659954343,
+          "sample_stddev": 0.019392576353637
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 0.3620618999702856,
+          "incremental_peak_rss_bytes": 9211904,
+          "neuron_count": 64,
+          "output_sha256": "be2fa188a13c72d8ee8edb3ef11f9832f417d46c3bf0f41d6f99cc2537e0a178",
+          "phase_peak_rss_bytes": {
+            "retrieval": 51478528,
+            "serialization": 51478528,
+            "setup": 42389504,
+            "simulation": 51478528
+          },
+          "process_baseline_rss_bytes": 42266624,
+          "process_peak_rss_bytes": 51478528,
+          "realized_edge_count": 2041,
+          "retrieval_s": 0.0015408999752253294,
+          "serialization_s": 0.0022314999951049685,
+          "serialized_result_bytes": 106841,
+          "setup_s": 0.00011749996338039637,
+          "simulation_s": 0.36216189997503534,
+          "spike_count": 960,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.37688120000530034,
+          "incremental_peak_rss_bytes": 9285632,
+          "neuron_count": 64,
+          "output_sha256": "be2fa188a13c72d8ee8edb3ef11f9832f417d46c3bf0f41d6f99cc2537e0a178",
+          "phase_peak_rss_bytes": {
+            "retrieval": 51298304,
+            "serialization": 51298304,
+            "setup": 42135552,
+            "simulation": 51298304
+          },
+          "process_baseline_rss_bytes": 42012672,
+          "process_peak_rss_bytes": 51298304,
+          "realized_edge_count": 2041,
+          "retrieval_s": 0.0015019000275060534,
+          "serialization_s": 0.0021468999912030995,
+          "serialized_result_bytes": 106842,
+          "setup_s": 0.00011330004781484604,
+          "simulation_s": 0.3769594999612309,
+          "spike_count": 960,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.3990496999467723,
+          "incremental_peak_rss_bytes": 9080832,
+          "neuron_count": 64,
+          "output_sha256": "be2fa188a13c72d8ee8edb3ef11f9832f417d46c3bf0f41d6f99cc2537e0a178",
+          "phase_peak_rss_bytes": {
+            "retrieval": 51200000,
+            "serialization": 51200000,
+            "setup": 42242048,
+            "simulation": 51200000
+          },
+          "process_baseline_rss_bytes": 42119168,
+          "process_peak_rss_bytes": 51200000,
+          "realized_edge_count": 2041,
+          "retrieval_s": 0.001507100008893758,
+          "serialization_s": 0.002459999988786876,
+          "serialized_result_bytes": 106841,
+          "setup_s": 0.00011559994891285896,
+          "simulation_s": 0.399142199952621,
+          "spike_count": 960,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.3515421999618411,
+          "incremental_peak_rss_bytes": 9203712,
+          "neuron_count": 64,
+          "output_sha256": "be2fa188a13c72d8ee8edb3ef11f9832f417d46c3bf0f41d6f99cc2537e0a178",
+          "phase_peak_rss_bytes": {
+            "retrieval": 51359744,
+            "serialization": 51359744,
+            "setup": 42278912,
+            "simulation": 51359744
+          },
+          "process_baseline_rss_bytes": 42156032,
+          "process_peak_rss_bytes": 51359744,
+          "realized_edge_count": 2041,
+          "retrieval_s": 0.0015241000219248235,
+          "serialization_s": 0.0023034000187180936,
+          "serialized_result_bytes": 106841,
+          "setup_s": 0.00011039996752515435,
+          "simulation_s": 0.351621099980548,
+          "spike_count": 960,
+          "time_steps": 2000
+        },
+        {
+          "engine_reported_simulation_s": 0.3553764999960549,
+          "incremental_peak_rss_bytes": 8658944,
+          "neuron_count": 64,
+          "output_sha256": "be2fa188a13c72d8ee8edb3ef11f9832f417d46c3bf0f41d6f99cc2537e0a178",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50831360,
+            "serialization": 50831360,
+            "setup": 42295296,
+            "simulation": 50831360
+          },
+          "process_baseline_rss_bytes": 42172416,
+          "process_peak_rss_bytes": 50831360,
+          "realized_edge_count": 2041,
+          "retrieval_s": 0.0014471000176854432,
+          "serialization_s": 0.0021303999819792807,
+          "serialized_result_bytes": 106841,
+          "setup_s": 0.00011570000788196921,
+          "simulation_s": 0.35544940002728254,
+          "spike_count": 960,
+          "time_steps": 2000
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "single-neuron-long-duration",
+      "config": {
+        "dt": 0.025,
+        "duration": 1000,
+        "model": "lif",
+        "n": 1,
+        "probability": 0,
+        "pulses": [
+          {
+            "amplitude": 2,
+            "start": 0,
+            "stop": 1000,
+            "target": 0
+          }
+        ],
+        "record_every": 40,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 1,
+        "neuron_steps": 40000,
+        "realized_edge_count": 0,
+        "serialized_result_bytes": 29472,
+        "spike_count": 87,
+        "time_steps": 40000
+      },
+      "id": "lif-long-1000ms",
+      "identical_output_sha256": "650622b6b8f6dd390facd3822302e2915af07cba2362fda192408c0914de0b0f",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 8650752.0,
+          "mean": 8544256.0,
+          "median": 8515584.0,
+          "min": 8470528.0,
+          "p95": 8642560.0,
+          "sample_stddev": 81766.25572936553
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42266624.0,
+          "mean": 42142924.8,
+          "median": 42110976.0,
+          "min": 42012672.0,
+          "p95": 42258432.0,
+          "sample_stddev": 102580.06568139835
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 50741248.0,
+          "mean": 50687180.8,
+          "median": 50708480.0,
+          "min": 50585600.0,
+          "p95": 50740428.8,
+          "sample_stddev": 64724.57674794019
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 4.78999289998319,
+          "mean": 4.702708619995974,
+          "median": 4.666118600056507,
+          "min": 4.65995830000611,
+          "p95": 4.779187399987132,
+          "sample_stddev": 0.05828481299099402
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.00048210000386461616,
+          "mean": 0.0004760000039823353,
+          "median": 0.00047660002019256353,
+          "min": 0.00047129997983574867,
+          "p95": 0.00048137999838218095,
+          "sample_stddev": 4.641114820052709e-06
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.0007196000078693032,
+          "mean": 0.0006875399849377573,
+          "median": 0.0006939999875612557,
+          "min": 0.0006479999865405262,
+          "p95": 0.0007176600047387183,
+          "sample_stddev": 2.9951440586256038e-05
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00011859997175633907,
+          "mean": 0.00011536000529304147,
+          "median": 0.00011439999798312783,
+          "min": 0.00011270004324615002,
+          "p95": 0.00011849998263642192,
+          "sample_stddev": 2.8094391772446056e-06
+        },
+        "simulation": {
+          "count": 5,
+          "max": 4.78873550001299,
+          "mean": 4.7014297200017605,
+          "median": 4.664798800018616,
+          "min": 4.658657399995718,
+          "p95": 4.777924660011195,
+          "sample_stddev": 0.05829434802899027
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 4.734577699971851,
+          "incremental_peak_rss_bytes": 8650752,
+          "neuron_count": 1,
+          "output_sha256": "650622b6b8f6dd390facd3822302e2915af07cba2362fda192408c0914de0b0f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50663424,
+            "serialization": 50663424,
+            "setup": 42135552,
+            "simulation": 50663424
+          },
+          "process_baseline_rss_bytes": 42012672,
+          "process_peak_rss_bytes": 50663424,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00047150003956630826,
+          "serialization_s": 0.0006939999875612557,
+          "serialized_result_bytes": 29472,
+          "setup_s": 0.00011859997175633907,
+          "simulation_s": 4.734681300004013,
+          "spike_count": 87,
+          "time_steps": 40000
+        },
+        {
+          "engine_reported_simulation_s": 4.788617599988356,
+          "incremental_peak_rss_bytes": 8474624,
+          "neuron_count": 1,
+          "output_sha256": "650622b6b8f6dd390facd3822302e2915af07cba2362fda192408c0914de0b0f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50585600,
+            "serialization": 50585600,
+            "setup": 42233856,
+            "simulation": 50585600
+          },
+          "process_baseline_rss_bytes": 42110976,
+          "process_peak_rss_bytes": 50585600,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00047849997645244,
+          "serialization_s": 0.0006661999505013227,
+          "serialized_result_bytes": 29472,
+          "setup_s": 0.00011270004324615002,
+          "simulation_s": 4.78873550001299,
+          "spike_count": 87,
+          "time_steps": 40000
+        },
+        {
+          "engine_reported_simulation_s": 4.664687399985269,
+          "incremental_peak_rss_bytes": 8470528,
+          "neuron_count": 1,
+          "output_sha256": "650622b6b8f6dd390facd3822302e2915af07cba2362fda192408c0914de0b0f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50737152,
+            "serialization": 50737152,
+            "setup": 42385408,
+            "simulation": 50737152
+          },
+          "process_baseline_rss_bytes": 42266624,
+          "process_peak_rss_bytes": 50737152,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00048210000386461616,
+          "serialization_s": 0.0007196000078693032,
+          "serialized_result_bytes": 29472,
+          "setup_s": 0.0001181000261567533,
+          "simulation_s": 4.664798800018616,
+          "spike_count": 87,
+          "time_steps": 40000
+        },
+        {
+          "engine_reported_simulation_s": 4.660176299978048,
+          "incremental_peak_rss_bytes": 8515584,
+          "neuron_count": 1,
+          "output_sha256": "650622b6b8f6dd390facd3822302e2915af07cba2362fda192408c0914de0b0f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50741248,
+            "serialization": 50741248,
+            "setup": 42348544,
+            "simulation": 50741248
+          },
+          "process_baseline_rss_bytes": 42225664,
+          "process_peak_rss_bytes": 50741248,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00047129997983574867,
+          "serialization_s": 0.0006479999865405262,
+          "serialized_result_bytes": 29472,
+          "setup_s": 0.00011299998732283711,
+          "simulation_s": 4.660275599977467,
+          "spike_count": 87,
+          "time_steps": 40000
+        },
+        {
+          "engine_reported_simulation_s": 4.658493499970064,
+          "incremental_peak_rss_bytes": 8609792,
+          "neuron_count": 1,
+          "output_sha256": "650622b6b8f6dd390facd3822302e2915af07cba2362fda192408c0914de0b0f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 50708480,
+            "serialization": 50708480,
+            "setup": 42221568,
+            "simulation": 50708480
+          },
+          "process_baseline_rss_bytes": 42098688,
+          "process_peak_rss_bytes": 50708480,
+          "realized_edge_count": 0,
+          "retrieval_s": 0.00047660002019256353,
+          "serialization_s": 0.0007098999922163785,
+          "serialized_result_bytes": 29472,
+          "setup_s": 0.00011439999798312783,
+          "simulation_s": 4.658657399995718,
+          "spike_count": 87,
+          "time_steps": 40000
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    },
+    {
+      "category": "result-serialization-retrieval",
+      "config": {
+        "dt": 0.025,
+        "duration": 200,
+        "model": "lif",
+        "n": 64,
+        "probability": 0.1,
+        "pulses": [
+          {
+            "amplitude": 3,
+            "start": 0,
+            "stop": 200,
+            "target": 0
+          }
+        ],
+        "record_every": 4,
+        "seed": 42
+      },
+      "derived": {
+        "neuron_count": 64,
+        "neuron_steps": 512000,
+        "realized_edge_count": 403,
+        "serialized_result_bytes": 1501263,
+        "spike_count": 3607,
+        "time_steps": 8000
+      },
+      "id": "lif-result-serialization-64x200ms",
+      "identical_output_sha256": "7ee11cc30888849cacaca301a2bb2db6f9b8251be193b6a85c05431f59e32d2f",
+      "memory_summary_bytes": {
+        "incremental_peak_rss_bytes": {
+          "count": 5,
+          "max": 22052864.0,
+          "mean": 21725184.0,
+          "median": 21671936.0,
+          "min": 21508096.0,
+          "p95": 21988966.4,
+          "sample_stddev": 201058.95143464764
+        },
+        "process_baseline_rss_bytes": {
+          "count": 5,
+          "max": 42270720.0,
+          "mean": 42161766.4,
+          "median": 42160128.0,
+          "min": 42078208.0,
+          "p95": 42257612.8,
+          "sample_stddev": 79456.06572691603
+        },
+        "process_peak_rss_bytes": {
+          "count": 5,
+          "max": 64131072.0,
+          "mean": 63886950.4,
+          "median": 63864832.0,
+          "min": 63668224.0,
+          "p95": 64093388.8,
+          "sample_stddev": 169195.04620644188
+        }
+      },
+      "phase_summary_seconds": {
+        "measured_total": {
+          "count": 5,
+          "max": 1.2521709999418817,
+          "mean": 1.194752119970508,
+          "median": 1.1708712999825366,
+          "min": 1.1686439999612048,
+          "p95": 1.2442737399484032,
+          "sample_stddev": 0.037127113125459826
+        },
+        "retrieval": {
+          "count": 5,
+          "max": 0.030176300031598657,
+          "mean": 0.02785166000248864,
+          "median": 0.02797689998988062,
+          "min": 0.025880899978801608,
+          "p95": 0.029818780021741986,
+          "sample_stddev": 0.001629764125592773
+        },
+        "serialization": {
+          "count": 5,
+          "max": 0.040947899979073554,
+          "mean": 0.036818799993488936,
+          "median": 0.03583740000613034,
+          "min": 0.033914600033313036,
+          "p95": 0.04043731997953728,
+          "sample_stddev": 0.0028391329935892775
+        },
+        "setup": {
+          "count": 5,
+          "max": 0.00014739995822310448,
+          "mean": 0.00012265997938811778,
+          "median": 0.00011339999036863446,
+          "min": 0.00011129997437819839,
+          "p95": 0.0001436799648217857,
+          "sample_stddev": 1.5571054391112623e-05
+        },
+        "simulation": {
+          "count": 5,
+          "max": 1.1856517000123858,
+          "mean": 1.1299589999951423,
+          "median": 1.1094828000059351,
+          "min": 1.097406399960164,
+          "p95": 1.1781906000105664,
+          "sample_stddev": 0.036612365758191115
+        }
+      },
+      "repeats_identical": true,
+      "repetitions": 5,
+      "sample_records": [
+        {
+          "engine_reported_simulation_s": 1.1476772999740206,
+          "incremental_peak_rss_bytes": 21733376,
+          "neuron_count": 64,
+          "output_sha256": "7ee11cc30888849cacaca301a2bb2db6f9b8251be193b6a85c05431f59e32d2f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 63827968,
+            "serialization": 60928000,
+            "setup": 42217472,
+            "simulation": 58712064
+          },
+          "process_baseline_rss_bytes": 42094592,
+          "process_peak_rss_bytes": 63827968,
+          "realized_edge_count": 403,
+          "retrieval_s": 0.028388699982315302,
+          "serialization_s": 0.03583740000613034,
+          "serialized_result_bytes": 1501263,
+          "setup_s": 0.00011239998275414109,
+          "simulation_s": 1.1483462000032887,
+          "spike_count": 3607,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.1089623000007123,
+          "incremental_peak_rss_bytes": 21659648,
+          "neuron_count": 64,
+          "output_sha256": "7ee11cc30888849cacaca301a2bb2db6f9b8251be193b6a85c05431f59e32d2f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 63864832,
+            "serialization": 60166144,
+            "setup": 42328064,
+            "simulation": 58634240
+          },
+          "process_baseline_rss_bytes": 42205184,
+          "process_peak_rss_bytes": 63864832,
+          "realized_edge_count": 403,
+          "retrieval_s": 0.025880899978801608,
+          "serialization_s": 0.033914600033313036,
+          "serialized_result_bytes": 1501263,
+          "setup_s": 0.00011129997437819839,
+          "simulation_s": 1.1094828000059351,
+          "spike_count": 3607,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.1084471999784,
+          "incremental_peak_rss_bytes": 21508096,
+          "neuron_count": 64,
+          "output_sha256": "7ee11cc30888849cacaca301a2bb2db6f9b8251be193b6a85c05431f59e32d2f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 63668224,
+            "serialization": 60551168,
+            "setup": 42283008,
+            "simulation": 58609664
+          },
+          "process_baseline_rss_bytes": 42160128,
+          "process_peak_rss_bytes": 63668224,
+          "realized_edge_count": 403,
+          "retrieval_s": 0.026835500029847026,
+          "serialization_s": 0.034999099967535585,
+          "serialized_result_bytes": 1501260,
+          "setup_s": 0.00012879999121651053,
+          "simulation_s": 1.1089078999939375,
+          "spike_count": 3607,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.0966507999692112,
+          "incremental_peak_rss_bytes": 21671936,
+          "neuron_count": 64,
+          "output_sha256": "7ee11cc30888849cacaca301a2bb2db6f9b8251be193b6a85c05431f59e32d2f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 63942656,
+            "serialization": 59858944,
+            "setup": 42393600,
+            "simulation": 58716160
+          },
+          "process_baseline_rss_bytes": 42270720,
+          "process_peak_rss_bytes": 63942656,
+          "realized_edge_count": 403,
+          "retrieval_s": 0.030176300031598657,
+          "serialization_s": 0.040947899979073554,
+          "serialized_result_bytes": 1501263,
+          "setup_s": 0.00011339999036863446,
+          "simulation_s": 1.097406399960164,
+          "spike_count": 3607,
+          "time_steps": 8000
+        },
+        {
+          "engine_reported_simulation_s": 1.185204999987036,
+          "incremental_peak_rss_bytes": 22052864,
+          "neuron_count": 64,
+          "output_sha256": "7ee11cc30888849cacaca301a2bb2db6f9b8251be193b6a85c05431f59e32d2f",
+          "phase_peak_rss_bytes": {
+            "retrieval": 64131072,
+            "serialization": 60620800,
+            "setup": 42201088,
+            "simulation": 58703872
+          },
+          "process_baseline_rss_bytes": 42078208,
+          "process_peak_rss_bytes": 64131072,
+          "realized_edge_count": 403,
+          "retrieval_s": 0.02797689998988062,
+          "serialization_s": 0.038394999981392175,
+          "serialized_result_bytes": 1501262,
+          "setup_s": 0.00014739995822310448,
+          "simulation_s": 1.1856517000123858,
+          "spike_count": 3607,
+          "time_steps": 8000
+        }
+      ],
+      "warmup_repeats_discarded": 1
+    }
+  ],
+  "config_path": "benchmarks/v020-workloads.json",
+  "config_sha256": "4d7ee2eba90479bf8f7a86f329f060e08924dbed24c51b72f1d4d47421999b1c",
+  "environment": {
+    "dependencies": {
+      "fastapi": "0.129.0",
+      "neurosim": "0.2.0.dev0",
+      "numpy": "2.4.2",
+      "pydantic": "2.12.5",
+      "scipy": "1.17.1"
+    },
+    "logical_cpu_count": 16,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD Ryzen 7 7730U with Radeon Graphics",
+    "python": "3.14.2",
+    "release": "11",
+    "system": "Windows",
+    "system_memory_bytes": 16486756352,
+    "thread_environment": {
+      "MKL_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    }
+  },
+  "protocol": {
+    "measured_repetitions": 5,
+    "percentile_method": "linear interpolation; p95 over measured repetitions",
+    "rss_scope": "worker process working set peak including imports and result materialization",
+    "sample_isolation": "one fresh Python subprocess per warmup or measured sample",
+    "serialization": "stdlib json.dumps followed by json.loads in each worker",
+    "timing_clock": "time.perf_counter",
+    "warmup_repeats": 1
+  },
+  "run_started_utc": "2026-10-30T19:52:15.444767+00:00",
+  "runner_sha256": "42aeb03eb1f470a2394cc1d82a2acd459e32a7ea6fe59d9d6aefbafeb7632934",
+  "schema_version": 1,
+  "source_revision": "60c00909ef07a97f5c0267db52047f68aaaf750e",
+  "suite": "neurosim-v020-cpu-workloads"
+}
