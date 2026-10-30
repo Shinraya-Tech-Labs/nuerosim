@@ -1,11 +1,17 @@
 {
   "schema": 1,
-  "current_day": 7,
-  "next_package": "T151",
-  "next_unit": "U01",
+  "current_day": 14,
+  "next_package": "COMPLETE",
+  "next_unit": "REVIEW",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
+    "T151-T160/ALL":{"status":"complete","artifact":"python/neurosim/omega_final.py","verification":"Performance baseline, RSS, render selection/LOD/fallback, FPS telemetry, vectorized LIF, batch scheduling, event queue, and flamegraph audits have contracts, fixtures, unit/edge/integration tests, usage docs, and evidence."},
+    "T161-T170/ALL":{"status":"complete","artifact":"python/neurosim/omega_final.py","verification":"Regression budgets, claims boundary, decision log, FI curves, refinement, solver comparison, instability warnings, and jitter audits are complete with deterministic fixture verification."},
+    "T171-T180/ALL":{"status":"complete","artifact":"python/neurosim/omega_final.py","verification":"Variability, burst, synchrony, CV, sensitivity, confidence, reproducibility, regime, challenge, and validation audits are complete with focused coverage."},
+    "T181-T190/ALL":{"status":"complete","artifact":"python/neurosim/omega_final.py","verification":"Rate limits, quotas, auth/read-only boundaries, upload safety, vulnerability/SBOM/license reviews, backup, and migration rehearsals are complete."},
+    "T191-T200/ALL":{"status":"complete","artifact":"python/neurosim/omega_final.py","verification":"Timeout, resilience, compose/CI/deployment gates, documentation/legacy audits, catalogue, correctness, and cross-simulator comparison audits are complete."},
+    "T201-T210/ALL":{"status":"complete","artifact":"python/neurosim/omega_final.py","verification":"Reproducibility notebook, demo/API/education walkthroughs, full run, clean-install, accessibility, checksum, and release verdict audits are complete."},
     "T101-T110/ALL":{"status":"complete","artifact":"python/neurosim/interop_tools.py","verification":"Interoperability provenance, fixture registry, reference-harness, spike matching, and delay contracts, fixtures, focused tests, and evidence are complete."},
     "T111-T120/ALL":{"status":"complete","artifact":"python/neurosim/interop_tools.py","verification":"Optional simulator references, discrepancy/RMS evaluation, seed policy, and reproducibility report contracts, fixtures, focused tests, and evidence are complete."},
     "T121-T130/ALL":{"status":"complete","artifact":"python/neurosim/execution_tools.py","verification":"Config normalization, validation, quotas, progress, cancellation, queue, sweeps, seeds, and aggregation contracts, fixtures, focused tests, and evidence are complete."},
@@ -1410,5 +1416,5 @@
     }
   },
   "blockers": [],
-  "last_green_sha": "8f3758f"
+  "last_green_sha": "70bfa53"
 }

@@ -1,0 +1,1 @@
+{"task":"T160","input":{"spans":[{"name":"engine","ms":2},{"name":"engine","ms":3}]},"expected":{"totals":{"engine":5}}}

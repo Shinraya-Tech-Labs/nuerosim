@@ -1,0 +1,1 @@
+{"task":"T172","input":{"spikes":[1,2,10],"max_gap":3},"expected":{"bursts":2}}

@@ -1,0 +1,1 @@
+{"task":"T153","input":{"edges":[{"id":"a","weight":2},{"id":"b","weight":1}],"max_edges":1},"expected":{"selected":["a"]}}

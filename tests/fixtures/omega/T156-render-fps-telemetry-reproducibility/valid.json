@@ -1,0 +1,1 @@
+{"task":"T156","input":{"fps":[60,58,62]},"expected":{"min_fps":58}}

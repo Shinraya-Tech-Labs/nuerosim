@@ -1,8 +1,8 @@
 # Omega continuation checkpoint
 
 - Branch: `exhibition-2026-10-28`
-- Completed range: T101–T150
-- Next task: T151
-- Focused verification: 101 passing checks across the T101–T150 catalog and edge tests; full regression: 426 passed.
-- Delivery: push the completed range to `origin/exhibition-2026-10-28`, then resume at T151.
+- Completed range: T001–T210
+- Next task: review
+- Verification: T151–T210 focused unit/edge/integration suite passes; full repository regression: 606 passed.
+- Delivery: branch is ready for user review at `origin/exhibition-2026-10-28`.
 - Blockers: none.
