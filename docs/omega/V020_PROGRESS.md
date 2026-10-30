@@ -12,8 +12,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 |---|---|---|---|
 | CP01 | Complete | `5dbe7d49f702e06e5edbc1e17587fcf0a9906679` | Verified merge/base and captured baseline suite. |
 | CP02 | Complete; daemon build deferred to CP03 CI | `7c2d883c2e992018836a13443ffbdb8a3377faa9` | Improved container health ordering and Next.js runtime token proxy. |
-| CP03 | Repair pushed; daemon-enabled CI rerun pending | SHA recorded in CP04 ledger update | Full-stack smoke plus production/E2E TypeScript boundary fix. |
-| CP04 | Pending | — | Scientific validation framework and machine-readable configurations. |
+| CP03 | Complete | `57051899`, `5fc38b70`, `21139cef` | Clean Docker build and full-stack lifecycle smoke verified in hosted CI. |
+| CP04 | Complete; commit SHA recorded in CP05 ledger update | Pending this commit | Reproducible eight-case science suite, raw runs, safe runner, CI artifact. |
 | CP05 | Pending | — | Hodgkin-Huxley validation. |
 | CP06 | Pending | — | LIF and AdEx validation. |
 | CP07 | Pending | — | Passive cable and seeded network validation. |
@@ -69,8 +69,12 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 ## CP03 — Docker full-stack runtime and lifecycle verification
 
 - Commit point ID: CP03.
-- Commit SHA: recorded in CP04 ledger update after remote CI completes.
-- Files changed: `.github/workflows/cpu.yml`, `scripts/smoke_docker_stack.py`.
+- Commit SHAs: `57051899f2e23f37c96aa1c495bc8c6c2eb68f86`,
+  `5fc38b70eed68fbeb562d6f6f6fa0e403b2d48de`,
+  `21139cef0ca2d43158ba310e95717055153b532e`.
+- Files changed: `.github/workflows/cpu.yml`, `.github/workflows/web.yml`,
+  `scripts/smoke_docker_stack.py`, `web/tsconfig.json`,
+  `web/tsconfig.e2e.json`, and this ledger.
 - Implementation: the daemon-enabled workflow builds and starts the clean API
   plus web stack, waits for health checks, exercises direct API rejection and
   authenticated web proxy access, runs a simulation, retrieves results, retries,
@@ -79,25 +83,29 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Local checks: `python -m py_compile scripts/smoke_docker_stack.py` — PASS;
   `python -m ruff check scripts/smoke_docker_stack.py` — PASS;
   `docker compose -p neurosim-v020-ci --profile web config --quiet` — PASS.
-- Docker runtime: CI run `41114467169` built the API image but the web image
-  failed TypeScript because `web/Dockerfile` intentionally copies only `web/`
-  while the production `web/tsconfig.json` included E2E specs importing root
-  fixtures. Docker daemon is unavailable on this host
-  (`dockerDesktopLinuxEngine` named pipe unavailable).
+- Docker runtime: local daemon unavailable (`dockerDesktopLinuxEngine` named
+  pipe missing); verified on hosted GitHub Actions Ubuntu runner instead.
 - Hosted CI: first candidate run `41113922670` failed at Ruff in Ubuntu/Python
   3.12 after the Python suite passed; matrix fail-fast cancelled remaining jobs.
   The runner selected different ambient lint rules than this host. The lint
-  command is now isolated with explicit E4/E7/E9/F selection and matrix fail-fast
-  is disabled. Await the new head's rerun before accepting this point.
-- Pass/fail: harness/configuration PASS; initial container build FAIL exposed
-  the E2E fixture boundary; repair pushed for CI rerun. Docker runtime remains
-  unverified until the rerun passes.
-- Evidence: [CI run 41114467169](https://github.com/sreerevanth/nuerosim/actions/runs/41114467169)
-  (failure at web-image TypeScript step); [web CI run 41114467315](https://github.com/sreerevanth/nuerosim/actions/runs/41114467315)
-  (all checks pass).
-- Remaining issues: latest CP03 repair CI build and full-stack lifecycle smoke.
-- Push status: CP03 harness commits pushed; repair commit SHA and rerun result
-  to be recorded in CP04 ledger update.
+  command is isolated with explicit E4/E7/E9/F selection and matrix fail-fast
+  is disabled. The first Docker build exposed E2E specs importing test fixtures
+  omitted by the production image. Production type-checking now excludes those
+  specs while web CI separately type-checks them against fixtures.
+- Hosted Docker: PASS in [CI run 41115307566](https://github.com/sreerevanth/nuerosim/actions/runs/41115307566),
+  Docker Engine 29.4.2 / Compose 5.1.3 on Linux amd64. Clean compose teardown
+  ran before and after. Both images built, health checks passed, and the smoke
+  verified unauthenticated API rejection, authenticated Next proxy access,
+  simulation create/results, retry, running cancellation, API restart, and
+  persisted results. Exact smoke output and service logs are in the run log.
+- Web workflow: PASS in [run 41115307664](https://github.com/sreerevanth/nuerosim/actions/runs/41115307664),
+  including frontend tests, production build, and Chromium Playwright E2E.
+- Pass/fail: PASS; the initially failed Docker build was fixed and the clean
+  full-stack lifecycle run passed.
+- Remaining issues: none for CP03; continue broader reliability coverage in
+  CP11 and final regression in CP14.
+- Push status: all CP03 commits are pushed; branch was at `21139cef` during
+  verification.
 
 ### CP03 repair — separate production and browser E2E type checking
 
@@ -109,6 +117,37 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   types before building the app.
 - Tests/commands: `cd web; npx tsc --noEmit --project tsconfig.e2e.json` — PASS;
   `cd web; npm run build` — PASS; Docker Compose config — PASS.
-- Docker check: image rebuild and full runtime smoke pending hosted CI.
-- Evidence: CI run 41114467169 failure diagnosis; next run will verify repair.
-- Remaining issues: await image build and lifecycle smoke.
+- Docker check: resolved by successful build and smoke in CI run 41115307566.
+- Evidence: web CI run 41115307664 passed its new E2E TypeScript check, app
+  build, and browser tests.
+- Remaining issues: none for CP03.
+
+## CP04 — Scientific validation framework and experiment configurations
+
+- Commit point ID: CP04.
+- Commit SHA: recorded in CP05 ledger update after this commit exists.
+- Files changed: `.github/workflows/cpu.yml`,
+  `scripts/run_scientific_validation.py`,
+  `tests/test_scientific_validation_runner.py`, `scientific/README.md`,
+  `scientific/experiments/v020-core.json`, and two run directories under
+  `scientific/results/`.
+- Implementation: strict schema/version and unique safe-ID checks; eight
+  bounded HH, LIF, AdEx, cable, and seeded-network experiment definitions;
+  complete execution manifests and raw traces; deterministic output hashes;
+  suite-config SHA-256; wall time and software/platform metadata; refuses to
+  overwrite non-empty evidence. CI runs the suite on Ubuntu/Python 3.12 and
+  uploads the raw artifacts.
+- Tests/commands: focused scientific regression selection — 60 passed;
+  `python -m pytest tests/test_scientific_validation_runner.py -q` — 3 passed;
+  isolated Ruff E4/E7/E9/F on the runner and test — PASS; standalone suite
+  command — PASS for both recorded runs.
+- Reproducibility: all 8 `scientific_outputs_sha256` values match between
+  `scientific/results/v020-core-run-001/` and `run-002/`;
+  suite SHA-256 `c6b0d60281ecd6879cae1f71781ae03b4baed6fadbbc28fbd6e8039325b2f43f`.
+- Pass/fail: PASS.
+- Evidence: `scientific/results/v020-core-run-001/summary.json`,
+  `scientific/results/v020-core-run-002/summary.json`, and per-experiment JSON
+  traces in both directories. Hosted artifact upload is added to CPU CI.
+- Remaining issues: model-specific equation/parameter/tolerance writeups and
+  deeper validation additions continue in CP05–CP08 and CP13.
+- Push status: commit and push in progress.

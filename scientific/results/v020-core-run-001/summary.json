@@ -1,0 +1,73 @@
+{
+  "experiments": [
+    {
+      "config_sha256": "ae2652c2507e3602d4a7ce2e5b2bf20069e8721128e53dbe3b9b812fb10fd580",
+      "experiment_id": "hh_quiet",
+      "file": "hh_quiet.json",
+      "scientific_outputs_sha256": "91c7d69cdd68ad40a6b2f53db19e0fb7c7b51307b3db854c5ec0586ac0b5b361",
+      "wall_time_s": 0.3958408000180498
+    },
+    {
+      "config_sha256": "7ee90cb75cb3045dca4d879cc296fec628dfd99865dd722e92a5db6b8b0e7d1d",
+      "experiment_id": "hh_current_clamp",
+      "file": "hh_current_clamp.json",
+      "scientific_outputs_sha256": "6bbbf7437ef4b0a5d9f5ef1c97adacb98579b06722d64555e54cdf90d09d5531",
+      "wall_time_s": 0.29392569995252416
+    },
+    {
+      "config_sha256": "433c39b3bc85c3c049daa8044a1ad2187578879561b4ea48f68ac6d6e5a80e9e",
+      "experiment_id": "lif_subthreshold",
+      "file": "lif_subthreshold.json",
+      "scientific_outputs_sha256": "b87a2bd3f0f08a9836de064039a277dd0119da2a3d9f7c3a75944a48e7e37b66",
+      "wall_time_s": 0.10333460004767403
+    },
+    {
+      "config_sha256": "1a147def01752e4d2d8053e23e6088c64ca6cfe37cfc93f62c662b1604829959",
+      "experiment_id": "lif_spike_train",
+      "file": "lif_spike_train.json",
+      "scientific_outputs_sha256": "e00a3ca53ea35d6e78acc8d0f27ea873723569eae0a7ea233b9aaa82a440eda7",
+      "wall_time_s": 0.5274704999756068
+    },
+    {
+      "config_sha256": "869f0c744f5088d1b84770df960626814caf31eccc0f0a4869dd6fe57c349c82",
+      "experiment_id": "adex_subthreshold",
+      "file": "adex_subthreshold.json",
+      "scientific_outputs_sha256": "9651176c5c70f5ee064ebee62c609600bd272340a4a3828fce5ea98f4f517f3f",
+      "wall_time_s": 0.1495301999966614
+    },
+    {
+      "config_sha256": "586b74c1121b0678f3b106ef9d8a92174ef8f2336ae9631007059bf0f33a382d",
+      "experiment_id": "adex_adaptation",
+      "file": "adex_adaptation.json",
+      "scientific_outputs_sha256": "a87d98fdd4baae1091ed7d7f0404177b8d0cbe01807c25545aa6323aad6a8af7",
+      "wall_time_s": 1.5638823000481352
+    },
+    {
+      "config_sha256": "1873acb93e135e2e7f281369ca6190e434ff1faec17568d3b6b3774d0821c6cf",
+      "experiment_id": "cable_charge",
+      "file": "cable_charge.json",
+      "scientific_outputs_sha256": "809751412cac40af9e4fd91aa58c3e321cb98edd8c5150db2c7fa88bc0c8d5cd",
+      "wall_time_s": 0.07042479998199269
+    },
+    {
+      "config_sha256": "ef90f25b3153b53050ae95cf62876d5dede17f2446dbc0b05006ea412861c122",
+      "experiment_id": "network_seeded",
+      "file": "network_seeded.json",
+      "scientific_outputs_sha256": "a4dc7419debfbcca93ddca49a672c0595de4b26514e5396d325f9f500e1658d1",
+      "wall_time_s": 0.2028524999623187
+    }
+  ],
+  "numpy": "2.4.2",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.2",
+  "schema_version": 1,
+  "software_version": "0.2.0.dev0",
+  "suite": "neurosim-v020-core",
+  "units": {
+    "capacitance": "uF/cm^2",
+    "conductance": "mS/cm^2",
+    "current": "uA/cm^2",
+    "time": "ms",
+    "voltage": "mV"
+  }
+}
