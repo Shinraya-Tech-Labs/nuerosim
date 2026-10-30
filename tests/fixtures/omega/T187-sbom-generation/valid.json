@@ -1,0 +1,1 @@
+{"task":"T187","input":{"components":[{"name":"numpy"},{"name":"pydantic"}]},"expected":{"count":2}}
