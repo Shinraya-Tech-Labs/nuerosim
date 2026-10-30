@@ -1,0 +1,1 @@
+{"experiment":{"model":"fhn","duration":10,"dt":0.025,"record_every":1,"parameters":{"fhn_epsilon":0.08,"fhn_beta":0.7,"fhn_gamma":0.8},"pulses":[{"start":1,"stop":5,"amplitude":5}]},"expected_spike_count":2}
