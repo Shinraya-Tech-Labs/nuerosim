@@ -1,0 +1,1 @@
+{"experiment":{"model":"morris_lecar","duration":10,"dt":0.025,"record_every":1,"parameters":{},"pulses":[{"start":1,"stop":5,"amplitude":5}]},"expected_spike_count":4}
