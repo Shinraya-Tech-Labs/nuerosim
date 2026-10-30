@@ -19,8 +19,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP07 | Complete | `df4e3dd` | Cable DOP853 trajectory check and seeded-network invariants. |
 | CP08 | Complete | `927a929345aa2025286c5243608f40c0d05d1dc3` | Seven-reference report with unit-separated errors and convergence orders. |
 | CP09 | Complete | `60c00909ef07a97f5c0267db52047f68aaaf750e` | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
-| CP10 | Implemented; commit SHA recorded in CP11 ledger update | Pending this commit | Captured five-repeat measurements for all 11 workloads with raw samples and results. |
-| CP11 | Pending | — | API, worker, storage, and lifecycle integration. |
+| CP10 | Pushed; CI pending | `0717caff6f10ecf9368b920c314b2af3d985f8f7` | Captured five-repeat measurements for all 11 workloads with raw samples and results. |
+| CP11 | Implemented; commit SHA recorded in CP12 ledger update | Pending this commit | API, worker, storage, and lifecycle integration verification. |
 | CP12 | Pending | — | Frontend, browser, and export integration. |
 | CP13 | Pending | — | Verified capabilities, deployment, and limitations docs. |
 | CP14 | Pending | — | Full regression, CI, security, and release-gate review. |
@@ -302,7 +302,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 ## CP10 — Execute benchmarks and publish measured results
 
 - Commit point ID: CP10.
-- Commit SHA: recorded in CP11 ledger update after this commit exists.
+- Commit SHA: `0717caff6f10ecf9368b920c314b2af3d985f8f7`.
 - Files changed: `benchmarks/results/v020-run-001.json` (captured raw samples and
   aggregates), `docs/BENCHMARK_RESULTS.md`,
   `scripts/verify_release_benchmark_report.py`,
@@ -322,8 +322,36 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Evidence: `benchmarks/results/v020-run-001.json` (SHA-256
   `106367d3ea4ef55dc08d1e16e48c2e3a47bc5dc6159d5dae412fb40153ab4666`),
   `docs/BENCHMARK_RESULTS.md`, and `docs/BENCHMARK_METHODOLOGY.md`.
-- Pass/fail: benchmark execution and determinism checks PASS; report recorded.
+- Pass/fail: benchmark execution, report verification, and focused tests PASS;
+  hosted CPU and web workflows for this commit are still running.
 - Remaining issues: API/worker/storage lifecycle integration is CP11; this
   benchmark does not measure API queuing, concurrent users, or deployment
   storage.
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
+  verified at `0717caff6f10ecf9368b920c314b2af3d985f8f7`.
+
+## CP11 — API, worker, storage, and lifecycle integration
+
+- Commit point ID: CP11.
+- Commit SHA: recorded in CP12 ledger update after this commit exists.
+- Files changed: `tests/test_release_reliability.py` and this ledger.
+- Implementation: added an end-to-end large-result check using the production
+  64-cell workload shape. It verifies API result retrieval, history limit
+  validation, online SQLite backup while the application is open, restore,
+  API restart, manifest retention, and full result equality after recovery.
+  Added endpoint-level activity pagination checks and verified that closing an
+  active worker cancels promptly, releases the database lock, and allows a
+  replacement worker to acquire it. Existing API tests cover auth/read-only
+  modes, queue limits, retries, failures, cancellation, and interrupted-job
+  recovery.
+- Tests/commands: `$env:PYTHONPATH='python'; python -m pytest tests/test_release_reliability.py tests/test_api.py tests/test_visualization_api.py tests/test_post_t210_remediation.py -q` — 35 passed in 6.94 seconds; `python -m ruff check --isolated --select E4,E7,E9,F tests/test_release_reliability.py` — PASS; `python -m py_compile tests/test_release_reliability.py` — PASS.
+- Failure fixed: the initial shutdown-test fixture exceeded the simulator's
+  10-million neuron-step input cap. Reduced the test to 200 neurons so the
+  long-running job stays inside supported limits and can exercise shutdown.
+- Evidence: `tests/test_release_reliability.py`,
+  `tests/test_api.py`, `tests/test_visualization_api.py`, and
+  `tests/test_post_t210_remediation.py`.
+- Pass/fail: focused local integration suite PASS; hosted CI will run on push.
+- Remaining issues: frontend and browser flows are CP12; full regression and
+  security/release gate review are CP14.
 - Push status: pending commit and push.
