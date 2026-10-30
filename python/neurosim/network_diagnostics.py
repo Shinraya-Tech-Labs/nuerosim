@@ -5,6 +5,7 @@ from .workbench.config import Experiment
 from .synapse_metrics import exponential_event, synaptic_current
 
 def delay_roundtrip(delay_ms, dt_ms):
+    if delay_ms <= 0 or dt_ms <= 0: raise ValueError('delay and dt must be positive')
     steps=effective_delay_steps(delay_ms,dt_ms)
     return {"delay_ms":delay_ms,"dt_ms":dt_ms,"steps":steps,"effective_delay_ms":steps*dt_ms}
 

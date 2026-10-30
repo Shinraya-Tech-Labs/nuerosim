@@ -24,3 +24,15 @@ def test_T059_synapse_visualization_tests_unit():
  f=json.loads((F/'T059-synapse-visualization-tests/valid.json').read_text());rows=inspect_synapses(f['config']);assert all(x['source']!=x['target'] for x in rows)
 def test_T060_synapse_benchmarks_unit():
  f=json.loads((F/'T060-synapse-benchmarks/valid.json').read_text());assert benchmark_events(f['count'])['checksum']==pytest.approx(f['expected_checksum'])
+
+def test_T051_delay_rejects_zero_step():
+ with pytest.raises(ValueError): delay_roundtrip(0,0)
+def test_T052_empty_tie_is_deterministic(): assert tie_order([])==[]
+def test_T053_self_edges_are_excluded(): assert all(s!=t for s,t,_ in directed_edges({'model':'lif','n':3,'probability':1,'pulses':[]}))
+def test_T054_empty_superposition_is_zero(): assert superpose([],5)==0
+def test_T055_reversal_signs_are_opposite(): assert synaptic_current(.02,-65,0)>0 and synaptic_current(.02,-65,-80)<0
+def test_T056_recurrent_summary_is_manifest_backed(): assert 'manifest' in recurrent_summary({'model':'lif','n':2,'duration':1,'dt':.025,'pulses':[]})
+def test_T057_sparse_summary_has_edges(): assert sparse_summary({'model':'lif','n':3,'probability':1,'pulses':[]})['edge_count']==6
+def test_T058_inspector_fields_are_complete(): assert set(inspect_synapses({'model':'lif','n':2,'probability':1,'pulses':[]})[0])=={'source','target','inhibitory'}
+def test_T059_visualization_rows_are_directed(): assert all('source' in row and 'target' in row for row in inspect_synapses({'model':'lif','n':2,'probability':1,'pulses':[]}))
+def test_T060_benchmark_rejects_no_work(): assert benchmark_events(0)['checksum']==0
