@@ -1,0 +1,130 @@
+{
+  "comparisons": [
+    {
+      "fixture": "tests/fixtures/omega/T022-hh-6-3-celsius-reference/valid.json",
+      "fixture_sha256": "e5e0ce889d11755078443eeb8f462649e056228026dbd33e5fd92dff35cbb429",
+      "method": "published rate equations and expected gate values; production initialization checked",
+      "metrics": {
+        "max_gate_error": 0.0,
+        "max_initialization_error": 0.0,
+        "max_rate_error_ms^-1": 0.0,
+        "temperature_c": 6.3,
+        "tolerance": 1e-12,
+        "voltage_mV": -65.0
+      },
+      "passed": true,
+      "reference": "Hodgkin-Huxley published 6.3 C rates and steady-state gates"
+    },
+    {
+      "fixture": "tests/fixtures/omega/T024-lif-exact-reference-solution/valid.json",
+      "fixture_sha256": "a0b3505a4db1b5bb5642cdc0a24802f3c359c1e81469507f9129d7804e862fcf",
+      "method": "piecewise constant-current closed-form voltage solution",
+      "metrics": {
+        "fixture_reference_errors_mV": {
+          "15": 0.0,
+          "20": 0.0
+        },
+        "max_abs_error_mV": 7.105427357601002e-14,
+        "tolerance_mV": 1e-08
+      },
+      "passed": true,
+      "reference": "Leaky integrate-and-fire analytic trajectory"
+    },
+    {
+      "fixture": "tests/fixtures/omega/T020-adaptive-reference-comparisons/valid.json",
+      "fixture_sha256": "5241c4ff4b1f074a47e0e199ad8d34eb1658caab98a25df2ebf012fd8607cb6c",
+      "method": "two DOP853 tolerance settings compared with production RK4",
+      "metrics": {
+        "reference_delta_max_mV": 9.961300619920621e-06,
+        "reference_limit_mV": 0.001,
+        "rk4_error_max_mV": 0.005719466313934163,
+        "rk4_limit_mV": 0.02,
+        "sample_count": 201
+      },
+      "passed": true,
+      "reference": "Hodgkin-Huxley adaptive reference sensitivity"
+    },
+    {
+      "fixture": "tests/fixtures/omega/T019-rk4-convergence-harness/valid.json",
+      "fixture_sha256": "9ceb60ad1d8ba5916a408addc1b0aa541a9746d121d49dc37a91047eed1f24c5",
+      "method": "two fixed-step solutions compared with independent DOP853",
+      "metrics": {
+        "coarse_to_fine_error_ratio": 19.653365856871236,
+        "dt_ms": [
+          0.025,
+          0.0125
+        ],
+        "max_abs_error_mV": [
+          0.006001657032228991,
+          0.00030537553088549885
+        ],
+        "observed_order": 4.296704506057195
+      },
+      "passed": true,
+      "reference": "Hodgkin-Huxley RK4 convergence order"
+    },
+    {
+      "fixture": "tests/fixtures/omega/T018-euler-convergence-harness/valid.json",
+      "fixture_sha256": "ce8d7936b66ff5f3c96fcfad7c1ab308acd1b4db7e1305f470c4d6223f305225",
+      "method": "two forward-Euler solutions compared with independent DOP853",
+      "metrics": {
+        "coarse_to_fine_error_ratio": 1.9947999795756648,
+        "dt_ms": [
+          0.005,
+          0.0025
+        ],
+        "max_abs_error_mV": [
+          2.633780306477247,
+          1.3203230065389846
+        ],
+        "observed_order": 0.9962440933442155
+      },
+      "passed": true,
+      "reference": "Hodgkin-Huxley Euler convergence order"
+    },
+    {
+      "method": "endpoint comparison; subthreshold constant-current trajectory",
+      "metrics": {
+        "adaptation_tolerance_uA_cm2": 1e-07,
+        "atol": 1e-12,
+        "current_uA_cm2": 0.3,
+        "dt_ms": 0.025,
+        "duration_ms": 20,
+        "max_abs_adaptation_error_uA_cm2": 3.7567171595753734e-14,
+        "max_abs_voltage_error_mV": 6.30961949354969e-12,
+        "rtol": 1e-10,
+        "state": [
+          "voltage_mV",
+          "adaptation_uA_cm2"
+        ],
+        "voltage_tolerance_mV": 1e-07
+      },
+      "passed": true,
+      "reference": "independently coded AdEx ODE with SciPy DOP853"
+    },
+    {
+      "method": "full trajectory comparison at production sample times",
+      "metrics": {
+        "atol": 1e-12,
+        "compartments": 3,
+        "current_uA_cm2": 1,
+        "dt_ms": 0.025,
+        "duration_ms": 10,
+        "max_abs_voltage_error_mV": 8.467821999147418e-10,
+        "rtol": 1e-11,
+        "tolerance_mV": 1e-07
+      },
+      "passed": true,
+      "reference": "independently integrated sealed-chain cable ODE with SciPy DOP853"
+    }
+  ],
+  "environment": {
+    "numpy": "2.4.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.2",
+    "scipy": "1.17.1"
+  },
+  "passed": true,
+  "schema_version": 1,
+  "suite": "neurosim-v020-reference-comparisons"
+}

@@ -12,6 +12,14 @@ $env:PYTHONPATH = 'python'
 python scripts/run_scientific_validation.py --config scientific/experiments/v020-core.json --output-dir scientific/results/v020-core-reproduction-003
 ```
 
+Re-run the independent reference and solver-order checks, writing their compact
+measured errors to a fresh JSON file:
+
+```powershell
+$env:PYTHONPATH = 'python'
+python scripts/run_reference_validation.py --output scientific/results/v020-reference-reproduction-003.json
+```
+
 The runner refuses to write into a non-empty output directory. Each experiment
 artifact records the complete execution manifest, raw trajectories/spikes/
 connectivity, a SHA-256 over deterministic scientific outputs, and measured
@@ -121,3 +129,17 @@ The passive cable context follows the classical treatment in Rall, [Branching
 dendritic trees and motoneuron membrane resistivity
 (1959)](https://doi.org/10.1016/0014-4886(59)90046-9); this implementation is a
 small sealed compartment chain, not a morphology-resolved dendritic model.
+
+## Independent reference and convergence report
+
+`results/v020-reference-comparisons-002.json` records seven checks in one
+machine-readable report. It stores each fixture's SHA-256, the reference
+method, measured error, tolerance, and environment. All seven passed on
+Windows 11 / Python 3.14.2 / NumPy 2.4.2 / SciPy 1.17.1. Measured highlights:
+the LIF analytic voltage error was `7.11e-14 mV`; the HH RK4 convergence order
+was `4.2967` and forward-Euler order was `0.9962`; the independent AdEx
+endpoint errors were `6.31e-12 mV` for voltage and `3.76e-14 uA/cm^2` for
+adaptation; and the cable trajectory error was `8.47e-10 mV`. The HH adaptive
+reference pair differed by `9.96e-6 mV`, below its `0.001 mV` sensitivity
+limit. The report separates each error by its physical units and keeps the
+fixture and numerical tolerances alongside it.

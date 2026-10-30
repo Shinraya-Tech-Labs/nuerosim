@@ -14,10 +14,10 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP02 | Complete; daemon build deferred to CP03 CI | `7c2d883c2e992018836a13443ffbdb8a3377faa9` | Improved container health ordering and Next.js runtime token proxy. |
 | CP03 | Complete | `57051899`, `5fc38b70`, `21139cef` | Clean Docker build and full-stack lifecycle smoke verified in hosted CI. |
 | CP04 | Complete | `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c` | Reproducible eight-case suite, two matching raw runs, hosted science artifact. |
-| CP05 | Pushed; hosted CI pending | `767d52c44f39dc49565c389f0312fb0e0229ce73` | Hodgkin-Huxley stimulus-response and DOP853 convergence evidence. |
-| CP06 | Pushed; hosted CI pending | `2d91981eb14190ff26f211083a4807d6934570a4` | LIF analytic periods and LIF/AdEx stimulus response. |
-| CP07 | Implemented; commit SHA recorded in CP08 ledger update | Pending this commit | Cable DOP853 trajectory check and seeded-network invariants. |
-| CP08 | Pending | — | Independent references and convergence studies. |
+| CP05 | Complete | `767d52c44f39dc49565c389f0312fb0e0229ce73` | Hodgkin-Huxley stimulus-response and DOP853 convergence evidence. |
+| CP06 | Complete | `2d91981eb14190ff26f211083a4807d6934570a4` | LIF analytic periods and LIF/AdEx stimulus response. |
+| CP07 | Complete | `df4e3dd` | Cable DOP853 trajectory check and seeded-network invariants. |
+| CP08 | Implemented; commit SHA recorded in CP09 ledger update | Pending this commit | Seven-reference report with unit-separated errors and convergence orders. |
 | CP09 | Pending | — | Reproducible benchmark harness and methodology. |
 | CP10 | Pending | — | Benchmark runs, raw measurements, and results. |
 | CP11 | Pending | — | API, worker, storage, and lifecycle integration. |
@@ -151,8 +151,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Evidence: `scientific/results/v020-core-run-001/summary.json`,
   `scientific/results/v020-core-run-002/summary.json`, and per-experiment JSON
   traces in both directories. Hosted artifact upload is added to CPU CI.
-- Remaining issues: model-specific equation/parameter/tolerance writeups and
-  deeper validation additions continue in CP05–CP08 and CP13.
+- Remaining issues: model-specific tests/references were added in CP05–CP08;
+  full release documentation is consolidated in CP13.
 - Push status: pushed to `origin/codex/neurosim-v020-release`; verified remote SHA
   `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c`.
 
@@ -177,11 +177,11 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `atol=1e-12`.
 - Evidence: `scientific/results/v020-core-run-002/hh_current_clamp.json`;
   stdout from the focused convergence test; `scientific/README.md`.
-- Pass/fail: focused model checks PASS; CPU [run 41116458456](https://github.com/sreerevanth/nuerosim/actions/runs/41116458456)
-  and web CI [run 41116458540](https://github.com/sreerevanth/nuerosim/actions/runs/41116458540)
-  are still running.
-- Remaining issues: LIF/AdEx checks in CP06 and cross-model reference/convergence
-  summary in CP08.
+- Pass/fail: focused checks, full CPU matrix, and web workflow PASS in
+  [CPU run 41116458456](https://github.com/sreerevanth/nuerosim/actions/runs/41116458456)
+  and [web run 41116458540](https://github.com/sreerevanth/nuerosim/actions/runs/41116458540).
+- Remaining issues: LIF/AdEx checks were completed in CP06 and cross-model
+  reference/convergence results in CP08.
 - Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA verified
   at `767d52c44f39dc49565c389f0312fb0e0229ce73`.
 
@@ -202,16 +202,18 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Evidence: `scientific/results/v020-core-run-002/lif_subthreshold.json`,
   `lif_spike_train.json`, `adex_subthreshold.json`, `adex_adaptation.json`,
   and the LIF/AdEx sections of `scientific/README.md`.
-- Pass/fail: local focused validation PASS; hosted CI will run on this commit.
-- Remaining issues: passive cable/network validation in CP07; combined
-  independent reference and convergence report in CP08.
+- Pass/fail: local focused validation PASS; CPU and web workflows PASS in
+  [run 41116806224](https://github.com/sreerevanth/nuerosim/actions/runs/41116806224)
+  and [run 41116806300](https://github.com/sreerevanth/nuerosim/actions/runs/41116806300).
+- Remaining issues: passive cable/network validation was completed in CP07;
+  combined reference results are captured in CP08.
 - Push status: pushed to `origin/codex/neurosim`; remote SHA verified at
   `2d91981eb14190ff26f211083a4807d6934570a4`.
 
 ## CP07 — Passive cable and seeded network validation
 
 - Commit point ID: CP07.
-- Commit SHA: recorded in CP08 ledger update after this commit exists.
+- Commit SHA: `df4e3ddf1acd72d05def26ca876ef1052a880259`.
 - Files changed: `tests/test_science.py`, `scientific/README.md`,
   and this ledger.
 - Implementation: compare the actual cable solver's full three-compartment
@@ -229,7 +231,38 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   for passive cable context.
 - Evidence: `scientific/results/v020-core-run-002/cable_charge.json`,
   `network_seeded.json`, and `scientific/README.md`.
-- Pass/fail: local focused validation PASS; hosted CI will run on this commit.
-- Remaining issues: consolidated independent reference and convergence study in
-  CP08.
+- Pass/fail: local focused validation PASS; all CPU matrix/Docker jobs PASS in
+  [run 41117106783](https://github.com/sreerevanth/nuerosim/actions/runs/41117106783)
+  and web workflow PASS in [run 41117106807](https://github.com/sreerevanth/nuerosim/actions/runs/41117106807).
+- Remaining issues: none for CP07; aggregated reference report is in CP08.
+- Push status: pushed to `origin/codex/neurosim`; remote SHA verified at
+  `df4e3ddf1acd72d05def26ca876ef1052a880259`.
+
+## CP08 — Independent reference comparisons and convergence
+
+- Commit point ID: CP08.
+- Commit SHA: recorded in CP09 ledger update after this commit exists.
+- Files changed: `scripts/run_reference_validation.py`,
+  `tests/test_reference_validation_runner.py`, `.github/workflows/cpu.yml`,
+  `scientific/README.md`, `scientific/results/v020-reference-comparisons-002.json`,
+  and this ledger.
+- Implementation: aggregates seven reference checks into a reproducible JSON
+  report with input fixture SHA-256s, reference methods, physical units,
+  measured errors, limits, and Python/NumPy/SciPy/platform metadata. Covers
+  published HH rates/gates, exact LIF voltage, HH DOP853 sensitivity, RK4 and
+  Euler convergence orders, independent AdEx state comparison, and independent
+  passive-cable trajectory comparison. Reports AdEx voltage and adaptation
+  errors with separate dimensional tolerances. CPU CI runs and uploads this
+  report with raw simulation traces.
+- Tests/commands: `$env:PYTHONPATH='python'; python -m pytest tests/test_science.py tests/test_hh_reference.py tests/test_lif_exact_reference.py tests/test_adaptive_reference.py tests/test_rk4_convergence.py tests/test_euler_convergence.py tests/test_current_balance.py tests/test_reference_validation_runner.py tests/test_scientific_validation_runner.py -q` — 63 passed; `$env:PYTHONPATH='python'; python scripts/run_reference_validation.py --output scientific/results/v020-reference-comparisons-002.json` — 7/7 passed; `python -m ruff check --isolated --select E4,E7,E9,F scripts/run_reference_validation.py tests/test_reference_validation_runner.py` — PASS.
+- Outcomes: LIF analytic max error `7.105427e-14 mV`; HH observed RK4/Euler
+  orders `4.296705/0.996244`; AdEx max voltage/adaptation errors
+  `6.309619e-12 mV / 3.756717e-14 uA/cm^2`; cable max trajectory error
+  `8.467822e-10 mV`; all within recorded limits.
+- Evidence: `scientific/results/v020-reference-comparisons-002.json` and the
+  methodology/results sections in `scientific/README.md`.
+- Pass/fail: local reference and convergence suite PASS; hosted CI will run on
+  this commit.
+- Remaining issues: benchmark methodology and measured benchmark results in
+  CP09–CP10; broader documentation consolidated in CP13.
 - Push status: pending commit and push.
