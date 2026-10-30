@@ -1,11 +1,16 @@
 {
   "schema": 1,
-  "current_day": 5,
-  "next_package": "T101",
+  "current_day": 7,
+  "next_package": "T151",
   "next_unit": "U01",
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
+    "T101-T110/ALL":{"status":"complete","artifact":"python/neurosim/interop_tools.py","verification":"Interoperability provenance, fixture registry, reference-harness, spike matching, and delay contracts, fixtures, focused tests, and evidence are complete."},
+    "T111-T120/ALL":{"status":"complete","artifact":"python/neurosim/interop_tools.py","verification":"Optional simulator references, discrepancy/RMS evaluation, seed policy, and reproducibility report contracts, fixtures, focused tests, and evidence are complete."},
+    "T121-T130/ALL":{"status":"complete","artifact":"python/neurosim/execution_tools.py","verification":"Config normalization, validation, quotas, progress, cancellation, queue, sweeps, seeds, and aggregation contracts, fixtures, focused tests, and evidence are complete."},
+    "T131-T140/ALL":{"status":"complete","artifact":"python/neurosim/execution_tools.py","verification":"Manifest/archive validation, profiling, chunking, workflow UI, picker, model explainer, current plot, channel chart, and raster contracts, fixtures, focused tests, and evidence are complete."},
+    "T141-T150/ALL":{"status":"complete","artifact":"python/neurosim/ui_contracts.py","verification":"Firing-rate, arrow, refractory, STDP, morphology, comparison, SVG metadata, keyboard, and reduced-motion contracts, fixtures, focused tests, and evidence are complete."},
     "T061-T070/ALL":{"status":"complete","artifact":"python/neurosim/plasticity_metrics.py","verification":"STDP, bounded updates, short-term plasticity, Hebbian and homeostatic primitives have contracts, fixtures, edge tests, evidence, and usage docs."},
     "T071-T075/ALL":{"status":"complete","artifact":"python/neurosim/network_motifs.py","verification":"Ring, small-world, modular, provenance and preset motif utilities have contracts, fixtures, edge tests, evidence, and usage docs."},
     "T076-T090/ALL":{"status":"complete","artifact":"python/neurosim/morphology_tools.py","verification":"SWC parsing, topology, coupling, site mapping, cable benchmarks and display metadata tasks have contracts, fixtures, edge tests, evidence, and usage docs."},
