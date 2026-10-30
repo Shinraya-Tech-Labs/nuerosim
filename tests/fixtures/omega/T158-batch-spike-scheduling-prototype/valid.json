@@ -1,0 +1,1 @@
+{"task":"T158","input":{"events":[{"id":"b","time":2},{"id":"a","time":1}]},"expected":{"order":["a","b"]}}
