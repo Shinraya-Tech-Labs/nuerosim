@@ -6,5 +6,5 @@ RUN pip install --no-cache-dir pip==26.2.1 && pip install --no-cache-dir -r requ
 USER neurosim
 ENV NEUROSIM_DB=/data/experiments.db
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=5s CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"
 CMD ["neurosim-serve"]

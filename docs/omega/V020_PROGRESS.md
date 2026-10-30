@@ -10,8 +10,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 
 | Point | Status | Commit | Summary |
 |---|---|---|---|
-| CP01 | Complete | SHA recorded in CP02 ledger update | Verified merge/base and captured baseline suite. |
-| CP02 | Pending | — | Docker configuration and image build fixes. |
+| CP01 | Complete | `5dbe7d49f702e06e5edbc1e17587fcf0a9906679` | Verified merge/base and captured baseline suite. |
+| CP02 | Complete; daemon build deferred to CP03 CI | SHA recorded in CP03 ledger update | Improved container health ordering and Next.js runtime token proxy. |
 | CP03 | Pending | — | Full stack runtime, persistence, and lifecycle verification. |
 | CP04 | Pending | — | Scientific validation framework and machine-readable configurations. |
 | CP05 | Pending | — | Hodgkin-Huxley validation. |
@@ -43,3 +43,25 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Remaining issues: Docker daemon runtime status and all release validation are
   still pending. Existing user edit to `web/next-env.d.ts` is preserved.
 - Push status: pending initial release-branch push.
+
+## CP02 — Docker configuration and build fixes
+
+- Commit point ID: CP02.
+- Commit SHA: recorded in CP03 ledger update after this commit exists.
+- Files changed: `Dockerfile.api`, `docker-compose.yml`, `web/middleware.ts`
+  (replaced by `web/proxy.ts`).
+- Implementation: Compose explicitly builds the web proxy against the internal
+  API URL, waits for API health before web startup, and health-checks the web
+  service. API image health check now allows startup time and retries. Next.js
+  16 proxy convention ensures the bearer token is read on the server at runtime.
+- Tests: `docker compose -p neurosim-v020 config --quiet` — PASS;
+  `cd web; npm test` — 6 passed;
+  `cd web; npm run build` — PASS including TypeScript.
+- Docker build: attempted `docker compose -p neurosim-v020 build` — BLOCKED,
+  Docker daemon unavailable at `npipe:////./pipe/dockerDesktopLinuxEngine`.
+- Pass/fail: configuration/build changes PASS; real image build deferred to
+  daemon-enabled CP03 CI.
+- Evidence: Compose config output; frontend test/build outputs;
+  `docs/omega/POST_T210_VALIDATION_RESULTS.md` for earlier host details.
+- Remaining issues: full image build and runtime stack tests required in CP03.
+- Push status: CP02 push result recorded in CP03 ledger update.

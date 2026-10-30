@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const token = process.env.NEUROSIM_AUTH_TOKEN;
   if (!token) return NextResponse.next();
   const headers = new Headers(request.headers);
