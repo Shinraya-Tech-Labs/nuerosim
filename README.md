@@ -223,6 +223,8 @@ development work, not a released package.
   operations and release gates.
 - [Compose deployment](docs/DEPLOYMENT.md) — local deployment, data retention,
   backups, and security boundaries.
+- [v0.2.0 release gate review](docs/RELEASE_GATE.md) — verification outcome
+  and release blockers.
 - [Web workbench guide](docs/WEB_WORKBENCH.md) — data endpoints, controls,
   playback, display budgets and browser tests.
 - [Implementation audit](docs/IMPLEMENTATION_AUDIT.md) — repository findings

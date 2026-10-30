@@ -21,10 +21,10 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP09 | Complete | `60c00909ef07a97f5c0267db52047f68aaaf750e` | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
 | CP10 | Hosted CPU and web checks pass | `59bb8de51b3b0be45d6aa65a75e3845108db463c` | Captured five-repeat measurements for all 11 workloads with stable cross-platform provenance. |
 | CP11 | Complete; hosted CPU and web checks pass | `134c10cee0a45e531d43b6112a7f03fec507d305` | API, worker, storage, and lifecycle integration verification. |
-| CP12 | Pushed; hosted checks running | `a4b5e1bafd6fcec7c6db0f86f92f8616b78072bc` | Browser workbench, rendering, persistence, and export integration. |
-| CP13 | Implemented; local documentation checks pass | Pending this commit | Verified capabilities, deployment, and limitations docs. |
-| CP14 | Pending | — | Full regression, CI, security, and release-gate review. |
-| CP15 | Pending | — | Version, annotated tag, and GitHub release (only if all gates pass). |
+| CP12 | Complete; hosted checks pass | `a4b5e1bafd6fcec7c6db0f86f92f8616b78072bc` | Browser workbench, rendering, persistence, and export integration. |
+| CP13 | Complete; hosted checks pass | `8687dc53a97bdc58b1d85f92cf8447e47f2dc82e` | Verified capabilities, deployment, and limitations docs. |
+| CP14 | Release review complete; license gate remains | Pending this commit | Full regression, CI, security, and release-gate review. |
+| CP15 | Prohibited pending license confirmation | — | Version, annotated tag, and GitHub release only after all gates pass. |
 
 ## CP01 — Establish v0.2.0 baseline
 
@@ -410,10 +410,9 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `docs/validation/web-network-512-redesign.png`, the exhibition screenshots,
   and `docs/validation/web-render-benchmark-redesign.json`.
 - Pass/fail: all focused local browser and frontend checks PASS. Hosted CPU
-  run [41122970088](https://github.com/sreerevanth/nuerosim/actions/runs/41122970088)
-  is queued; web run
-  [41122970014](https://github.com/sreerevanth/nuerosim/actions/runs/41122970014)
-  is in progress at the time this entry was written.
+  [run 41122970088](https://github.com/sreerevanth/nuerosim/actions/runs/41122970088)
+  and web [run 41122970014](https://github.com/sreerevanth/nuerosim/actions/runs/41122970014)
+  both passed on this commit.
 - Remaining issues: full regression and security/release gate review are CP14.
 - Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
   verified at `a4b5e1bafd6fcec7c6db0f86f92f8616b78072bc`.
@@ -421,7 +420,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 ## CP13 — Documentation, deployment, and limitations
 
 - Commit point ID: CP13.
-- Commit SHA: recorded in CP14 ledger update after this commit exists.
+- Commit SHA: `8687dc53a97bdc58b1d85f92cf8447e47f2dc82e`.
 - Files changed: `docs/DEPLOYMENT.md`, `docs/VALIDATION.md`, `README.md`, and
   this ledger.
 - Implementation: added Compose instructions for API-only and full web startup,
@@ -450,9 +449,78 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `docs/omega/POST_T210_REMAINING_LIMITATIONS.md`, and CP10/CP11/CP12 records
   above.
 - Pass/fail: documentation links, Compose configuration, YAML parsing, and
-  whitespace checks PASS. At recording time, CP12 CPU run 41122970088 was
-  queued and web run 41122970014 was in progress; CP14 must verify the final
-  hosted state and rerun current security scans.
+  whitespace checks PASS. CP13 CPU run
+  [41123539549](https://github.com/sreerevanth/nuerosim/actions/runs/41123539549)
+  and web run
+  [41123539587](https://github.com/sreerevanth/nuerosim/actions/runs/41123539587)
+  subsequently passed, including hosted Docker and browser checks.
 - Remaining issues: confirmed license terms remain an explicit release gate;
   full regression, current security scans, and release review are CP14.
+- Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
+  verified at `8687dc53a97bdc58b1d85f92cf8447e47f2dc82e`.
+
+## CP14 — Full regression, CI, security, and release-gate review
+
+- Commit point ID: CP14.
+- Commit SHA: recorded in the immediate CP14 closure ledger commit after this
+  commit exists (a commit cannot contain its own SHA).
+- Files changed: `docs/RELEASE_GATE.md`, `docs/VALIDATION.md`, `README.md`,
+  and this ledger.
+- Implementation: reviewed the full test suite in both the checkout and a
+  clean installed-wheel environment; reconciled the Windows/Linux workflow
+  matrix, Docker lifecycle smoke, browser checks, science/reference validation,
+  and current dependency audits. Confirmed version metadata remains
+  `0.2.0.dev0`, no v0.2.0 tag/release exists, and the repository has no
+  `LICENSE*` or `COPYING*` file or license declaration in `pyproject.toml`.
+- Tests/commands:
+
+  ```powershell
+  $env:PYTHONPATH='python'; python -m pytest tests -q
+  python -m build --wheel
+  $releaseVenv='C:\Users\sreer_mg\AppData\Local\Temp\neurosim-cp14-f910d9a120f24883bb2b927241566334'
+  python -m venv $releaseVenv
+  & "$releaseVenv\Scripts\python.exe" -m pip install '.[dev]'
+  $wheel=(Get-ChildItem dist\neurosim-0.2.0.dev0-*.whl | Select-Object -First 1).FullName
+  & "$releaseVenv\Scripts\python.exe" -m pip install --force-reinstall --no-deps $wheel
+  & "$releaseVenv\Scripts\python.exe" -m pip check
+  Remove-Item Env:PYTHONPATH -ErrorAction SilentlyContinue
+  & "$releaseVenv\Scripts\python.exe" -m pytest tests -q
+  python -m pip_audit -r requirements-runtime.lock
+  # From web/:
+  npm audit --audit-level=high
+  npm test
+  npx tsc --noEmit --project tsconfig.e2e.json
+  npm run build
+  # From repository root, local link check for README and release guides:
+  python -c "from pathlib import Path; fs=[Path('README.md'),Path('docs/DEPLOYMENT.md'),Path('docs/VALIDATION.md'),Path('docs/WEB_INTEGRATION_VALIDATION.md'),Path('docs/RELEASE_GATE.md')]; links=[(f,u.split(')',1)[0]) for f in fs for u in f.read_text(encoding='utf-8').split('](')[1:]]; bad=[(str(f),u) for f,u in links if not u.startswith(('http://','https://','mailto:','#')) and u.split('#',1)[0] and not (f.parent/u.split('#',1)[0]).exists()]; print('Markdown local links: PASS' if not bad else bad); assert not bad"
+  git diff --check
+  ```
+
+  Checkout suite: 649 passed in 130.61 s. Clean installed-wheel suite: 649
+  passed in 113.96 s with one upstream Starlette/httpx deprecation warning;
+  clean environment `pip check` found no broken requirements. Wheel build,
+  runtime audit, npm audit (0 vulnerabilities), six frontend tests, TypeScript,
+  and production build passed. A `pip check` in the shared global Python
+  environment reported conflicts in unrelated `fastmcp`/`python-dotenv` and
+  `yfinance`/`curl-cffi` packages; the fresh project environment is clean.
+- Hosted checks: CPU run
+  [41123539549](https://github.com/sreerevanth/nuerosim/actions/runs/41123539549)
+  passed all eight Windows/Linux Python versions, dependency audit, scientific
+  and reference validation, and the Docker image/full-stack lifecycle smoke.
+  Web run
+  [41123539587](https://github.com/sreerevanth/nuerosim/actions/runs/41123539587)
+  passed npm audit, unit tests, e2e typecheck, production build, and all six
+  Chromium end-to-end tests.
+- Outcome: all technical regression, security-dependency, scientific,
+  cross-platform, browser, and hosted Docker gates passed. CP15 cannot run:
+  license ownership and terms are unconfirmed, which is an explicit release
+  blocker in the repository's release contract.
+- Evidence: `docs/RELEASE_GATE.md`, `docs/VALIDATION.md`,
+  `docs/omega/POST_T210_VALIDATION_RESULTS.md`, and the linked hosted workflow
+  runs above.
+- Pass/fail: technical gates PASS; publication gate BLOCKED by unresolved
+  licensing. The local Docker daemon was unavailable, while the hosted Docker
+  build and runtime check passed.
+- Remaining issues: resolve and document the project license before any v0.2.0
+  tag or GitHub release. Keep version `0.2.0.dev0` until then.
 - Push status: pending commit and push.
