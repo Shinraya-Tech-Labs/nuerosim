@@ -1,0 +1,1 @@
+{"units":{"time":"ms","step":"1"},"experiment":{"model":"lif","duration":1.01,"dt":0.025,"record_every":4,"pulses":[]},"expected_error":"integer multiple"}
