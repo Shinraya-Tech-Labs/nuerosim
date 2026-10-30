@@ -1,0 +1,1 @@
+{"task":"T185","input":{"name":"sample.json","size_mb":1,"max_mb":2},"expected":{"allowed":true}}
