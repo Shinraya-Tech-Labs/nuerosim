@@ -31,4 +31,4 @@ cd web; npm test; npm run build; npm run test:e2e; npm audit --omit=dev --audit-
 cd ..; $env:NEUROSIM_AUTH_TOKEN = 'local-neurosim-token-2026'; docker compose config --quiet
 ```
 
-Commit references are filled after the verified push.
+Remediation commit: `d5166adc69aa5eb71ab18da7b7df50a575987250`.

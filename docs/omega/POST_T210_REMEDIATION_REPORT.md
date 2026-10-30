@@ -41,5 +41,5 @@ reports pre-existing legacy-module findings outside the gated production surface
 
 ## Commit reference
 
-The verified remediation commit is recorded in the validation results and the
-follow-up documentation commit after push.
+The verified remediation commit is `d5166adc69aa5eb71ab18da7b7df50a575987250`.
+The follow-up documentation commit records the final report references.
