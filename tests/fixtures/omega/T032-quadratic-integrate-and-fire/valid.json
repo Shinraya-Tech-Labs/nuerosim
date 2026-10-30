@@ -1,0 +1,1 @@
+{"experiment":{"model":"qif","duration":20,"dt":0.025,"record_every":1,"parameters":{"rest":-65,"reset":-65,"threshold":-50,"tau_m":20,"refractory":2},"pulses":[{"start":1,"stop":10,"amplitude":20}]},"expected_spikes_ms":[1.85,4.7,7.55]}
