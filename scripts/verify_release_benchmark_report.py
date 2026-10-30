@@ -66,15 +66,20 @@ def validate_report(report_path, config_path, runner_path):
     report = json.loads(
         report_path.read_text(encoding="utf-8"), parse_constant=_reject_constant
     )
-    config_bytes = config_path.read_bytes()
-    config = json.loads(config_bytes, parse_constant=_reject_constant)
-    runner_hash = hashlib.sha256(runner_path.read_bytes()).hexdigest()
+    config = json.loads(
+        config_path.read_text(encoding="utf-8"), parse_constant=_reject_constant
+    )
+    canonical_config = json.dumps(
+        config, sort_keys=True, separators=(",", ":"), allow_nan=False
+    ).encode("utf-8")
+    canonical_runner = runner_path.read_bytes().replace(b"\r\n", b"\n")
+    runner_hash = hashlib.sha256(canonical_runner).hexdigest()
 
     if report.get("schema_version") != 1:
         raise ValueError("unsupported benchmark report schema")
     if report.get("suite") != config.get("suite"):
         raise ValueError("report suite does not match workload config")
-    if report.get("config_sha256") != hashlib.sha256(config_bytes).hexdigest():
+    if report.get("config_sha256") != hashlib.sha256(canonical_config).hexdigest():
         raise ValueError("report workload config hash does not match")
     if report.get("runner_sha256") != runner_hash:
         raise ValueError("report runner hash does not match")
@@ -154,7 +159,7 @@ def validate_report(report_path, config_path, runner_path):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--report", type=Path, default=Path("benchmarks/results/v020-run-001.json")
+        "--report", type=Path, required=True
     )
     parser.add_argument(
         "--config", type=Path, default=Path("benchmarks/v020-workloads.json")

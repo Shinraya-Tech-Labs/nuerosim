@@ -12,14 +12,16 @@ evidence.
 
 ```powershell
 python -m pip install '.[dev]'
-python scripts/run_release_benchmarks.py --config benchmarks/v020-workloads.json --output benchmarks/results/v020-run-001.json
+python scripts/run_release_benchmarks.py --config benchmarks/v020-workloads.json --output benchmarks/results/v020-run-003.json
+python scripts/verify_release_benchmark_report.py --report benchmarks/results/v020-run-003.json
 ```
 
 The committed workload file selects five measured repetitions and one
 discarded warm-up for each case. To repeat a run, supply a new output path and
-keep the workload file unchanged. The report stores its SHA-256, the harness
-SHA-256, the source Git revision, and the complete configuration for every
-case.
+keep the workload file unchanged. The report stores its canonical JSON config
+SHA-256, an LF-normalized harness SHA-256, the source Git revision, and the
+complete configuration for every case. Canonical config JSON and normalized
+source line endings make the input hashes stable across Windows and Unix.
 
 ## Workloads
 

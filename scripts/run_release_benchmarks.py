@@ -360,6 +360,10 @@ def run_benchmarks(config_path, output_path):
     config_bytes = config_path.read_bytes()
     document = json.loads(config_bytes)
     warmups, repetitions = _validate_document(document)
+    canonical_config = json.dumps(
+        document, sort_keys=True, separators=(",", ":"), allow_nan=False
+    ).encode("utf-8")
+    canonical_runner = Path(__file__).read_bytes().replace(b"\r\n", b"\n")
     results = [
         _benchmark_workload(workload, warmups, repetitions)
         for workload in document["workloads"]
@@ -370,8 +374,8 @@ def run_benchmarks(config_path, output_path):
         "run_started_utc": datetime.now(timezone.utc).isoformat(),
         "source_revision": _git_revision(config_path.resolve().parents[1]),
         "config_path": config_path.as_posix(),
-        "config_sha256": hashlib.sha256(config_bytes).hexdigest(),
-        "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "config_sha256": hashlib.sha256(canonical_config).hexdigest(),
+        "runner_sha256": hashlib.sha256(canonical_runner).hexdigest(),
         "protocol": {
             "warmup_repeats": warmups,
             "measured_repetitions": repetitions,

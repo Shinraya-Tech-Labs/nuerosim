@@ -52,6 +52,20 @@ def test_release_benchmark_measures_isolated_run_phases_and_peak_rss(tmp_path):
     assert json.loads(output.read_text(encoding="utf-8")) == report
 
 
+def test_config_hash_is_stable_across_line_endings(tmp_path):
+    original = _config(tmp_path).read_bytes()
+    lf_config = tmp_path / "workloads-lf.json"
+    crlf_config = tmp_path / "workloads-crlf.json"
+    lf_bytes = original.replace(b"\r\n", b"\n").rstrip(b"\n") + b"\n"
+    lf_config.write_bytes(lf_bytes)
+    crlf_config.write_bytes(lf_bytes.replace(b"\n", b"\r\n"))
+
+    lf_report = run_benchmarks(lf_config, tmp_path / "lf-report.json")
+    crlf_report = run_benchmarks(crlf_config, tmp_path / "crlf-report.json")
+
+    assert lf_report["config_sha256"] == crlf_report["config_sha256"]
+
+
 def test_release_benchmark_refuses_to_overwrite_existing_report(tmp_path):
     output = tmp_path / "existing.json"
     output.write_text("preserve", encoding="utf-8")
