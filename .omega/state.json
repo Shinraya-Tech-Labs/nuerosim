@@ -6,6 +6,9 @@
   "branch": "exhibition-2026-10-28",
   "base_sha": "5416e0f87040924e68ebd47eea332d0e98fd1dc2",
   "results": {
+    "T030/U01":{"status":"complete","artifact":"docs/omega/contracts/T030-solver-selection-ux.md","verification":"Documented RK4/Euler selector behavior, schema values, default, failure behavior, and limitations."},
+    "T030/U08":{"status":"complete","artifact":"web/components/Workspace.tsx","verification":"Added accessible Integrator selector to New simulation; updates submitted experiment JSON."},
+    "T030/U10":{"status":"complete","artifact":"docs/omega/T030-solver-selection-ux.md","verification":"Added usage guidance and science limitations."},
     "T029/U01":{"status":"complete","artifact":"docs/omega/contracts/T029-time-grid-and-sampling-conventions.md","verification":"Specified time grid and sampling contract."},
     "T029/U02":{"status":"complete","artifact":"tests/fixtures/omega/T029-time-grid-and-sampling-conventions/valid.json","verification":"Fixture covers 1 ms, dt .025 ms, stride 4 and final sample."},
     "T029/U03":{"status":"complete","artifact":"tests/fixtures/omega/T029-time-grid-and-sampling-conventions/invalid.json","verification":"Nonintegral duration fixture rejected by Experiment validator."},
