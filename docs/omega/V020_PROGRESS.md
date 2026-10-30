@@ -1,8 +1,8 @@
 # NeuroSim v0.2.0 release execution ledger
 
-Release branch: `codex/neurosim-v020-release`  
-Verified base: `ea4d43239bc7deb343e112eab413770eddc52165`  
-PR #11: merged to `main` at `ea4d43239bc7deb343e112eab413770eddc52165` on 2026-10-30.  
+- Release branch: `codex/neurosim-v020-release`
+- Verified base: `ea4d43239bc7deb343e112eab413770eddc52165`
+- PR #11: merged to `main` at `ea4d43239bc7deb343e112eab413770eddc52165` on 2026-10-30.
 Starting validation environment: Windows 11, Python 3.14.2, Node 22.23.0,
 Docker CLI 29.3.1, Docker Compose 5.1.1.
 
