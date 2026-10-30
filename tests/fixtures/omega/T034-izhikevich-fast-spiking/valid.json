@@ -1,0 +1,1 @@
+{"experiment":{"model":"izhikevich","duration":20,"dt":0.025,"record_every":1,"parameters":{"threshold":-50,"izh_a":0.1,"izh_b":0.2,"izh_c":-65,"izh_d":2},"pulses":[{"start":1,"stop":10,"amplitude":100}]},"expected_spike_count":4}

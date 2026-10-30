@@ -1,0 +1,1 @@
+{"experiment":{"model":"cable","n":1,"duration":10,"dt":0.025,"record_every":1,"pulses":[{"start":0,"stop":5,"amplitude":1}]},"expected_final_voltage_mV":-60.0}

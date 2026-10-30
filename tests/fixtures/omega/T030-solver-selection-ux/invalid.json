@@ -1,0 +1,1 @@
+{"solver":"bogus","expected_error":"Input should be 'rk4' or 'euler'"}

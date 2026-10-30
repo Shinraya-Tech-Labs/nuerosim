@@ -82,9 +82,24 @@ def derivative(state, current, ge, gi, config):
         )
     elif config.model == "cable":
         d[0] = (drive - p.g_leak * (v - p.e_leak) + cable_current(v, p.axial)) / p.cm
+    elif config.model == "qif":
+        d[0] = (v - p.rest) * (v - p.threshold) / p.tau_m + drive / p.cm
+    elif config.model == "izhikevich":
+        d[0] = 0.04 * v**2 + 5 * v + 140 - w + drive
+        d[4] = p.izh_a * (p.izh_b * v - w)
+    elif config.model == "fhn":
+        x = (v + 65) / 10
+        d[0] = 10 * (x - x**3 / 3 - w + drive / p.cm)
+        d[4] = p.fhn_epsilon * (x + p.fhn_beta - p.fhn_gamma * w)
+    elif config.model == "morris_lecar":
+        m_inf = 0.5 * (1 + np.tanh((v + 1.2) / 18))
+        w_inf = 0.5 * (1 + np.tanh(v / 17.4))
+        tau_w = 1 / np.cosh((v - 10) / 34)
+        d[0] = (drive - p.g_leak * (v - p.e_leak) - p.g_k * w * (v - p.e_k) - p.g_na * m_inf * (v - p.e_na)) / p.cm
+        d[4] = (w_inf - w) / tau_w
     else:
         d[0] = (p.rest - v) / p.tau_m + drive / p.cm
-        if config.model == "adex":
+        if config.model in ("adex", "eif"):
             # Numerical spike cutoff is threshold+5*Delta; stages are bounded
             # at cutoff to avoid evaluating the divergent exponential after a spike.
             d[0] += (
@@ -93,7 +108,8 @@ def derivative(state, current, ge, gi, config):
                 * np.exp(np.minimum((v - p.threshold) / p.delta_t, 5))
                 - w / p.cm
             )
-            d[4] = (p.a * (v - p.rest) - w) / p.tau_w
+            if config.model == "adex":
+                d[4] = (p.a * (v - p.rest) - w) / p.tau_w
     return d
 
 
@@ -134,6 +150,7 @@ def manifest(config):
 def simulate(config: Experiment, progress=None, cancelled=None):
     start = time.perf_counter()
     state = initial_state(config)
+    rng = np.random.default_rng(config.seed)
     edges = connectivity(config)
     if len(edges) > 32768:
         raise ValueError("limit: 32768 realized synapses; reduce connectivity")
@@ -163,6 +180,8 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         for pulse in config.pulses:
             if round(pulse.start / config.dt) <= step < round(pulse.stop / config.dt):
                 current[pulse.target] += pulse.amplitude
+        if config.parameters.noise_std:
+            current += rng.normal(0, config.parameters.noise_std / np.sqrt(config.dt), config.n)
         t = step * config.dt
         old_v = state[0].copy()
         active = t + 1e-10 >= refractory_until
@@ -170,7 +189,7 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         def f(s, offset):
             decay = np.exp(-offset / config.tau_syn)
             ds = derivative(s, current, ge * decay, gi * decay, config)
-            if config.model in ("lif", "adex"):
+            if config.model in ("lif", "adex", "eif", "qif", "izhikevich", "fhn", "morris_lecar"):
                 ds[0, ~active] = 0
             return ds
 
@@ -195,12 +214,15 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         end = (step + 1) * h
         if config.model == "hh":
             fired = np.flatnonzero((old_v < 0) & (state[0] >= 0))
-        elif config.model in ("lif", "adex"):
-            threshold = p.threshold + (5 * p.delta_t if config.model == "adex" else 0)
+        elif config.model in ("lif", "adex", "eif", "qif", "izhikevich", "fhn", "morris_lecar"):
+            threshold = p.threshold + (5 * p.delta_t if config.model in ("adex", "eif") else 0)
             fired = np.flatnonzero(active & (state[0] >= threshold))
             state[0, fired] = p.reset
             if config.model == "adex":
                 state[4, fired] += p.b
+            if config.model == "izhikevich":
+                state[0, fired] = p.izh_c
+                state[4, fired] += p.izh_d
             refractory_until[fired] = end + p.refractory
         else:
             fired = []

@@ -35,11 +35,19 @@ class Parameters(StrictModel):
     a: float = Field(0.02, ge=0, le=0.2)
     b: float = Field(0.1, ge=0, le=2)
     axial: float = Field(0.1, ge=0, le=1)
+    izh_a: float = Field(0.02, ge=0, le=1)
+    izh_b: float = Field(0.2, ge=0, le=1)
+    izh_c: float = Field(-65, ge=-100, le=-40)
+    izh_d: float = Field(8, ge=-20, le=50)
+    fhn_epsilon: float = Field(0.08, gt=0, le=1)
+    fhn_beta: float = Field(0.7, ge=0, le=2)
+    fhn_gamma: float = Field(0.8, ge=0, le=2)
+    noise_std: float = Field(0, ge=0, le=100)
 
 
 class Experiment(StrictModel):
     name: str = Field("Current clamp", min_length=1, max_length=120)
-    model: Literal["hh", "lif", "adex", "cable"] = "hh"
+    model: Literal["hh", "lif", "adex", "eif", "qif", "izhikevich", "fhn", "morris_lecar", "cable"] = "hh"
     solver: Literal["rk4", "euler"] = "rk4"
     duration: float = Field(50, gt=0, le=2000)
     dt: float = Field(0.025, ge=0.001, le=0.025)

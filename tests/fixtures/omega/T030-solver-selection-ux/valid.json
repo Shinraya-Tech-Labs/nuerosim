@@ -1,0 +1,1 @@
+{"solver_options":["rk4","euler"],"default":"rk4","units":{"time":"ms","voltage":"mV"},"expected_rk4_spike_count":1}

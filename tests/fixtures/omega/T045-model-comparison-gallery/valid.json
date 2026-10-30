@@ -1,0 +1,1 @@
+{"configs":[{"model":"lif","duration":5,"dt":0.025,"pulses":[]},{"model":"eif","duration":5,"dt":0.025,"pulses":[]},{"model":"qif","duration":5,"dt":0.025,"pulses":[]}],"expected_models":["lif","eif","qif"]}
