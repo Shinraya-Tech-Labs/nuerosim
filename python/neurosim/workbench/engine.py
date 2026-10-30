@@ -239,6 +239,10 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         raise Cancelled()
     if progress:
         progress(1.0)
+    activity_events = sorted(
+        ({"time_ms": float(t), "neuron_id": int(i)} for i, train in enumerate(spikes) for t in train),
+        key=lambda event: (event["time_ms"], event["neuron_id"]),
+    )
     bin_edges = np.linspace(
         0, config.duration, max(2, math.ceil(config.duration / 10) + 1)
     )
@@ -247,6 +251,7 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         "t": times,
         "voltage": np.array(voltages).T.tolist(),
         "spikes": spikes,
+        "activity_events": activity_events,
         "edges": edges,
         "rate_time": ((bin_edges[1:] + bin_edges[:-1]) / 2).tolist(),
         "rate_hz": (counts / config.n / (np.diff(bin_edges) / 1000)).tolist(),

@@ -1,1 +1,1 @@
-{"task":"T209","input":{"checks":{"checksum":true}},"expected":{"passed":true}}
+{"task":"T209","input":{"content":"release-artifact"},"expected":{"sha256":"55d98606526de0f88b30c309717deef32c0e061e1319fd1f20f866b49a226174"}}

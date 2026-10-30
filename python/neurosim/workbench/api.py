@@ -1,9 +1,11 @@
 """Local single-user API. Do not expose without an authenticated reverse proxy."""
 
 import csv
+import hmac
 import io
 import json
 import os
+import time
 import zipfile
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -63,6 +65,18 @@ def export_zip(result):
 
 
 def create_app(database=None):
+    remote = os.environ.get("NEUROSIM_ALLOW_REMOTE", "0").lower() in {"1", "true", "yes"}
+    auth_token = os.environ.get("NEUROSIM_AUTH_TOKEN")
+    if remote and (not auth_token or len(auth_token) < 16):
+        raise RuntimeError(
+            "NEUROSIM_AUTH_TOKEN must be set to at least 16 characters when remote access is enabled"
+        )
+    read_only = os.environ.get("NEUROSIM_READ_ONLY", "0").lower() in {"1", "true", "yes"}
+    rate_limit = int(os.environ.get("NEUROSIM_RATE_LIMIT", "120"))
+    if rate_limit < 1:
+        raise RuntimeError("NEUROSIM_RATE_LIMIT must be positive")
+    request_times = []
+
     @asynccontextmanager
     async def lifespan(app):
         app.state.store = Store(
@@ -76,6 +90,25 @@ def create_app(database=None):
             worker.close()
 
     app = FastAPI(title="NeuroSim CPU Workbench", lifespan=lifespan)
+
+    @app.middleware("http")
+    async def security_policy(request, call_next):
+        if remote and request.url.path != "/health":
+            header = request.headers.get("authorization", "")
+            supplied = header[7:] if header.lower().startswith("bearer ") else ""
+            if not hmac.compare_digest(supplied, auth_token or ""):
+                return Response('{"detail":"authentication required"}', status_code=401,
+                                headers={"WWW-Authenticate": "Bearer"}, media_type="application/json")
+            now = time.monotonic()
+            request_times[:] = [stamp for stamp in request_times if now - stamp < 60]
+            if len(request_times) >= rate_limit:
+                return Response('{"detail":"rate limit exceeded"}', status_code=429,
+                                media_type="application/json")
+            request_times.append(now)
+        if read_only and request.method not in {"GET", "HEAD", "OPTIONS"}:
+            return Response('{"detail":"read-only mode"}', status_code=403,
+                            media_type="application/json")
+        return await call_next(request)
 
     @app.exception_handler(KeyError)
     async def missing(request, exc):
@@ -205,4 +238,10 @@ app = create_app()
 def serve():
     import uvicorn
 
-    uvicorn.run("neurosim.workbench.api:app", host="127.0.0.1", port=8000, workers=1)
+    remote = os.environ.get("NEUROSIM_ALLOW_REMOTE", "0").lower() in {"1", "true", "yes"}
+    uvicorn.run(
+        "neurosim.workbench.api:app",
+        host="0.0.0.0" if remote else "127.0.0.1",
+        port=int(os.environ.get("NEUROSIM_PORT", "8000")),
+        workers=1,
+    )

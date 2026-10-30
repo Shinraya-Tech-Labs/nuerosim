@@ -59,11 +59,14 @@ def topology(result, offset, limit):
 
 
 def activity(result, offset, limit):
-    events = sorted((t, i) for i, train in enumerate(result["spikes"]) for t in train)
+    events = result.get("activity_events")
+    if events is None:
+        events = [
+            {"time_ms": t, "neuron_id": i}
+            for t, i in sorted((t, i) for i, train in enumerate(result["spikes"]) for t in train)
+        ]
     return {
-        "events": [
-            {"time_ms": t, "neuron_id": i} for t, i in events[offset : offset + limit]
-        ],
+        "events": events[offset : offset + limit],
         "total_events": len(events),
         "offset": offset,
         "next_offset": offset + limit if offset + limit < len(events) else None,
