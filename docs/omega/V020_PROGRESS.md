@@ -19,9 +19,9 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP07 | Complete | `df4e3dd` | Cable DOP853 trajectory check and seeded-network invariants. |
 | CP08 | Complete | `927a929345aa2025286c5243608f40c0d05d1dc3` | Seven-reference report with unit-separated errors and convergence orders. |
 | CP09 | Complete | `60c00909ef07a97f5c0267db52047f68aaaf750e` | Isolated benchmark harness, peak RSS, phase metrics, and 11 workloads. |
-| CP10 | Final run captured; publication pending | `0717caff` + `26f5290` + `89f9745` | Captured five-repeat measurements for all 11 workloads with stable cross-platform provenance. |
-| CP11 | Pushed; hosted rerun pending | `134c10cee0a45e531d43b6112a7f03fec507d305` | API, worker, storage, and lifecycle integration verification. |
-| CP12 | Pending | — | Frontend, browser, and export integration. |
+| CP10 | Pushed; hosted checks running | `59bb8de51b3b0be45d6aa65a75e3845108db463c` | Captured five-repeat measurements for all 11 workloads with stable cross-platform provenance. |
+| CP11 | CPU pass; web check running | `134c10cee0a45e531d43b6112a7f03fec507d305` | API, worker, storage, and lifecycle integration verification. |
+| CP12 | Implemented; local checks pass | Pending this commit | Browser workbench, rendering, persistence, and export integration. |
 | CP13 | Pending | — | Verified capabilities, deployment, and limitations docs. |
 | CP14 | Pending | — | Full regression, CI, security, and release-gate review. |
 | CP15 | Pending | — | Version, annotated tag, and GitHub release (only if all gates pass). |
@@ -305,8 +305,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Commit SHA: `0717caff6f10ecf9368b920c314b2af3d985f8f7`.
 - Corrective commit SHA: `26f52904b368a99dfd7a8e26130c4a426dce11f8`.
 - Stable artifact writer commit SHA: `89f9745a87dd01bf54f554d739cec74175becddc`.
-- Results publication commit SHA: recorded in CP12 ledger update after this
-  commit exists.
+- Results publication commit SHA: `59bb8de51b3b0be45d6aa65a75e3845108db463c`.
 - Files changed: `benchmarks/results/v020-run-004.json` (captured raw samples
   and aggregates), `docs/BENCHMARK_RESULTS.md`,
   `docs/BENCHMARK_METHODOLOGY.md`, `scripts/run_release_benchmarks.py`,
@@ -339,14 +338,13 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   `docs/BENCHMARK_RESULTS.md`, and `docs/BENCHMARK_METHODOLOGY.md`.
 - Pass/fail: corrected benchmark execution, LF/CRLF hash regression, stable
   report-byte regression, report verification, and focused tests PASS; hosted
-  CPU and web workflows for the corrected code head are pending.
+  CPU run 41122245333 is in progress and web run 41122245338 is queued.
 - Remaining issues: API/worker/storage lifecycle integration is CP11; this
   benchmark does not measure API queuing, concurrent users, or deployment
   storage.
-- Push status: harness/verifier and stable-output fixes pushed as
-  `26f52904b368a99dfd7a8e26130c4a426dce11f8` and
-  `89f9745a87dd01bf54f554d739cec74175becddc`; final raw report and results
-  record are pending this commit.
+- Push status: all CP10 work pushed to
+  `origin/codex/neurosim-v020-release`; remote SHA verified at
+  `59bb8de51b3b0be45d6aa65a75e3845108db463c`.
 
 ## CP11 — API, worker, storage, and lifecycle integration
 
@@ -369,10 +367,47 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Evidence: `tests/test_release_reliability.py`,
   `tests/test_api.py`, `tests/test_visualization_api.py`, and
   `tests/test_post_t210_remediation.py`.
-- Pass/fail: focused local integration suite PASS. Hosted CPU and web runs
-  41119716700 and 41119717047 also hit the CP10 cross-platform config-hash
-  defect; corrected-head reruns are pending.
+- Pass/fail: focused local integration suite PASS. Hosted CPU matrix passed
+  after the CP10 hash fix in [run 41121655259](https://github.com/sreerevanth/nuerosim/actions/runs/41121655259);
+  corrected web workflow [run 41121655282](https://github.com/sreerevanth/nuerosim/actions/runs/41121655282)
+  is still running. Earlier Windows failures on runs 41119716700 and
+  41119717047 were caused by the now-fixed CP10 line-ending hash defect.
 - Remaining issues: frontend and browser flows are CP12; full regression and
   security/release gate review are CP14.
 - Push status: pushed to `origin/codex/neurosim-v020-release`; remote SHA
   verified at `134c10cee0a45e531d43b6112a7f03fec507d305`.
+
+## CP12 — Frontend, browser, and export integration
+
+- Commit point ID: CP12.
+- Commit SHA: recorded in CP13 ledger update after this commit exists.
+- Files changed: `.github/workflows/web.yml`,
+  `web/tests/e2e/connectivity.spec.ts`, refreshed screenshots and measured
+  browser results in `docs/validation/`,
+  `docs/WEB_INTEGRATION_VALIDATION.md`, and this ledger.
+- Implementation: extended the real browser workbench flow to follow the
+  completed simulation's **Export data** link, assert the downloaded filename
+  is `neurosim-results.zip`, and verify the ZIP local-file signature and
+  non-trivial payload size. The Python API integration test separately checks
+  the archive's expected member files. The e2e suite also covered invalid and
+  valid experiment forms, seeded demonstrations, saved topology and reload,
+  paired comparison persistence, SVG download, valid/invalid SWC import,
+  responsive layout, 512-neuron rendering, WebGL2/2D fallback, and renderer
+  performance reporting. Updated CI artifact paths to retain the actual
+  redesign benchmark JSON and exhibition screenshots produced by these tests.
+- Tests/commands: `npm test` — 6 passed; `npx tsc --noEmit --project tsconfig.e2e.json` — PASS; `npx prettier --check tests/e2e/connectivity.spec.ts` — PASS; `$env:NEUROSIM_TEST_PYTHON='python'; npm run test:e2e` — 6 passed in 1.7 minutes, including the ZIP download assertion.
+- Outcome: actual browser downloads, saved results, comparison and reload,
+  renderer fallback, and mobile layout all passed. The measured renderer
+  profile and screenshots were refreshed by the passing browser run.
+- Evidence: `docs/WEB_INTEGRATION_VALIDATION.md`,
+  `docs/validation/web-3d-redesign.png`,
+  `docs/validation/web-mobile-redesign.png`,
+  `docs/validation/web-fallback-redesign.png`,
+  `docs/validation/web-network-512-auto.png`,
+  `docs/validation/web-network-512-redesign.png`, the exhibition screenshots,
+  and `docs/validation/web-render-benchmark-redesign.json`.
+- Pass/fail: all focused local browser and frontend checks PASS; hosted CI runs
+  on push.
+- Remaining issues: deployment and capability/limitation documentation is
+  CP13; full release regression/security gate review is CP14.
+- Push status: pending commit and push.

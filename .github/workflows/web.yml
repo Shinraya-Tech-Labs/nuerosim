@@ -38,5 +38,6 @@ jobs:
           name: web-validation
           path: |
             docs/validation/web-*.png
-            docs/validation/web-render-benchmark.json
+            docs/validation/exhibition-*.png
+            docs/validation/web-render-benchmark*.json
             web/test-results
