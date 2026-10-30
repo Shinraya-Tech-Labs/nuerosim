@@ -39,7 +39,7 @@ class Parameters(StrictModel):
 
 class Experiment(StrictModel):
     name: str = Field("Current clamp", min_length=1, max_length=120)
-    model: Literal["hh", "lif", "adex", "cable"] = "hh"
+    model: Literal["hh", "lif", "adex", "eif", "qif", "cable"] = "hh"
     solver: Literal["rk4", "euler"] = "rk4"
     duration: float = Field(50, gt=0, le=2000)
     dt: float = Field(0.025, ge=0.001, le=0.025)

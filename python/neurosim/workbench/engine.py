@@ -82,9 +82,11 @@ def derivative(state, current, ge, gi, config):
         )
     elif config.model == "cable":
         d[0] = (drive - p.g_leak * (v - p.e_leak) + cable_current(v, p.axial)) / p.cm
+    elif config.model == "qif":
+        d[0] = (v - p.rest) * (v - p.threshold) / p.tau_m + drive / p.cm
     else:
         d[0] = (p.rest - v) / p.tau_m + drive / p.cm
-        if config.model == "adex":
+        if config.model in ("adex", "eif"):
             # Numerical spike cutoff is threshold+5*Delta; stages are bounded
             # at cutoff to avoid evaluating the divergent exponential after a spike.
             d[0] += (
@@ -93,7 +95,8 @@ def derivative(state, current, ge, gi, config):
                 * np.exp(np.minimum((v - p.threshold) / p.delta_t, 5))
                 - w / p.cm
             )
-            d[4] = (p.a * (v - p.rest) - w) / p.tau_w
+            if config.model == "adex":
+                d[4] = (p.a * (v - p.rest) - w) / p.tau_w
     return d
 
 
@@ -170,7 +173,7 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         def f(s, offset):
             decay = np.exp(-offset / config.tau_syn)
             ds = derivative(s, current, ge * decay, gi * decay, config)
-            if config.model in ("lif", "adex"):
+            if config.model in ("lif", "adex", "eif", "qif"):
                 ds[0, ~active] = 0
             return ds
 
@@ -195,8 +198,8 @@ def simulate(config: Experiment, progress=None, cancelled=None):
         end = (step + 1) * h
         if config.model == "hh":
             fired = np.flatnonzero((old_v < 0) & (state[0] >= 0))
-        elif config.model in ("lif", "adex"):
-            threshold = p.threshold + (5 * p.delta_t if config.model == "adex" else 0)
+        elif config.model in ("lif", "adex", "eif", "qif"):
+            threshold = p.threshold + (5 * p.delta_t if config.model in ("adex", "eif") else 0)
             fired = np.flatnonzero(active & (state[0] >= threshold))
             state[0, fired] = p.reset
             if config.model == "adex":
