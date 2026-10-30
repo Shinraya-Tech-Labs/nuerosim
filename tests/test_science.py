@@ -24,6 +24,26 @@ def test_hh_rate_limits_and_rest():
     )
 
 
+def test_hh_stimulus_intensity_increases_spike_response():
+    responses = []
+    for amplitude in (0, 2, 5, 10):
+        result = simulate(
+            Experiment(
+                duration=20,
+                dt=0.025,
+                record_every=1,
+                pulses=[Pulse(start=0, stop=20, amplitude=amplitude)],
+            )
+        )
+        responses.append((len(result["spikes"][0]), max(result["voltage"][0])))
+
+    spike_counts = [count for count, _ in responses]
+    peak_voltages = [peak for _, peak in responses]
+    assert spike_counts == sorted(spike_counts)
+    assert spike_counts[0] == 0 < spike_counts[-1]
+    assert all(left < right for left, right in zip(peak_voltages, peak_voltages[1:]))
+
+
 def test_hh_reference_convergence():
     # Independent scalar HH equations + adaptive DOP853; constant current avoids
     # discontinuity-related order reduction in this solver comparison.

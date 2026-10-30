@@ -13,8 +13,8 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 | CP01 | Complete | `5dbe7d49f702e06e5edbc1e17587fcf0a9906679` | Verified merge/base and captured baseline suite. |
 | CP02 | Complete; daemon build deferred to CP03 CI | `7c2d883c2e992018836a13443ffbdb8a3377faa9` | Improved container health ordering and Next.js runtime token proxy. |
 | CP03 | Complete | `57051899`, `5fc38b70`, `21139cef` | Clean Docker build and full-stack lifecycle smoke verified in hosted CI. |
-| CP04 | Complete; commit SHA recorded in CP05 ledger update | Pending this commit | Reproducible eight-case science suite, raw runs, safe runner, CI artifact. |
-| CP05 | Pending | — | Hodgkin-Huxley validation. |
+| CP04 | Pushed; hosted CI run pending | `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c` | Reproducible eight-case science suite, raw runs, safe runner, CI artifact. |
+| CP05 | Implemented; commit SHA recorded in CP06 ledger update | Pending this commit | Hodgkin-Huxley stimulus-response and DOP853 convergence evidence. |
 | CP06 | Pending | — | LIF and AdEx validation. |
 | CP07 | Pending | — | Passive cable and seeded network validation. |
 | CP08 | Pending | — | Independent references and convergence studies. |
@@ -125,7 +125,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 ## CP04 — Scientific validation framework and experiment configurations
 
 - Commit point ID: CP04.
-- Commit SHA: recorded in CP05 ledger update after this commit exists.
+- Commit SHA: `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c`.
 - Files changed: `.github/workflows/cpu.yml`,
   `scripts/run_scientific_validation.py`,
   `tests/test_scientific_validation_runner.py`, `scientific/README.md`,
@@ -137,17 +137,45 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
   suite-config SHA-256; wall time and software/platform metadata; refuses to
   overwrite non-empty evidence. CI runs the suite on Ubuntu/Python 3.12 and
   uploads the raw artifacts.
-- Tests/commands: focused scientific regression selection — 60 passed;
-  `python -m pytest tests/test_scientific_validation_runner.py -q` — 3 passed;
+- Tests/commands: `$env:PYTHONPATH='python'; python -m pytest tests/test_scientific_validation_runner.py tests/test_science.py tests/test_hh_reference.py tests/test_lif_exact_reference.py tests/test_adaptive_reference.py tests/test_rk4_convergence.py tests/test_euler_convergence.py tests/test_current_balance.py tests/test_adex_threshold_audit.py -q` — 60 passed;
+  `$env:PYTHONPATH='python'; python -m pytest tests/test_scientific_validation_runner.py -q` — 3 passed;
   isolated Ruff E4/E7/E9/F on the runner and test — PASS; standalone suite
   command — PASS for both recorded runs.
 - Reproducibility: all 8 `scientific_outputs_sha256` values match between
   `scientific/results/v020-core-run-001/` and `run-002/`;
   suite SHA-256 `c6b0d60281ecd6879cae1f71781ae03b4baed6fadbbc28fbd6e8039325b2f43f`.
-- Pass/fail: PASS.
+- Pass/fail: local validation PASS; hosted CI [run 41116118687](https://github.com/sreerevanth/nuerosim/actions/runs/41116118687)
+  is still running after the push and must pass before final CP04 acceptance.
 - Evidence: `scientific/results/v020-core-run-001/summary.json`,
   `scientific/results/v020-core-run-002/summary.json`, and per-experiment JSON
   traces in both directories. Hosted artifact upload is added to CPU CI.
 - Remaining issues: model-specific equation/parameter/tolerance writeups and
   deeper validation additions continue in CP05–CP08 and CP13.
-- Push status: commit and push in progress.
+- Push status: pushed to `origin/codex/neurosim-v020-release`; verified remote SHA
+  `97c37038b0cfc2b1fa7ef04f318cb4f77ec74b3c`.
+
+## CP05 — Hodgkin–Huxley validation
+
+- Commit point ID: CP05.
+- Commit SHA: recorded in CP06 ledger update after this commit exists.
+- Files changed: `tests/test_science.py`, `scientific/README.md`,
+  `.github/workflows/cpu.yml`, and this ledger.
+- Implementation: added a stimulus-response regression across 0, 2, 5, and
+  10 uA/cm^2; checks spike count and peak voltage rise monotonically without
+  inventing exact spike counts. Documented the classical 6.3 °C equations,
+  defaults, initial gate state, RK4 step, applied current, and independent
+  adaptive-reference method.
+- Tests/commands: `python -m pytest tests/test_science.py::test_hh_rate_limits_and_rest tests/test_science.py::test_hh_stimulus_intensity_increases_spike_response tests/test_science.py::test_hh_reference_convergence tests/test_hh_reference.py -q -s` — 10 passed;
+  observed maximum voltage errors at `dt=0.025/0.0125 ms` were
+  `0.006001657/0.000305376 mV`, a `19.653x` refinement; isolated Ruff on
+  `tests/test_science.py` — PASS.
+- Reference basis: Hodgkin & Huxley, 1952,
+  [DOI 10.1113/jphysiol.1952.sp004764](https://doi.org/10.1113/jphysiol.1952.sp004764);
+  independent scalar equations integrated by SciPy DOP853 at `rtol=1e-11`,
+  `atol=1e-12`.
+- Evidence: `scientific/results/v020-core-run-002/hh_current_clamp.json`;
+  stdout from the focused convergence test; `scientific/README.md`.
+- Pass/fail: focused model checks PASS; hosted CI will run on the next push.
+- Remaining issues: LIF/AdEx checks in CP06 and cross-model reference/convergence
+  summary in CP08.
+- Push status: pending commit and push.
