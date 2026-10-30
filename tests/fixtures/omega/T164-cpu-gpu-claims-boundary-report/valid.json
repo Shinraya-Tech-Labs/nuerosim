@@ -1,0 +1,1 @@
+{"task":"T164","input":{"allowed":["cpu"],"claims":["cpu","gpu"]},"expected":{"unsupported":["gpu"]}}
