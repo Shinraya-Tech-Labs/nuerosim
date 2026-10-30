@@ -12,7 +12,7 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 |---|---|---|---|
 | CP01 | Complete | `5dbe7d49f702e06e5edbc1e17587fcf0a9906679` | Verified merge/base and captured baseline suite. |
 | CP02 | Complete; daemon build deferred to CP03 CI | `7c2d883c2e992018836a13443ffbdb8a3377faa9` | Improved container health ordering and Next.js runtime token proxy. |
-| CP03 | Pushed; awaiting daemon-enabled CI result | SHA recorded in CP04 ledger update | Added clean full-stack container lifecycle smoke. |
+| CP03 | Repair pushed; daemon-enabled CI rerun pending | SHA recorded in CP04 ledger update | Full-stack smoke plus production/E2E TypeScript boundary fix. |
 | CP04 | Pending | — | Scientific validation framework and machine-readable configurations. |
 | CP05 | Pending | — | Hodgkin-Huxley validation. |
 | CP06 | Pending | — | LIF and AdEx validation. |
@@ -79,15 +79,36 @@ Docker CLI 29.3.1, Docker Compose 5.1.1.
 - Local checks: `python -m py_compile scripts/smoke_docker_stack.py` — PASS;
   `python -m ruff check scripts/smoke_docker_stack.py` — PASS;
   `docker compose -p neurosim-v020-ci --profile web config --quiet` — PASS.
-- Docker runtime: pending daemon-enabled GitHub Actions job; this host has no
-  Docker engine (`dockerDesktopLinuxEngine` named pipe unavailable).
+- Docker runtime: CI run `41114467169` built the API image but the web image
+  failed TypeScript because `web/Dockerfile` intentionally copies only `web/`
+  while the production `web/tsconfig.json` included E2E specs importing root
+  fixtures. Docker daemon is unavailable on this host
+  (`dockerDesktopLinuxEngine` named pipe unavailable).
 - Hosted CI: first candidate run `41113922670` failed at Ruff in Ubuntu/Python
   3.12 after the Python suite passed; matrix fail-fast cancelled remaining jobs.
   The runner selected different ambient lint rules than this host. The lint
   command is now isolated with explicit E4/E7/E9/F selection and matrix fail-fast
   is disabled. Await the new head's rerun before accepting this point.
-- Pass/fail: harness and configuration PASS; actual build/runtime result PENDING.
-- Evidence: CI run link and Docker version/log output to be added after workflow
-  completes.
-- Remaining issues: do not treat Docker as verified until that job passes.
-- Push status: pending CP03 push.
+- Pass/fail: harness/configuration PASS; initial container build FAIL exposed
+  the E2E fixture boundary; repair pushed for CI rerun. Docker runtime remains
+  unverified until the rerun passes.
+- Evidence: [CI run 41114467169](https://github.com/sreerevanth/nuerosim/actions/runs/41114467169)
+  (failure at web-image TypeScript step); [web CI run 41114467315](https://github.com/sreerevanth/nuerosim/actions/runs/41114467315)
+  (all checks pass).
+- Remaining issues: latest CP03 repair CI build and full-stack lifecycle smoke.
+- Push status: CP03 harness commits pushed; repair commit SHA and rerun result
+  to be recorded in CP04 ledger update.
+
+### CP03 repair — separate production and browser E2E type checking
+
+- Files changed: `web/tsconfig.json`, `web/tsconfig.e2e.json`,
+  `.github/workflows/web.yml`.
+- Implementation: production Next.js type-check excludes Playwright specs that
+  import repository-level fixture files unavailable in the production image;
+  web CI now separately type-checks those specs and fixture imports with Node
+  types before building the app.
+- Tests/commands: `cd web; npx tsc --noEmit --project tsconfig.e2e.json` — PASS;
+  `cd web; npm run build` — PASS; Docker Compose config — PASS.
+- Docker check: image rebuild and full runtime smoke pending hosted CI.
+- Evidence: CI run 41114467169 failure diagnosis; next run will verify repair.
+- Remaining issues: await image build and lifecycle smoke.

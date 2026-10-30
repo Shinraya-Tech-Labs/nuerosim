@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "types": ["node"] },
+  "include": ["tests/e2e/**/*.ts", "../tests/fixtures/**/*.json"],
+  "exclude": ["node_modules"]
+}
