@@ -1,4 +1,31 @@
-# Validation record — 2026-10-19
+# Validation and release evidence
+
+## Current v0.2.0 candidate record — 2026-10-31
+
+The release branch is `codex/neurosim-v020-release`. These results describe
+specific checks and revisions; they are not a statement that a public release
+is ready.
+
+| Area | Verified result | Evidence |
+|---|---|---|
+| Scientific workbench baseline | 628 Python tests passed in the post-T210 remediation baseline; focused scientific reference and convergence suites and seven independent reference comparisons passed. | [`POST_T210_VALIDATION_RESULTS.md`](omega/POST_T210_VALIDATION_RESULTS.md), [`V020_PROGRESS.md`](omega/V020_PROGRESS.md), [`scientific/results/`](../scientific/results/) |
+| Benchmark | Eleven CPU workloads ran for five measured repetitions after warm-up; output hashes matched within each workload. The report verifier and focused harness tests passed. | [`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md), [`v020-run-004.json`](../benchmarks/results/v020-run-004.json) |
+| API and lifecycle | 35 focused API, worker, SQLite backup/restore, restart, pagination, and cancellation tests passed. Hosted CPU and web workflows passed on the publication revision. | [`V020_PROGRESS.md`](omega/V020_PROGRESS.md), [`test_release_reliability.py`](../tests/test_release_reliability.py) |
+| Browser workbench | Six Playwright end-to-end tests passed, including real simulation submission, reload/comparison, SVG and ZIP downloads, SWC import, 512-neuron rendering, fallback, and mobile layout. | [`WEB_INTEGRATION_VALIDATION.md`](WEB_INTEGRATION_VALIDATION.md), [`validation/`](validation/) |
+| Hosted CI | CP13 head `8687dc53` passed the eight-job Windows/Linux Python matrix, dependency scan, scientific/reference validation, Docker build and lifecycle smoke, and browser workflow. | [CPU and Docker run](https://github.com/sreerevanth/nuerosim/actions/runs/41123539549), [web run](https://github.com/sreerevanth/nuerosim/actions/runs/41123539587) |
+| Docker deployment | Latest hosted image build, health checks, authenticated API proxy, real job, retry, cancellation, restart, and persisted-result smoke passed. The local Docker daemon is unavailable on the recording host, so no local image startup is claimed. | [Docker CI run](https://github.com/sreerevanth/nuerosim/actions/runs/41123539549), [`DEPLOYMENT.md`](DEPLOYMENT.md) |
+| Security | `pip-audit -r requirements-runtime.lock` reported no known vulnerabilities; `npm audit --audit-level=high` found 0 vulnerabilities. Both checks also passed in hosted CI. | [`RELEASE_GATE.md`](RELEASE_GATE.md), [`V020_PROGRESS.md`](omega/V020_PROGRESS.md) |
+| Release blockers | License ownership and terms remain unconfirmed. Technical checks passed, but CP15 tagging and publication are prohibited until license terms are resolved. | [`RELEASE_GATE.md`](RELEASE_GATE.md), [`ARCHITECTURE.md`](ARCHITECTURE.md) |
+
+Run the Python tests from the repository root with `PYTHONPATH=python` so the
+checkout, rather than an older installed package, is exercised. Exact commands,
+reports, host details, and remaining limitations are recorded in the linked
+evidence files and the persistent commit-point ledger.
+
+## Historical baseline — 2026-10-19
+
+The table below records the earlier pre-remediation state and should be read as
+a dated snapshot, not the current candidate status.
 
 This record separates the supported CPU workbench from preserved legacy research.
 No release has been tagged, deployed or published.

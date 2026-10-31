@@ -24,6 +24,8 @@ jobs:
         working-directory: web
       - run: npm test
         working-directory: web
+      - run: npx tsc --noEmit --project tsconfig.e2e.json
+        working-directory: web
       - run: npm run build
         working-directory: web
       - run: npx playwright install --with-deps chromium
@@ -36,5 +38,6 @@ jobs:
           name: web-validation
           path: |
             docs/validation/web-*.png
-            docs/validation/web-render-benchmark.json
+            docs/validation/exhibition-*.png
+            docs/validation/web-render-benchmark*.json
             web/test-results

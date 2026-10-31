@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { readFile } from "node:fs/promises";
 test("real saved topology renders, filters, and reloads", async ({
   page,
   request,
@@ -126,6 +127,17 @@ test("real saved topology renders, filters, and reloads", async ({
   const download = await exportEvent;
   expect(download.suggestedFilename()).toBe("neurosim-signals.svg");
   await download.saveAs("../docs/validation/neurosim-signals.svg");
+  const archiveEvent = page.waitForEvent("download");
+  await page.getByRole("link", { name: /Export data/ }).click();
+  const archiveDownload = await archiveEvent;
+  expect(archiveDownload.suggestedFilename()).toBe("neurosim-results.zip");
+  const archivePath = await archiveDownload.path();
+  expect(archivePath).not.toBeNull();
+  const archiveBytes = await readFile(archivePath!);
+  expect(archiveBytes.subarray(0, 4)).toEqual(
+    Buffer.from([0x50, 0x4b, 0x03, 0x04]),
+  );
+  expect(archiveBytes.length).toBeGreaterThan(1000);
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
     HTMLCanvasElement.prototype.getContext = function (

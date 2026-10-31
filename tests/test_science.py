@@ -24,6 +24,26 @@ def test_hh_rate_limits_and_rest():
     )
 
 
+def test_hh_stimulus_intensity_increases_spike_response():
+    responses = []
+    for amplitude in (0, 2, 5, 10):
+        result = simulate(
+            Experiment(
+                duration=20,
+                dt=0.025,
+                record_every=1,
+                pulses=[Pulse(start=0, stop=20, amplitude=amplitude)],
+            )
+        )
+        responses.append((len(result["spikes"][0]), max(result["voltage"][0])))
+
+    spike_counts = [count for count, _ in responses]
+    peak_voltages = [peak for _, peak in responses]
+    assert spike_counts == sorted(spike_counts)
+    assert spike_counts[0] == 0 < spike_counts[-1]
+    assert all(left < right for left, right in zip(peak_voltages, peak_voltages[1:]))
+
+
 def test_hh_reference_convergence():
     # Independent scalar HH equations + adaptive DOP853; constant current avoids
     # discontinuity-related order reduction in this solver comparison.
@@ -77,14 +97,31 @@ def test_lif_analytic_subthreshold():
     np.testing.assert_allclose(r["voltage"][0], expected, atol=1e-9)
 
 
-def test_lif_spike_period_and_refractory():
+@pytest.mark.parametrize("amplitude", [1, 2, 4])
+def test_lif_spike_period_and_refractory(amplitude):
     r = simulate(
         Experiment(
-            model="lif", duration=100, pulses=[Pulse(start=0, stop=100, amplitude=2)]
+            model="lif",
+            duration=100,
+            pulses=[Pulse(start=0, stop=100, amplitude=amplitude)],
         )
     )
-    period = -20 * np.log(1 - 15 / 40) + 2
+    period = -20 * np.log(1 - 15 / (amplitude * 20)) + 2
     np.testing.assert_allclose(np.diff(r["spikes"][0]), period, atol=0.026)
+
+
+def test_lif_increasing_current_increases_firing_rate():
+    mean_rates = []
+    for amplitude in (1, 2, 4):
+        result = simulate(
+            Experiment(
+                model="lif",
+                duration=100,
+                pulses=[Pulse(start=0, stop=100, amplitude=amplitude)],
+            )
+        )
+        mean_rates.append(result["mean_rate_hz"])
+    assert all(left < right for left, right in zip(mean_rates, mean_rates[1:]))
 
 
 def test_adex_subthreshold_reference_and_adaptation():
@@ -111,6 +148,20 @@ def test_adex_subthreshold_reference_and_adaptation():
     )
     assert len(r["spikes"][0]) > 3
     assert np.diff(r["spikes"][0])[-1] > np.diff(r["spikes"][0])[0]
+
+
+def test_adex_increasing_current_increases_mean_firing_rate():
+    mean_rates = []
+    for amplitude in (0.3, 1, 2, 4):
+        result = simulate(
+            Experiment(
+                model="adex",
+                duration=200,
+                pulses=[Pulse(start=0, stop=200, amplitude=amplitude)],
+            )
+        )
+        mean_rates.append(result["mean_rate_hz"])
+    assert all(left < right for left, right in zip(mean_rates, mean_rates[1:]))
 
 
 def test_passive_cable_conservation_and_decay():
@@ -141,6 +192,33 @@ def test_passive_cable_conservation_and_decay():
     assert abs(sum(v[-1] for v in driven["voltage"]) - (-195 + 10)) < 1e-9
 
 
+def test_cable_production_trajectory_matches_dop853_reference():
+    config = Experiment(
+        model="cable",
+        n=3,
+        duration=10,
+        dt=0.025,
+        record_every=1,
+        parameters=Parameters(g_leak=0, axial=0.1),
+        pulses=[Pulse(start=0, stop=10, amplitude=1)],
+    )
+    reference = solve_ivp(
+        lambda t, v: np.array([1.0, 0.0, 0.0]) + cable_current(v, 0.1),
+        (0, 10),
+        [-65.0, -65.0, -65.0],
+        method="DOP853",
+        rtol=1e-11,
+        atol=1e-12,
+        dense_output=True,
+    )
+    result = simulate(config)
+    error = np.max(
+        np.abs(np.array(result["voltage"]) - reference.sol(result["t"]))
+    )
+    print(f"Cable DOP853 maximum voltage error: {error:.9g} mV")
+    assert error < 1e-7
+
+
 def test_network_seed_inhibition_and_recording():
     c = Experiment(
         model="lif",
@@ -151,6 +229,8 @@ def test_network_seed_inhibition_and_recording():
     )
     a, b = simulate(c), simulate(c)
     assert a["voltage"] == b["voltage"] and a["edges"] == b["edges"]
+    assert a["spikes"] == b["spikes"]
+    assert all(source != target for source, target, _ in a["edges"])
     assert a["edges"] != simulate(c.model_copy(update={"seed": 43}))["edges"]
     assert len(a["voltage"]) == 8 and np.isfinite(a["voltage"]).all()
     state = initial_state(c)

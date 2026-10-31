@@ -4,14 +4,27 @@ services:
     build:
       context: .
       dockerfile: web/Dockerfile
+      args:
+        NEUROSIM_API_URL: http://neurosim:8000
     ports:
       - "127.0.0.1:3000:3000"
     depends_on:
-      - neurosim
+      neurosim:
+        condition: service_healthy
     environment:
       NEUROSIM_AUTH_TOKEN: ${NEUROSIM_AUTH_TOKEN:?Set NEUROSIM_AUTH_TOKEN to a 16+ character secret}
     mem_limit: 1g
     restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch('http://127.0.0.1:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
   neurosim:
     build:
       context: .

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "suite": "neurosim-v020-core",
+  "units": {
+    "time": "ms",
+    "voltage": "mV",
+    "current": "uA/cm^2",
+    "conductance": "mS/cm^2",
+    "capacitance": "uF/cm^2"
+  },
+  "experiments": [
+    {
+      "id": "hh_quiet",
+      "purpose": "resting membrane stability and no-spike baseline",
+      "config": {"model": "hh", "duration": 20, "dt": 0.025, "record_every": 1, "pulses": []},
+      "validation_refs": ["tests/test_science.py::test_hh_rate_limits_and_rest"]
+    },
+    {
+      "id": "hh_current_clamp",
+      "purpose": "constant-drive trajectory and timestep refinement",
+      "config": {"model": "hh", "duration": 20, "dt": 0.025, "record_every": 1, "pulses": [{"target": 0, "start": 0, "stop": 20, "amplitude": 10}]},
+      "validation_refs": ["tests/test_science.py::test_hh_reference_convergence", "tests/test_hh_reference.py::test_T022_hh_6_3_celsius_reference_unit"]
+    },
+    {
+      "id": "lif_subthreshold",
+      "purpose": "analytic subthreshold exponential trajectory",
+      "config": {"model": "lif", "duration": 20, "dt": 0.025, "record_every": 1, "pulses": [{"target": 0, "start": 0, "stop": 20, "amplitude": 0.2}]},
+      "validation_refs": ["tests/test_science.py::test_lif_analytic_subthreshold", "tests/test_lif_exact_reference.py::test_T024_lif_exact_reference_solution_unit"]
+    },
+    {
+      "id": "lif_spike_train",
+      "purpose": "threshold, reset, refractory interval and rate response",
+      "config": {"model": "lif", "duration": 100, "dt": 0.025, "record_every": 4, "pulses": [{"target": 0, "start": 0, "stop": 100, "amplitude": 2}]},
+      "validation_refs": ["tests/test_science.py::test_lif_spike_period_and_refractory"]
+    },
+    {
+      "id": "adex_subthreshold",
+      "purpose": "independent adaptive-system trajectory comparison",
+      "config": {"model": "adex", "duration": 20, "dt": 0.025, "record_every": 1, "pulses": [{"target": 0, "start": 0, "stop": 20, "amplitude": 0.3}]},
+      "validation_refs": ["tests/test_science.py::test_adex_subthreshold_reference_and_adaptation"]
+    },
+    {
+      "id": "adex_adaptation",
+      "purpose": "adaptation under sustained current",
+      "config": {"model": "adex", "duration": 200, "dt": 0.025, "record_every": 4, "pulses": [{"target": 0, "start": 0, "stop": 200, "amplitude": 2}]},
+      "validation_refs": ["tests/test_science.py::test_adex_subthreshold_reference_and_adaptation", "tests/test_adex_threshold_audit.py::test_T025_adex_threshold_dynamics_unit"]
+    },
+    {
+      "id": "cable_charge",
+      "purpose": "sealed axial coupling and charge response",
+      "config": {"model": "cable", "n": 3, "duration": 10, "dt": 0.025, "record_every": 1, "pulses": [{"target": 0, "start": 0, "stop": 10, "amplitude": 1}], "parameters": {"g_leak": 0, "axial": 0.1}},
+      "validation_refs": ["tests/test_science.py::test_passive_cable_conservation_and_decay", "tests/test_current_balance.py::test_T028_current_balance_conservation_diagnostic_unit"]
+    },
+    {
+      "id": "network_seeded",
+      "purpose": "reproducible seeded network integration",
+      "config": {"model": "lif", "n": 8, "probability": 0.5, "seed": 42, "duration": 30, "dt": 0.025, "record_every": 4, "pulses": [{"target": 0, "start": 0, "stop": 30, "amplitude": 3}]},
+      "validation_refs": ["tests/test_science.py::test_network_seed_inhibition_and_recording"]
+    }
+  ]
+}
